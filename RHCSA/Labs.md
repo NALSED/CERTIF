@@ -1,4 +1,4 @@
-# 🖥️ RHCSA EX200 — Montage du Lab RHEL 10
+# 🖥️ RHCSA EX200 — Montage du Lab RHEL 10 (Création => 11/03/26) 
 
 ---
 
@@ -35,29 +35,42 @@ Télécharger [RHEL](https://developers.redhat.com/products/rhel/download#getred
 
 ---
 
-## 📦 Paquets à installer sur les VMs
+## 📦 Configuratin VMs
 
-Après installation minimale, ajouter les outils nécessaires aux exercices :
+`[NOTE]` Il est préférable de passer en CLI pur, si ce n'est pas le cas l'ors de l'intallation tapper:
+````
+systemctl set-default multi-user.target
+````
 
-```bash
-# Outils généraux
-dnf install -y vim bash-completion man-pages wget curl
+````
+sudo systemctl reboot
 
-# Outils réseau
-dnf install -y bind-utils net-tools nmap-ncat
+````
 
-# Outils stockage
-dnf install -y lvm2 parted gdisk xfsprogs e2fsprogs stratisd stratis-cli
+### `-1.` Enregistrer la vm
 
-# Outils sécurité
-dnf install -y policycoreutils-python-utils setroubleshoot-server firewalld
+`-1.1.` Status
+````
+sudo subscription-manager status
+````
 
-# Conteneurs
-dnf install -y podman skopeo
+`-1.2.` Si non enregistrer, impossible d'accéder a `dnf` source.
+````
+sudo subscription-manager register --username [USER NAME] --password [PASSWORD]
+````
 
-# Outils système
-dnf install -y tuned chrony
-```
+`-1.3.` Update
+````
+sudo dnf update -y
+````
+---
+
+### `-2.` Paquet à Installer
+
+`2.1.` VIM
+````
+sudo dnf install vim
+````
 
 ---
 
