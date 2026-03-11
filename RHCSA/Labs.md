@@ -37,7 +37,7 @@ Télécharger [RHEL](https://developers.redhat.com/products/rhel/download#getred
 
 ## 📦 Configuratin VMs
 
-`[NOTE]` Il est préférable de passer en CLI pur, si ce n'est pas le cas l'ors de l'intallation tapper:
+`[NOTE]`Il est préférable de passer en CLI pur. Si ce n’est pas le cas lors de l’installation, tapez :
 ````
 systemctl set-default multi-user.target
 ````
