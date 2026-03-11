@@ -29,7 +29,7 @@ En revanche, si l'on utilise `>>`, le contenu sera ajouté à la suite de l'exis
 
 :warning: `>` `>>` ne redirige que stdout pas stderr 
 
-Ici, redirection du contenu de `/var` dans un fichier `.txt`, puis affichage du contenu de ce fichier dans le shell.
+=> Ici, redirection du contenu de `/var` dans un fichier `.txt`, puis affichage du contenu de ce fichier dans le shell.
 ````
 sednal@rhel:~$ ls /var > /home/sednal/var.txt && cat /home/sednal/var.txt
 account
@@ -59,7 +59,7 @@ yp
 
 Redirige l’entrée standard (stdin) d’une commande depuis un fichier.
 
-- Ici wc compte le nombre de ligne de var.txt
+=> Ici wc compte le nombre de ligne de var.txt
 ````
 sednal@rhel:~$ wc -l < var.txt
 21
@@ -68,7 +68,7 @@ sednal@rhel:~$ wc -l < var.txt
 
 ### - `2>`
 
--Ici le message d'erreur est redirigé vers le fichier texte
+=> Ici le message d'erreur est redirigé vers le fichier texte
 ````
 sednal@rhel:~$ ls aaaa 2> ls_error.txt
 sednal@rhel:~$ cat ls_error.txt
@@ -77,7 +77,7 @@ ls: cannot access 'aaaa': No such file or directory
 
 `[NOTE]` Il est possible de combiner `>` `2>` et d'utiliser `devnul` pour ne pas avoir de  sortie.
 
-- Ici le contenue de /var se retrouve dans le dossier sortie.txt, et il n'y à pas de sortie avec /dossier_inexistant
+=> Ici le contenue de /var se retrouve dans le dossier sortie.txt, et il n'y à pas de sortie avec /dossier_inexistant
 ````
 sednal@rhel:~$ ls /var /dossier_inexistant > sortie.txt 2> /dev/null
 sednal@rhel:~$ cat sortie.txt
@@ -108,7 +108,7 @@ yp
 ### - `|`
 Permet d'envoyer la sortie d'une commande vers l'entrée d'une autre commande.
 
-- Ici, `ls` liste le contenu de `/etc` → `grep` isole les dossiers commençant par "s" → `wc` compte le nombre de lignes, et ce nombre est enregistré dans le fichier `etc.txt`.
+=> Ici, `ls` liste le contenu de `/etc` → `grep` isole les dossiers commençant par "s" → `wc` compte le nombre de lignes, et ce nombre est enregistré dans le fichier `etc.txt`.
 ````
 sednal@rhel:~$ ls /etc | grep ^"s" | wc -l > etc.txt
 sednal@rhel:~$ cat etc.txt
