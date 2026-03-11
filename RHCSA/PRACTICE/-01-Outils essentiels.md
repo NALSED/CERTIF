@@ -24,12 +24,12 @@ Concept :
 
 - `>` et `>>
 
-Ici, redirection du contenu de `/var` dans un fichier `.txt`, puis affichage du contenu de ce fichier dans le shell.
-
 Si l'on réutilise `>`, le contenu de `var.txt` sera écrasé.  
 En revanche, si l'on utilise `>>`, le contenu sera ajouté à la suite de l'existant.
 
 :warning: `>` `>>` ne redirige que stdout pas stderr 
+
+Ici, redirection du contenu de `/var` dans un fichier `.txt`, puis affichage du contenu de ce fichier dans le shell.
 ````
 sednal@rhel:~$ ls /var > /home/sednal/var.txt && cat /home/sednal/var.txt
 account
