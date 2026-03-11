@@ -12,7 +12,7 @@ Certification : *Red Hat Certified System Administrator*
 
 🟥 Non commencé 🟨 En cours 🟩 Maîtrisé  🟦 Sans Aide
 
-🟥 Section 1 — Outils essentiels  
+🟨 Section 1 — Outils essentiels  
 🟥 Section 2 — Gestion des logiciels  
 🟥 Section 3 — Scripts shell  
 🟥 Section 4 — Systèmes en cours d'exécution  
@@ -29,9 +29,9 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 1. 🛠️ Comprendre et utiliser les outils essentiels
 
-🟥 **1.1** — Accéder à une invite shell et écrire des commandes — *Bash 5.x par défaut*  
-🟥 **1.2** — Redirection des entrées/sorties — `>` `>>` `<` `2>` `|` `tee`  
-🟥 **1.3** — `grep` et expressions régulières — `grep -E`, `grep -P`, `egrep`  
+🟦 **1.1** — Accéder à une invite shell et écrire des commandes — *Bash 5.x par défaut*  
+🟦 **1.2** — Redirection des entrées/sorties — `>` `>>` `<` `2>` `|` `tee`  
+🟨 **1.3** — `grep` et expressions régulières — `grep -E`, `grep -P`, `egrep`  
 🟥 **1.4** — Accès distant via `ssh` — *OpenSSH 9.x, ED25519 privilégié*  
 🟥 **1.5** — Changer d'utilisateur — `su`, `su -`, `sudo`  
 🟥 **1.6** — Archiver et compresser — `tar`, `gzip`, `bzip2`, `xz`  
