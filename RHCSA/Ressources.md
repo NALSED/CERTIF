@@ -24,7 +24,7 @@
 
 | Chaîne | Points forts | Lien |
 |--------|-------------|--------|
-| **Xavki** | Sujet => LVM, Podman, Recherche, traité en profondeur |  [Liens Youtube](https://www.youtube.com/@xavki/search?query=rhcsa)|
+| **Xavki** | Sujet => LVM, Recherche, traité en profondeur |  [Liens Youtube](https://www.youtube.com/@xavki/search?query=rhcsa)|
 | **Stéphane Robert** | Excellents conseils, et des execices bien construit|  [Blog](blog.stephane-robert.info/docs/admin-serveurs/linux) et [GitHub-RHCSA](github.com/stephrobert/linux-training) |
 | **Goffinet** | Pour travailler, hors ligne :warning: RHEL 7et 8 traité :warning: |  [Liens Leanpub](https://leanpub.com/b/linux-administration-complet) |
 
@@ -44,7 +44,17 @@
 
 ---
 
-## 🟥 Section 2 — Scripts shell
+## 🟥 Section 2 — Gestion des logiciels
+
+| Type | Ressource | Lien |
+|------|-----------|------|
+| 📄 Doc | Red Hat — DNF5 / gestion des paquets RPM | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/managing_software_with_the_dnf_tool |
+| 📄 Doc | Flatpak — Documentation officielle | https://docs.flatpak.org/en/latest/using-flatpak.html |
+| 📄 Doc | Red Hat — Flatpak sur RHEL | https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/installing_and_using_dynamic_programming_languages/using-flatpak_installing-and-using-dynamic-programming-languages |
+
+---
+
+## 🟥 Section 3 — Scripts shell
 
 | Type | Ressource | Lien |
 |------|-----------|------|
@@ -53,7 +63,7 @@
 
 ---
 
-## 🟥 Section 3 — Systèmes en cours d'exécution
+## 🟥 Section 4 — Systèmes en cours d'exécution
 
 | Type | Ressource | Lien |
 |------|-----------|------|
@@ -62,7 +72,7 @@
 
 ---
 
-## 🟥 Section 4 — Stockage local
+## 🟥 Section 5 — Stockage local
 
 | Type | Ressource | Lien |
 |------|-----------|------|
@@ -71,25 +81,24 @@
 
 ---
 
-## 🟥 Section 5 — Systèmes de fichiers
+## 🟥 Section 6 — Systèmes de fichiers
 
 | Type | Ressource | Lien |
 |------|-----------|------|
 | 📄 Doc | Red Hat — ext4 / xfs / NFS / autofs | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/managing_file_systems |
-| 📄 Doc | Red Hat — Stratis | https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/managing_file_systems/setting-up-stratis-file-systems_managing-file-systems |
 
 ---
 
-## 🟥 Section 6 — Déploiement et gestion
+## 🟥 Section 7 — Déploiement et gestion
 
 | Type | Ressource | Lien |
 |------|-----------|------|
-| 📄 Doc | Red Hat — DNF5 / gestion des paquets | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/managing_software_with_the_dnf_tool |
 | 📄 Doc | Red Hat — cron & systemd timers | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/configuring_basic_system_settings |
+| 📄 Doc | Red Hat — DNF5 / gestion des paquets | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/managing_software_with_the_dnf_tool |
 
 ---
 
-## 🟥 Section 7 — Réseau
+## 🟥 Section 8 — Réseau
 
 | Type | Ressource | Lien |
 |------|-----------|------|
@@ -97,7 +106,7 @@
 
 ---
 
-## 🟥 Section 8 — Utilisateurs et groupes
+## 🟥 Section 9 — Utilisateurs et groupes
 
 | Type | Ressource | Lien |
 |------|-----------|------|
@@ -105,22 +114,13 @@
 
 ---
 
-## 🟥 Section 9 — Sécurité
+## 🟥 Section 10 — Sécurité
 
 | Type | Ressource | Lien |
 |------|-----------|------|
 | 📄 Doc | Red Hat — SELinux ⚠️ *priorité absolue* | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/using_selinux |
 | 📄 Doc | Red Hat — ACL & firewalld | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/securing_networks |
 | 📄 Doc | Notes RHCSA SELinux (communautaire) | https://doc-rhel-rhcsa-prep.readthedocs.io/en/latest/security/selinux.html |
-
----
-
-## 🟥 Section 10 — Conteneurs
-
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — Podman / Skopeo / Quadlet | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/building_running_and_managing_containers |
-| 🎬 Vidéo | Sander van Vugt — Containers in 4 Hours | https://www.youtube.com/@rhatcert |
 
 ---
 
