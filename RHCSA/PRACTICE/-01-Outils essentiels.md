@@ -2,7 +2,7 @@
 
 ---
 
-- Ici sera exposé dans l'odre du document {README.md](https://github.com/NALSED/CERTIF/blob/main/RHCSA/README.md), la section -1-Outils essentiels.
+- Ici sera exposé dans l'odre du document [README.md](https://github.com/NALSED/CERTIF/blob/main/RHCSA/README.md), section -1-Outils essentiels.
 
 ---
 
@@ -22,14 +22,14 @@ Concept :
 
 ### -`>`, `>> et `<`
 
-- `>` et `>>
-
-Si l'on réutilise `>`, le contenu de `var.txt` sera écrasé.  
-En revanche, si l'on utilise `>>`, le contenu sera ajouté à la suite de l'existant.
+- `>` et `>>`
 
 :warning: `>` `>>` ne redirige que stdout pas stderr 
 
+
 => Ici, redirection du contenu de `/var` dans un fichier `.txt`, puis affichage du contenu de ce fichier dans le shell.
+Si l'on réutilise `>`, le contenu de `var.txt` sera écrasé.  
+En revanche, si l'on utilise `>>`, le contenu sera ajouté à la suite de l'existant.
 ````
 sednal@rhel:~$ ls /var > /home/sednal/var.txt && cat /home/sednal/var.txt
 account
@@ -65,6 +65,8 @@ sednal@rhel:~$ wc -l < var.txt
 21
 ````
 
+`[NOTE]` 
+- Il est possible de récupérer un stderr et de la "changer" stdout, `2>&1`, par exemple pour `grep` les stderr (grep ne prend que les stdout).
 
 ### - `2>`
 
