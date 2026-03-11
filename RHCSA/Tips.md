@@ -1,6 +1,7 @@
 # **Tips**
 
 ---
+- Réaliser le squellette total du support d'apprentissage avant de commencer.
 - Si pas de sources officiel de formation croiser les sources!!
 - Pour l'examen tous lire avant de commencer
 - Gérer toutes la liste du [README.md](https://github.com/NALSED/CERTIF/blob/main/RHCSA/README.md)
