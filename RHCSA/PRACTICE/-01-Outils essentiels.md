@@ -6,7 +6,7 @@
 
 ---
 
-**1.2** — Redirection des entrées/sorties — `>` `>>` `<` `2>` `|` `tee`
+## **1.2** — Redirection des entrées/sorties — `>` `>>` `<` `2>` `|` `tee`
 
 Concept :
 - entrée standard : `stdin` fd 0
@@ -169,11 +169,32 @@ yp
 ````
 
 
+---
+---
 
+## **1.3** — `grep` et expressions régulières — `grep -E`, `grep -P`, `egrep`
 
+– Options `grep`
 
-
-
+- **-num** : Affiche `num` lignes avant et après chaque correspondance (une ligne n’est jamais répétée).  
+- **-A num** : Affiche `num` lignes après la correspondance.  
+- **-B num** : Affiche `num` lignes avant la correspondance.  
+- **-C num** : Affiche `num` lignes avant et après la correspondance (équivalent à `-num`).  
+- **-V** : Affiche le numéro de version de `grep` sur stderr (utile pour rapports de bogues).  
+- **-b** : Affiche le décalage en octets avant chaque ligne correspondante.  
+- **-c** : Affiche uniquement le nombre de lignes correspondant au motif (`-v` inverse la sélection).  
+- **-e motif** : Utilise le motif indiqué, pratique pour motifs commençant par `-`.  
+- **-f fichier** : Lit le motif depuis un fichier.  
+- **-h** : Ne pas afficher le nom des fichiers lors de la recherche sur plusieurs fichiers.  
+- **-i** : Ignore la casse (majuscule/minuscule) dans le motif et les fichiers.  
+- **-L** : Affiche les fichiers **sans** correspondance.  
+- **-l** : Affiche les fichiers **avec** correspondance.  
+- **-n** : Préfixe chaque ligne avec son numéro dans le fichier.  
+- **-q** : Silence complet, aucune sortie normale.  
+- **-s** : Supprime les messages d’erreur pour fichiers inexistants ou illisibles.  
+- **-v** : Inverse la correspondance (sélectionne les lignes **ne correspondant pas** au motif).  
+- **-w** : Sélectionne uniquement les correspondances formant un mot complet.  
+- **-x** : Sélectionne uniquement les lignes correspondant **exactement** au motif.
 
 
 
