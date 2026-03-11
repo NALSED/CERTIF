@@ -1,4 +1,3 @@
-# **GREP**
 
 # Réponses — Exercices `grep` RHCSA
 
