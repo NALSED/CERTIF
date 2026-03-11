@@ -14,17 +14,17 @@ Télécharger [RHEL](https://developers.redhat.com/products/rhel/download#getred
 │  │   VM1 — server   │   │   VM2 — client   │   │
 │  │  (node1)         │   │  (node2)         │   │
 │  │                  │   │                  │   │
-│  │  RAM  : 10 Go     │   │  RAM  : 5 Go     │   │
+│  │  RAM  : 10 Go    │   │  RAM  : 5 Go     │   │
 │  │  CPU  : 4 vCPU   │   │  CPU  : 1 vCPU   │   │
 │  │  HDD1 : 20 Go    │   │  HDD  : 10 Go    │   │
 │  │  HDD2 : 10 Go    │   │                  │   │
 │  │  HDD3 : 10 Go    │   │                  │   │
 │  └──────────────────┘   └──────────────────┘   │
-│                                                 │
-│  Réseau :  bridge
-   - VM1 : 192.168.0.10
-   - VM2 :   │
-└─────────────────────────────────────────────────┘
+│                                                │
+│  Réseau :  bridge                              │
+│   - VM1 : 192.168.0.5                          │ 
+│   - VM2 :                                      │
+└────────────────────────────────────────────────┘
 - Entrée dans pfsense des VM
 
 <img width="1139" height="93" alt="image" src="https://github.com/user-attachments/assets/3587e07c-79e1-4709-9612-cd4bd7afbe3f" />
