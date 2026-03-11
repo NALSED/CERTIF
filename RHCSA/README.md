@@ -113,7 +113,6 @@ Certification : *Red Hat Certified System Administrator*
 ⬜ **7.4** — Pare-feu — `firewall-cmd --permanent`, `firewall-cmd --reload`  
 
 > 💡 RHEL 10 : NetworkManager uniquement — `network-scripts` supprimé, `ip`/`ss` remplacent `ifconfig`/`netstat`
-
 ---
 
 ## 8. 👥 Gérer des groupes et utilisateurs système
