@@ -14,7 +14,6 @@
 
 | Chaîne | Points forts | Lien |
 |--------|-------------|--------|
-
 | **Sander van Vugt** | Labs RHCSA RHEL 9/10, très proche de l'examen |  [Liens Youtube](https://www.youtube.com/playlist?list=PLC5eRS3MXpp8qgCiKYbZNhnTmfr57bYeU)|
 | **beanologi** |  |  [Liens Youtube](https://www.youtube.com/watch?v=WDDkDw3LI3U&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) |
 | **Eddie Jennings** | courbe d'apprentissage très bien pensée, tous les sujets traité |  [Liens Youtube](https://www.youtube.com/watch?v=TB06LSPQySE&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy) |
@@ -25,7 +24,6 @@
 
 | Chaîne | Points forts | Lien |
 |--------|-------------|--------|
-
 | **Xavki** | Sujet => LVM, Podman, Recherche, traité en profondeur |  [Liens Youtube](https://www.youtube.com/@xavki/search?query=rhcsa)|
 | **Stéphane Robert** | Excellents conseils, et des execices bien construit|  [Blog](blog.stephane-robert.info/docs/admin-serveurs/linux) [GitHub-RHCSA](github.com/stephrobert/linux-training) |
 | **Goffinet** | Pour travailler, hors ligne :warning: RHEL 7et 8 traité :warning: |  [Liens Leanpub]([https://leanpub.com/b/linux-administration-complet) |
