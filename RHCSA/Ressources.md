@@ -36,9 +36,6 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 
 # 🔄 RHEL 8 → RHEL 10 : Guide de transition RHCSA
 
-> Utilise ce guide quand une ressource RHEL 8 donne une commande ou un outil différent de ce que tu verras à l'examen RHEL 10.
-
----
 
 ## 📦 Gestion des paquets
 
@@ -46,7 +43,7 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 |-------|--------|---------|------|
 | Gestionnaire de paquets | `dnf` (DNF 4) | `dnf5` (DNF 5) | Les commandes `dnf` restent compatibles |
 | Alias yum | `yum` → symlink vers `dnf` | `yum` → symlink vers `dnf5` | Même syntaxe, ça marche toujours |
-| Modules AppStream | `dnf module enable/install` | Simplifié, moins utilisé | Les module streams sont en retrait |
+| Modules AppStream | `dnf module enable/install` | Simplifié, moins utilisé | Les modules streams sont en retrait |
 | Gestion logiciels alternatifs | — | `flatpak install/remove` | **Nouveau objectif RHCSA 10** |
 | Dépôts Flatpak | — | `flatpak remote-add` | **Nouveau objectif RHCSA 10** |
 
