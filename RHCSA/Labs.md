@@ -46,6 +46,7 @@ systemctl set-default multi-user.target
 sudo systemctl reboot
 
 ````
+:warning: A suivre dans cet ordre jusqu'au point `-3.`
 
 ### `-1.` Enregistrer la vm
 
@@ -71,6 +72,21 @@ sudo dnf update -y
 ````
 sudo dnf install vim
 ````
+
+### `-3.` Clone + Snap
+
+`-3.1.` Après installation et enregistrement clonage, en cas du crash total de la Vm pas besoin de reinstaller RHEL 10
+
+`-3.1.` Lancer le clone, et faire un Snap à chaque étape cruicial.
+
+-Si probléme Rollback avec le Snap et si crash total, Clone.
+
+`[NOTE]` Probléme possible avec l'enregistrement, si c'est le cas
+````
+subscription-manager unregister
+````
+
+-Puis se réenregistrer
 
 ---
 
