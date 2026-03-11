@@ -159,6 +159,8 @@ Snapshot 3 : "Avant exercice LVM"        → avant chaque série d'exercices ris
 > 💡 Avec VirtualBox : `Machine → Prendre un instantané`  
 > Avec KVM/virt-manager : `Snapshot → Créer`
 
+:one
+
 ---
 
 ## 🎯 Rappels examen
