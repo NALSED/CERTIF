@@ -2,7 +2,6 @@
 **Examen EX200** | Red Hat Enterprise Linux 10 | Version 2026  
 Certification : *Red Hat Certified System Administrator*
 
-:one
 
 ---
 
