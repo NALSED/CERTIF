@@ -26,7 +26,7 @@
 |--------|-------------|--------|
 | **Xavki** | Sujet => LVM, Podman, Recherche, traité en profondeur |  [Liens Youtube](https://www.youtube.com/@xavki/search?query=rhcsa)|
 | **Stéphane Robert** | Excellents conseils, et des execices bien construit|  [Blog](blog.stephane-robert.info/docs/admin-serveurs/linux) [GitHub-RHCSA](github.com/stephrobert/linux-training) |
-| **Goffinet** | Pour travailler, hors ligne :warning: RHEL 7et 8 traité :warning: |  [Liens Leanpub]([https://leanpub.com/b/linux-administration-complet) |
+| **Goffinet** | Pour travailler, hors ligne :warning: RHEL 7et 8 traité :warning: |  [Liens Leanpub](https://leanpub.com/b/linux-administration-complet) |
 
 
 ---
