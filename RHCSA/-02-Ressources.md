@@ -181,7 +181,7 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 | Type | Ressource | Lien |
 |------|-----------|------|
 | 📄 Doc | Red Hat — Configuring basic system settings | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/configuring_basic_system_settings |
-| 📄 Doc | GNU Bash Manual (redirections, grep, pipes) | https://www.gnu.org/software/bash/manual/bash.html |
+| 📄 Doc | GNU Bash Manual (redirections, grep, pipes) | [ITConnect](https://www.it-connect.fr/tuto-grep-linux-exemples-pratiques/) [Stephane Robert](https://blog.stephane-robert.info/docs/admin-serveurs/linux/grep/)[Livre 1 Goffinet](https://leanpub.com/b/linux-administration-complet) |
 
 ---
 
