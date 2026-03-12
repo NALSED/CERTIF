@@ -143,12 +143,4 @@ EOF
 22. Dans `/etc/hosts`, affiche les lignes qui ne sont pas des commentaires.
 23. Dans `/proc/mounts`, affiche les systèmes de fichiers de type `ext4`.
 
-### Niveau 5 — Pièges
 
-24. Cherche le texte littéral `v1.0.0` sans que les `.` soient des jokers.
-25. Utilise **une seule commande** avec `-e` pour chercher `CRITICAL`, `ERROR` et `WARNING`.
-26. Affiche les lignes contenant exactement le mot `root` (pas `rootLogin`, pas `rootfs`).
-27. Extrais uniquement les tailles de fichiers en `GB` ou `MB`.
-28. Affiche les lignes où `alice` apparaît **au moins 2 fois**.
-29. Cherche `timeout=30` en tant que chaîne **littérale**.
-30. Dans les logs Apache, affiche uniquement les requêtes de l'IP `10.0.0.99`.
