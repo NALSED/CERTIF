@@ -25,7 +25,7 @@ systemctl reboot
 ```` 
 
 - Examen blancs
-
+- Faire des liens logique, et comprehenssif pour vous entre vos notre et la commande `man`, exemple : quand je travailsu `grep`, je fait des allez retoutr entre mes notes et `man` m'abituer pour le jour de l'examen
 --- 
 
 
