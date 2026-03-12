@@ -172,21 +172,25 @@ yp
 ---
 ---
 
-## **1.3** — `grep` et expressions régulières — `grep -E`, `grep -P`, `egrep`
+## **1.3** — `grep` et expressions régulières — `grep -E`, `grep -F`
+[Regex](https://regex101.com/)
+
+- Syntaxe : `grep [OPTIONS] MOTIF [FICHIER...]`
 
 – Options `grep`
-
-- **-num** : Affiche `num` lignes avant et après chaque correspondance (une ligne n’est jamais répétée).  
-- **-A num** : Affiche `num` lignes après la correspondance.  
-- **-B num** : Affiche `num` lignes avant la correspondance.  
-- **-C num** : Affiche `num` lignes avant et après la correspondance (équivalent à `-num`).  
+- **-E** à la place de egrep : permet d’utiliser une syntaxe de regex plus riche.
+- **-F** à la place de fgrep : désactive totalement les regex et traite le motif comme une chaîne brute.
+- **-i** : Ignore la casse (majuscule/minuscule) dans le motif et les fichiers.  
+- **-f fichier** : Lit le motif depuis un fichier.
+- **-n** : Affiche `num` lignes avant et après chaque correspondance (une ligne n’est jamais répétée).  
+- **-A n** : Affiche `num` lignes après la correspondance.  
+- **-B n** : Affiche `num` lignes avant la correspondance.  
+- **-C n** : Affiche `num` lignes avant et après la correspondance (équivalent à `-num`).  
 - **-V** : Affiche le numéro de version de `grep` sur stderr (utile pour rapports de bogues).  
 - **-b** : Affiche le décalage en octets avant chaque ligne correspondante.  
 - **-c** : Affiche uniquement le nombre de lignes correspondant au motif (`-v` inverse la sélection).  
 - **-e motif** : Utilise le motif indiqué, pratique pour motifs commençant par `-`.  
-- **-f fichier** : Lit le motif depuis un fichier.  
 - **-h** : Ne pas afficher le nom des fichiers lors de la recherche sur plusieurs fichiers.  
-- **-i** : Ignore la casse (majuscule/minuscule) dans le motif et les fichiers.  
 - **-L** : Affiche les fichiers **sans** correspondance.  
 - **-l** : Affiche les fichiers **avec** correspondance.  
 - **-n** : Préfixe chaque ligne avec son numéro dans le fichier.  
@@ -197,9 +201,21 @@ yp
 - **-x** : Sélectionne uniquement les lignes correspondant **exactement** au motif.
 
 
+Principaux métacaractères utilisés :
 
+| Métacaractère | Signification | Exemples |
+|---|---|---|
+| . | N'importe quel caractère | |
+| * | 0 ou plusieurs répétitions | ab*c => ac abc abbc etc.. |
+| + | 1 ou plusieurs répétitions | ab+c => abc abbc abbbc (pas ac) |
+| ? | 0 ou 1 répétition | colou?r => color/colour |
+| [...] | Classe de caractère | [a-Z] [0-9] |
+| ^ | Début de ligne | |
+| $ | Fin de ligne | |
+| | | Alternative | Avec -E | 
+| \| | Alternative | Sans -E (échappement \)|
 
-
+:warning: `*` `+` `?` s'appliquent sur le caractère ou le groupe précédent. (dans les exemple ci dessus `b` ou `u`).
 
 
 
