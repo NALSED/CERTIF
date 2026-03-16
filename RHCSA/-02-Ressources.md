@@ -179,7 +179,7 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 # RHCSA — Tableaux de ressources
 
 ---
-
+:warning: Si abscence de liens et `OK`, sujet déjà maitrisé avant `RHCSA` :warning:
 ## 1. Outils essentiels
 🎬
 📄
@@ -187,14 +187,14 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 |---------|------|------|
 | 1.2 — Redirections I/O | 🎬 | [Eddie Jennings](https://www.youtube.com/watch?v=Vnv8cELgIQ8&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=3) |
 | 1.3 — grep & regex | 🎬 et 📄 | [Eddie Jennings](https://www.youtube.com/watch?v=h7HWWugPPpY&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=4) et [Exercices](https://github.com/NALSEDCERTIF/tree/main/RHCSA/PRACTICE/EXO/GREP) |
-| 1.4 — Accès SSH | 🎬 et  | [Eddie Jennings](https://www.youtube.com/watch?v=YinR8zIK_3g&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=5) et [_Techcurator](https://www.youtube.com/watch?v=305AJx2aTm0)|
-| 1.5 — Changement utilisateur | | []() |
-| 1.6 — Archivage | | []() |
-| 1.7 — Édition fichiers texte | | []() |
-| 1.8 — Gestion fichiers/répertoires | | []() |
-| 1.9 — Liens physiques/symboliques | | []() |
-| 1.10 — Permissions ugo/rwx | | []() |
-| 1.11 — Documentation système | | []() |
+| 1.4 — Accès SSH | 🎬 et 🎬 | [Eddie Jennings](https://www.youtube.com/watch?v=YinR8zIK_3g&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=5) et [_Techcurator](https://www.youtube.com/watch?v=305AJx2aTm0)|
+| 1.5 — Changement utilisateur | 🎬 et 🎬 | [Eddie Jennings](https://www.youtube.com/watch?v=f1liwlGvw5s&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=6) et [Xavki](https://www.youtube.com/watch?v=1XqBbDQ0C1g) |
+| 1.6 — Archivage | 🎬 et 🎬 |  [Eddie Jennings](https://www.youtube.com/watch?v=_q9ww3pF0U4&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=7) [xavki](https://www.youtube.com/watch?v=uVksM-i4HT8) |
+| 1.7 — Édition fichiers texte | | `OK` |
+| 1.8 — Gestion fichiers/répertoires | | `OK` |
+| 1.9 — Liens physiques/symboliques | 🎬 | [It_Connect](https://www.youtube.com/watch?v=MCQI0lLGbUw) |
+| 1.10 — Permissions ugo/rwx | 🎬 et 🎬 | [Eddie Jennings](https://www.youtube.com/watch?v=talHSb28aIg&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=11) et [xavki](https://www.youtube.com/watch?v=A2aaJVc5PD8) |
+| 1.11 — Documentation système | | `OK` |
 
 ---
 
