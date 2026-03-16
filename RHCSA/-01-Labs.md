@@ -110,8 +110,7 @@ getenforce   # doit retourner "Enforcing"
 # Firewalld actif
 systemctl status firewalld
 
-# Podman disponible
-podman --version
+
 ```
 
 ---
