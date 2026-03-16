@@ -218,8 +218,27 @@ Principaux métacaractères utilisés :
 :warning: `*` `+` `?` s'appliquent sur le caractère ou le groupe précédent. (dans les exemple ci dessus `b` ou `u`).
 
 
+---
 
+## **1.4** — Accès distant via `ssh` 
 
+-Accés ssh 
+````
+ssh USERNAME @ IP / DOMAIN NAME
+````
+
+- Accés sans mots de passe
+Générer les clés (ed25519 conseillé =>  plus court, plus rapide, plus sûr par conception, moins fragile aux mauvaises implémentations.)
+````
+ssh-keygen -t ed25519 -C "COMMENTAIRE"
+````
+
+- Copier la clé
+````
+ssh-copy-id -i /home/$USER/.ssh/id_ed25519.pub client@ip
+````
+
+- Sortie
 
 
 
