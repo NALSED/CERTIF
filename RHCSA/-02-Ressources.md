@@ -32,9 +32,14 @@
 `[NOTE]` Point de vigilance entre RHEL 8 et 10, il est tout à fait possible de travailler avec des support traitant de RHEL 8, voici les point de différences.
 [Source Red Hat (11/03/2026)](https://www.redhat.com/en/services/training/ex200-red-hat-certified-system-administrator-rhcsa-exam?section=objectives)
 
-Et le tableau à été construit avec les documentations officielles de redhat (11/03/2026)
+Les tableau sont construit avec les documentations officielles de redhat (11/03/2026)
 
-# 🔄 RHEL 8 → RHEL 10 : Guide de transition RHCSA
+<details>
+<summary>
+<h2>
+🔄 RHEL 8 → RHEL 10 : Guide de transition RHCSA
+</h2>
+</summary>
 
 
 ## 📦 Gestion des paquets
@@ -98,16 +103,7 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 | ACL | `setfacl`, `getfacl` | Identique | Aucun changement |
 | `umask` / permissions par défaut | Objectif présent | **Objectif explicite** "manage default file permissions" | Même commandes |
 
----
 
-## 📜 Scripts shell & outils
-
-| Sujet | RHEL 8 | RHEL 10 | Note |
-|-------|--------|---------|------|
-| Bash | 5.0 | 5.2+ | Syntaxe identique |
-| Python par défaut | `python3` (3.6) | `python3` (3.12) | Syntaxe compatible, vérifier les f-strings |
-| `vim` / `nano` | Disponibles | Identiques | Aucun changement |
-| `grep`, `sed`, `awk` | Identiques | Identiques | Aucun changement |
 
 ---
 
@@ -115,21 +111,9 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 
 | Sujet | RHEL 8 | RHEL 10 | Note |
 |-------|--------|---------|------|
-| `systemctl` | Identique | Identique | Aucun changement |
 | GRUB | `grub2-mkconfig` | `grubby` **recommandé** + `grub2-mkconfig` | `grubby` plus simple pour les options kernel |
-| Rescue mode | `rd.break` / `init=/bin/bash` | Identique | Aucun changement |
-| Cibles systemd | `multi-user.target`, etc. | Identiques | Aucun changement |
 | journald | `journalctl` | Identique | Aucun changement |
 
----
-
-## 👥 Utilisateurs & groupes
-
-| Sujet | RHEL 8 | RHEL 10 | Note |
-|-------|--------|---------|------|
-| `useradd`, `usermod`, `userdel` | Identiques | Identiques | Aucun changement |
-| `passwd`, `chage` | Identiques | Identiques | Aucun changement |
-| `sudoers` / `visudo` | Identique | Identique | Aucun changement |
 
 ---
 
@@ -137,9 +121,6 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 
 | Sujet | RHEL 8 | RHEL 10 | Note |
 |-------|--------|---------|------|
-| xfs, ext4, vfat | `mkfs.xfs`, `mkfs.ext4` | Identiques | Aucun changement |
-| NFS | `mount -t nfs` | Identique | Aucun changement |
-| autofs | `/etc/auto.master` + `/etc/auto.*` | Identique | Aucun changement |
 | CIFS/Samba | `mount -t cifs` (objectif RHCSA 8) | **Retiré des objectifs RHCSA 10** | Pas à l'examen |
 
 ---
@@ -151,24 +132,13 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 | Podman | **Objectif RHCSA 8** (depuis RHEL 8.4) | **Retiré des objectifs RHCSA 10** | Podman existe sur le système mais pas à l'exam |
 | Skopeo / Buildah | Présents | Présents | Hors objectifs RHCSA |
 
----
-
-## ✅ Résumé 
-
-| Priorité | Action |
-|----------|--------|
-| 🔴 Critique | Oublier `ifconfig`/`netstat` → apprendre `ip addr` / `ss` |
-| 🔴 Critique | Oublier `iptables` → utiliser uniquement `firewall-cmd` |
-| 🔴 Critique | Oublier les fichiers `ifcfg-*` → tout passe par `nmcli` |
-| 🟠 Important | Apprendre les **systemd timers** (pas juste cron) |
-| 🟠 Important | Apprendre **Flatpak** (dépôts + install/remove) |
-| 🟡 Mineur | `grubby` à la place de `grub2-mkconfig` (les deux fonctionnent) |
-| 🟢 OK | LVM, SELinux, NFS, autofs, users, SSH → **identiques** |
-| 🟢 OK | Podman vu dans des ressources RHEL 8 → **ignorer pour l'exam** |
-
----
 
 *Référence : EX200 RHEL 10 — objectifs officiels Red Hat — 2026*
+
+</details>
+
+
+
 
 ---
 
