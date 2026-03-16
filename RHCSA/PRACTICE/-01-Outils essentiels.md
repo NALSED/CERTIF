@@ -463,10 +463,34 @@ ls -li
 | `6` | `110` | `rw-` | ✔ | ✔ | ✗ | Lecture + écriture |
 | `7` | `111` | `rwx` | ✔ | ✔ | ✔ | Tous les droits |
 
+`[NOTE]`
+
+- 4 = Read
+- 2 = Write
+- 1 = Execute
 
 
+**Commandes**
 
+- `chmod`
+Options courantes : -R (Récurssif) / -c (Verbeux sur les changements)
 
+- Exemple
+````
+# Octale , ici user r + w / groups w / others w
+chmod 644
+````
+
+````
+# Lettres
+chmod [cible][+|-][permission] fichier
+option u (users) g(groups) o(others)
+=> chmod o-w supprime la lecture aux autres utilisateurs
+````
+ 
+---
+
+- `chown`
 
 
 
