@@ -1,2 +1,2 @@
 username **nalsed**
-password **Clasic shit**
+password **Classic shit**
