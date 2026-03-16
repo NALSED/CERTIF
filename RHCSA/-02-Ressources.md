@@ -176,92 +176,139 @@ Et le tableau à été construit avec les documentations officielles de redhat (
 ## :three:  **Ressources par thémes**
 
 
-## 🟥 Section 1 — Outils essentiels
-
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — Configuring basic system settings | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/configuring_basic_system_settings |
-| 📄 Doc | GNU Bash Manual (redirections, grep, pipes) | [ITConnect](https://www.it-connect.fr/tuto-grep-linux-exemples-pratiques/) [Stephane Robert](https://blog.stephane-robert.info/docs/admin-serveurs/linux/grep/)[Livre 1 Goffinet](https://leanpub.com/b/linux-administration-complet) |
+# RHCSA — Tableaux de ressources
 
 ---
 
-## 🟥 Section 2 — Gestion des logiciels
-
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — DNF5 / gestion des paquets RPM | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/managing_software_with_the_dnf_tool |
-| 📄 Doc | Flatpak — Documentation officielle | https://docs.flatpak.org/en/latest/using-flatpak.html |
-| 📄 Doc | Red Hat — Flatpak sur RHEL | https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/installing_and_using_dynamic_programming_languages/using-flatpak_installing-and-using-dynamic-programming-languages |
-
----
-
-## 🟥 Section 3 — Scripts shell
-
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 🎬 Vidéo | Sander van Vugt — Bash Scripting in 4 Hours | https://www.youtube.com/@rhatcert |
-| 📄 Doc | GNU Bash Reference — if, for, while, $? | https://www.gnu.org/software/bash/manual/bash.html#Shell-Scripts |
-
----
-
-## 🟥 Section 4 — Systèmes en cours d'exécution
-
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — systemd & journald | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/monitoring_and_managing_system_status_and_performance |
-| 📄 Doc | Red Hat — tuned profiles | https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/html/monitoring_and_managing_system_status_and_performance/getting-started-with-tuned_monitoring-and-managing-system-status-and-performance |
+## 1. Outils essentiels
+🎬
+📄
+| Section | Type | Lien |
+|---------|------|------|
+| 1.2 — Redirections I/O | 🎬 | [Eddie Jennings](https://www.youtube.com/watch?v=Vnv8cELgIQ8&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=3) |
+| 1.3 — grep & regex | 🎬 et 📄 | [Eddie Jennings](https://www.youtube.com/watch?v=h7HWWugPPpY&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=4) et [Exercices](https://github.com/NALSEDCERTIF/tree/main/RHCSA/PRACTICE/EXO/GREP) |
+| 1.4 — Accès SSH | 🎬 et  | [Eddie Jennings](https://www.youtube.com/watch?v=YinR8zIK_3g&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=5) et [_Techcurator](https://www.youtube.com/watch?v=305AJx2aTm0)|
+| 1.5 — Changement utilisateur | | []() |
+| 1.6 — Archivage | | []() |
+| 1.7 — Édition fichiers texte | | []() |
+| 1.8 — Gestion fichiers/répertoires | | []() |
+| 1.9 — Liens physiques/symboliques | | []() |
+| 1.10 — Permissions ugo/rwx | | []() |
+| 1.11 — Documentation système | | []() |
 
 ---
 
-## 🟥 Section 5 — Stockage local
+## 2. Gestion des logiciels
 
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — LVM (pvcreate, vgcreate, lvcreate) | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/configuring_and_managing_logical_volumes |
-| 📄 Doc | Red Hat — Partitions fdisk/parted/GPT | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/managing_storage_devices |
-
----
-
-## 🟥 Section 6 — Systèmes de fichiers
-
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — ext4 / xfs / NFS / autofs | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/managing_file_systems |
+| Section | Type | Lien |
+|---------|------|------|
+| 2.1 — Dépôts RPM | | []() |
+| 2.2 — Paquets RPM | | []() |
+| 2.3 — Dépôts Flatpak | | []() |
+| 2.4 — Apps Flatpak | | []() |
 
 ---
 
-## 🟥 Section 7 — Déploiement et gestion
+## 3. Scripts shell
 
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — cron & systemd timers | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/configuring_basic_system_settings |
-| 📄 Doc | Red Hat — DNF5 / gestion des paquets | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/managing_software_with_the_dnf_tool |
-
----
-
-## 🟥 Section 8 — Réseau
-
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — NetworkManager / nmcli / firewalld | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/configuring_and_managing_networking |
+| Section | Type | Lien |
+|---------|------|------|
+| 3.1 — Exécution conditionnelle | | []() |
+| 3.2 — Boucles | | []() |
+| 3.3 — Entrées de script | | []() |
+| 3.4 — Codes de retour | | []() |
 
 ---
 
-## 🟥 Section 9 — Utilisateurs et groupes
+## 4. Systèmes en cours d'exécution
 
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — useradd, sudoers, chage | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/configuring_basic_system_settings/managing-users-and-groups_configuring-basic-system-settings |
+| Section | Type | Lien |
+|---------|------|------|
+| 4.1 — Démarrer/éteindre | | []() |
+| 4.2 — Cibles système | | []() |
+| 4.3 — Accès root GRUB | | []() |
+| 4.4 — Processus gourmands | | []() |
+| 4.5 — Priorité processus | | []() |
+| 4.6 — Profils tuning | | []() |
+| 4.7 — Journaux système | | []() |
+| 4.8 — Persistance journaux | | []() |
+| 4.9 — Services réseau | | []() |
+| 4.10 — Transfert fichiers | | []() |
 
 ---
 
-## 🟥 Section 10 — Sécurité
+## 5. Stockage local
 
-| Type | Ressource | Lien |
-|------|-----------|------|
-| 📄 Doc | Red Hat — SELinux ⚠️ *priorité absolue* | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/using_selinux |
-| 📄 Doc | Red Hat — ACL & firewalld | https://docs.redhat.com/fr/documentation/red_hat_enterprise_linux/10/html/securing_networks |
-| 📄 Doc | Notes RHCSA SELinux (communautaire) | https://doc-rhel-rhcsa-prep.readthedocs.io/en/latest/security/selinux.html |
+| Section | Type | Lien |
+|---------|------|------|
+| 5.1 — Partitions GPT | | []() |
+| 5.2 — Volumes physiques LVM | | []() |
+| 5.3 — Groupes de volumes | | []() |
+| 5.4 — Volumes logiques | | []() |
+| 5.5 — Montage fstab | | []() |
+| 5.6 — Partitions & swap | | []() |
+
+---
+
+## 6. Systèmes de fichiers
+
+| Section | Type | Lien |
+|---------|------|------|
+| 6.1 — Créer/monter fs | | []() |
+| 6.2 — NFS | | []() |
+| 6.3 — autofs | | []() |
+| 6.4 — Étendre LV | | []() |
+| 6.5 — Permissions & contextes | | []() |
+
+---
+
+## 7. Déploiement et gestion
+
+| Section | Type | Lien |
+|---------|------|------|
+| 7.1 — Planification tâches | | []() |
+| 7.2 — Services au démarrage | | []() |
+| 7.3 — Cible par défaut | | []() |
+| 7.4 — Services de temps | | []() |
+| 7.5 — Gestion paquetages | | []() |
+| 7.6 — Chargeur de démarrage | | []() |
+
+---
+
+## 8. Réseau
+
+| Section | Type | Lien |
+|---------|------|------|
+| 8.1 — IPv4/IPv6 | | []() |
+| 8.2 — Nom d'hôte & DNS | | []() |
+| 8.3 — Services réseau auto | | []() |
+| 8.4 — Pare-feu | | []() |
+
+---
+
+## 9. Utilisateurs et groupes
+
+| Section | Type | Lien |
+|---------|------|------|
+| 9.1 — Comptes utilisateur | | []() |
+| 9.2 — Mots de passe | | []() |
+| 9.3 — Groupes | | []() |
+| 9.4 — Accès sudo | | []() |
+
+---
+
+## 10. Sécurité
+
+| Section | Type | Lien |
+|---------|------|------|
+| 10.1 — Pare-feu firewalld | | []() |
+| 10.2 — Permissions fichiers | | []() |
+| 10.3 — Auth SSH par clé | | []() |
+| 10.4 — Modes SELinux | | []() |
+| 10.5 — Contextes SELinux | | []() |
+| 10.6 — Restaurer contextes | | []() |
+| 10.7 — Ports SELinux | | []() |
+| 10.8 — Booléens SELinux | | []() |
 
 ---
 
