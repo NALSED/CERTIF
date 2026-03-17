@@ -416,13 +416,13 @@ ls -li
 ---
 ---
 
-# **1.10** — Permissions `ugo/rwx` — `chmod`, `chown`, `chgrp`, `umask`, `suid`, `sguid`, `sticky-bit` 
+# **1.10** — Permissions `ugo/rwx` — `chmod`, `chown`, `chgrp`, `umask`, `suid`, `sgid`, `sticky-bit` 
 
 ## 📝 **SOMMAIRE**
 
 - 1️⃣ `chmod`/ `chown` / `chgrp`
 - 2️⃣ `umask`
-- 3️⃣ `suid` / `sguid` / `sticky-bit` 
+- 3️⃣ `suid` / `sgid` / `sticky-bit` 
 
 ---
 
@@ -553,7 +553,7 @@ umask
 │  │   │   └── Permissions others
 │  │   └────── Permissions group
 │  └────────── Permissions user (owner)
-└───────────── Permissions spéciales ignoré pour le calcule (voir : suid, sguid, sticky-bit  ) 
+└───────────── Permissions spéciales ignoré pour le calcule (voir : suid, sgid, sticky-bit  ) 
 ```
 
 -2.2.2 Fonctionnement
@@ -616,8 +616,9 @@ Changer umask pour user
 
 ---
 
-### 3️⃣ **`suid` / `sguid` / `sticky-bit`** 
+### 3️⃣ **`suid` / `sgid` / `sticky-bit`** 
 
+Les bit suid/guid/sticky-bit
 
 `-3.1.` Définition 
 
@@ -626,26 +627,79 @@ Abréviation de `Set User ID`, est une autorisation spéciale sur les fichiers e
 Autrement dit, même si l'utilisateur courant ne dispose pas des droits nécessaire sur le fichier il pourra quand même l'exécuter.
 
 - Exemple : le binaire `/usr/bin/passwd`.
+
 `passwd` est une `commande` permettant de `modifier le mot de passe` de l’utilisateur et possède un bit SUID.
 
 Lorsque nous tapons la commande, nous `l’exécutons en tant qu’utilisateur root`, sans ça on ne pourrait pas `modifier le fichier /etc/shadow`, et par concéquent être dans l'incapacité de modifier son mot de passe sans passer par root.
 
+pour voir si un fichier à le bit suid activé
+````
+ls -l /FICHIER CIBLE
+# Sortie
+-rwsr-xr-x
+   ↑
+   └── `s` remplace le `x` dans la partie user
+````
 
--3.1.2`sguid` 
+-3.1.2`sgid` 
+Abréviation de `Set Group ID`, si `sgid` est activé,  les fichiers et répertoires nouvellement créés dans ce répertoire héritent de la propriété de groupe du répertoire parent plutôt que de la propriété de groupe par défaut de l’utilisateur.
 
+- Exemple : Avec Bareos dans le dossier `/etc/bareos/` le bit `sgid` est activé.
 
+<img width="543" height="48" alt="image" src="https://github.com/user-attachments/assets/4097ee93-f89b-42f9-b083-05969b937bd8" />
+
+pour voir si un fichier à le bit suid activé
+````
+ls -l /FICHIER CIBLE
+# Sortie
+-rwxr-sr-x
+      ↑
+      └── `s` remplace le `x` dans la partie group
+````
 
 -3.3.3`sticky-bit`
+Il permet d’interdire la suppression ou déplacement de fichiers dans un répertoire créé par un autre utilisateur.
+
+L’utilisateur ne pourra supprimer que ses propres fichiers.
+
+pour voir si un fichier à le bit suid activé
+````
+ls -l /FICHIER CIBLE
+# Sortie
+-rwxr-xr-t
+         ↑
+         └── `t` remplace le `x` dans la partie group
+````
 
 
+`-3.2.` Fonctionnement
 
+`suid`
+````
+chmod u+s <fichier>
+chmod u-s <fichier>
+````
 
+`sgid`
+````
+chmod g+s <fichier>
+````
 
+`sticky-bit`
+````
+chmod +t <fichier>
+chmod g+t <fichier>
+````
 
+**Trouver les fichier/dossier avec le bit suid/sgid/sticky-bit activé**
+````
+#suid
+find / -perm 4000 -type f 2>/dev/null
 
+#sgid
+find / -perm 2000 -type f 2>/dev/null
 
-
-
-
-
+#sticky-bit 
+find / -perm 1000 -type f 2>/dev/null
+````
 
