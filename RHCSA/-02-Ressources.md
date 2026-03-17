@@ -163,7 +163,7 @@ Les tableau sont construit avec les documentations officielles de redhat (11/03/
 | 1.7 — Édition fichiers texte | | `OK` |
 | 1.8 — Gestion fichiers/répertoires | | `OK` |
 | 1.9 — Liens physiques/symboliques | 🎬 | [It_Connect](https://www.youtube.com/watch?v=MCQI0lLGbUw) |
-| 1.10 — Permissions ugo/rwx | 🎬 et 🎬 | [Eddie Jennings](https://www.youtube.com/watch?v=talHSb28aIg&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=11) et [xavki](https://www.youtube.com/watch?v=A2aaJVc5PD8) |
+| 1.10 — Permissions ugo/rwx | 🎬 et 🎬 et 📄 et 📄 | [Eddie Jennings - permissions](https://www.youtube.com/watch?v=talHSb28aIg&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=11) et [xavki - permissions](https://www.youtube.com/watch?v=A2aaJVc5PD8) et [malekal - umask](https://www.malekal.com/quest-ce-que-umask-et-comment-utiliser-la-commande-umask/) et [malekal - suid/guid/sticky-bit](https://www.malekal.com/suid-sgid-sticky-bit-linux/)|
 | 1.11 — Documentation système | | `OK` |
 
 ---
