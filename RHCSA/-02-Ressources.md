@@ -16,7 +16,7 @@
 |--------|-------------|--------|
 | **Sander van Vugt** | Labs RHCSA RHEL 9/10, très proche de l'examen |  [Liens Youtube](https://www.youtube.com/playlist?list=PLC5eRS3MXpp8qgCiKYbZNhnTmfr57bYeU)|
 | **beanologi** |  |  [Liens Youtube](https://www.youtube.com/watch?v=WDDkDw3LI3U&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) |
-| **Eddie Jennings** | courbe d'apprentissage très bien pensée, tous les sujets traité :warning: RHEL 8 :warning:|  [Liens Youtube](https://www.youtube.com/watch?v=TB06LSPQySE&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy) |
+| **Eddie Jennings** | courbe d'apprentissage très bien pensée, sujets traité dans l'odre de la doc RH :warning: RHEL 8 :warning:|  [Liens Youtube](https://www.youtube.com/watch?v=TB06LSPQySE&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy) |
 
 ---
 
@@ -159,7 +159,7 @@ Les tableau sont construit avec les documentations officielles de redhat (11/03/
 | 1.3 — grep & regex | 🎬 et 📄 | [Eddie Jennings](https://www.youtube.com/watch?v=h7HWWugPPpY&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=4) et [Exercices](https://github.com/NALSEDCERTIF/tree/main/RHCSA/PRACTICE/EXO/GREP) |
 | 1.4 — Accès SSH | 🎬 et 🎬 | [Eddie Jennings](https://www.youtube.com/watch?v=YinR8zIK_3g&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=5) et [_Techcurator](https://www.youtube.com/watch?v=305AJx2aTm0)|
 | 1.5 — Changement utilisateur | 🎬 et 🎬 | [Eddie Jennings](https://www.youtube.com/watch?v=f1liwlGvw5s&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=6) et [Xavki](https://www.youtube.com/watch?v=1XqBbDQ0C1g) |
-| 1.6 — Archivage | 🎬 et 🎬 |  [Eddie Jennings](https://www.youtube.com/watch?v=_q9ww3pF0U4&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=7) [xavki](https://www.youtube.com/watch?v=uVksM-i4HT8) |
+| 1.6 — Archivage | 🎬 et 🎬 |  [Eddie Jennings](https://www.youtube.com/watch?v=_q9ww3pF0U4&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy&index=7) et [xavki](https://www.youtube.com/watch?v=uVksM-i4HT8) |
 | 1.7 — Édition fichiers texte | | `OK` |
 | 1.8 — Gestion fichiers/répertoires | | `OK` |
 | 1.9 — Liens physiques/symboliques | 🎬 | [It_Connect](https://www.youtube.com/watch?v=MCQI0lLGbUw) |
@@ -172,8 +172,8 @@ Les tableau sont construit avec les documentations officielles de redhat (11/03/
 
 | Section | Type | Lien |
 |---------|------|------|
-| 2.1 — Dépôts RPM | | []() |
-| 2.2 — Paquets RPM | | []() |
+| 2.1 — Dépôts RPM | 🎬 et 📄 et 🎬 et 🎬| [Alphorm](https://www.youtube.com/watch?v=0hIpRAPPSMI) et [lea-linux](https://lea-linux.org/documentations/RPM) et [beanologi RPM-1-](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=27) et [beanologiRPM -2-](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=26)|
+| 2.2 — Paquets RPM | 🎬 et 🎬 | [beanologi RPM-1-](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=27) et [beanologiRPM -2-](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=26)|
 | 2.3 — Dépôts Flatpak | | []() |
 | 2.4 — Apps Flatpak | | []() |
 
