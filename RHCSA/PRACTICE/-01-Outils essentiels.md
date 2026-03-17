@@ -428,8 +428,11 @@ ls -li
 
 ### 1️⃣ **`chmod`/ `chown` / `chgrp`**
 
-- Lister les permission :
-   - `ls` =>  liste le contenu d'un répertoire 
+Utilisé pour changer le mode `chmod`, le propriétaire `chown` ou le groupe `chgrp`
+
+### `-1.1.` Lister les permission :
+
+- `ls` =>  liste le contenu d'un répertoire 
     **=== Options Principales ===**
 ````
 -l Format long (permissions, taille, date…) 
@@ -443,23 +446,27 @@ ls -li
 -i Affiche l'inode
 ````
     
-   - `stat` =>  affiche les métadonnées détaillées d'un fichier ou répertoire (permissions, tailles, horodatages)
-   - `getfacl` =>  affiche les ACL (Access Control Lists) d'un fichier ou répertoire
+- `stat` =>  affiche les métadonnées détaillées d'un fichier ou répertoire (permissions, tailles, horodatages)
 
-**- Permissions ou mode**
+- `getfacl` =>  affiche les ACL (Access Control Lists) d'un fichier ou répertoire
+
+---
+
+### `-1.2.` Définition :
+
+**Permissions ou mode**
 
 ```
 - --- --- ---
 ↑  ↑   ↑   ↑
 │  │   │   └── others
 │  │   └────── group
-│  └────────── owner
+│  └────────── user (owner)
 └───────────── type de fichier
 ```
 
----
 
-## I — Type de fichier (1er caractère)
+— Type de fichier (1er caractère)
 
 | Car. | Type | Exemple |
 |:----:|------|---------|
@@ -471,9 +478,7 @@ ls -li
 | `p` | Tube nommé (FIFO) | `/run/systemd/initctl/fifo` |
 | `s` | Socket Unix | `/run/docker.sock` |
 
----
-
-## II — Valeur des triplets `rwx` (par entité)
+— Valeur des triplets `rwx` (par entité ugo)
 
 | Octal | Binaire | Symbole | r | w | x | Description |
 |:-----:|:-------:|:-------:|:-:|:-:|:-:|-------------|
@@ -486,44 +491,151 @@ ls -li
 | `6` | `110` | `rw-` | ✔ | ✔ | ✗ | Lecture + écriture |
 | `7` | `111` | `rwx` | ✔ | ✔ | ✔ | Tous les droits |
 
-`[NOTE]`
+---
 
-- 4 = Read
-- 2 = Write
-- 1 = Execute
+### `-1.3.` Utilisation Commandes
 
-
-**Commandes**
-- Changer le mode d'un fichier/dossier
-
-- `chmod`
-Options courantes : -R (Récurssif) / -c (Verbeux sur les changements)
-
-- Exemple
+Options courantes pour les `chmod`, `chown`, `chgrp` => -R (Récurssif) / -c (Verbeux sur les changements)
 ````
-# Octale , ici user r + w / groups w / others w
+# Octale ici : user r + w / groups w / others w
 chmod 644
 ````
 
 ````
 # Lettres
-chmod [cible][+|-][permission] fichier
+chmod [cible][+|-][permission lettres] fichier
 option u (users) g(groups) o(others)
 => chmod o-w supprime la lecture aux autres utilisateurs
 ````
  
 ---
-- Changer le propriétaire ou/et groupe d'un fichier/dossier
+
 - `chown`
+Peux changer utilisateur et groupe
 ````
-chown
+chown [user] [fichier]
+chown [user]:[groupe] [fichier]
+chown :[groupe] [fichier]
 ````
 
 ---
 
-- `chgroup`
+- `chgrp`
+````
+chgrp [groupe] [fichier]
+````
+
+---
+
+### 2️⃣ **`umask`**
+
+`-2.1.` Définition :
+Permet d'appliquer des `droits par defaut`, lors de la `création de dossiers ou fichiers`.
+Les droits par defauts (sans modification de `umask`) sur linux sont :
+- Dossiers : `755`
+- Fichiers : `644`
+
+`-2.2.` Fonctionnement :
+
+`umask` pour user mask, utilise le ET binaire sur les droits maximaux sur 777 (dossiers) et 666 (fichiers), avec les droits octals vu plus haut.
+
+-2.2.1 Voir la valeur de umask
+````
+umask
+# Par defaut Sortie
+0022
+````
 
 
+```
+0  0   2   2
+↑  ↑   ↑   ↑
+│  │   │   └── Permissions others
+│  │   └────── Permissions group
+│  └────────── Permissions user (owner)
+└───────────── Permissions spéciales ignoré pour le calcule (voir : suid, sguid, sticky-bit  ) 
+```
+
+-2.2.2 Fonctionnement
+umask utilise **AND NOT** : d'abord **NOT** inverse le masque, puis **AND** l'applique sur la base.
+
+`[RAPPEL]`
+
+`AND`
+| A | B | A AND B |
+|---|---|---------|
+| 0 | 0 |    0    |
+| 0 | 1 |    0    |
+| 1 | 0 |    0    |
+| 1 | 1 |    1    |
+
+`NOT`
+| A | NOT A |
+|---|-------|
+| 0 |   1   |
+| 1 |   0   |
+
+`Calcul réel — umask 022`
+```
+umask 022   = 000 010 010
+NOT 022     = 111 101 101
+
+0666        = 110 110 110
+AND NOT 022 = 110 100 100  →  0644
+
+0777        = 111 111 111
+AND NOT 022 = 111 101 101  →  0755
+```
+
+Pour simplifier on peut utiliser l'analogie suivante :  
+La sortie de umask indique ce qui est retiré aux utilisateurs/groupes/autres toujours en octal (en arrondissant au supérieur)
+- Ici :
+
+`Dossiers`  
+777 - 022 = 755
+
+`Fichiers`  
+666 - 022 = 644
+
+Donc par défaut Dossiers et Fichiers auront respectivement les permissions `755` et `644`.
+
+`[NOTE]`
+Changer umask pour root 
+````
+su -
+vim /root/.bashrc
+# Ajouter
+umask VALEUR SOUHAITEE
+````
+
+Changer umask pour user
+- La valeur est dans le fichier `/etc/login.defs`
+
+<img width="613" height="70" alt="image" src="https://github.com/user-attachments/assets/df4a93b9-591e-4da9-a15c-f686f38fdeac" />
+
+
+---
+
+### 3️⃣ **`suid` / `sguid` / `sticky-bit`** 
+
+
+`-3.1.` Définition 
+
+-3.1.1 `suid` 
+Abréviation de `Set User ID`, est une autorisation spéciale sur les fichiers exécutables, qui permet à tous les utilisateurs de disposer temporairement des priviléges du propriétaire du fichier.
+Autrement dit, même si l'utilisateur courant ne dispose pas des droits nécessaire sur le fichier il pourra quand même l'exécuter.
+
+- Exemple : le binaire `/usr/bin/passwd`.
+`passwd` est une `commande` permettant de `modifier le mot de passe` de l’utilisateur et possède un bit SUID.
+
+Lorsque nous tapons la commande, nous `l’exécutons en tant qu’utilisateur root`, sans ça on ne pourrait pas `modifier le fichier /etc/shadow`, et par concéquent être dans l'incapacité de modifier son mot de passe sans passer par root.
+
+
+-3.1.2`sguid` 
+
+
+
+-3.3.3`sticky-bit`
 
 
 
