@@ -1,4 +1,4 @@
-# -1- Outils essentiels
+# **-1- Outils essentiels**
 
 ---
 
@@ -6,7 +6,7 @@
 
 ---
 
-## **1.2** — Redirection des entrées/sorties — `>` `>>` `<` `2>` `|` `tee`
+# **1.2** — Redirection des entrées/sorties — `>` `>>` `<` `2>` `|` `tee`
 
 Concept :
 - entrée standard : `stdin` fd 0
@@ -172,7 +172,7 @@ yp
 ---
 ---
 
-## **1.3** — `grep` et expressions régulières — `grep -E`, `grep -F`
+# **1.3** — `grep` et expressions régulières — `grep -E`, `grep -F`
 [Regex](https://regex101.com/)
 
 - Syntaxe : `grep [OPTIONS] MOTIF [FICHIER...]`
@@ -252,7 +252,7 @@ sudo vim /etc/ssh/sshd_config
 ---
 ---
 
- ## **1.5** — Changer d'utilisateur — `su`, `su -`, `sudo`  
+ # **1.5** — Changer d'utilisateur — `su`, `su -`, `sudo`  
 
 ## `su`
  
@@ -302,7 +302,7 @@ sednal@rhel:~$ su - USER
 ---
 ---
 
-## **1.6** — Archiver et compresser — `tar`, `gzip`, `bzip2`, `xz`  
+# **1.6** — Archiver et compresser — `tar`, `gzip`, `bzip2`, `xz`  
 
 `[NOTE]`
 - Vitesse : gzip > bzip2 > xz  |  Compression : xz > bzip2 > gzip
@@ -364,7 +364,7 @@ tar -uf archive.tar fichier.txt    # mettre à jour
 ---
 ---
 
-## **1.9** — Liens physiques (`ln`) et symboliques (`ln -s`)  
+# **1.9** — Liens physiques (`ln`) et symboliques (`ln -s`)  
 
 =>  `ln` ou alias
 
@@ -416,10 +416,33 @@ ls -li
 ---
 ---
 
-## **1.10** — Permissions `ugo/rwx` — `chmod`, `chown`, `chgrp`, `umask`  
+# **1.10** — Permissions `ugo/rwx` — `chmod`, `chown`, `chgrp`, `umask`, `suid`, `sguid`, `sticky-bit` 
+
+## 📝 **SOMMAIRE**
+
+- 1️⃣ `chmod`/ `chown` / `chgrp`
+- 2️⃣ `umask`
+- 3️⃣ `suid` / `sguid` / `sticky-bit` 
+
+---
+
+### 1️⃣ **`chmod`/ `chown` / `chgrp`**
 
 - Lister les permission :
    - `ls` =>  liste le contenu d'un répertoire 
+    **=== Options Principales ===**
+````
+-l Format long (permissions, taille, date…) 
+-a Affiche les fichiers cachés (.)
+-h Tailles lisibles par un humain (utimiser avec -l)
+-r Ordre inverse
+-t Tri par date de modification
+-S Tri par taille
+-R Récursif
+-d Affiche le répertoire lui-même, pas son contenu
+-i Affiche l'inode
+````
+    
    - `stat` =>  affiche les métadonnées détaillées d'un fichier ou répertoire (permissions, tailles, horodatages)
    - `getfacl` =>  affiche les ACL (Access Control Lists) d'un fichier ou répertoire
 
@@ -471,6 +494,7 @@ ls -li
 
 
 **Commandes**
+- Changer le mode d'un fichier/dossier
 
 - `chmod`
 Options courantes : -R (Récurssif) / -c (Verbeux sur les changements)
@@ -489,11 +513,15 @@ option u (users) g(groups) o(others)
 ````
  
 ---
-
+- Changer le propriétaire ou/et groupe d'un fichier/dossier
 - `chown`
+````
+chown
+````
 
+---
 
-
+- `chgroup`
 
 
 
