@@ -150,6 +150,10 @@ Les tableau sont construit avec les documentations officielles de redhat (11/03/
 
 ---
 :warning: Si abscence de liens et `OK`, sujet déjà maitrisé avant `RHCSA` :warning:
+
+`[NOTE]` Les tableaux suivants listent les ressources utilisées en fonction des thèmes, pour être sûr de ne pas me perdre ou trop m'éloigner de ce qui est attendu lors de l'examen, j'ai comme fil rouge :
+Vidéo complète de préparation à l'examen de [Sander van Vugt](https://www.oreilly.com/videos/rhcsa-rhel-9/9780135397237/)
+
 ## 1. Outils essentiels
 🎬
 📄
