@@ -12,7 +12,7 @@ Certification : *Red Hat Certified System Administrator*
 
 🟥 Non commencé 🟨 En cours 🟩 Maîtrisé  🟦 Sans Aide
 
-🟨 Section 1 — Outils essentiels  
+🟩 Section 1 — Outils essentiels  
 🟥 Section 2 — Gestion des logiciels  
 🟥 Section 3 — Scripts shell  
 🟥 Section 4 — Systèmes en cours d'exécution  
@@ -32,25 +32,23 @@ Certification : *Red Hat Certified System Administrator*
 🟦 **1.1** — Accéder à une invite shell et écrire des commandes — *Bash 5.x par défaut*  
 🟦 **1.2** — Redirection des entrées/sorties — `>` `>>` `<` `2>` `|` `tee`  
 🟩 **1.3** — `grep` et expressions régulières — `grep -E`, `grep -P`, `egrep`  
-🟩 **1.4** — Accès distant via `ssh` — *OpenSSH 9.x, ED25519 privilégié*  
-🟨 **1.5** — Changer d'utilisateur — `su`, `su -`, `sudo`  
-🟥 **1.6** — Archiver et compresser — `tar`, `gzip`, `bzip2`, `xz`  
-🟨 **1.7** — Créer et éditer des fichiers texte — `vim`, `nano` *(vim recommandé)*  
-🟨 **1.8** — Gérer fichiers et répertoires — `mkdir -p`, `cp -r`, `rm -rf`, `mv`  
-🟥 **1.9** — Liens physiques (`ln`) et symboliques (`ln -s`)  
-🟨 **1.10** — Permissions `ugo/rwx` — `chmod`, `chown`, `chgrp`, `umask`  
-🟩 **1.11** — Documentation système — `man`, `info`, `/usr/share/doc`, `man -k`  
+🟦 **1.4** — Accès distant via `ssh` — *OpenSSH 9.x, ED25519 privilégié*  
+🟦 **1.5** — Changer d'utilisateur — `su`, `su -`, `sudo`  
+🟩 **1.6** — Archiver et compresser — `tar`, `gzip`, `bzip2`, `xz`  
+🟦 **1.7** — Créer et éditer des fichiers texte — `vim`, `nano` *(vim recommandé)*  
+🟦 **1.8** — Gérer fichiers et répertoires — `mkdir -p`, `cp -r`, `rm -rf`, `mv`  
+🟩 **1.9** — Liens physiques (`ln`) et symboliques (`ln -s`)  
+🟩 **1.10** — Permissions `ugo/rwx` — `chmod`, `chown`, `chgrp`, `umask`  
+🟦 **1.11** — Documentation système — `man`, `info`, `/usr/share/doc`, `man -k`  
 
 ---
 
 ## 2. 📦 Gérer les logiciels
 
-🟥 **2.1** — Configurer l'accès aux dépôts RPM — `dnf config-manager`, `/etc/yum.repos.d/`  
-🟥 **2.2** — Installer et supprimer des paquets RPM — `dnf install`, `dnf remove`, `rpm -ivh`  
+🟨 **2.1** — Configurer l'accès aux dépôts RPM — `dnf config-manager`, `/etc/yum.repos.d/`  
+🟨 **2.2** — Installer et supprimer des paquets RPM — `dnf install`, `dnf remove`, `rpm -ivh`  
 🟥 **2.3** — Configurer l'accès aux dépôts Flatpak — `flatpak remote-add`, `flatpak remotes`  
 🟥 **2.4** — Installer et supprimer des applications Flatpak — `flatpak install`, `flatpak uninstall`, `flatpak list`  
-
-> 💡 RHEL 10 : `dnf5` par défaut — Flatpak remplace Podman dans les objectifs RHCSA
 
 ---
 
@@ -60,8 +58,6 @@ Certification : *Red Hat Certified System Administrator*
 🟥 **3.2** — Boucles — `for`, `while`  
 🟥 **3.3** — Entrées de script — `$1`, `$2`, `$@`, `$#`  
 🟥 **3.4** — Codes de retour — `$?`, `exit`, `&&`, `||`  
-
-> 💡 Shebang obligatoire `#!/bin/bash` + `chmod +x script.sh`
 
 ---
 
