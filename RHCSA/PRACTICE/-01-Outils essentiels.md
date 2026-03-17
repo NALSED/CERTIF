@@ -249,6 +249,20 @@ ssh-copy-id -i /home/$USER/.ssh/id_ed25519.pub client@ip
 sudo vim /etc/ssh/sshd_config
 ````
 
+- Fichier `/home/$USER/.ssh/config`
+
+Permet de créer un alias de client ssh
+````
+vim /home/$USER/.ssh/config
+````
+
+- Renseigné (Si doute => `man ssh_config`)
+````
+Host NOM CLIENT
+   HostName IP/NOM DE DOMAINE
+   User NOM USER CLIENT
+````
+
 ---
 ---
 
