@@ -154,7 +154,11 @@ dnf repolist
 sudo dnf install NOM PAQUET -y
 
 sudo dnf install --disablerepo "*" --enablerepo "NOM REPO" NOM PAQUET -y
+
+# Activer désactiver Repo
+dnf config-manager --enable NOM DU REPO
 ````
+
 
 
 
