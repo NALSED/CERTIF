@@ -88,31 +88,25 @@ subscription-manager unregister
 
 -Puis se réenregistrer
 
----
-
-## ✅ Checklist de validation du lab
-
-Avant de commencer les exercices, vérifier que l'environnement est opérationnel :
-
-```bash
-# SSH entre les deux VMs
-ssh user@192.168.56.12
-
-# Accès DNF (internet)
-dnf list installed | head
-
-# Disques supplémentaires visibles
-lsblk
-
-# SELinux actif
-getenforce   # doit retourner "Enforcing"
-
-# Firewalld actif
-systemctl status firewalld
-
-
 ```
 
+### `-4.` Monter les repo dans /etc/fstab
+
+⚠️ Cet partie n'interviens pas avant la section 2.2 de la liste de compétence ⚠️
+
+````
+# Copie l'iso
+dd if=/dev/sr0 of=/rhel10.iso bs=1M
+
+#
+sudo mkdir /repo
+sudo cp /etc/fstab /etc/fstab.bak
+echo "/rhel10.iso /repo iso9660 defaults 0 0" >> /etc/fstab
+
+cat /etc/fstab
+````
+
+ 
 ---
 
 ## 🎯 Rappels examen
