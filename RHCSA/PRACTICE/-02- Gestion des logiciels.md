@@ -32,7 +32,7 @@ man dnf.conf
 ````
 
 - Ici création d'un repo en local, avec vérrification de clé GPG.
-(Pour allez plus loin (hors scope) : [création / signature gpg](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) et [Configurer un serveur repo HTTP](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) )
+
 
 Test sur Virtual Box avec un Iso `RHEL 10`
 
@@ -236,6 +236,10 @@ rpm2cpio NOM DU PAQUET.rpm | cpio -idmv CHEMIN
 # Restaurer un fichier système corrompu sans réinstaller le paquet
 rpm2cpio NOM DU PAQUET.rpm | cpio -idmv CHEMIN
 ````
+
+
+`[NOTE]`
+- Pour allez plus loin (hors scope) : [création / signature gpg](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) et [Configurer un serveur repo HTTP](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) )
 
 ---
 
