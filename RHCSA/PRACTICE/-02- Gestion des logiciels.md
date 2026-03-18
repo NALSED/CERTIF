@@ -105,7 +105,7 @@ rpm -qa --qf "%{NAME} %{VERSION}\n"        # format personnalisé
 
 ---
 
-> **Priorité RHCSA** : maîtriser `-qa`, `-qf`, `-qi`, `-ql`, `-ivh`, `-e`, et `-V`.
+
 
 `2.1.2.` Exemples 
 Pour pouvoir travailler sur un exemple concret liste de dépot [RPM](https://dl.fedoraproject.org/pub/fedora/linux/development/44/Everything/source/tree/Packages/)
