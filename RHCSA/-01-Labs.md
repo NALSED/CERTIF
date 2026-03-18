@@ -88,7 +88,7 @@ subscription-manager unregister
 
 -Puis se réenregistrer
 
-```
+---
 
 ### `-4.` Monter les repo dans /etc/fstab
 
@@ -98,11 +98,16 @@ subscription-manager unregister
 # Copie l'iso
 dd if=/dev/sr0 of=/rhel10.iso bs=1M
 
-#
+# Point de montage
 sudo mkdir /repo
+
+# Backup fstab 
 sudo cp /etc/fstab /etc/fstab.bak
+
+# Rendre le point de montage persistant
 echo "/rhel10.iso /repo iso9660 defaults 0 0" >> /etc/fstab
 
+# Vérifier
 cat /etc/fstab
 ````
 
