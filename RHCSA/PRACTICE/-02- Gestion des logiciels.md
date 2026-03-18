@@ -26,7 +26,8 @@
 
 ## **2.1** — Configurer l'accès aux dépôts RPM 
 
-`[NOTE]` Pour la syntaxe 
+`[NOTE]` 
+Pour la syntaxe 
 ````
 man dnf.conf
 ````
@@ -223,7 +224,7 @@ rpm --checksig monpaquet.rpm   # vérifier la signature GPG
 rpm -qa | grep http                        # chercher un paquet par nom
 rpm -qa --qf "%{NAME} %{VERSION}\n"        # format personnalisé
 ```
-## cpio
+## cpio (HORS SCOPE)
 Est l'archiveur utilisé par RPM en interne:
 
 ````
@@ -238,54 +239,37 @@ rpm2cpio NOM DU PAQUET.rpm | cpio -idmv CHEMIN
 ````
 
 
+1) Trouver un .rpm non installé en local dans `/mtn/AppStream/Package`
+````
+dnf list --available | head -20 | grep "AppStream"
+# Sortie
+CUnit.x86_64                                           2.1.3-34.el10                      AppStream
+HdrHistogram_c.x86_64                                  0.11.8-7.el10                      AppStream
+Judy.x86_64                                            1.0.5-38.el10                      AppStream
+````
+
+2) Installer le paquet
+````
+cd /mnt/AppStream/Packages/
+
+sudo rpm -ihv CUnit.x86_64  
+#Sortie
+Verifying...                          ################################# [100%]
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:CUnit-2.1.3-34.el10              ################################# [100%]
+````
+
+— Règle des arguments
+ 
+| Option | Argument |
+|--------|----------|
+| `-i`, `-U`, `-F` | fichier `.rpm` |
+| `-q`, `-e` | nom du paquet |
+| `-qf` | chemin d'un fichier système |
+
 `[NOTE]`
 - Pour allez plus loin (hors scope) : [création / signature gpg](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) et [Configurer un serveur repo HTTP](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) )
-
----
-
-`2.2.2.` Exemples 
-Pour pouvoir travailler sur un exemple concret liste de dépot [RPM](https://dl.fedoraproject.org/pub/fedora/linux/development/44/Everything/source/tree/Packages/)
-
-Utiliser wget pour télécharger un .rpm 
-
-<img width="1096" height="306" alt="image" src="https://github.com/user-attachments/assets/776a6a27-3ce7-4ac6-8a2d-10aa6fd6523d" />
-
-- Voir ou est installé un fichier
-````
-which ls
-# Sortie
-alias ls='ls --color=auto'
-        /usr/bin/ls <==== On va utiliser cette partie
-````
-
-- Quel paquet à installé ce fichier
-````
-rpm -qf /usr/bin/ls
-# Sortie
-coreutils-9.5-6.el10.x86_64 
-````
-
-- Lister quel fichier est installé par le paquet `coreutils`
-````
-rpm -ql coreutils | grep "bin"
-# Sortie
-/usr/bin/[
-[...]
-/usr/sbin/chroot
-````
-
-- Lire les  scripts pre/post installation.
- Les connaître permet de savoir ce qu'il va se passer sur ton système.
-````
-rpm -q --scripts bash
-# Sortie
-postinstall scriptlet (using <lua>):
-nl        = '\n'
-[...]
-end
-````
-
-
 
 
 ---
