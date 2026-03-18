@@ -447,7 +447,8 @@ Utilisé pour changer le mode `chmod`, le propriétaire `chown` ou le groupe `ch
 ### `-1.1.` Lister les permission :
 
 - `ls` =>  liste le contenu d'un répertoire 
-    **=== Options Principales ===**
+
+  **=== Options Principales ===**
 ````
 -l Format long (permissions, taille, date…) 
 -a Affiche les fichiers cachés (.)
