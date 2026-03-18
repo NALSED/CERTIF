@@ -32,11 +32,31 @@ Pour la syntaxe
 man dnf.conf
 ````
 
-- Ici création d'un repo en local, avec vérrification de clé GPG.
+<details>
+<summary>
+<h2>
+I) Création repo local, sans vérification de clé GPG.
+</h2>
+</summary>
+
+
+
+</details>
+
+
+
+
+
+<details>
+<summary>
+<h2>
+II) Création repo local depuis iso, avec vérification de clé GPG.
+</h2>
+</summary>
 
 
 Test sur Virtual Box avec un Iso `RHEL 10`
-
+⚠️ Sans persistance du point de montage avec fstab le repo dans `/etc/yum.repo.d`, pointera vers /mnt qui sera vide, donc dnf échoura. ⚠️
 
 `1)` Monter le disque RHEL 10 depuis Virtual Box.
 ````
@@ -133,6 +153,11 @@ Installed:
 
 Complete!
 ````
+
+
+</details>
+
+
 
 
 ## **=== Récapitulatif commandes ===**
