@@ -26,12 +26,154 @@
 
 ## **2.1** — Configurer l'accès aux dépôts RPM 
 
-`2.1.1.` **===  Commandes ===**
-# Commandes RPM — RHCSA
+`[NOTE]` Pour la syntaxe 
+````
+man dnf.conf
+````
 
-## Interroger un paquet installé
+- Ici création d'un repo en local, avec vérrification de clé GPG.
+(Pour allez plus loin (hors scope) : [création / signature gpg](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) et [Configurer un serveur repo HTTP](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) )
 
-```bash
+Test sur Virtual Box avec un Iso `RHEL 10`
+
+
+`1)` Monter le disque RHEL 10 depuis Virtual Box.
+````
+sudo mount /dev/sr0 /mnt/
+````
+g
+`2)` Regarder l'architecture de l'ISO
+````
+ls /mnt/
+#Sortie
+AppStream  BaseOS  boot  EFI  EULA  extra_files.json  Flatpaks  GPL  images  media.repo  RPM-GPG-KEY-redhat-beta  RPM-GPG-KEY-redhat-release
+
+# Vérifier quel dossier contient des .rpm, avec tree ou find .
+# Ici
+AppStream  BaseOS
+````
+
+`3)` Création du fichier
+
+- Les `repo` se place dans ce dossier :
+`/etc/yum.repos.d`
+
+- Editer le fichier en .repo
+
+
+````
+sudo tee /etc/yum.repos.d/local.repo << EOF
+[AppStream]
+name=AppStream local
+baseurl=file:///mnt/AppStream/
+gpgchek=1
+gpgkey=file:///mnt/RPM-GPG-KEY-redhat-release
+
+[BaseOS]
+name=BaseOS Local
+baseurl=file:///mnt/BaseOS/
+gpgcheck=1
+gpgkey=file:///mnt/RPM-GPG-KEY-redhat-release
+
+EOF
+````
+
+4) Test
+
+- repo enregistré en conforme
+````
+dnf repolist
+# Sortie attendu
+Not root, Subscription Management repositories not updated
+repo id                                                        repo name
+AppStream                                                      AppStream local
+BaseOS                                                         BaseOS Local
+rhel-10-for-x86_64-appstream-rpms                              Red Hat Enterprise Linux 10 for x86_64 - AppStream (RPMs)
+rhel-10-for-x86_64-baseos-rpms                                 Red Hat Enterprise Linux 10 for x86_64 - BaseOS (RPMs)
+````
+
+- Test d'installation (en forcant l'install local car le compte RH est actif)
+````
+# Si compte non actif (chercher un paquet non installé sur la machine)
+sudo dnf install aide.x86_64 -y
+
+# Si compte actif
+sudo dnf install --disablerepo "*" --enablerepo "BaseOS,AppStream"  acpid.x86_64 -y
+# Sortie attendu
+Updating Subscription Management repositories.
+Last metadata expiration check: 0:09:03 ago on Wed 18 Mar 2026 12:42:16 +04.
+Dependencies resolved.
+=====================================================================================================================================================
+ Package                         Architecture                     Version                                  Repository                           Size
+=====================================================================================================================================================
+Installing:
+ acpid                           x86_64                           2.0.34-10.el10                           AppStream                            73 k
+
+Transaction Summary
+=====================================================================================================================================================
+Install  1 Package
+
+Total size: 73 k
+Installed size: 146 k
+Downloading Packages: <========== DOWNLOAD ABCENT Donc repo local utilisé
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                                                             1/1
+  Running scriptlet: acpid-2.0.34-10.el10.x86_64                                                                                                 1/1
+  Installing       : acpid-2.0.34-10.el10.x86_64                                                                                                 1/1
+  Running scriptlet: acpid-2.0.34-10.el10.x86_64                                                                                                 1/1
+Installed products updated.
+
+Installed:
+  acpid-2.0.34-10.el10.x86_64
+
+Complete!
+````
+
+
+## **=== Récapitulatif commandes ===**
+````
+# créer le repo
+sudo tee /etc/yum.repos.d/local.repo << EOF
+[TITRE]
+name= NOM
+baseurl=file:///CHEMIN RPM
+gpgckeck=1
+gpgkey=file:/// CHEMIN GPG KEY
+
+EOF
+
+# Liste les repos actif (enable=1, par defaut dans les fichier de configuration .repo)
+dnf repolist
+
+#Instalation paquet
+sudo dnf install NOM PAQUET -y
+
+sudo dnf install --disablerepo "*" --enablerepo "NOM REPO" NOM PAQUET -y
+````
+
+
+
+---
+
+## **2.2** — Installer et supprimer des paquets RPM 
+
+### `2.2.1` **===  Commandes ===**
+ 
+
+### => Interroger un paquet 
+- Différence notable sur les options :
+
+   - `q` interroge la base RPM (paquet déjà installé)
+
+   - `p` interroge le fichier .rpm (paquet local, avant installation)
+
+ En fonction des besoin avec les commande ci dessous adapter en fonction.
+
+```
 rpm -qa                        # lister tous les paquets installés
 rpm -qi bash                   # infos détaillées (version, date, description)
 rpm -ql bash                   # fichiers installés par le paquet
@@ -44,13 +186,13 @@ rpm -q --provides bash         # ce que le paquet fournit
 
 ## Interroger un fichier
 
-```bash
+```
 rpm -qf /usr/bin/bash          # quel paquet a installé ce fichier
 ```
 
 ## Interroger un `.rpm` local (pas encore installé)
 
-```bash
+```
 rpm -qip monpaquet.rpm         # infos du paquet local
 rpm -qlp monpaquet.rpm         # fichiers qu'il va installer
 ```
@@ -59,7 +201,7 @@ rpm -qlp monpaquet.rpm         # fichiers qu'il va installer
 
 ## Installer / Mettre à jour / Supprimer
 
-```bash
+```
 rpm -ivh monpaquet.rpm         # installer (i=install, v=verbose, h=progress)
 rpm -Uvh monpaquet.rpm         # upgrade (installe si absent, met à jour si présent)
 rpm -Fvh monpaquet.rpm         # freshen (met à jour seulement si déjà installé)
@@ -69,73 +211,78 @@ rpm -e --nodeps monpaquet      # désinstaller sans vérifier les dépendances
 
 ## Vérifier l'intégrité
 
-```bash
+```
 rpm -V bash                    # vérifier les fichiers d'un paquet installé
 rpm -Va                        # vérifier tous les paquets
 rpm --checksig monpaquet.rpm   # vérifier la signature GPG
 ```
 
-Codes de sortie de `-V` :
-
-```
-S = taille    5 = checksum    T = timestamp
-M = permissions   U = user    G = groupe
-```
-
 ## Filtrer / chercher
 
-```bash
+```
 rpm -qa | grep http                        # chercher un paquet par nom
 rpm -qa --qf "%{NAME} %{VERSION}\n"        # format personnalisé
 ```
+## cpio
+Est l'archiveur utilisé par RPM en interne:
 
-## Mémo des options principales
+````
+# Voir ce qu'il y a dans l'archive sans extraire
+rpm2cpio NOM DU PAQUET.rpm | cpio -tv
 
-| Option | Signification |
-|--------|---------------|
-| `-q`   | query         |
-| `-i`   | info (avec `-q`) ou install |
-| `-l`   | list files    |
-| `-f`   | file (quel paquet) |
-| `-p`   | package local |
-| `-v`   | verbose       |
-| `-h`   | hash (barre de progression) |
-| `-V`   | verify        |
-| `-e`   | erase         |
+# Extraire un seul fichier
+rpm2cpio NOM DU PAQUET.rpm | cpio -idmv CHEMIN
+
+# Restaurer un fichier système corrompu sans réinstaller le paquet
+rpm2cpio NOM DU PAQUET.rpm | cpio -idmv CHEMIN
+````
 
 ---
 
-
-
-`2.1.2.` Exemples 
+`2.2.2.` Exemples 
 Pour pouvoir travailler sur un exemple concret liste de dépot [RPM](https://dl.fedoraproject.org/pub/fedora/linux/development/44/Everything/source/tree/Packages/)
 
 Utiliser wget pour télécharger un .rpm 
 
 <img width="1096" height="306" alt="image" src="https://github.com/user-attachments/assets/776a6a27-3ce7-4ac6-8a2d-10aa6fd6523d" />
 
+- Voir ou est installé un fichier
+````
+which ls
+# Sortie
+alias ls='ls --color=auto'
+        /usr/bin/ls <==== On va utiliser cette partie
+````
+
+- Quel paquet à installé ce fichier
+````
+rpm -qf /usr/bin/ls
+# Sortie
+coreutils-9.5-6.el10.x86_64 
+````
+
+- Lister quel fichier est installé par le paquet `coreutils`
+````
+rpm -ql coreutils | grep "bin"
+# Sortie
+/usr/bin/[
+[...]
+/usr/sbin/chroot
+````
+
+- Lire les  scripts pre/post installation.
+ Les connaître permet de savoir ce qu'il va se passer sur ton système.
+````
+rpm -q --scripts bash
+# Sortie
+postinstall scriptlet (using <lua>):
+nl        = '\n'
+[...]
+end
+````
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-## **2.2** — Installer et supprimer des paquets RPM 
 
 ---
 
