@@ -173,7 +173,7 @@ yp
 ---
 
 # **1.3** — `grep` et expressions régulières — `grep -E`, `grep -F`
-[Regex](https://regex101.com/)
+[Regex](https://regex101.com/) et [Exercice](https://github.com/NALSED/CERTIF/tree/main/RHCSA/PRACTICE/EXO/GREP)
 
 - Syntaxe : `grep [OPTIONS] MOTIF [FICHIER...]`
 
