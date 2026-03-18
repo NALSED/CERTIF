@@ -109,6 +109,9 @@ echo "/rhel10.iso /repo iso9660 defaults 0 0" >> /etc/fstab
 
 # Vérifier
 cat /etc/fstab
+
+# Monter
+mount -a
 ````
 
  
