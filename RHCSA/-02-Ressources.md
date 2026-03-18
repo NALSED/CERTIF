@@ -176,8 +176,8 @@ Vidéo complète de préparation à l'examen de [Sander van Vugt](https://www.or
 
 | Section | Type | Lien |
 |---------|------|------|
-| 2.1 — Dépôts RPM | 🎬 et 📄 et 🎬 et 🎬| [Alphorm](https://www.youtube.com/watch?v=0hIpRAPPSMI) et [lea-linux](https://lea-linux.org/documentations/RPM) et [beanologi RPM-1-](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=27) et [beanologiRPM -2-](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=26)|
-| 2.2 — Paquets RPM | 🎬 et 🎬 | [beanologi RPM-1-](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=27) et [beanologiRPM -2-](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=26)|
+| 2.1 — Dépôts RPM | 🎬 et 📄  et 🎬| [Alphorm](https://www.youtube.com/watch?v=0hIpRAPPSMI) et [lea-linux](https://lea-linux.org/documentations/RPM) et [beanologi RPM-1-](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=27) et [beanologiRPM -2-](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=26)|
+| 2.2 — Paquets RPM | 🎬 et 🎬 | [beanologi RPM-1-](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=27)|
 | 2.3 — Dépôts Flatpak | | []() |
 | 2.4 — Apps Flatpak | | []() |
 
