@@ -39,12 +39,28 @@ I) Création repo local, sans vérification de clé GPG.
 </h2>
 </summary>
 
+⚠️ Ici la persistance du point de montage `/repo`, à été effectué via `/etc/fstab`, voir => [lab](https://github.com/NALSED/CERTIF/blob/main/RHCSA/-01-Labs.md#-4-monter-les-repo-dans-etcfstab).
+
+- Utilisation de `dnf config-manager`
+````
+sudo dnf config-manager --add-repo="file:///repo/BaseOS"
+sudo dnf config-manager --add-repo="file:///repo/AppStream"
+
+#Test
+dnf repolist
+#Sortie
+repo id                                         repo name
+repo_AppStream                                  created by dnf config-manager from file:///repo/AppStream
+repo_BaseOS                                     created by dnf config-manager from file:///repo/BaseOS
+rhel-10-for-x86_64-appstream-rpms               Red Hat Enterprise Linux 10 for x86_64 - AppStream (RPMs)
+rhel-10-for-x86_64-baseos-rpms                  Red Hat Enterprise Linux 10 for x86_64 - BaseOS (RPMs)
+````
 
 
 </details>
 
 
-
+---
 
 
 <details>
