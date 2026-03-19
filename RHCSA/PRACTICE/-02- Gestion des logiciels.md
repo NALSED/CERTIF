@@ -327,7 +327,7 @@ dnf list | less
 # Cherche les noms et descriptions des paquets
 dnf search all "yara"
 
-# Cherche les fichiers installés par les paquets
+# Cherche les commandes/fichiers installés par quel paquets
 dnf provides
 
 # Historique
@@ -344,8 +344,45 @@ dnf group install
 dnf group install --with-optional
 ````
 
+`[RESUME]`
+
+# RPM vs DNF
+
+## RPM — outil bas niveau
+
+`=>` Travaille sur des fichiers `.rpm` **déjà présents** / paquets **déjà installés**. Ne télécharge rien.
+
+| Besoin | Commande |
+|---|---|
+| Quel paquet a installé ce fichier ? | `rpm -qf /usr/bin/seinfo` |
+| Quels fichiers installe ce paquet ? | `rpm -ql setools-console` |
+| Ce paquet est-il installé ? | `rpm -q setools-console` |
+| Infos sur un paquet installé | `rpm -qi setools-console` |
+
+---
+
+## DNF — outil haut niveau
+`=>` Travaille avec les **dépôts** (réseau ou ISO). Peut trouver des paquets non installés.
+
+| Besoin | Commande |
+|---|---|
+| Quel paquet fournit cette commande/fichier ? | `dnf provides seinfo` |
+| Chercher un paquet par nom | `dnf search setools` |
+| Infos sur un paquet (même non installé) | `dnf info setools-console` |
+| Installer avec dépendances | `dnf install setools-console` |
+
+---
+
+## Règle simple
+
+| Situation | Outil |
+|---|---|
+| Fichier/paquet **déjà installé** | `rpm` |
+| **Chercher** ou **installer** quelque chose | `dnf` |
+
 
 `[NOTE]`
+
 - Pour allez plus loin (hors scope) : [création / signature gpg](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) et [Configurer un serveur repo HTTP](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) )
 
 ---
