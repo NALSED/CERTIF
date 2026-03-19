@@ -309,9 +309,29 @@ sednal@rhel:~$ su - USER
 
 ## `sudo`
 
-**Superuser Do**
+- configurer sudo
+````
+# Fichier de configuration
+visudo
 
+# Les utilisateurs présent dans le group whell on des droit administrateur
+# pour ce faire
+sudo usermod -aG whell USER
 
+# Il est possible de restreindre sudo à quelque commande
+visudo
+anna (ALL) ALL=/usr/sbin/useradd 
+
+# Anna ne pourra utiliser sudo que sur la commande useradd
+````
+
+⚠️ Bonne pratique ⚠️
+````
+visudo -f /etc/sudoers.d/USER
+````
+
+- Un fichier par utilisateur
+- `-f` valide la syntaxe avant de sauvegarder
 
 ---
 ---
