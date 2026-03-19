@@ -266,10 +266,10 @@ Vidéo complète de préparation à l'examen de [Sander van Vugt](https://www.or
 
 | Section | Type | Lien |
 |---------|------|------|
-| 9.1 — Comptes utilisateur | | [Sander van Vugt](https://learning.oreilly.com/videos/rhcsa-rhel-9/9780135397237/9780135397237-RHL9_03_09_02/) |
-| 9.2 — Mots de passe | | [Sander van Vugt](https://learning.oreilly.com/videos/rhcsa-rhel-9/9780135397237/9780135397237-RHL9_03_09_02/) |
-| 9.3 — Groupes | | [Sander van Vugt](https://learning.oreilly.com/videos/rhcsa-rhel-9/9780135397237/9780135397237-RHL9_03_09_02/) |
-| 9.4 — Accès sudo | | [Sander van Vugt](https://learning.oreilly.com/videos/rhcsa-rhel-9/9780135397237/9780135397237-RHL9_03_09_02/) |
+| 9.1 — Comptes utilisateur | 🎬 | [Sander van Vugt](https://learning.oreilly.com/videos/rhcsa-rhel-9/9780135397237/9780135397237-RHL9_03_09_02/) |
+| 9.2 — Mots de passe | 🎬 | [Sander van Vugt](https://learning.oreilly.com/videos/rhcsa-rhel-9/9780135397237/9780135397237-RHL9_03_09_02/) |
+| 9.3 — Groupes | 🎬 | [Sander van Vugt](https://learning.oreilly.com/videos/rhcsa-rhel-9/9780135397237/9780135397237-RHL9_03_09_02/) |
+| 9.4 — Accès sudo | 🎬 | [Sander van Vugt](https://learning.oreilly.com/videos/rhcsa-rhel-9/9780135397237/9780135397237-RHL9_03_09_02/) |
 
 ---
 
