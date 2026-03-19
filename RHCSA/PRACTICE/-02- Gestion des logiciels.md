@@ -314,13 +314,78 @@ Updating / installing...
 | `-q`, `-e` | nom du paquet |
 | `-qf` | chemin d'un fichier système |
 
-`[NOTE]`
-- Pour allez plus loin (hors scope) : [création / signature gpg](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) et [Configurer un serveur repo HTTP](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) )
-
 
 ---
 
+### **DNF**
+
+=== Commandes ===
+````
+# Lister
+dnf list | less
+
+# Cherche les noms et descriptions des paquets
+dnf search all "yara"
+
+# Cherche les fichiers installés par les paquets
+dnf provides
+
+# Historique
+dnf history
+# history donne le ID
+# désinstaller un paquet
+dnf history undo ID
+
+# === GROUP ===
+# Permet d'intaller de environement facilement
+dnf group list
+dnf info NOM DU GROUPE
+dnf group install
+dnf group install --with-optional
+````
+
+
+`[NOTE]`
+- Pour allez plus loin (hors scope) : [création / signature gpg](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) et [Configurer un serveur repo HTTP](https://www.youtube.com/watch?v=K7mgEKGVUkg&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) )
+
+---
+---
+
 ## **2.3** — Configurer l'accès aux dépôts Flatpak 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
