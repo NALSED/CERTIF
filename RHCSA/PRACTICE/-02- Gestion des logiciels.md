@@ -179,14 +179,7 @@ Complete!
 ## **=== Récapitulatif commandes ===**
 ````
 # créer le repo
-sudo tee /etc/yum.repos.d/local.repo << EOF
-[TITRE]
-name= NOM
-baseurl=file:///CHEMIN RPM
-gpgckeck=1
-gpgkey=file:/// CHEMIN GPG KEY
-
-EOF
+sudo dnf config-manager --add-repo="file:///CHEMIN REPO"
 
 # Liste les repos actif (enable=1, par defaut dans les fichier de configuration .repo)
 dnf repolist
