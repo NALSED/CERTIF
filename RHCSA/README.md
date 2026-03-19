@@ -125,10 +125,10 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 9. 👥 Gérer des groupes et utilisateurs système
 
-🟥 **9.1** — Comptes utilisateur — `useradd`, `usermod`, `userdel -r`  
-🟥 **9.2** — Mots de passe et validité — `passwd`, `chage`, `chage -l`  
-🟥 **9.3** — Groupes — `groupadd`, `groupmod`, `groupdel`, `gpasswd -a`  
-🟥 **9.4** — Accès super-utilisateur — `/etc/sudoers`, `visudo`, `/etc/sudoers.d/`  
+🟦 **9.1** — Comptes utilisateur — `useradd`, `usermod`, `userdel -r`  
+🟦 **9.2** — Mots de passe et validité — `passwd`, `chage`, `chage -l`  
+🟦 **9.3** — Groupes — `groupadd`, `groupmod`, `groupdel`, `gpasswd -a`  
+🟦 **9.4** — Accès super-utilisateur — `/etc/sudoers`, `visudo`, `/etc/sudoers.d/`  
 
 ---
 
