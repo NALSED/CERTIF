@@ -309,6 +309,8 @@ sednal@rhel:~$ su - USER
 
 ## `sudo`
 
+- `sudo` doit root pour utilisateur courrant
+ 
 - configurer sudo
 ````
 # Fichier de configuration
