@@ -639,7 +639,20 @@ La sortie de umask indique ce qui est retiré aux utilisateurs/groupes/autres to
 Donc par défaut Dossiers et Fichiers auront respectivement les permissions `755` et `644`.
 
 `[NOTE]`
-Changer umask pour root 
+
+### ⚠️ POUR RENDRE LE CHANGEMENT PERSISTANT ⚠️
+
+**Utilisateur courant**
+````
+sudo vim /$HOME/.bashrc
+````
+
+**Tout Utilisateur**
+````
+sudo vim /etc/bashrc
+````
+
+**root** 
 ````
 su -
 vim /root/.bashrc
