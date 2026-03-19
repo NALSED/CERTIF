@@ -49,6 +49,31 @@ userdel -rf
 
 
 
+- configurer sudo
+````
+# Fichier de configuration
+visudo
+
+# Les utilisateurs présent dans le group whell on des droit administrateur
+# pour ce faire
+sudo usermod -aG whell USER
+
+# Il est possible de restreindre sudo à quelque commande
+visudo
+anna (ALL) ALL=/usr/sbin/useradd 
+
+# Anna ne pourra utiliser sudo que sur la commande useradd
+````
+
+⚠️ Bonne pratique ⚠️
+````
+visudo -f /etc/sudoers.d/USER
+#Exemple on veux que linda puisse utiliser la commande useradd, usermod, userdel, modifier les mots de passe mais pas celui de root:
+linda ALL=(ALL) /usr/sbin/useradd, /usr/sbin/usermod, /usr/sbin/userdel, /usr/bin/passwd , ! /usr/bin/passwd root
+````
+
+- Un fichier par utilisateur
+- `-f` valide la syntaxe avant de sauvegarder
 
 
 
