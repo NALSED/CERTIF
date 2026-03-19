@@ -328,6 +328,8 @@ anna (ALL) ALL=/usr/sbin/useradd
 ⚠️ Bonne pratique ⚠️
 ````
 visudo -f /etc/sudoers.d/USER
+#Exemple on veux que linda puisse utiliser la commande useradd, usermod, userdel, modifier les mots de passe mais pas celui de root:
+linda ALL=(ALL) /usr/sbin/useradd, /usr/sbin/usermod, /usr/sbin/userdel, /usr/bin/passwd , ! /usr/bin/passwd root
 ````
 
 - Un fichier par utilisateur
