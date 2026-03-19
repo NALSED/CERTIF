@@ -200,8 +200,13 @@ dnf config-manager --enable NOM DU REPO
 
 ## **2.2** — Installer et supprimer des paquets RPM 
 
-### `2.2.1` **===  Commandes ===**
- 
+
+ <details>
+<summary>
+<h2>
+===  Commandes de Gestion ===
+</h2>
+</summary>
 
 ### => Interroger un paquet 
 - Différence notable sur les options :
@@ -275,6 +280,9 @@ rpm2cpio NOM DU PAQUET.rpm | cpio -idmv CHEMIN
 # Restaurer un fichier système corrompu sans réinstaller le paquet
 rpm2cpio NOM DU PAQUET.rpm | cpio -idmv CHEMIN
 ````
+
+</details>
+
 
 
 1) Trouver un .rpm non installé en local dans `/mtn/AppStream/Package`
