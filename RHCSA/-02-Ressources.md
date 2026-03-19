@@ -178,8 +178,8 @@ Vidéo complète de préparation à l'examen de [Sander van Vugt](https://www.or
 |---------|------|------|
 | 2.1 — Dépôts RPM | 🎬 et 📄  et 🎬| [Alphorm](https://www.youtube.com/watch?v=0hIpRAPPSMI) et [lea-linux](https://lea-linux.org/documentations/RPM) et [beanologi RPM-1-](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=27) |
 | 2.2 — Paquets RPM | 🎬 et 🎬 | [beanologi RPM-1-](https://www.youtube.com/watch?v=dk0fwOQzZ2s&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz&index=27)|
-| 2.3 — Dépôts Flatpak | | []() |
-| 2.4 — Apps Flatpak | | []() |
+| 2.3 — Dépôts Flatpak | 🎬 et 📄 | [Tech Ressolve](https://www.youtube.com/watch?v=C8q9XqR7Jgg) et [Red Hat Doc](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/using_the_desktop_environment_in_rhel_8/assembly_installing-applications-using-flatpak_using-the-desktop-environment-in-rhel-8#proc_enabling-the-red-hat-flatpak-remote_assembly_installing-applications-using-flatpak) |
+| 2.4 — Apps Flatpak | 🎬 et 📄 | [TatOG Tech](https://www.youtube.com/watch?v=VQgfT2qQlwo) et [Red Hat Doc](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/using_the_desktop_environment_in_rhel_8/assembly_installing-applications-using-flatpak_using-the-desktop-environment-in-rhel-8#proc_enabling-the-red-hat-flatpak-remote_assembly_installing-applications-using-flatpak)|
 
 ---
 
