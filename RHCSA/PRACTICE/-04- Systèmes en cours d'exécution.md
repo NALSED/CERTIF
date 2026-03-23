@@ -1,5 +1,10 @@
 # Utiliser des systèmes en cours d'exécution
 
+---
+
+- dans linux les sont démarrées en tant que procéssus, elles ont un `ID` le `PID` 
+
+
 ## 4.1 — Démarrer, redémarrer, éteindre — systemctl reboot, poweroff, shutdown
 
 ---
