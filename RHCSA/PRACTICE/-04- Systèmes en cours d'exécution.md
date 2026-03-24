@@ -2,10 +2,45 @@
 
 ---
 
-- dans linux les sont démarrées en tant que procéssus, elles ont un `ID` le `PID` 
+ 
+Tout programme en cours d'exécution est un **processus**. Le kernel lui attribue un PID, de la mémoire, et des tranches de temps CPU via l'ordonnanceur (CFS).
+ 
+Un processus naît par `fork()` depuis un parent, optionnellement suivi d'un `exec()` pour charger un nouveau programme. Il alterne entre espace user (son code) et espace kernel (ses appels système).
+ 
+À tout moment il est dans un état : actif (`R`), en attente (`S`/`D`), stoppé (`T`), ou zombie (`Z`) s'il est terminé mais non récupéré par son parent.
+ 
+---
+
+=== Commande Générique ===
+```
+# Exécuter un processus en arrière plans
+COMMAND &
+
+# Dépplacer un processus en arrière plans
+Ctrl Z + bg
+
+#Lister les processus
+jobs
+
+# Placer un processus en premier plans
+fg NUMERO LISTER AVEC JOBS
+```
 
 
-## 4.1 — Démarrer, redémarrer, éteindre — systemctl reboot, poweroff, shutdown
+
+
+
+
+
+
+
+
+
+
+---
+
+
+## 4.1 — Démarrer, redémarrer, éteindre systemctl reboot, poweroff, shutdown
 
 ---
 
