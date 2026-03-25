@@ -50,11 +50,15 @@ fg NUMERO LISTER AVEC JOBS
 
 Les options pour `ps` sont très nombreuse, en voici quelque une :
 
-`ps fax` => Donne une hiérarchie des processus parent - enfants
-`ps -fU` => Permet de lister les processus pour un utilisateur précis
-`ps -f --forest -C NOM DU PREOCESSUS` => Permet de d'affiche les infos sur un processus.
-`ps L` => affiche les option / collones que ps peux afficher
-`ps -o` => permet de chosir les option parmis celle listé par `ps L`, mais `ps -o` liste pour l'utilisateur, si on veux tout lister `ps -oe OPTION`
+- `ps fax` => Donne une hiérarchie des processus parent - enfants
+
+- `ps -fU` => Permet de lister les processus pour un utilisateur précis
+
+- `ps -f --forest -C NOM DU PREOCESSUS` => Permet de d'affiche les infos sur un processus.
+
+- `ps L` => affiche les option / collones que ps peux afficher
+
+- `ps -o` => permet de chosir les option parmis celle listé par `ps L`, mais `ps -o` liste pour l'utilisateur, si on veux tout lister `ps -oe OPTION`
 
 
 
