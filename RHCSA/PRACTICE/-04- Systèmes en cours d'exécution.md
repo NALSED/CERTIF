@@ -2,12 +2,13 @@
 
 ---
 
+`[INTRO]`
  
 Tout programme en cours d'exécution est un **processus**. Le kernel lui attribue un PID, de la mémoire, et des tranches de temps CPU via l'ordonnanceur (CFS).
  
 Un processus naît par `fork()` depuis un parent, optionnellement suivi d'un `exec()` pour charger un nouveau programme. Il alterne entre espace user (son code) et espace kernel (ses appels système).
  
-À tout moment il est dans un état : actif (`R`), en attente (`S`/`D`), stoppé (`T`), ou zombie (`Z`) s'il est terminé mais non récupéré par son parent.
+À tout moment il est dans un état : actif `R`, en attente `S` (en attente d'une requéte hardware, réceptif au sigaux)/`D` (ne peux être interompu), stoppé `T`, ou zombie `Z` s'il est terminé mais non récupéré par son parent, `K` en attente d'être arrété
  
 ---
 
@@ -26,19 +27,39 @@ jobs
 fg NUMERO LISTER AVEC JOBS
 ```
 
+---
 
+ - Definition des colones de la commande `ps aux`
 
-
-
-
-
-
-
-
+| Colonne | Signification |
+|---------|---------------|
+| USER | propriétaire du processus |
+| PID | identifiant unique |
+| %CPU | usage CPU |
+| %MEM | usage mémoire |
+| VSZ | mémoire virtuelle (Ko) |
+| RSS | mémoire physique réelle (Ko) |
+| TTY | terminal de contrôle (`?` = daemon) |
+| STAT | état du processus |
+| START | heure de démarrage |
+| TIME | temps CPU cumulé |
+| COMMAND | commande lancée |
 
 
 ---
 
+Les options pour `ps` sont très nombreuse, en voici quelque une :
+
+`ps fax` => Donne une hiérarchie des processus parent - enfants
+`ps -fU` => Permet de lister les processus pour un utilisateur précis
+`ps -f --forest -C NOM DU PREOCESSUS` => Permet de d'affiche les infos sur un processus.
+`ps L` => affiche les option / collones que ps peux afficher
+`ps -o` => permet de chosir les option parmis celle listé par `ps L`, mais `ps -o` liste pour l'utilisateur, si on veux tout lister `ps -oe OPTION`
+
+
+
+---
+---
 
 ## 4.1 — Démarrer, redémarrer, éteindre systemctl reboot, poweroff, shutdown
 
