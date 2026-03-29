@@ -78,8 +78,73 @@ Les options pour `ps` sont très nombreuse, en voici quelque une :
 
 ---
 
-## 4.4 — Processus gourmands — top, htop, ps aux, kill, killall
+## 4.4 — Processus gourmands RAM et CPU — ps, free, top, kill, killall
 
+`[NOTE]`
+Linux placera le plus possible de fichier en mémoire cache, par sécurité un `swap`, au cas ou l'on manquerai de mémoire, le swap est créer à partir d'espace disque.
+
+**=>** **ps** permet de lister les procéssus en cours d'éxecution sur la machine
+Les options sont très nombreuse, en voici quelque une :
+
+- `ps fax` => Donne une hiérarchie des processus parent - enfants
+
+- `ps -fU` => Permet de lister les processus pour un utilisateur précis
+
+- `ps -f --forest -C NOM DU PREOCESSUS` => Permet de d'affiche les infos sur un processus.
+
+- `ps L` => affiche les option / collones que ps peux afficher
+
+- `ps -o` => permet de chosir les option parmis celle listé par `ps L`, mais `ps -o` liste pour l'utilisateur, si on veux tout lister `ps -oe OPTION`
+
+**=>** **free** permet de voir la mémoire / swap utilisé et disponible
+
+- `free -m` pour avoir une sortie de la mémoire en mégaoctet 
+
+- Pour plus de détails sur la mémoire voir le fichier `/proc/meminfo`
+
+`[NOTE]`
+Si un fichier est créé, il est d'abord stocké dans le **buffer d'écriture en RAM**.
+Pour s'assurer qu'il soit écrit immédiatement sur le disque, utiliser la commande `sync`.
+Car si le serveur plante avant que le fichier soit écrit sur le disque, il sera perdu.
+ 
+```bash
+sync
+```
+
+Linux tamponne l'écriture en RAM pour ne pas ralentir le programme *(writeback asynchrone)*.
+Régulation de flux RAM → disque, car le disque à une vitesse d'écriture inférieur à celle de la RAM.
+
+
+**=>** **top**
+
+`top` est un moniteur de processus en temps réel dans le terminal.
+
+=== Commandes ===
+
+- `q` — Quitter
+
+- `k` — Tuer un processus (demande le PID)
+
+- `M` — Trier par utilisation mémoire
+
+- `P` — Trier par utilisation CPU
+
+- `u` — Filtrer par utilisateur
+
+- `1` — Afficher chaque CPU séparément
+
+- `h` — Aide
+ 
+
+ **=>** **kill** et **killall**
+
+- `kill` — envoie un signal à un processus par son **PID**
+- `killall` — envoie un signal à tous les processus par leur **nom**
+
+```
+kill 1234        # tue le PID 1234
+killall nginx    # tue tous les processus nommés nginx
+```
 
 ---
 ## 4.5 — Priorité des processus — nice, renice
