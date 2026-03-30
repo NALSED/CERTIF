@@ -27,7 +27,42 @@ jobs
 fg NUMERO LISTER AVEC JOBS
 ```
 
+
 ---
+---
+
+## 4.1 — Démarrer, redémarrer, éteindre systemctl reboot, poweroff, shutdown
+
+---
+
+
+## 4.2 — Démarrer dans différentes cibles — systemctl isolate multi-user.target
+
+---
+
+## 4.3 — Interrompre le démarrage pour accès root — GRUB → rd.break / init=/bin/bash
+
+---
+
+## 4.4 — Processus gourmands RAM et CPU — ps, free, top, uptime, kill, killall
+
+`[NOTE]`
+- Linux placera le plus possible de fichier en mémoire cache, par sécurité un `swap`, au cas ou l'on manquerai de mémoire, le swap est créer à partir d'espace disque.
+
+
+**=>** **ps** permet de lister les procéssus en cours d'éxecution sur la machine
+Les options sont très nombreuse, en voici quelque une :
+
+- `ps fax` => Donne une hiérarchie des processus parent - enfants
+
+- `ps -fU` => Permet de lister les processus pour un utilisateur précis
+
+- `ps -f --forest -C NOM DU PREOCESSUS` => Permet de d'affiche les infos sur un processus.
+
+- `ps L` => affiche les option / collones que ps peux afficher
+
+- `ps -o` => permet de chosir les option parmis celle listé par `ps L`, mais `ps -o` liste pour l'utilisateur, si on veux tout lister `ps -oe OPTION`
+
 
  - Definition des colones de la commande `ps aux`
 
@@ -46,40 +81,6 @@ fg NUMERO LISTER AVEC JOBS
 | COMMAND | commande lancée |
 
 
-
----
----
-
-## 4.1 — Démarrer, redémarrer, éteindre systemctl reboot, poweroff, shutdown
-
----
-
-
-## 4.2 — Démarrer dans différentes cibles — systemctl isolate multi-user.target
-
----
-
-## 4.3 — Interrompre le démarrage pour accès root — GRUB → rd.break / init=/bin/bash
-
----
-
-## 4.4 — Processus gourmands RAM et CPU — ps, free, top, kill, killall
-
-`[NOTE]`
-Linux placera le plus possible de fichier en mémoire cache, par sécurité un `swap`, au cas ou l'on manquerai de mémoire, le swap est créer à partir d'espace disque.
-
-**=>** **ps** permet de lister les procéssus en cours d'éxecution sur la machine
-Les options sont très nombreuse, en voici quelque une :
-
-- `ps fax` => Donne une hiérarchie des processus parent - enfants
-
-- `ps -fU` => Permet de lister les processus pour un utilisateur précis
-
-- `ps -f --forest -C NOM DU PREOCESSUS` => Permet de d'affiche les infos sur un processus.
-
-- `ps L` => affiche les option / collones que ps peux afficher
-
-- `ps -o` => permet de chosir les option parmis celle listé par `ps L`, mais `ps -o` liste pour l'utilisateur, si on veux tout lister `ps -oe OPTION`
 
 **=>** **free** permet de voir la mémoire / swap utilisé et disponible
 
@@ -119,9 +120,15 @@ Régulation de flux RAM → disque, car le disque à une vitesse d'écriture inf
 - `1` — Afficher chaque CPU séparément
 
 - `h` — Aide
- 
 
- **=>** **kill** et **killall**
+- `f` contenu aditionel 
+**=>** **uptime**
+
+- Donne des information sur la durée depuis le démarrage, le nombre de session et de charge `CPU` depuis 1, 5 et 15 minutes 
+
+`[NOTE]` 
+La commande`lscpu` donne les informations complétes sur lou les `CPU`
+ **=>** **kill** et **SIGNAL**
 
 - `kill` — envoie un signal à un processus par son **PID**
 - `killall` — envoie un signal à tous les processus par leur **nom**
@@ -130,6 +137,21 @@ Régulation de flux RAM → disque, car le disque à une vitesse d'écriture inf
 kill 1234        # tue le PID 1234
 killall nginx    # tue tous les processus nommés nginx
 ```
+
+**=>** **SIGNAL**
+```
+#Lister les signal
+kill -l
+```
+
+- Il sont généralement au nombre de 64, mais l'on utilise principalement les 1, 2, 9, 15.
+
+- Pour avoir une deffinition précise de chaque signal
+```
+man 7 signal
+```
+
+
 
 ---
 ## 4.5 — Priorité des processus — nice, renice
