@@ -160,8 +160,11 @@ nice -n 10 dd if=/dev/sda of=/test &
 
 ---
 
-## 4.6 — Profils de tuning — tuned-adm list, tuned-adm profile <nom>
+## 4.6 — Profils de tuning — tuned-adm list, tuned-adm profile
 
+- `tuned` est un daemon Linux qui optimise automatiquement les performances du système en appliquant des profils prédéfinis selon l'usage de la machine.
+
+- Les profiles de `tuned` se trouvent dans `/usr/lib/tuned`
 
 ----
 ## 4.7 — Journaux système — journalctl, journalctl -u, /var/log/
