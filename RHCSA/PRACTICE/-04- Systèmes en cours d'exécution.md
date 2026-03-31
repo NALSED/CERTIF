@@ -64,24 +64,6 @@ Les options sont très nombreuse, en voici quelque une :
 - `ps -o` => permet de chosir les option parmis celle listé par `ps L`, mais `ps -o` liste pour l'utilisateur, si on veux tout lister `ps -oe OPTION`
 
 
- - Definition des colones de la commande `ps aux`
-
-| Colonne | Signification |
-|---------|---------------|
-| USER | propriétaire du processus |
-| PID | identifiant unique |
-| %CPU | usage CPU |
-| %MEM | usage mémoire |
-| VSZ | mémoire virtuelle (Ko) |
-| RSS | mémoire physique réelle (Ko) |
-| TTY | terminal de contrôle (`?` = daemon) |
-| STAT | état du processus |
-| START | heure de démarrage |
-| TIME | temps CPU cumulé |
-| COMMAND | commande lancée |
-
-
-
 **=>** **free** permet de voir la mémoire / swap utilisé et disponible
 
 - `free -m` pour avoir une sortie de la mémoire en mégaoctet 
@@ -122,6 +104,7 @@ Régulation de flux RAM → disque, car le disque à une vitesse d'écriture inf
 - `h` — Aide
 
 - `f` contenu aditionel 
+
 **=>** **uptime**
 
 - Donne des information sur la durée depuis le démarrage, le nombre de session et de charge `CPU` depuis 1, 5 et 15 minutes 
@@ -146,15 +129,34 @@ kill -l
 
 - Il sont généralement au nombre de 64, mais l'on utilise principalement les 1, 2, 9, 15.
 
-- Pour avoir une deffinition précise de chaque signal
+- Pour avoir une définition précise de chaque signal
 ```
 man 7 signal
 ```
 
-
+Pour voir comment tuer un zombie => [Exercice Zombie](https://github.com/NALSED/CERTIF/blob/main/RHCSA/PRACTICE/EXO/PROCESSUS/Zombie.md)
 
 ---
 ## 4.5 — Priorité des processus — nice, renice
+
+`[NOTE]`
+
+- Linux attribu via cgroups des "tanches" de `ressources`, entre :
+
+   - System : Tous les process Systemd
+   - User : Tous les process User
+   - Machine : Virtual Machine, Container
+
+(cgroups est la brique fondamentale sur laquelle repose l'isolation et la gestion des ressources sous Linux.)
+
+`nice` (au lancement d'un processus) et `renice` (sur un processus en cours) on une plage de priorité allant de -20 => +19 (- 19 étant le plus prioritaire)
+```
+nice ou renice -n NOMBRE PRIORITE COMMANDE
+
+#Exemple
+nice -n 10 dd if=/dev/sda of=/test &
+```
+
 
 ---
 
