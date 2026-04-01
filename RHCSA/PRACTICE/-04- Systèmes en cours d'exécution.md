@@ -164,11 +164,42 @@ nice -n 10 dd if=/dev/sda of=/test &
 
 
 - `tuned` est un daemon Linux qui optimise automatiquement les performances du système en appliquant des profils prédéfinis selon l'usage de la machine.
-Les modification appliqués par `tuned`, sont visible dans l'outil bas niveau `sysctl`
+Les modification appliqués par `tuned`, sont visible dans l'outil bas niveau `sysctl`.
+
+`[NOTE]`
+
+- Pour voir la valeurs des profils de `sysctl`
+```
+sysctl -a 
+```
+
+- Pour modifier les valeurs de sysctl (ici le swappiness de vm)=> dans `/etc/sysctl.d`
+```
+cat >> /etc/sysctl.d/swappiness.conf << EOF
+vm.swappiness = 40
+EOF
+```
+
+- Recharger
+```
+# Rechargement ciblé
+sysctl -p /etc/sysctl.d/vm.swappiness.conf
+
+# recharge tout
+sysctl --system
+```
 
 - Les profiles de `tuned` se trouvent dans `/usr/lib/tuned`
 
+- Lister les profiles
+```
+tuned-adm list
+```
 
+- Changer de profile
+```
+tuned-adm profile PROFILE 
+``` 
 
 
 ----
