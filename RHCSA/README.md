@@ -15,12 +15,12 @@ Certification : *Red Hat Certified System Administrator*
 🟩 Section 1 — Outils essentiels  
 🟨 Section 2 — Gestion des logiciels  
 🟥 Section 3 — Scripts shell  
-🟥 Section 4 — Systèmes en cours d'exécution  
+🟨 Section 4 — Systèmes en cours d'exécution  
 🟥 Section 5 — Stockage local  
 🟥 Section 6 — Systèmes de fichiers  
 🟥 Section 7 — Déploiement et gestion  
 🟥 Section 8 — Réseau  
-🟥 Section 9 — Utilisateurs et groupes  
+🟦 Section 9 — Utilisateurs et groupes  
 🟥 Section 10 — Sécurité  
 
 ---
@@ -66,13 +66,14 @@ Certification : *Red Hat Certified System Administrator*
 🟥 **4.1** — Démarrer, redémarrer, éteindre — `systemctl reboot`, `poweroff`, `shutdown`  
 🟥 **4.2** — Démarrer dans différentes cibles — `systemctl isolate multi-user.target`  
 🟥 **4.3** — Interrompre le démarrage pour accès root — GRUB → `rd.break` / `init=/bin/bash`  
-🟥 **4.4** — Processus gourmands — `top`, `htop`, `ps aux`, `kill`, `killall`  
-🟥 **4.5** — Priorité des processus — `nice`, `renice`  
-🟥 **4.6** — Profils de tuning — `tuned-adm list`, `tuned-adm profile <nom>`  
+🟦 **4.4** — Processus gourmands — `top`, `htop`, `ps aux`, `kill`, `killall`  
+🟦 **4.5** — Priorité des processus — `nice`, `renice`  
+🟩 **4.6** — Profils de tuning — `tuned-adm list`, `tuned-adm profile <nom>`  
 🟥 **4.7** — Journaux système — `journalctl`, `journalctl -u`, `/var/log/`  
-🟥 **4.8** — Persistance des journaux — `journald.conf` → `Storage=persistent`  
-🟥 **4.9** — Services réseau — `systemctl start/stop/status/enable`  
-🟥 **4.10** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
+🟥 **4.8** — Gestion des sessions actives `loginctl`
+🟥 **4.9** — Persistance des journaux — `journald.conf` → `Storage=persistent`  
+🟥 **4.10** — Services réseau — `systemctl start/stop/status/enable`  
+🟥 **4.11** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
 
 ---
 
