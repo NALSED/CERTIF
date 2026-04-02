@@ -55,7 +55,7 @@ Les options sont très nombreuse, en voici quelque une :
 
 - `ps fax` => Donne une hiérarchie des processus parent - enfants
 
-- `ps -fU` => Permet de lister les processus pour un utilisateur précis
+- `ps -u` => Permet de lister les processus pour un utilisateur précis
 
 - `ps -f --forest -C NOM DU PREOCESSUS` => Permet de d'affiche les infos sur un processus.
 
@@ -111,15 +111,20 @@ Régulation de flux RAM → disque, car le disque à une vitesse d'écriture inf
 
 `[NOTE]` 
 La commande`lscpu` donne les informations complétes sur lou les `CPU`
+
  **=>** **kill** et **SIGNAL**
 
 - `kill` — envoie un signal à un processus par son **PID**
+
 - `killall` — envoie un signal à tous les processus par leur **nom**
+
+- `pkill -u USERNAME` envoie un siganl aux processus de l'utilisateur choisi.
 
 ```
 kill 1234        # tue le PID 1234
 killall nginx    # tue tous les processus nommés nginx
 ```
+
 
 **=>** **SIGNAL**
 ```
@@ -166,6 +171,15 @@ nice -n 10 dd if=/dev/sda of=/test &
 - `tuned` est un daemon Linux qui optimise automatiquement les performances du système en appliquant des profils prédéfinis selon l'usage de la machine.
 Les modification appliqués par `tuned`, sont visible dans l'outil bas niveau `sysctl`.
 
+- **/proc/sys** => Pseudo filesystem monté par le kernel, qui liste les options
+
+- **sysctl** commande sui agit sur /proc/sys
+
+- **sysctl.d** dossier de persitance de la configuration
+
+- **tuned-adm** Outil d'administration de `tuned`
+
+- Fichier de **configuration** de `tuned`  **cat /etc/tuned/tuned-main.conf**
 `[NOTE]`
 
 - Pour voir la valeurs des profils de `sysctl`
@@ -201,23 +215,90 @@ tuned-adm list
 tuned-adm profile PROFILE 
 ``` 
 
+=== Personalisation de profile tuned ===
+
+1) créer un répertoire dans /etc/tuned
+```
+mkdir /etc/tuned/my_profile
+```
+
+2) Créer un fichier de configuration
+```
+vim /etc/tuned/my_profile/tuned.conf
+
+# Editer
+[sysctl]
+vm.swapinness = 40
+```    
+
+3) Utiliser le profile créé
+```
+tuned-adm profile my_profile
+```
 
 ----
 ## 4.7 — Journaux système — journalctl, journalctl -u, /var/log/
 
 
 ---
-## 4.8 — Persistance des journaux — journald.conf → Storage=persistent
+
+## 4.8 — Gestion des sessions actives - loginctl
+
+- `loginctl` dépend de `systemd`, qui gére les sessions et utilisateurs.
+
+**Lister**
+
+- User
+```
+loginctl list-users
+```
+
+- Sessions
+```
+loginctl list-sessions
+```
+
+- Processus (liste en arborécence les processus de l'utilisateur choisi)
+```
+loginctl user-status UID
+```
+
+- Terminer session ou user
+```
+loginctl terminate-session
+loginctl terminate-user
+```
+
+---
+## 4.9 — Persistance des journaux — journald.conf → Storage=persistent
 
 
 ---
 
-## 4.9 — Services réseau — systemctl start/stop/status/enable
+## 4.10 — Services réseau — SYSTEMD => systemctl start/stop/status/enable
+
+`systemd` gère les ressources système via des **unités**, chacune d'un type spécifique :
+
+- **Service** — processus daemon géré par systemd
+
+- **Socket** — point de communication IPC ou réseau, active un service à la demande
+
+- **Timer** — déclenchement planifié (alternative à cron)
+
+- **Path** — surveille un fichier/dossier et active un service sur événement
+
+- **Mount** — gère les points de montage filesystem, équivalent systemd de `/etc/fstab`
+
+`[NOTE]` Liste disponible des unit systemd (A par celle mentionnées ci dessus, hors scope pour RHCSA.)
+```
+systemctl -t help
+```
+
 
 
 ---
 
-## 4.10 — Transfert sécurisé de fichiers — scp, sftp, rsync
+## 4.11 — Transfert sécurisé de fichiers — scp, sftp, rsync
 
 
 
