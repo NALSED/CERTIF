@@ -196,18 +196,22 @@ Vidéo complète de préparation à l'examen de [Sander van Vugt](https://www.or
 
 ## 4. Systèmes en cours d'exécution
 
-| Section | Type | Lien |
-|---------|------|------|
-| 4.1 — Démarrer/éteindre | | []() |
-| 4.2 — Cibles système | | []() |
-| 4.3 — Accès root GRUB | | []() |
-| 4.4 — Processus gourmands | | []() |
-| 4.5 — Priorité processus | | []() |
-| 4.6 — Profils tuning | | []() |
-| 4.7 — Journaux système | | []() |
-| 4.8 — Persistance journaux | | []() |
-| 4.9 — Services réseau | | []() |
-| 4.10 — Transfert fichiers | | []() |
+⚠️ Toute cette partie à été vu avec les vidéos de `Sander van Vugt`
+(Modules 4 Daily Administration_Task)
+
+| Section | Type | 
+|---------|------|
+| 4.1 — Démarrer/éteindre | 
+| 4.2 — Cibles système | 
+| 4.3 — Accès root GRUB | 
+| 4.4 — Processus gourmands | 
+| 4.5 — Priorité processus | 
+| 4.6 — Profils tuning | 
+| 4.7 — Journaux système |
+| 4.8 — Persistance journaux | 
+| 4.9 — Services réseau |
+| 4.10 -SYSTEMD         | 
+| 4.11 — Transfert fichiers | 
 
 ---
 
