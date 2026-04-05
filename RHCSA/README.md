@@ -74,6 +74,7 @@ Certification : *Red Hat Certified System Administrator*
 🟥 **4.9** — Persistance des journaux — `journald.conf` → `Storage=persistent`  
 🟩 **4.10** — `systemd`
 🟥 **4.11** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
+🟥 **4.12** — Gestion des fichier /tmp — `systemd-tmpfiles`  
 
 ---
 
