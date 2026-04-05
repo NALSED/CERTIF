@@ -625,17 +625,14 @@ exemple
 </h2>
 </summary>
 
-1) Créer un dossier test
-```
-mkdir /$HOME/test_tmp
-```
 
-3) Editer un fichier de configuration dans `/etc/tmpfiles.d`
+
+1) Editer un fichier de configuration dans `/etc/tmpfiles.d`
 ```
 sudo vim test_tmp_file.conf
 ```
 
-3) Editer
+2) Editer
 ```
 # Créé un fichier pour sednal avec permissions
 f /home/sednal/fichier_test_tmpfiles 0644 sednal sednal -
@@ -648,10 +645,29 @@ L /home/sednal/dossier_test_tmpfiles_link - - - /home/sednal/test_tmp
 ```
 
 
-4) Reboot
+3) Appliquer la configuration
+```
+systemd-tmpfiles --create /etc/tmpfiles.d/test_tmp-files.conf
+```
 
-5) Résultat
 
+4) Résultat
+```
+drwxr-xr-x. 2 sednal sednal  6 Mar 23 18:07 Desktop
+drwxr-xr-x. 2 sednal sednal  6 Mar 23 18:07 Documents
+drwxr--r--. 2 sednal sednal  6 Apr  5 16:58 dossier_test_tmpfiles
+drwxr-xr-x. 2 sednal sednal 20 Mar 30 18:41 Downloads
+-rw-r--r--. 1 sednal sednal  0 Apr  5 16:58 fichier_test_tmpfiles
+lrwxrwxrwx. 1 sednal sednal 34 Apr  5 17:20 link_test -> /home/sednal/dossier_test_tmpfiles
+drwxr-xr-x. 2 sednal sednal  6 Mar 23 18:07 Music
+drwxr-xr-x. 2 sednal sednal  6 Mar 23 18:07 Pictures
+drwxr-xr-x. 2 sednal sednal  6 Mar 23 18:07 Public
+drwxr-xr-x. 2 sednal sednal  6 Mar 23 18:07 Templates
+drwxr-xr-x. 2 sednal sednal  6 Mar 23 18:07 Videos
+
+```
+
+=> dossier_test_tmpfiles / fichier_test_tmpfiles /link_test -> /home/sednal/dossier_test_tmpfiles => créé avec succés.
 
 </details>
 
