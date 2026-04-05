@@ -618,7 +618,42 @@ man tmpfiles.d
 
 
 
+<details>
+<summary>
+<h2>
+exemple
+</h2>
+</summary>
 
+1) Créer un dossier test
+```
+mkdir /$HOME/test_tmp
+```
+
+3) Editer un fichier de configuration dans `/etc/tmpfiles.d`
+```
+sudo vim test_tmp_file.conf
+```
+
+3) Editer
+```
+# Créé un fichier pour sednal avec permissions
+f /home/sednal/fichier_test_tmpfiles 0644 sednal sednal -
+
+# Créé un dossier pour sednal avec permissions
+d /home/sednal/dossier_test_tmpfiles 0744 sednal sednal 10d
+
+# Créé un liens symbolique entre le dossié créé pour le test et le dossier créé par tmpfiles.
+L /home/sednal/dossier_test_tmpfiles - - - /home/sednal/test_tmp
+```
+
+
+4) Reboot
+
+5) Résultat
+
+
+</details>
 
 
 
