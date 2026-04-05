@@ -180,6 +180,7 @@ Les modification appliqués par `tuned`, sont visible dans l'outil bas niveau `s
 - **tuned-adm** Outil d'administration de `tuned`
 
 - Fichier de **configuration** de `tuned`  **cat /etc/tuned/tuned-main.conf**
+
 `[NOTE]`
 
 - Pour voir la valeurs des profils de `sysctl`
