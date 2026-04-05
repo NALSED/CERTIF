@@ -337,6 +337,12 @@ systemctl restart
 
 #  changements de config à chaud,
 systemctl reload
+
+# Pour obliger un service à ne pas démarrer
+# Un symlink sera créé vers /dev/null, ainsi le service ne pourra jamais démarrer.
+systemctl mask SERVICE
+# Pou désactiver
+systemctl unmask SERVICE
 ```
 
 **=== Configuartion fichier units ===**
@@ -522,6 +528,14 @@ systemctl restart httpd
 
 </details>
 
+**Déffinition de chaque option des fichier**
+```
+man systemd.unit      # [Unit] + [Install]
+man systemd.service   # [Service]
+```
+
+
+
 **=== Dépendences ===**
 
 - lister les dépendence
@@ -530,22 +544,6 @@ systemctl list-dependencies
 ```
 
 `systemctl list-dependencies` affiche l'arbre complet des dépendances d'une unit, en résolvant récursivement les dépendances de chaque dépendance.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ---
