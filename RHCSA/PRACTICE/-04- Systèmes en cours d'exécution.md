@@ -290,7 +290,10 @@ loginctl terminate-user
 
 - **Mount** — gère les points de montage filesystem, équivalent systemd de `/etc/fstab`
 
-`[NOTE]` Liste disponible des unit systemd, via `systemctl`, la commande pour gérer systemd (A par celle mentionnées ci dessus, hors scope pour RHCSA.)
+
+`[NOTE]`
+
+Liste disponible des unit systemd, via `systemctl`, la commande pour gérer systemd (A par celle mentionnées ci dessus, hors scope pour RHCSA.)
 ```
 systemctl -t help
 ```
@@ -357,7 +360,7 @@ systemctl show SERVICE
 <details>
 <summary>
 <h2>
-=== Exemple ===
+##### === Exemple ===
 </h2>
 </summary>
 
