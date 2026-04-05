@@ -72,7 +72,7 @@ Certification : *Red Hat Certified System Administrator*
 🟥 **4.7** — Journaux système — `journalctl`, `journalctl -u`, `/var/log/`  
 🟦 **4.8** — Gestion des sessions actives `loginctl`
 🟥 **4.9** — Persistance des journaux — `journald.conf` → `Storage=persistent`  
-🟥 **4.10** — Services réseau — `systemctl start/stop/status/enable`  
+🟩 **4.10** — SYSTEMD
 🟥 **4.11** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
 
 ---
