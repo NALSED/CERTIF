@@ -360,7 +360,7 @@ systemctl show SERVICE
 <details>
 <summary>
 <h2>
-##### === Exemple ===
+=== Exemple ===
 </h2>
 </summary>
 
