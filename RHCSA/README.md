@@ -63,7 +63,7 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 4. ⚙️ Utiliser des systèmes en cours d'exécution
 
-🟥 **4.1** — Démarrer, redémarrer, éteindre — `systemctl reboot`, `poweroff`, `shutdown`  
+🟦 **4.1** — Démarrer, redémarrer, éteindre — `systemctl reboot`, `poweroff`, `shutdown`  
 🟥 **4.2** — Démarrer dans différentes cibles — `systemctl isolate multi-user.target`  
 🟥 **4.3** — Interrompre le démarrage pour accès root — GRUB → `rd.break` / `init=/bin/bash`  
 🟦 **4.4** — Processus gourmands — `top`, `htop`, `ps aux`, `kill`, `killall`  
@@ -72,7 +72,7 @@ Certification : *Red Hat Certified System Administrator*
 🟥 **4.7** — Journaux système — `journalctl`, `journalctl -u`, `/var/log/`  
 🟦 **4.8** — Gestion des sessions actives `loginctl`
 🟥 **4.9** — Persistance des journaux — `journald.conf` → `Storage=persistent`  
-🟩 **4.10** — SYSTEMD
+🟩 **4.10** — `systemd`
 🟥 **4.11** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
 
 ---
@@ -102,7 +102,7 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 7. 🚀 Déployer, configurer et gérer des systèmes
 
-🟥 **7.1** — Planification de tâches — `at`, `cron`, `crontab -e`, **`systemd timers`**  
+🟩 **7.1** — Planification de tâches — `at`, `cron`, `crontab -e`, **`systemd timers`**  
 🟦 **7.2** — Services au démarrage — `systemctl enable --now`, `systemctl disable`  
 🟥 **7.3** — Cible de démarrage par défaut — `systemctl set-default`  
 🟥 **7.4** — Services de temps — `chronyc`, `timedatectl`, `/etc/chrony.conf`  
