@@ -103,10 +103,10 @@ Certification : *Red Hat Certified System Administrator*
 ## 7. 🚀 Déployer, configurer et gérer des systèmes
 
 🟥 **7.1** — Planification de tâches — `at`, `cron`, `crontab -e`, **`systemd timers`**  
-🟥 **7.2** — Services au démarrage — `systemctl enable --now`, `systemctl disable`  
+🟦 **7.2** — Services au démarrage — `systemctl enable --now`, `systemctl disable`  
 🟥 **7.3** — Cible de démarrage par défaut — `systemctl set-default`  
 🟥 **7.4** — Services de temps — `chronyc`, `timedatectl`, `/etc/chrony.conf`  
-🟥 **7.5** — Gestion des paquetages — `dnf install`, `dnf update`, `rpm -ivh`  
+🟦 **7.5** — Gestion des paquetages — `dnf install`, `dnf update`, `rpm -ivh`  
 🟥 **7.6** — Chargeur de démarrage — `grubby`, `/etc/default/grub`, `grub2-mkconfig`  
 
 > 💡 `systemd timers` = objectif explicite RHEL 10 — `OnCalendar=`, `systemctl list-timers`
