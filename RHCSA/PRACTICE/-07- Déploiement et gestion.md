@@ -42,7 +42,10 @@
 `Syntaxe OnCalendar` => `man 7 systemd.time
 
 
-**=== Cron ===**
+**=== cron et anacron ===**
+
+
+=> `cron`
 
 `Syntaxe Cron` => `man 5 crontab
 
@@ -67,8 +70,37 @@ MAILTO=root
 
 - La configuration de `cron` peux être géré via `/etc/crontab`, `/etc/cron.d/`, `/etc/cron.{hourly,daily,weekly,monthly}/`
 
+=> `anacron`
+
+`Syntaxe Anacron` => `man anacrontab
+
+## anacron
+
+- Édition : `vi /etc/anacrontab`
+- Granularité : **jour minimum** (pas de minutes/heures)
+
+- Syntaxe : `période  délai(min)  identifiant  commande`
+
+   - période : en jours (1=quotidien, 7=hebdo, 30=mensuel) ou `@daily` / `@weekly` / `@monthly`
+   - délai : minutes d'attente après le boot avant exécution
+   - identifiant : nom unique de la tâche (pour les logs)
+   - commande : script/commande à lancer
+
+- Rôle par défaut : exécute `/etc/cron.{daily,weekly,monthly}` sur machines non 24/7
+- `nice` : exécution basse priorité au boot
+
 
 **=== at ===**
+
+- Usage : exécution **one-shot** différée
+- Prérequis : daemon `atd` actif (`systemctl enable --now atd`)
+- Syntaxe : `at HH:MM`, `at now +1hour`, `at midnight`
+- Saisie interactive de la commande, terminer avec `Ctrl+D`
+- `atq` : lister les tâches en attente
+- `atrm <id>` : supprimer une tâche
+- Logs : mail à l'utilisateur
+- Pas de rattrapage si machine éteinte
+
 
 ---
 
