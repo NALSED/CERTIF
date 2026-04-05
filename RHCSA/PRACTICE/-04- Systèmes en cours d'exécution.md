@@ -551,6 +551,82 @@ systemctl list-dependencies
 ## 4.11 — Transfert sécurisé de fichiers — scp, sftp, rsync
 
 
+---
+
+## 4.12 — Gestion des fichiers — `systemd-tmpfiles`  
+
+- Avec systemd , il est possible de gérer des fichiers/dossiers via le gestionaire tmpfile.
+
+- Il permet de générer des dossier/fichiers au boot et gérer les permission, les utilisateurs ainsi que de nettoyer les contenues de dossiers si non utilisé
+
+
+**=== Fichiers de configurations ===**
+
+=> Géréré directement à l'installation par `rpm`
+```
+/usr/lib/tmpfiles.d
+```
+
+=> Généré par le systeme
+```
+/run/tmpfiles.d
+```
+
+=> Pour générer des fichiers customisés
+```
+/etc/tmpfiles.d
+```
+
+`[INFO]`
+
+**Informations générale**
+```
+man systemd-tmpfiles
+```
+
+**Syntaxe et options**
+```
+man tmpfiles.d
+```
+
+
+**=== Fonctionnement ===**
+```
+
+          systemd-tmpfiles-setup.service
+          Crée / supprime / applique permissions
+                          |
+                          | (boot)
+                          v
+          systemd-tmpfiles-clean.timer
+                          |
+                          | (déclenche périodiquement)
+                          v
+          systemd-tmpfiles-clean.service
+                          |
+                          | (lit la config)
+                          v
+          ┌──────────────────────────────────┐
+          │ /etc/tmpfiles.d/                 │ <= admin (prioritaire)
+          │ /usr/lib/tmpfiles.d/             │ <= paquets (ne pas modifier)
+          └──────────────────────────────────┘
+                          |
+                          | (nettoie selon l'âge défini)
+                          v
+                    Fichiers expirés supprimés
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
