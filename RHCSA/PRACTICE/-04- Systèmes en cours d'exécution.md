@@ -237,13 +237,10 @@ vm.swapinness = 40
 tuned-adm profile my_profile
 ```
 
-----
-## 4.7 — Journaux système — journalctl, journalctl -u, /var/log/
-
 
 ---
 
-## 4.8 — Gestion des sessions actives - loginctl
+## 4.7 — Gestion des sessions actives - loginctl
 
 - `loginctl` dépend de `systemd`, qui gére les sessions et utilisateurs.
 
@@ -271,7 +268,7 @@ loginctl terminate-user
 ```
 
 ---
-## 4.9 — Persistance des journaux — journalctl / journald.conf 
+## 4.8 — Journaux système et Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
 
 `[INTRO]`
 
@@ -350,8 +347,22 @@ loginctl terminate-user
 - `journalctl --list-boots` Historique des boots, uniquement quand la percistance des boots est activées. 
 
 
+**=== Persistance du journal de Logs ===**
 
+- `Méthode 1`
 
+=> Créer un fichier `mkdir -p /var/log/journal`
+
+- `Méthode 2`
+
+=> Modifier le dossier `/etc/systemd/journald.conf`
+```
+# Ouvrir le fichier
+sudo vim etc/systemd/journald.conf 
+
+# Editer
+Storage=persistent
+```
 
 
 
@@ -375,7 +386,7 @@ loginctl terminate-user
 
 ---
 
-## 4.10 — SYSTEMD 
+## 4.9 — SYSTEMD 
 
 `[INTRO]`
 
@@ -649,12 +660,12 @@ systemctl list-dependencies
 
 ---
 
-## 4.11 — Transfert sécurisé de fichiers — scp, sftp, rsync
+## 4.10 — Transfert sécurisé de fichiers — scp, sftp, rsync
 
 
 ---
 
-## 4.12 — Gestion des fichiers — `systemd-tmpfiles`  
+## 4.11 — Gestion des fichiers — `systemd-tmpfiles`  
 
 - Avec systemd , il est possible de gérer des fichiers/dossiers via le gestionaire tmpfile.
 
