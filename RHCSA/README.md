@@ -69,12 +69,11 @@ Certification : *Red Hat Certified System Administrator*
 🟦 **4.4** — Processus gourmands — `top`, `htop`, `ps aux`, `kill`, `killall`  
 🟦 **4.5** — Priorité des processus — `nice`, `renice`  
 🟩 **4.6** — Profils de tuning — `tuned-adm list`, `tuned-adm profile <nom>`  
-🟥 **4.7** — Journaux système — `journalctl`, `journalctl -u`, `/var/log/`  
-🟦 **4.8** — Gestion des sessions actives — `loginctl`  
-🟨 **4.9** — Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
-🟩 **4.10** — `systemd`  
-🟥 **4.11** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
-🟩 **4.12** — Gestion des fichier /tmp — `systemd-tmpfiles`  
+🟦 **4.7** — Gestion des sessions actives — `loginctl`  
+🟨 **4.8** — Journaux système et Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
+🟩 **4.9** — `systemd`  
+🟥 **4.10** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
+🟩 **4.11** — Gestion des fichier /tmp — `systemd-tmpfiles`  
 
 ---
 
