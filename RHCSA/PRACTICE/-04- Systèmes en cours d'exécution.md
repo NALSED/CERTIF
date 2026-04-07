@@ -271,12 +271,113 @@ loginctl terminate-user
 ```
 
 ---
-## 4.9 — Persistance des journaux — journald.conf → Storage=persistent
+## 4.9 — Persistance des journaux — journalctl / journald.conf 
+
+`[INTRO]`
+
+- `systemd-journald` reçoit des messages de log depuis différents endroit:
+
+   - Kernel
+   
+   - Boot
+   
+   - Evenement Syslog
+   
+   - Sortie normal et erreur des daemons
+
+- Systemd Journal par defaut n'est pas persistant
+ 
+- Les service `Rsyslog` lit les messages syslog et les écrits dans différent endroits `/var/log/MODULE`
+
+
+**=== FLUX LOGS ===**
+```
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│   Kernel    │  │ Early boot  │  │  Services   │  │    Apps     │
+│ /dev/kmsg   │  │ initrd/drac │  │ stdout/err  │  │  syslog()   │
+└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+       │                │                │                  │
+       └────────────────┴────────────────┘                  │
+                                │                           │
+                                v                           │
+                 ┌──────────────────────────┐               │
+                 │     systemd-journald     │               │
+                 │  /run/log/journal        │<──────────────┘
+                 │  (volatile par défaut)   │
+                 │  /var/log/journal        │
+                 │  (si Storage=persistent) │
+                 └───────────┬──────────────┘
+                             │
+              ┌──────────────┴──────────────┐
+              │                             │
+              │  imjournal (plugin)         │
+              v                             v
+┌─────────────────────┐      ┌──────────────────────────┐
+│    journalctl       │      │         rsyslog          │
+│  -b  -xb  -u  -f    │      │   /etc/rsyslog.conf      │
+│  -p  --since        │      └─────────────┬────────────┘
+└─────────────────────┘                    │
+                             ┌─────────────┼──────────────┐
+                             v             v              v
+                    /var/log/messages  /var/log/secure  /var/log/cron
+                    /var/log/maillog   /var/log/boot.log
+```
+
+
+
+
+   
+**===  Lire les logs ===**
+
+- `systemctl status NAME.UNIT` => Donne un aperçut claire et facile, pour un service précis.
+
+- `journalctl` donne la totalité du journal de logs.
+
+- `journalctl -p OPTION` Filtre en fonction de l'option (man systemctl).
+
+- `journalctl -f` Affiche les 10 derniers messages, et ajoutes ceux qui arrivent par la suite.
+
+- `journalctl -u SERVICE` montre les messages pour un service spécifique.
+
+- `journalctl --since` Donne la possibilité de définir une plage horaire, pour la lecture des logs.
+
+- `journalctl -o verbose` Pour afficher plus d'information
+
+- `journalctl -b` : Logs depuis le boot actuel
+
+- `journalctl -xb` Idem + explications contextuelles (catalog entries) 
+
+- `journalctl --list-boots` Historique des boots, uniquement quand la percistance des boots est activées. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
 
 ## 4.10 — SYSTEMD 
+
+`[INTRO]`
 
 `systemd` gère les ressources système via des **unités**, chacune d'un type spécifique :
 
