@@ -33,6 +33,8 @@ fg NUMERO LISTER AVEC JOBS
 
 ## 4.1 — Démarrer, redémarrer, éteindre systemctl reboot, poweroff, shutdown
 
+OK
+
 ---
 
 
