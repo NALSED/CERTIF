@@ -18,7 +18,7 @@ Certification : *Red Hat Certified System Administrator*
 🟨 Section 4 — Systèmes en cours d'exécution  
 🟥 Section 5 — Stockage local  
 🟥 Section 6 — Systèmes de fichiers  
-🟥 Section 7 — Déploiement et gestion  
+🟨 Section 7 — Déploiement et gestion  
 🟥 Section 8 — Réseau  
 🟦 Section 9 — Utilisateurs et groupes  
 🟥 Section 10 — Sécurité  
@@ -71,7 +71,7 @@ Certification : *Red Hat Certified System Administrator*
 🟩 **4.6** — Profils de tuning — `tuned-adm list`, `tuned-adm profile <nom>`  
 🟥 **4.7** — Journaux système — `journalctl`, `journalctl -u`, `/var/log/`  
 🟦 **4.8** — Gestion des sessions actives — `loginctl`  
-🟥 **4.9** — Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
+🟨 **4.9** — Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
 🟩 **4.10** — `systemd`  
 🟥 **4.11** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
 🟩 **4.12** — Gestion des fichier /tmp — `systemd-tmpfiles`  
@@ -103,7 +103,7 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 7. 🚀 Déployer, configurer et gérer des systèmes
 
-🟩 **7.1** — Planification de tâches — `at`, `cron`, `crontab -e`, **`systemd timers`**  
+🟩 **7.1** — Planification de tâches — `at`, `cron`, `crontab -e`, `systemd timers`  
 🟦 **7.2** — Services au démarrage — `systemctl enable --now`, `systemctl disable`  
 🟥 **7.3** — Cible de démarrage par défaut — `systemctl set-default`  
 🟥 **7.4** — Services de temps — `chronyc`, `timedatectl`, `/etc/chrony.conf`  
