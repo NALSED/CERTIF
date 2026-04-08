@@ -291,10 +291,10 @@ loginctl terminate-user
 
 **=== FLUX LOGS ===**
 ```
-┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
-│   Kernel    │  │ Early boot  │  │  Services   │  │    Apps     │
-│ /dev/kmsg   │  │ initrd/drac │  │ stdout/err  │  │  syslog()   │
-└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐    ┌─────────────┐
+│   Kernel    │  │ Early boot  │  │  Services   │    │    Apps     │
+│ /dev/kmsg   │  │ initrd/drac │  │ stdout/err  │    │  syslog()   │
+└──────┬──────┘  └──────┬──────┘  └──────┬──────┘    └──────┬──────┘
        │                │                │                  │
        └────────────────┴────────────────┘                  │
                                 │                           │
@@ -321,10 +321,6 @@ loginctl terminate-user
                     /var/log/messages  /var/log/secure  /var/log/cron
                     /var/log/maillog   /var/log/boot.log
 ```
-
-
-
-
    
 **===  Lire les logs ===**
 
@@ -366,26 +362,33 @@ sudo vim etc/systemd/journald.conf
 Storage=persistent
 ```
 
+**=== Rsyslog ===**
 
+- Configuration Générale => `/etc/rsyslog.conf`
 
+- Ajout de régles => `/etc/rsyslog.d`
 
+Les trois composantes d'une règle de filtrage rsyslog + syntaxe:
 
+   - facility
+   
+   - severity
+   
+   - destination
 
+Avec la syntaxe suivante : `facility.severity destination` 
 
+Exemple : 
+```
+# Tous les logs auth (warning+) 
+authpriv.*              /var/log/secure
 
+# Kernel, niveau critique minimum 
+kern.crit               /var/log/kernel-crit.log
 
-
-
-
-
-
-
-
-
-
-
-
-
+# Tout sauf mail et auth 
+*.info;mail.none;authpriv.none    /var/log/messages
+```
 ---
 
 ## 4.9 — SYSTEMD 
