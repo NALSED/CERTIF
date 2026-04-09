@@ -40,13 +40,10 @@ OK
 
 ## 4.2 — Démarrer dans différentes cibles — systemctl isolate multi-user.target
 
----
-
-## 4.3 — Interrompre le démarrage pour accès root — GRUB → rd.break / init=/bin/bash
 
 ---
 
-## 4.4 — Processus gourmands RAM et CPU — ps, free, top, uptime, kill, killall
+## 4.3 — Processus gourmands RAM et CPU — ps, free, top, uptime, kill, killall
 
 `[NOTE]`
 - Linux placera le plus possible de fichier en mémoire cache, par sécurité un `swap`, au cas ou l'on manquerai de mémoire, le swap est créer à partir d'espace disque.
@@ -144,7 +141,7 @@ man 7 signal
 Pour voir comment tuer un zombie => [Exercice Zombie](https://github.com/NALSED/CERTIF/blob/main/RHCSA/PRACTICE/EXO/PROCESSUS/Zombie.md)
 
 ---
-## 4.5 — Priorité des processus — nice, renice
+## 4.4 — Priorité des processus — nice, renice
 
 `[NOTE]`
 
@@ -167,7 +164,7 @@ nice -n 10 dd if=/dev/sda of=/test &
 
 ---
 
-## 4.6 — Profils de tuning — tuned-adm list, tuned-adm profile
+## 4.5 — Profils de tuning — tuned-adm list, tuned-adm profile
 
 
 - `tuned` est un daemon Linux qui optimise automatiquement les performances du système en appliquant des profils prédéfinis selon l'usage de la machine.
@@ -242,7 +239,7 @@ tuned-adm profile my_profile
 
 ---
 
-## 4.7 — Gestion des sessions actives - loginctl
+## 4.6 — Gestion des sessions actives - loginctl
 
 - `loginctl` dépend de `systemd`, qui gére les sessions et utilisateurs.
 
@@ -270,7 +267,7 @@ loginctl terminate-user
 ```
 
 ---
-## 4.8 — Journaux système et Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
+## 4.7 — Journaux système et Persistance des journaux — `journald.conf` / `rsyslog`
 
 `[INTRO]`
 
@@ -389,9 +386,21 @@ kern.crit               /var/log/kernel-crit.log
 # Tout sauf mail et auth 
 *.info;mail.none;authpriv.none    /var/log/messages
 ```
+
+**=== logrotate ===**
+
+Permet une rotation des logs afin d'éviter l'encombrement des disque de stockage.
+
+- Configuration :
+
+   - `/etc/logrotate.conf`
+   
+   - `/etclogrotate.d` 
+
+
 ---
 
-## 4.9 — SYSTEMD 
+## 4.8 — SYSTEMD 
 
 `[INTRO]`
 
@@ -665,12 +674,12 @@ systemctl list-dependencies
 
 ---
 
-## 4.10 — Transfert sécurisé de fichiers — scp, sftp, rsync
+## 4.9 — Transfert sécurisé de fichiers — scp, sftp, rsync
 
 
 ---
 
-## 4.11 — Gestion des fichiers — `systemd-tmpfiles`  
+## 4.10 — Gestion des fichiers — `systemd-tmpfiles`  
 
 - Avec systemd , il est possible de gérer des fichiers/dossiers via le gestionaire tmpfile.
 
