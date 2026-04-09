@@ -179,7 +179,7 @@ OK
 ```
 
 
-- Poue editer le `runtime-boot` de linux, appyer sur `e`
+- Poue éditer le `runtime-boot` de linux choisir `regular kernel`, appyer sur `e`
 
 
 
