@@ -123,3 +123,98 @@ OK
 ---
 
 ## 7.6 — Chargeur de démarrage — grubby, /etc/default/grub, grub2-mkconfig
+
+`[INTRO]`
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    SÉQUENCE DE DÉMARRAGE LINUX               │
+└─────────────────────────────────────────────────────────────┘
+
+┌──────────────────────┐
+│       FIRMWARE       │  BIOS / UEFI
+│   (POST + détection) │  => détecte le matériel, cherche un boot device
+└──────────┬───────────┘
+           │
+           v
+┌──────────────────────┐
+│     BOOT DEVICE      │  Disque, USB, réseau...
+│   (MBR / GPT + ESP)  │  => contient le bootloader
+└──────────┬───────────┘
+           │
+           v
+┌──────────────────────┐
+│        GRUB          │  GRand Unified Bootloader
+│  (bootloader stage2) │  => charge le kernel + initramfs en mémoire
+└──────────┬───────────┘
+           │
+           v
+┌──────────────────────┐
+│  INITRAMFS + KERNEL  │  Système de fichiers temporaire en RAM
+│  (early userspace)   │  => monte le vrai /, charge les modules
+└──────────┬───────────┘
+           │
+           v
+┌──────────────────────┐
+│       SYSTEMD        │  PID 1 — init system
+│    (target switch)   │  => prend le contrôle, lance les targets
+└──────────┬───────────┘
+           │
+           v
+┌──────────────────────┐
+│    EARLY SERVICES    │  sysinit.target / basic.target
+│  (base du système)   │  => udev, réseau bas niveau, montages
+└──────────┬───────────┘
+           │
+           v
+┌──────────────────────┐
+│      SERVICES        │  multi-user.target / graphical.target
+│   (stack complète)   │  => SSH, réseau, logging, cron, etc.
+└──────────┬───────────┘
+           │
+           v
+┌──────────────────────┐
+│        SHELL         │  login prompt / getty / display manager
+│   (session user)     │  => bash, zsh, ou GUI
+└──────────────────────┘
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+## 7.7 — Interrompre le démarrage pour accès root — GRUB → rd.break / init=/bin/bash
