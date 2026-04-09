@@ -64,12 +64,12 @@ Certification : *Red Hat Certified System Administrator*
 ## 4. ⚙️ Utiliser des systèmes en cours d'exécution
 
 🟦 **4.1** — Démarrer, redémarrer, éteindre — `systemctl reboot`, `poweroff`, `shutdown`  
-🟥 **4.2** — Démarrer dans différentes cibles — `systemctl isolate multi-user.target`  
+🟦 **4.2** — Démarrer dans différentes cibles — `systemctl isolate multi-user.target`  
 🟦 **4.3** — Processus gourmands — `top`, `htop`, `ps aux`, `kill`, `killall`  
 🟦 **4.4** — Priorité des processus — `nice`, `renice`  
 🟩 **4.5** — Profils de tuning — `tuned-adm list`, `tuned-adm profile <nom>`  
 🟦 **4.6** — Gestion des sessions actives — `loginctl`  
-🟨 **4.7** — Journaux système et Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
+🟩 **4.7** — Journaux système et Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
 🟩 **4.8** — `systemd`  
 🟥 **4.9** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
 🟩 **4.10** — Gestion des fichier /tmp — `systemd-tmpfiles`  
@@ -102,12 +102,11 @@ Certification : *Red Hat Certified System Administrator*
 ## 7. 🚀 Déployer, configurer et gérer des systèmes
 
 🟩 **7.1** — Planification de tâches — `at`, `cron`, `crontab -e`, `systemd timers`  
-🟦 **7.2** — Services au démarrage — `systemctl enable --now`, `systemctl disable`  
-🟥 **7.3** — Cible de démarrage par défaut — `systemctl set-default`  
-🟥 **7.4** — Services de temps — `chronyc`, `timedatectl`, `/etc/chrony.conf`  
-🟦 **7.5** — Gestion des paquetages — `dnf install`, `dnf update`, `rpm -ivh`  
-🟥 **7.6** — Chargeur de démarrage — `grubby`, `/etc/default/grub`, `grub2-mkconfig`  
-🟥 **7.7** — Interrompre le démarrage pour accès root — `GRUB → rd.break` / `init=/bin/bash`
+🟦 **7.2** — Services au démarrage — `systemctl enable --now`, `systemctl disable`   
+🟥 **7.3** — Services de temps — `chronyc`, `timedatectl`, `/etc/chrony.conf`  
+🟦 **7.4** — Gestion des paquetages — `dnf install`, `dnf update`, `rpm -ivh`  
+🟩 **7.5** — Chargeur de démarrage —`/etc/default/grub`, `grub2-mkconfig`  
+🟥 **7.6** — Interrompre le démarrage pour accès root — `GRUB → rd.break` / `init=/bin/bash`
 
 > 💡 `systemd timers` = objectif explicite RHEL 10 — `OnCalendar=`, `systemctl list-timers`
 
