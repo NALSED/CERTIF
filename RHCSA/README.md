@@ -65,15 +65,14 @@ Certification : *Red Hat Certified System Administrator*
 
 🟦 **4.1** — Démarrer, redémarrer, éteindre — `systemctl reboot`, `poweroff`, `shutdown`  
 🟥 **4.2** — Démarrer dans différentes cibles — `systemctl isolate multi-user.target`  
-🟥 **4.3** — Interrompre le démarrage pour accès root — GRUB → `rd.break` / `init=/bin/bash`  
-🟦 **4.4** — Processus gourmands — `top`, `htop`, `ps aux`, `kill`, `killall`  
-🟦 **4.5** — Priorité des processus — `nice`, `renice`  
-🟩 **4.6** — Profils de tuning — `tuned-adm list`, `tuned-adm profile <nom>`  
-🟦 **4.7** — Gestion des sessions actives — `loginctl`  
-🟨 **4.8** — Journaux système et Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
-🟩 **4.9** — `systemd`  
-🟥 **4.10** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
-🟩 **4.11** — Gestion des fichier /tmp — `systemd-tmpfiles`  
+🟦 **4.3** — Processus gourmands — `top`, `htop`, `ps aux`, `kill`, `killall`  
+🟦 **4.4** — Priorité des processus — `nice`, `renice`  
+🟩 **4.5** — Profils de tuning — `tuned-adm list`, `tuned-adm profile <nom>`  
+🟦 **4.6** — Gestion des sessions actives — `loginctl`  
+🟨 **4.7** — Journaux système et Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
+🟩 **4.8** — `systemd`  
+🟥 **4.9** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
+🟩 **4.10** — Gestion des fichier /tmp — `systemd-tmpfiles`  
 
 ---
 
@@ -108,6 +107,7 @@ Certification : *Red Hat Certified System Administrator*
 🟥 **7.4** — Services de temps — `chronyc`, `timedatectl`, `/etc/chrony.conf`  
 🟦 **7.5** — Gestion des paquetages — `dnf install`, `dnf update`, `rpm -ivh`  
 🟥 **7.6** — Chargeur de démarrage — `grubby`, `/etc/default/grub`, `grub2-mkconfig`  
+🟥 **7.7** — Interrompre le démarrage pour accès root — GRUB → rd.break / init=/bin/bash
 
 > 💡 `systemd timers` = objectif explicite RHEL 10 — `OnCalendar=`, `systemctl list-timers`
 
