@@ -179,7 +179,7 @@ OK
 ```
 
 
-
+- Poue editer le `runtime-boot` de linux, appyer sur `e`
 
 
 
