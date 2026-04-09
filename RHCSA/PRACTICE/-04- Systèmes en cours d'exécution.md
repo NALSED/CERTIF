@@ -40,6 +40,32 @@ OK
 
 ## 4.2 — Démarrer dans différentes cibles — systemctl isolate multi-user.target
 
+- Les cibles sont l'nvironement dans lequel linux va charger le systeme.
+
+ Il y à 22 cibles chargés sur RHEL 9.
+
+ **=== Lister les cibles ===**: `systemctl list-units --type=target` 
+
+**=== Voir la cible actuelle ===**  `systemctl get-default`
+
+**=== Changer de cible ===** `systemctl set-default CIBLE`
+
+- Il est aussi possible de charger une cible sans redemmarer le systeme, en utilisant la commande `systemctl isolate CIBLE`
+
+- Dans le cas numéro 1 `systemctl set-default` un redemmarege est obligatoire, alors que `systemctl isolate`
+
+**=== Comparatif ===**
+```
+┌─────────────────────────┬──────────────────────┬──────────────────────┐
+│ Critère                 │ isolate              │ reboot               │
+├─────────────────────────┼──────────────────────┼──────────────────────┤
+│ Kernel rechargé ?       │ Non                  │ Oui                  │
+│ Processus arrêtés ?     │ Hors-cible seulement │ Tous                 │
+│ Filesystems démontés ?  │ Non                  │ Oui                  │
+│ RAM vidée ?             │ Non                  │ Oui                  │
+│ Cas d'usage typique     │ Changer de runlevel  │ Appliquer MAJ kernel │
+└─────────────────────────┴──────────────────────┴──────────────────────┘
+```
 
 ---
 
