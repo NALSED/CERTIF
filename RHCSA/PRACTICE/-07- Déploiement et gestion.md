@@ -122,7 +122,7 @@ OK
 
 ---
 
-## 7.6 — Chargeur de démarrage — grubby, /etc/default/grub, grub2-mkconfig
+## 7.6 — Chargeur de démarrage — /etc/default/grub, grub2-mkconfig
 
 `[INTRO]`
 ```
@@ -179,41 +179,23 @@ OK
 ```
 
 
-- Poue éditer le `runtime-boot` de linux choisir `regular kernel`, appyer sur `e`
+- Pour éditer le `runtime-boot` de linux choisir `regular kernel`, appyer sur `e`, mais le changement n'est pas persistant
 
+- Pour avoir une configuration persistante de Grub2
 
+1) éditer le fichier `/etc/default/grub`
 
+2) Vérifier si le systemme démarre en `NBR` ou en `EFI`
 
+- `lsblk` => si sur sda1 /boot = NBR et si /boot/efi = EFI
 
+3) Ecrire les changements :
 
+- NBR : `grub2-mkconfig -o /boot/grub2/brub.cfg`
+ 
+- EFI `grub2-mkconfig -o /boo/efi/EFI/redhat/grub.cfg`
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+4) Ici NBR => recharger la configuration : `grub2-mkconfig -o /boot/grub2/grub.cfg`
 
 ---
 
