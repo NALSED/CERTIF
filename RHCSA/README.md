@@ -107,7 +107,7 @@ Certification : *Red Hat Certified System Administrator*
 🟥 **7.4** — Services de temps — `chronyc`, `timedatectl`, `/etc/chrony.conf`  
 🟦 **7.5** — Gestion des paquetages — `dnf install`, `dnf update`, `rpm -ivh`  
 🟥 **7.6** — Chargeur de démarrage — `grubby`, `/etc/default/grub`, `grub2-mkconfig`  
-🟥 **7.7** — Interrompre le démarrage pour accès root — GRUB → rd.break / init=/bin/bash
+🟥 **7.7** — Interrompre le démarrage pour accès root — `GRUB → rd.break` / `init=/bin/bash`
 
 > 💡 `systemd timers` = objectif explicite RHEL 10 — `OnCalendar=`, `systemctl list-timers`
 
