@@ -8,29 +8,51 @@
  
 nftables gère :
 
-- Le filtrage des paquets
+   - Le filtrage des paquets
 
-- La traduction d'adresses réseau (NAT)
+   - La traduction d'adresses réseau (NAT)
 
-- La redirection de ports
+   - La redirection de ports
  
+- `firewalld` utilise différents composants pour administrer le parefeu; les principaux sont :
+
+   - `Service` : ensemble prédéfini de ports/protocoles regroupés sous un nom logique, `man firewalld.service`
+
+   - `Zone` :  définit le niveau de confiance accordé au trafic réseau. `man firewalld.zoneqq`
+   
+   - `Ports` : ouverture de port directement.
+
+- Utiliser la commande `firewall-cmd --permanent`, comme commande de base
+
+⚠️ Il sera principalment demandé l'application de services pour RHCSA ⚠️
 
 
+---
 
+**Commandes de bases**
 
+````
+# Affiche toutes les régles pour la zone active (dont Zone, Service et Ports)
+firewall-cmd --list-all
 
+# Affiche la liste tous les services prédéfinis disponibles dans firewalld.
+firewall-cmd --get-services
 
-
+# Ajout d'un service
+firewall-cmd --add-service NAME + --permanent (si besoin)
+````
 
 ---
 ---
 
 # **10.2** — Permissions par défaut des fichiers — `umask`, `chmod`  
 
+ok
+
 ---
 ---
 
-# **10.3** — Authentification SSH par clé — `ssh-keygen`, `ssh-copy-id`, `authorized_keys`  
+# **10.3** —  gestion SSH   
 
 ---
 ---
