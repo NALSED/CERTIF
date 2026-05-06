@@ -123,5 +123,3 @@ OK
 
 ---
 ---
-
-# 8.4 — Pare-feu — firewall-cmd --permanent, firewall-cmd --reload
