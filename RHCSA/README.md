@@ -135,7 +135,7 @@ Certification : *Red Hat Certified System Administrator*
 
 🟦 **10.1** — Pare-feu firewalld 
 🟦 **10.2** — Permissions par défaut des fichiers — `umask`, `chmod`  
-🟥 **10.3** — gestion SSH 
+🟨  **10.3** — gestion SSH 
 🟥 **10.4** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
 🟥 **10.5** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
 🟥 **10.6** — Restaurer les contextes — `restorecon -Rv`, `semanage fcontext`  
