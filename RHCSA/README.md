@@ -19,9 +19,9 @@ Certification : *Red Hat Certified System Administrator*
 🟥 Section 5 — Stockage local  
 🟥 Section 6 — Systèmes de fichiers  
 🟨 Section 7 — Déploiement et gestion  
-🟥 Section 8 — Réseau  
+🟨 Section 8 — Réseau  
 🟦 Section 9 — Utilisateurs et groupes  
-🟥 Section 10 — Sécurité  
+🟨 Section 10 — Sécurité  
 
 ---
 
@@ -117,7 +117,6 @@ Certification : *Red Hat Certified System Administrator*
 🟦 **8.1** — Adresses IPv4 et IPv6 — `nmcli`, `nmtui`, `/etc/NetworkManager/`  
 🟦 **8.2** — Résolution du nom d'hôte — `hostnamectl`, `/etc/hosts`, `/etc/resolv.conf`  
 🟥 **8.3** — Services réseau au démarrage — `nmcli con mod ... connection.autoconnect yes`  
-🟥 **8.4** — Pare-feu — `firewall-cmd --permanent`, `firewall-cmd --reload`  
 
 > 💡 RHEL 10 : NetworkManager uniquement — `network-scripts` supprimé, `ip`/`ss` remplacent `ifconfig`/`netstat`
 
@@ -134,8 +133,8 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 10. 🔒 Gérer la sécurité
 
-🟥 **10.1** — Pare-feu firewalld — `firewall-cmd --add-service`, `--add-port`, `--zone`  
-🟥 **10.2** — Permissions par défaut des fichiers — `umask`, `chmod`  
+🟨 **10.1** — Pare-feu firewalld 
+🟦 **10.2** — Permissions par défaut des fichiers — `umask`, `chmod`  
 🟥 **10.3** — Authentification SSH par clé — `ssh-keygen`, `ssh-copy-id`, `authorized_keys`  
 🟥 **10.4** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
 🟥 **10.5** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
