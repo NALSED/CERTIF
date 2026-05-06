@@ -114,8 +114,8 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 8. 🌐 Gestion de base du réseau
 
-🟥 **8.1** — Adresses IPv4 et IPv6 — `nmcli`, `nmtui`, `/etc/NetworkManager/`  
-🟥 **8.2** — Résolution du nom d'hôte — `hostnamectl`, `/etc/hosts`, `/etc/resolv.conf`  
+🟦 **8.1** — Adresses IPv4 et IPv6 — `nmcli`, `nmtui`, `/etc/NetworkManager/`  
+🟦 **8.2** — Résolution du nom d'hôte — `hostnamectl`, `/etc/hosts`, `/etc/resolv.conf`  
 🟥 **8.3** — Services réseau au démarrage — `nmcli con mod ... connection.autoconnect yes`  
 🟥 **8.4** — Pare-feu — `firewall-cmd --permanent`, `firewall-cmd --reload`  
 
