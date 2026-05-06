@@ -40,6 +40,9 @@ firewall-cmd --get-services
 
 # Ajout d'un service
 firewall-cmd --add-service NAME + --permanent (si besoin)
+
+# Recharger la configuration
+firewall-cmd --reload
 ````
 
 ---
@@ -53,6 +56,55 @@ ok
 ---
 
 # **10.3** —  gestion SSH   
+
+=> `Adminitration / Connection clées SSH`
+
+- Générer la clé
+````
+ssh-keygen
+````
+
+- Copier la clé
+````
+ssh-copy-id IP ou NAME 
+````
+
+---
+
+=> `SSH keyz en cache`
+
+- Ici la passphrase de la clé SSH est mise en cache dans le shell et disponible pendant toute la session ou l'utilisateur est connecté.
+
+⚠️ Hors scope mais plus proche du milieu professionel ⚠️
+
+- Générer clées avec passphrase
+
+- Alouer un espace dans le shell
+````
+ssh-agent /bin/bash
+````
+
+- Ajouter la passphrase
+````
+ssh-add PASSPHRASE
+```` 
+
+---
+
+=> `Client configuration`
+
+
+- Fichier de configuration client
+````
+$HOME/.shh/config
+````
+
+-Fichier de configuration global
+````
+/etc/ssh/ssh_config
+````
+
+
 
 ---
 ---
