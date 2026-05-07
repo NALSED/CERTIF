@@ -698,14 +698,10 @@ systemctl list-dependencies
 `systemctl list-dependencies` affiche l'arbre complet des dépendances d'une unit, en résolvant récursivement les dépendances de chaque dépendance.
 
 
----
-
-## 4.9 — Transfert sécurisé de fichiers — scp, sftp, rsync
-
 
 ---
 
-## 4.10 — Gestion des fichiers — `systemd-tmpfiles`  
+## 4.9 — Gestion des fichiers — `systemd-tmpfiles`  
 
 - Avec systemd , il est possible de gérer des fichiers/dossiers via le gestionaire tmpfile.
 
