@@ -138,7 +138,53 @@ systemctl isolate CHOIX
 
 ---
 
-## 7.4 — Services de temps — chronyc, timedatectl, /etc/chrony.conf
+## 7.4 — Services de temps — chronyc, timedatectl, /etc/chrony.conf,
+
+**Commandes**
+````
+=== DATE ===
+# Voir la date + heure
+date
+
+=== TIMEDATCTL ===
+# définir une heure précise
+timedatectl set-time TIME
+
+# Régler sur un fuseau horaire
+timedatectl set-timezone
+
+=== CHRONYD ===
+
+
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
