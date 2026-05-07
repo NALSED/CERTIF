@@ -127,15 +127,38 @@ $HOME/.shh/config
 
 **Principales Options**
 
-- Port : Port d'écoute de SSH
-- PermitRootLogin : Autoriser / Interdire connection via Root
-- PubkeyAuthentication : Autoriser / Interdire connection via clé publique
-- PasswordAthentication : Autoriser / Interdire connection via mot de passe
-- X11Forwarding : Autoriser / Interdire la possiblilité de lancer un application graphique sur un client
-- AllowYsers : Utilisateur autorisés à se connecter en SSH
+- `Port` : Port d'écoute de SSH
+- `PermitRootLogin` : Autoriser / Interdire connection via Root
+- `PubkeyAuthentication` : Autoriser / Interdire connection via clé publique
+- `PasswordAthentication` : Autoriser / Interdire connection via mot de passe
+- `X11Forwarding` : Autoriser / Interdire la possiblilité de lancer un application graphique sur un client
+- `AllowYsers` : Utilisateur autorisés à se connecter en SSH
 
 
+⚠️ Si changement ⚠️ => `systemctl restart sshd`
 
+---
+
+`[RAPPEL]`
+
+- `scp` copie de fichier en SSH => scp OPTION PATH USER@IP:PATH
+
+- `rsync` copie/synchronise => rsync OPTION USER@IP:PATH 
+
+**Principales Options**
+
+- `-r` mode récursif
+- `-l` synchronise les liens symboliques
+- `-p` preserve les permissions
+- `-n` test de synchronisation/copie
+- `-a` archive mode (équivalent =>  -r -l -p -t -g -o -D)
+- `-A` archive mode et ACL
+- `-X` synchronisation SELinux
+
+`[REMARQUE]`
+
+Protocole `rsync` natif non chiffré, utilisation implicite de SSH avec syntaxe ci dessus. 
+  
 ---
 ---
 
