@@ -111,6 +111,31 @@ OK
 
 ## 7.3 — Cible de démarrage par défaut — systemctl set-default
 
+
+- Sert à démarrer RHEL 10 sur une cible choisi, deux choix :
+
+   - `persistant après redémarrage` 
+
+**commandes**
+````
+# Lister les options disponible
+systemctl list-units --type=target
+
+# Modifier
+systemctl set-default CHOIX
+````
+
+   - `immédiat`
+
+**commandes**
+````
+# Lister les options disponible
+systemctl list-units --type=target
+
+# Modifier
+systemctl isolate CHOIX
+````
+
 ---
 
 ## 7.4 — Services de temps — chronyc, timedatectl, /etc/chrony.conf
