@@ -15,11 +15,11 @@ Certification : *Red Hat Certified System Administrator*
 🟩 Section 1 — Outils essentiels  
 🟨 Section 2 — Gestion des logiciels  
 🟥 Section 3 — Scripts shell  
-🟨 Section 4 — Systèmes en cours d'exécution  
+🟩 Section 4 — Systèmes en cours d'exécution  
 🟥 Section 5 — Stockage local  
 🟥 Section 6 — Systèmes de fichiers  
 🟨 Section 7 — Déploiement et gestion  
-🟨 Section 8 — Réseau  
+🟦 Section 8 — Réseau  
 🟦 Section 9 — Utilisateurs et groupes  
 🟨 Section 10 — Sécurité  
 
@@ -71,8 +71,7 @@ Certification : *Red Hat Certified System Administrator*
 🟦 **4.6** — Gestion des sessions actives — `loginctl`  
 🟩 **4.7** — Journaux système et Persistance des journaux — `journald.conf` / `rsyslog` => `Storage=persistent`  
 🟩 **4.8** — `systemd`  
-🟥 **4.9** — Transfert sécurisé de fichiers — `scp`, `sftp`, `rsync`  
-🟩 **4.10** — Gestion des fichier /tmp — `systemd-tmpfiles`  
+🟩 **4.9** — Gestion des fichier /tmp — `systemd-tmpfiles`  
 
 ---
 
@@ -116,8 +115,7 @@ Certification : *Red Hat Certified System Administrator*
 ## 8. 🌐 Gestion de base du réseau
 
 🟦 **8.1** — Adresses IPv4 et IPv6 — `nmcli`, `nmtui`, `/etc/NetworkManager/`  
-🟦 **8.2** — Résolution du nom d'hôte — `hostnamectl`, `/etc/hosts`, `/etc/resolv.conf`  
-🟥 **8.3** — Services réseau au démarrage — `nmcli con mod ... connection.autoconnect yes`  
+🟦 **8.2** — Résolution du nom d'hôte — `hostnamectl`, `/etc/hosts`, `/etc/resolv.conf`   
 
 > 💡 RHEL 10 : NetworkManager uniquement — `network-scripts` supprimé, `ip`/`ss` remplacent `ifconfig`/`netstat`
 
