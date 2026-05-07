@@ -122,7 +122,7 @@ OK
 
 ---
 
-## 7.6 — Chargeur de démarrage — /etc/default/grub, grub2-mkconfig
+## 7.6 — Chargeur de démarrage — grubby, grub2-mkconfig, 
 
 `[INTRO]`
 ```
@@ -181,7 +181,47 @@ OK
 
 - Pour éditer le `runtime-boot` de linux choisir `regular kernel`, appyer sur `e`, mais le changement n'est pas persistant
 
-- Pour avoir une configuration persistante de Grub2
+
+**2 solutions pour les modifications de paramètres noyau**
+
+1) `grubby` : Outil haut niveau pour **modifier les entrées noyau** sans toucher à la config GRUB globale.
+
+2) `grub2-mkconfig` : Outils bas niveau pour **régénérer ou installer** le bootloader GRUB2.
+
+⚠️ Pour RHCSA Privilégier `grubby` ⚠️
+
+---
+
+**grubby**
+
+- Commandes principales (man grubby) :
+````
+# info sur les noyaux du systéme
+grubby --info=ALL
+
+# Voir le noyau par défaut
+grubby --info=DEFAULT
+grubby --default-index
+
+# Ajouter un arguments
+grubby --update-kernel=ALL --args=""
+
+# Supprimer un arguments
+grubby --update-kernel=ALL --remove-args=""
+
+# Changer de noyau au boot
+grubby --set-default-index=0  
+```` 
+`[NOTE]`
+Cibles possibles pour --update-kernel :
+
+ALL => tous les noyaux
+DEFAULT => noyau par défaut uniquement
+/boot/vmlinuz-... => noyau spécifique
+
+---
+
+**Grub2**
 
 1) éditer le fichier `/etc/default/grub`
 
