@@ -91,6 +91,8 @@ ssh-add PASSPHRASE
 
 ---
 
+**CONFIGURATION**
+
 => `Client configuration`
 
 
@@ -103,6 +105,34 @@ $HOME/.shh/config
 ````
 /etc/ssh/ssh_config
 ````
+
+`[NOTE]`
+
+- Pour lancer une application graphique sur un serveur distant :
+   
+   - `-X` -X11 forwarding non fiable (sandboxé)
+
+   - `-Y` X11 forwarding de confiance (accés complet)
+
+---
+
+=> `Serveur Configuration`
+
+- Fichier de configuration serveur
+````
+/etc/ssh/sshd_config
+````
+
+`[NOTE]`
+
+**Principales Options**
+
+- Port : Port d'écoute de SSH
+- PermitRootLogin : Autoriser / Interdire connection via Root
+- PubkeyAuthentication : Autoriser / Interdire connection via clé publique
+- PasswordAthentication : Autoriser / Interdire connection via mot de passe
+- X11Forwarding : Autoriser / Interdire la possiblilité de lancer un application graphique sur un client
+- AllowYsers : Utilisateur autorisés à se connecter en SSH
 
 
 
