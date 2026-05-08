@@ -54,10 +54,10 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 3. 📜 Créer des scripts shell simples
 
-🟥 **3.1** — Exécution conditionnelle — `if`, `test`, `[ ]`, `[[ ]]`  
-🟥 **3.2** — Boucles — `for`, `while`  
-🟥 **3.3** — Entrées de script — `$1`, `$2`, `$@`, `$#`  
-🟥 **3.4** — Codes de retour — `$?`, `exit`, `&&`, `||`  
+🟦 **3.1** — Exécution conditionnelle — `if`, `test`, `[ ]`, `[[ ]]`  
+🟦 **3.2** — Boucles — `for`, `while`  
+🟦 **3.3** — Entrées de script — `$1`, `$2`, `$@`, `$#`  
+🟦 **3.4** — Codes de retour — `$?`, `exit`, `&&`, `||`  
 
 ---
 
