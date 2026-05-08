@@ -79,10 +79,12 @@ Certification : *Red Hat Certified System Administrator*
 
 🟥 **5.1** — Partitions GPT — `fdisk`, `gdisk`, `parted`  
 🟥 **5.2** — Volumes physiques LVM — `pvcreate`, `pvremove`, `pvs`  
-🟥 **5.3** - LVM
-      🟥 **5.3.1** — Groupes de volumes — `vgcreate`, `vgextend`, `vgs`  
-      🟥 **5.3.2** — Volumes logiques — `lvcreate`, `lvremove`, `lvs`  
-      🟥 **5.3.3** — Montage au démarrage par UUID/label — `/etc/fstab`, `blkid`, `lsblk -f`  
+
+🟥 **5.3** - **LVM**   
+🟥 **5.3.1** — Groupes de volumes — `vgcreate`, `vgextend`, `vgs`  
+🟥 **5.3.2** — Volumes logiques — `lvcreate`, `lvremove`, `lvs`  
+🟥 **5.3.3** — Montage au démarrage par UUID/label — `/etc/fstab`, `blkid`, `lsblk -f`  
+
 🟥 **5.6** — Ajout non destructif de partitions, LV et swap — `mkswap`, `swapon`, `swapoff`  
 
 > 💡 RHEL 10 : GPT recommandé par défaut — privilégier `parted` sur `fdisk`
