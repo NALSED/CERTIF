@@ -154,38 +154,12 @@ timedatectl set-time TIME
 timedatectl set-timezone
 
 === CHRONYD ===
+ # Tracking
+chronyc tracking
 
-
+# Sources NTP
+chronyc sources
 ````
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ---
 
 ## 7.5 — Gestion des paquetages — dnf install, dnf update, rpm -ivh
