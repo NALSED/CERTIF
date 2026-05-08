@@ -102,5 +102,5 @@ echo $red
 ---
 ---
 
-# **EXO** => [liens]()
+# **EXO** => [liens Exercices](https://github.com/NALSED/CERTIF/tree/main/RHCSA/PRACTICE/EXO/SCRIPT)
 
