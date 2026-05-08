@@ -14,7 +14,7 @@ Certification : *Red Hat Certified System Administrator*
 
 🟩 Section 1 — Outils essentiels  
 🟨 Section 2 — Gestion des logiciels  
-🟥 Section 3 — Scripts shell  
+🟦 Section 3 — Scripts shell  
 🟩 Section 4 — Systèmes en cours d'exécution  
 🟥 Section 5 — Stockage local  
 🟥 Section 6 — Systèmes de fichiers  
