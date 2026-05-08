@@ -77,7 +77,7 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 5. 💾 Configurer le stockage local
 
-🟥 **5.1** — Partitions GPT — `fdisk`, `gdisk`, `parted`  
+🟨 **5.1** — Partitions GPT — `fdisk`, `gdisk`, `parted`  
 
 🟥 **5.3** - **=== LVM ===**   
 🟥 **5.3.1** — Volumes physiques LVM — `pvcreate`, `pvremove`, `pvs` 
