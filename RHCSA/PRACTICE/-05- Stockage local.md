@@ -16,6 +16,15 @@ Solution de gestion de stockage avancée introduite sur RHEL 8, orientée simpli
 
 # 5.1 — Partitions GPT / MBR — fdisk, gdisk, parted
 
+`[INTRO]`
+
+=> Outils de partitionnement
+- **fdisk** — outil interactif historique, MBR uniquement.
+- **gdisk** — même logique que fdisk mais pour GPT.
+- **parted** — outil recommandé par Red Hat sur RHEL 10, supporte MBR et GPT, chaque commande est appliquée immédiatement.
+
+---
+
 `[NOTE]`
 
 - Différences partition **MBR** et **GPT**
