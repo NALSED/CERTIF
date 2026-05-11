@@ -93,7 +93,7 @@ Certification : *Red Hat Certified System Administrator*
 ## 6. 📂 Créer et configurer des systèmes de fichiers
 
 🟨 **6.1** — Créer/monter/démonter `vfat`, `ext4`, `xfs` — `mkfs.*`, `mount`, `umount`  
-🟨 **6.2.** — Montage au démarrage par `UUID/label` — `/etc/fstab`, `blkid`, `lsblk -f`  
+🟨 **6.2.** — Montage au démarrage par `UUID/label` — `/etc/fstab`, `blkid`, `lsblk -f`, systemd   
 🟥 **6.3** — Systèmes de fichiers réseau NFS — `mount -t nfs`, `/etc/fstab`  
 🟥 **6.4** — Configurer autofs — `/etc/auto.master`, `/etc/auto.*`  
 🟥 **6.5** — Étendre des volumes logiques — `lvextend`, `resize2fs`, `xfs_growfs`  
