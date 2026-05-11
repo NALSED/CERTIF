@@ -77,13 +77,12 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 5. 💾 Configurer le stockage local
 
-🟨 **5.1** — Partitions GPT / MBR — `fdisk`, `gdisk`, `parted`  
+🟦 **5.1** — Partitions GPT / MBR — `fdisk`, `gdisk`, `parted`  
 
 🟥 **5.2** - **=== LVM ===**   
 🟥 **5.2.1** — Volumes physiques LVM — `pvcreate`, `pvremove`, `pvs` 
 🟥 **5.2.2** — Groupes de volumes — `vgcreate`, `vgextend`, `vgs`  
 🟥 **5.2.3** — Volumes logiques — `lvcreate`, `lvremove`, `lvs`  
-🟥 **5.2.4** — Montage au démarrage par UUID/label — `/etc/fstab`, `blkid`, `lsblk -f`  
 
 🟥 **5.3** — Ajout non destructif de partitions, LV et swap — `mkswap`, `swapon`, `swapoff`  
 
@@ -93,11 +92,12 @@ Certification : *Red Hat Certified System Administrator*
 
 ## 6. 📂 Créer et configurer des systèmes de fichiers
 
-🟥 **6.1** — Créer/monter/démonter `vfat`, `ext4`, `xfs` — `mkfs.*`, `mount`, `umount`  
-🟥 **6.2** — Systèmes de fichiers réseau NFS — `mount -t nfs`, `/etc/fstab`  
-🟥 **6.3** — Configurer autofs — `/etc/auto.master`, `/etc/auto.*`  
-🟥 **6.4** — Étendre des volumes logiques — `lvextend`, `resize2fs`, `xfs_growfs`  
-🟥 **6.5** — Problèmes de permissions — `ls -lZ`, `stat`, contexte SELinux  
+🟨 **6.1** — Créer/monter/démonter `vfat`, `ext4`, `xfs` — `mkfs.*`, `mount`, `umount`  
+🟨 **6.2.** — Montage au démarrage par UUID/label — /etc/fstab, blkid, lsblk -f  
+🟥 **6.3** — Systèmes de fichiers réseau NFS — `mount -t nfs`, `/etc/fstab`  
+🟥 **6.4** — Configurer autofs — `/etc/auto.master`, `/etc/auto.*`  
+🟥 **6.5** — Étendre des volumes logiques — `lvextend`, `resize2fs`, `xfs_growfs`  
+🟥 **6.6** — Problèmes de permissions — `ls -lZ`, `stat`, contexte SELinux  
 
 ---
 
