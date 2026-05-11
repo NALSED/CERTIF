@@ -18,15 +18,6 @@ Solution de gestion de stockage avancée introduite sur RHEL 8, orientée simpli
 
 `[INTRO]`
 
-=> Outils de partitionnement
-- **fdisk** — outil interactif historique, MBR uniquement.
-- **gdisk** — même logique que fdisk mais pour GPT.
-- **parted** — outil recommandé par Red Hat sur RHEL 10, supporte MBR et GPT, chaque commande est appliquée immédiatement.
-
----
-
-`[NOTE]`
-
 - Différences partition **MBR** et **GPT**
 
 | | MBR | GPT |
@@ -37,12 +28,63 @@ Solution de gestion de stockage avancée introduite sur RHEL 8, orientée simpli
 | UEFI | ✗ | ✓ obligatoire |
 | BIOS legacy | ✓ | ✓ (compatible) |
 
+### => Outils de partitionnement
+
+- **fdisk** — outil interactif historique, MBR et GPT.
+- **gdisk** — Spécialisé GPT.
+- **parted** — outil recommandé par Red Hat sur RHEL 10, supporte MBR et GPT.
+
+⚠️ La grosse différence, c'est que `parted` écrit immédiatement quand la commande est lancée, alors que `fdisk` et `gdisk` ont besoin de l'option **w** pour écrire la partition. ⚠️
+
+
 ---
 
 **- Commandes Disk**
 ````
 # List block devices
 lsblk
+````
+
+---
+
+### **=== FDISK ===**
+
+**Syntaxe**
+````
+fdisk /dev/DISQUE DE DESTINATION
+````
+
+- `m` pour help puis suivre les instruction
+ 
+---
+
+
+### **=== GDISK ===**
+
+`[NOTE]`
+Son utilité historique :
+
+Quand fdisk ne supportait pas encore GPT, gdisk était le seul outil en ligne de commande avec la logique "écriture à la confirmation (w)" pour le GPT.
+
+---
+
+
+### **=== PARTED ===**
+
+- `parted` fait la même chose que `fdisk` en une seul ligne et les commandes sont donc scriptable.
+Attention pas de demande de confirmation.
+
+ **=== Principales commandes ===**
+````
+# liste tous les disques et partitions
+parted --list
+
+# initialise la table de partition
+parted /dev/sdb mklabel LABEL (gpt / dos / etc...)
+
+# crée de partition avec systeme de fichier
+parted /dev/sdb mkpart primary ext4 1MiB  10GiB  # partition 1
+parted /dev/sdb mkpart primary ext4 10GiB 20GiB  # partition 2
 ````
 
 
