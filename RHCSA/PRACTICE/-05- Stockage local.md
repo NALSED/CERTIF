@@ -90,6 +90,7 @@ parted /dev/sdb mkpart primary 10GiB 20GiB  # partition 2
 ### **Etape suivante**
 
 -  Création d'un systeme de fichier, voir Section 6 de la progression RHCSA.
+[ICI](https://github.com/NALSED/CERTIF/blob/main/RHCSA/PRACTICE/-06-%20Syst%C3%A8mes%20de%20fichiers.md)
 
 ---
 ---
