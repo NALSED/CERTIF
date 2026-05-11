@@ -58,8 +58,9 @@ lsof /POINT DE MONTAGE
 ---
 
 
-# 6.2 Montage au démarrage par UUID/label — /etc/fstab, blkid, lsblk -f
+# 6.2 Montage au démarrage par UUID/label — /etc/fstab, blkid, lsblk -f, systemd
 
+### **/etc/fstab**
 
 `[INTRO]`
 
@@ -94,6 +95,42 @@ blkid
 blkid | grep "sdDEVICE" | awk '{print $2}' >> /etc/fstab
 ````
 ---
+
+### **systemd**
+
+- Alternative à fstab => `avantage` :
+
+  - Dépendances — conditionner le démarrage d'un service à la disponibilité du point de montage.
+
+  - Target — intégration native dans le système de targets systemd.
+
+  - Logs — journalctl pour déboguer un montage raté, plus lisible que fstab.
+
+  - Montage à la demande — possible via .automount
+
+- Les points de montages fstab sont converti en points demontage `systemd`, présent dans le fichier `run/systemd/generator`
+ou alors sous le format : point de montage.mount
+````
+/mnt/ext4/sdb1
+
+deviens :
+mnt-ext4-sdb1.mount
+````
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
