@@ -83,11 +83,13 @@ parted --list
 parted /dev/sdb mklabel LABEL (gpt / dos / etc...)
 
 # crée de partition avec systeme de fichier
-parted /dev/sdb mkpart primary ext4 1MiB  10GiB  # partition 1
-parted /dev/sdb mkpart primary ext4 10GiB 20GiB  # partition 2
+parted /dev/sdb mkpart primary 1MiB  10GiB  # partition 1
+parted /dev/sdb mkpart primary 10GiB 20GiB  # partition 2
 ````
 
+### **Etape suivante**
 
+-  Création d'un systeme de fichier, voir Section 6 de la progression RHCSA.
 
 ---
 ---
