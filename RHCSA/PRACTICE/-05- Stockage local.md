@@ -114,7 +114,6 @@ parted /dev/sdb mkpart primary 10GiB 20GiB  # partition 2
 
 ---
 
-# 5.2.4 — Montage au démarrage par UUID/label — /etc/fstab, blkid, lsblk -f
 
 ---
 ---
