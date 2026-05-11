@@ -7,8 +7,6 @@
 
 - Différences partition **MBR** et **GPT**
 
-# MBR vs GPT
-
 | | MBR | GPT |
 |---|---|---|
 | Année | Ancien (1983) | Moderne (années 2000) |
