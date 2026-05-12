@@ -179,7 +179,21 @@ xfs_growfs /POINT_DE_MONTAGE
 <============>
 
 ````
-# Suppression PV
+````
+# Démonter le point de montage
+umount POINT_DE_MONTAGE
+
+# Déplacer les data
+pvmove -v /dev/sdx2 /dev/sdx1
+
+# Supprimer le VG
+vgreduce NOM_VG /dev/sdx1
+
+#Supprimer le PV
+pvremove /dev/sdx1
+````
+
+
 ````
 
 
@@ -277,6 +291,19 @@ xfs_growfs /mnt/lvm
 ### - 3) `Supprimer`  
 
 
+````
+# Démonter le point de montage
+umount /mnt/lvm
+
+# Déplacer les data
+pvmove -v /dev/sdc2 /dev/sdc1
+
+# Supprimer le VG
+vgreduce vg_data /dev/sdc1
+
+#Supprimer le PV
+pvremove /dev/sdc1
+````
 
 
 
