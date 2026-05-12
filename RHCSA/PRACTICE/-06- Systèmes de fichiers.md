@@ -116,22 +116,6 @@ ou alors sous le format : point de montage.mount
 deviens :
 mnt-ext4-sdb1.mount
 ````
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ---
 
