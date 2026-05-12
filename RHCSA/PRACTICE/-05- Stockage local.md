@@ -129,22 +129,75 @@ Pour allez plus loin => [ICI](https://github.com/NALSED/TUTO/tree/main/PERSO/SAU
 
 ---
 
+- Le flux est expliqué plus en détail ci dessous, mais pour résumé
+````
+# Création du Physical Volume
+pvcreate /dev/sdc1
+
+# Création du Group Volume
+vgcreate NOM_DU_GROUPE /dev/sdc1
+
+# Création du volume logique
+lvcreate -L TAILLE -n NAME /dev/NOM_DU_GROUPE 
+
+# Créer le systeme de fichier
+mkfs.ext4 /dev/NOM_DU_GROUPE/NAME
+
+# Créer un point de montage
+mkdir /mnt/monpoint
+
+# Le rendre persistant dans fstab
+````
 
 ---
 ---
 
-
+- Pour les prochaine partie je vais illustrer la création et l'administration par un exemple sur ma machine
 
 # 5.2.1 — Volumes physiques LVM — pvcreate, pvremove, pvs
 
+### **Création**
+````
+# Créer la partition
+fdisk /dev/sdc
+````
+
+
+### **Administration**
+````
+
+````
 
 ---
 
 # 5.2.2 — Groupes de volumes — vgcreate, vgextend, vgs
 
+### **Création**
+````
+
+````
+
+
+### **Administration**
+````
+
+````
+
 ---
 
 # 5.2.3 — Volumes logiques — lvcreate, lvremove, lvs
+
+
+### **Création**
+````
+
+````
+
+
+### **Administration**
+````
+
+````
 
 ---
 
