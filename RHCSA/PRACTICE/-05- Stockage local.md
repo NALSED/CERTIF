@@ -96,7 +96,6 @@ parted /dev/sdb mkpart primary 10GiB 20GiB  # partition 2
 ---
 
 # 5.2 - LVM
-# 5.2 - LVM
 
 `[INTRO]`
 
@@ -162,7 +161,7 @@ vgextend NOM_GROUPE NOM_DU_DEVICE
 # Etendre le LV
 
 # 1) Partition non monté
-lvextend -r -l +50%FREE  /dev/NOM_DU_VG/NOM_DU_LV # -r automatise le resize, si oublie xfs_grow (xfs) ou resize2fs (ext4)
+lvextend -r -l 50%FREE  /dev/NOM_DU_VG/NOM_DU_LV # -r automatise le resize, si oublie xfs_grow (xfs) ou resize2fs (ext4)
 mount /dev/NOM_DU_VG/NOM_DU_LV /POINT_DE_MONTAGE
 
 # 2) Partition monté
@@ -304,13 +303,6 @@ vgreduce vg_data /dev/sdc1
 #Supprimer le PV
 pvremove /dev/sdc1
 ````
-
-
-
-
-
-
-
 
 ---
 ---
