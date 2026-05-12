@@ -119,3 +119,62 @@ parted /dev/sdb mkpart primary 10GiB 20GiB  # partition 2
 ---
 
 # 5.3 — Ajout non destructif de partitions, LV et swap — mkswap, swapon, swapoff
+
+-  Création d'une partion swap via fdisk :
+**Etapes**
+````
+# -1- Avec fdisk création de la partion
+# Comme pour une partion classique utiliser l'option 'n'
+
+# Donner un type de partition
+t => swap
+
+# créer la fartion swap
+mkswap /dev/sdb7
+
+# Récupérer l'UUID et l'envoyer dans /etc/fstab
+blkid /dev/sdb7 | grep "UUID" | awk '{print $2}' >> /etc/fstab
+ 
+# Incription à /etc/fstab
+UUID none swap defaults 0 0
+
+# Activation
+swapon /dev/sdb7
+````
+
+- Vérification
+````
+swapon --show
+
+free -h
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
