@@ -96,6 +96,7 @@ parted /dev/sdb mkpart primary 10GiB 20GiB  # partition 2
 ---
 
 # 5.2 - LVM
+# 5.2 - LVM
 
 `[INTRO]`
 
@@ -150,8 +151,10 @@ mkdir /mnt/monpoint
 # Le rendre persistant dans fstab
 ````
 
+<============>
+
 ````
-=== Extention VG et LV ===
+=== Redimentionner VG et LV ===
 # Avoir une partition disponible 
 # Etendre le VG
 vgextend NOM_GROUPE NOM_DU_DEVICE
@@ -173,94 +176,114 @@ resize2fs /DEVICE
 xfs_growfs /POINT_DE_MONTAGE
 ````
 
----
----
+<============>
 
-- Pour les prochaine partie je vais illustrer la création et l'administration par un exemple sur ma machine
-
-# 5.2.1 — Volumes physiques LVM — pvcreate, pvremove, pvs
-
-### **Création**
 ````
-# Créer la partition
-fdisk /dev/sdc n + t
+# Suppression PV
+````
 
-# Création du Physical Volume
+
+
+---
+
+
+## **[EXEMPLE]**
+
+### - 1) `Création`
+
+-1.1- création de la partition
+````
+fdisk /dev/sdc n + t + w # n => nouvelle partition / t => type , ici lvm (optionel mais fait partie des bonnes pratiques) / w => write
+````
+
+-1.2- Création du `PV` => `Physical Volume`
+````
 pvcreate /dev/sdc1
 ````
 
-
-### **Administration**
+-1.3- Création du `VG` => `Volum Group`
+````
+vgcreate vg_data /dev/sdc1
 ````
 
+-1.4- Création du `LV` => `Logical Volume`
+````
+# Création par Taille => -L
+lvcreate -L 10G -n lv_data vg_data
+
+# Création la % d'espace du groupe => -l
+lvcreate -l 50%FREE -n lv_data vg_data
+````
+
+-1.5- Création du systeme de fichier
+````
+mkfs.ext4 /dev/vg_data/lv_data
+````
+
+-1.6- Créer un point de montage
+````
+mkdir /mnt/lvm
+````
+
+-1.7- (Optionel) Inscription à fstab
+⚠️ Bien récupérer `UUID` de /dev/mapper, du volume concerné et pas /dev/sdc1 ⚠️
+````
+# Récupérer l'UUID et l'envoyer à /etc/fstab
+blkid /dev/mapper/vg_data/lv_data | grep "UUID" | awk '{print $2}' >> /etc/fstab
+
+# Editer /etc/fstab
+vim /etc/fstab
+
+UUID /mnt/lvm ext4 defaults 0 0 
 ````
 
 ---
+ 
+### - 2) `Redimentionner`
 
-# 5.2.2 — Groupes de volumes — vgcreate, vgextend, vgs
+- On se servira de l'exemple précédent comme base
 
-### **Création**
+-2.1- Créer un partition ou utiliser un volume disponible
+
+-2.2- Etendre le `VG` sur le volume disponible
 ````
-# Création du Volume Group
-vgcreate data_groupe /dev/sdc1
-````
-
-
-### **Administration**
-````
-# Pour etendre un groupe sur une partition
-vgextend vg_sdc2 /dev/sdc4
+vgextend vg_data /dev/sdd1
 ````
 
----
+-2.3- Etendre le `LV`
 
-# 5.2.3 — Volumes logiques — lvcreate, lvremove, lvs
-
-
-### **Création**
+`=== Volume non monté ===`
 ````
-# Création du Logical volume
-lvcreate -L 1G -n data_logique /dev/data_groupe
+# Par taille
+lvextend -r -L +5G /dev/vg_data/lv_data
+mount /dev/vg_data/lv_data /mnt/lvm
+# Par %
+lvextend -r -l 50%FREE /dev/vg_data/lv_data
+ ````
 
-# Création du systeme de fichier
-mkfs.ext4 /dev/data_groupe/data_logique
+`=== Volume monté ===`
 ````
-### **Persistance**
-````
-# Création du point de montage
-mkdir /lvm
+# Les deux options -L et -l sont possible
+lvextend -L +5G /dev/vg_data/lv_data
 
-#récupération de l'UUID (bien prendre l'UUID de /dev/mapper/x , pas /dev/sdc1)
-blkid /dev/mapper/data_groupe-data_logique | grep "UUID" | awk '{print $2}' >>
-/etc/fstab
+# !!! Attention !!!
+# Si etx4 (c'est le cas ICI)
+resize2fs /dev/vg_data/lv_data
 
-# Edition de /etc/fstab
-# === LVM ===
-#lv1
-UUID="b13767fa-cca3-4711-836c-404e65f7c8a0" /lvm ext4 defaults 0 0
-
-# Monter la partion LVM
-mount /dev/mapper/data_groupe-data_logique /lvm
-
-# Test
-lsblk
-# Sortie Attendu
-sdc                            8:32   0   10G  0 disk
-└─sdc1                         8:33   0    5G  0 part
-  └─data_groupe-data_logique 253:2    0    1G  0 lvm  /lvm <======= OK 
+#si xfs
+xfs_growfs /mnt/lvm
 ````
 
-### **Administration**
-````
-# Etendre la Logical Volume
-# === PARTITION NON MONTÉE ===
-lvextend -r -l +50%FREE /dev/vg_sdc2/lv_sdc2   # fsck + resize automatique
-mount /dev/vg_sdc2/lv_sdc2 /lvm/resize
+### - 3) `Supprimer`  
 
-# === PARTITION MONTÉE ===
-lvextend -l +50%FREE /dev/vg_sdc2/lv_sdc2       # étend le LV sans toucher le FS
-resize2fs /dev/vg_sdc2/lv_sdc2                  # redimensionne le FS à chaud
-````
+
+
+
+
+
+
+
+
 
 ---
 ---
