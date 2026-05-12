@@ -79,12 +79,12 @@ Certification : *Red Hat Certified System Administrator*
 
 🟦 **5.1** — Partitions GPT / MBR — `fdisk`, `gdisk`, `parted`  
 
-🟥 **5.2** - **=== LVM ===**   
-🟥 **5.2.1** — Volumes physiques LVM — `pvcreate`, `pvremove`, `pvs` 
-🟥 **5.2.2** — Groupes de volumes — `vgcreate`, `vgextend`, `vgs`  
-🟥 **5.2.3** — Volumes logiques — `lvcreate`, `lvremove`, `lvs`  
+🟩  **5.2** - **=== LVM ===**   
+🟩  **5.2.1** — Volumes physiques LVM — `pvcreate`, `pvremove`, `pvs` 
+🟩  **5.2.2** — Groupes de volumes — `vgcreate`, `vgextend`, `vgs`  
+🟩  **5.2.3** — Volumes logiques — `lvcreate`, `lvremove`, `lvs`  
 
-🟥 **5.3** — Ajout non destructif de partitions, LV et swap — `mkswap`, `swapon`, `swapoff`  
+🟦 **5.3** — Ajout non destructif de partitions, LV et swap — `mkswap`, `swapon`, `swapoff`  
 
 > 💡 RHEL 10 : GPT recommandé par défaut — privilégier `parted` sur `fdisk`
 
@@ -96,8 +96,7 @@ Certification : *Red Hat Certified System Administrator*
 🟨 **6.2.** — Montage au démarrage par `UUID/label` — `/etc/fstab`, `blkid`, `lsblk -f`, systemd   
 🟥 **6.3** — Systèmes de fichiers réseau NFS — `mount -t nfs`, `/etc/fstab`  
 🟥 **6.4** — Configurer autofs — `/etc/auto.master`, `/etc/auto.*`  
-🟥 **6.5** — Étendre des volumes logiques — `lvextend`, `resize2fs`, `xfs_growfs`  
-🟥 **6.6** — Problèmes de permissions — `ls -lZ`, `stat`, contexte SELinux  
+🟥 **6.5** — Problèmes de permissions — `ls -lZ`, `stat`, contexte SELinux  
 
 ---
 
