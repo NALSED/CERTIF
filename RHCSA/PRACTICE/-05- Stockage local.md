@@ -191,11 +191,6 @@ vgreduce NOM_VG /dev/sdx1
 pvremove /dev/sdx1
 ````
 
-
-````
-
-
-
 ---
 
 
