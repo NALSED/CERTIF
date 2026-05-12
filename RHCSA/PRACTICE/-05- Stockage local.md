@@ -150,7 +150,7 @@ mkdir /mnt/monpoint
 # Le rendre persistant dans fstab
 ````
 
-<============>
+**<============>**
 
 ````
 === Redimentionner VG et LV ===
@@ -175,9 +175,8 @@ resize2fs /DEVICE
 xfs_growfs /POINT_DE_MONTAGE
 ````
 
-<============>
+**<============>**
 
-````
 ````
 # Démonter le point de montage
 umount POINT_DE_MONTAGE
