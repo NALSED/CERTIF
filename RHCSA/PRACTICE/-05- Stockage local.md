@@ -132,10 +132,10 @@ Pour allez plus loin => [ICI](https://github.com/NALSED/TUTO/tree/main/PERSO/SAU
 - Le flux est expliqué plus en détail ci dessous, mais pour résumé
 ````
 # Création du Physical Volume
-pvcreate /dev/sdc1
+pvcreate /dev/sdx
 
 # Création du Group Volume
-vgcreate NOM_DU_GROUPE /dev/sdc1
+vgcreate NOM_DU_GROUPE /dev/sdx
 
 # Création du volume logique
 lvcreate -L TAILLE -n NAME /dev/NOM_DU_GROUPE 
@@ -159,7 +159,10 @@ mkdir /mnt/monpoint
 ### **Création**
 ````
 # Créer la partition
-fdisk /dev/sdc
+fdisk /dev/sdc n + t
+
+# Création du Physical Volume
+pvcreate /dev/sdc1
 ````
 
 
@@ -174,7 +177,8 @@ fdisk /dev/sdc
 
 ### **Création**
 ````
-
+# Création du Volume Group
+vgcreate data_groupe /dev/sdc1
 ````
 
 
@@ -190,9 +194,36 @@ fdisk /dev/sdc
 
 ### **Création**
 ````
+# Création du Logical volume
+lvcreate -L 1G -n data_logique /dev/data_groupe
 
+# Création du systeme de fichier
+mkfs.ext4 /dev/data_groupe/data_logique
 ````
+### **Persistance**
+````
+# Création du point de montage
+mkdir /lvm
 
+#récupération de l'UUID (bien prendre l'UUID de /dev/mapper/x , pas /dev/sdc1)
+blkid /dev/mapper/data_groupe-data_logique | grep "UUID" | awk '{print $2}' >>
+/etc/fstab
+
+# Edition de /etc/fstab
+# === LVM ===
+#lv1
+UUID="b13767fa-cca3-4711-836c-404e65f7c8a0" /lvm ext4 defaults 0 0
+
+# Monter la partion LVM
+mount /dev/mapper/data_groupe-data_logique /lvm
+
+# Test
+lsblk
+# Sortie Attendu
+sdc                            8:32   0   10G  0 disk
+└─sdc1                         8:33   0    5G  0 part
+  └─data_groupe-data_logique 253:2    0    1G  0 lvm  /lvm <======= OK 
+````
 
 ### **Administration**
 ````
