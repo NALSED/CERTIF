@@ -127,8 +127,4 @@ mnt-ext4-sdb1.mount
 
 ---
 
-# 6.5 — Étendre des volumes logiques — lvextend, resize2fs, xfs_growfs
-
----
-
-# 6.6 — Problèmes de permissions — ls -lZ, stat, contexte SELinux
+# 6.5 — Problèmes de permissions — ls -lZ, stat, contexte SELinux
