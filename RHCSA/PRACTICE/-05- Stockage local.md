@@ -129,8 +129,9 @@ Pour allez plus loin => [ICI](https://github.com/NALSED/TUTO/tree/main/PERSO/SAU
 
 ---
 
-- Le flux est expliqué plus en détail ci dessous, mais pour résumé
+- Résumé des flux :
 ````
+=== Création ===
 # Création du Physical Volume
 pvcreate /dev/sdx
 
@@ -138,7 +139,7 @@ pvcreate /dev/sdx
 vgcreate NOM_DU_GROUPE /dev/sdx
 
 # Création du volume logique
-lvcreate -L TAILLE -n NAME /dev/NOM_DU_GROUPE 
+lvcreate -L TAILLE -n NAME NOM_DU_GROUPE 
 
 # Créer le systeme de fichier
 mkfs.ext4 /dev/NOM_DU_GROUPE/NAME
@@ -147,6 +148,29 @@ mkfs.ext4 /dev/NOM_DU_GROUPE/NAME
 mkdir /mnt/monpoint
 
 # Le rendre persistant dans fstab
+````
+
+````
+=== Extention VG et LV ===
+# Avoir une partition disponible 
+# Etendre le VG
+vgextend NOM_GROUPE NOM_DU_DEVICE
+
+# Etendre le LV
+
+# 1) Partition non monté
+lvextend -r -l +50%FREE  /dev/NOM_DU_VG/NOM_DU_LV # -r automatise le resize, si oublie xfs_grow (xfs) ou resize2fs (ext4)
+mount /dev/NOM_DU_VG/NOM_DU_LV /POINT_DE_MONTAGE
+
+# 2) Partition monté
+# !!! le resize en fonction du systeme de fichier se fait après !!!
+lvextend -L +10G /dev/NOM_DU_VG/NOM_DU_LV
+
+# ext4
+resize2fs /DEVICE
+
+# xfs
+xfs_growfs /POINT_DE_MONTAGE
 ````
 
 ---
@@ -184,7 +208,8 @@ vgcreate data_groupe /dev/sdc1
 
 ### **Administration**
 ````
-
+# Pour etendre un groupe sur une partition
+vgextend vg_sdc2 /dev/sdc4
 ````
 
 ---
@@ -227,11 +252,15 @@ sdc                            8:32   0   10G  0 disk
 
 ### **Administration**
 ````
+# Etendre la Logical Volume
+# === PARTITION NON MONTÉE ===
+lvextend -r -l +50%FREE /dev/vg_sdc2/lv_sdc2   # fsck + resize automatique
+mount /dev/vg_sdc2/lv_sdc2 /lvm/resize
 
+# === PARTITION MONTÉE ===
+lvextend -l +50%FREE /dev/vg_sdc2/lv_sdc2       # étend le LV sans toucher le FS
+resize2fs /dev/vg_sdc2/lv_sdc2                  # redimensionne le FS à chaud
 ````
-
----
-
 
 ---
 ---
@@ -266,33 +295,5 @@ swapon --show
 
 free -h
 ````
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
