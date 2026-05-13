@@ -17,3 +17,23 @@ systemctl status httpd
 ````
 cd /etc/httpd/conf/httpd.conf
 ````
+
+4) Autorisation firewalld
+````
+firwall-cmd --list-services
+
+firwall-cmd --add-services=http
+firwall-cmd --add-services=https
+
+firewal-cmd --reload
+````
+
+5) Editer le fichier `/var/www/html/index.html`
+````
+vim /var/www/html/index.html
+````
+
+6) test
+````
+curl http://localhost
+````
