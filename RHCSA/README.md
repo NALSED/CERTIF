@@ -18,7 +18,7 @@ Certification : *Red Hat Certified System Administrator*
 🟩 Section 4 — Systèmes en cours d'exécution  
 🟩 Section 5 — Stockage local  
 🟥 Section 6 — Systèmes de fichiers  
-🟨 Section 7 — Déploiement et gestion  
+🟩 Section 7 — Déploiement et gestion  
 🟦 Section 8 — Réseau  
 🟦 Section 9 — Utilisateurs et groupes  
 🟨 Section 10 — Sécurité  
@@ -31,7 +31,7 @@ Certification : *Red Hat Certified System Administrator*
 
 🟦 **1.1** — Accéder à une invite shell et écrire des commandes — *Bash 5.x par défaut*  
 🟦 **1.2** — Redirection des entrées/sorties — `>` `>>` `<` `2>` `|` `tee`  
-🟩 **1.3** — Outils de texte    
+🟩 **1.3** — Outils de texte  `cut`, `tr`, `awk`, `sed`, `grep`  
 🟦 **1.4** — Accès distant via `ssh` — *OpenSSH 9.x, ED25519 privilégié*  
 🟦 **1.5** — Changer d'utilisateur — `su`, `su -`, `sudo`  
 🟩 **1.6** — Archiver et compresser — `tar`, `gzip`, `bzip2`, `xz`  
@@ -107,7 +107,6 @@ Certification : *Red Hat Certified System Administrator*
 🟦 **7.4** — Services de temps — `chronyc`, `timedatectl`, `/etc/chrony.conf`  
 🟦 **7.5** — Gestion des paquetages — `dnf install`, `dnf update`, `rpm -ivh`  
 🟩 **7.6** — Chargeur de démarrage —`/etc/default/grub`, `grub2-mkconfig`  
-🟥 **7.7** — Interrompre le démarrage pour accès root — `GRUB → rd.break` / `init=/bin/bash`
 
 > 💡 `systemd timers` = objectif explicite RHEL 10 — `OnCalendar=`, `systemctl list-timers`
 
@@ -144,7 +143,7 @@ Certification : *Red Hat Certified System Administrator*
 🟥 **10.4.4** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
 🟥 **10.4.5** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
 
-🟥 **10.5** — `Mot de passe root` au boot  
+🟥 **10.5** — `Mot de passe root` au boot  `GRUB → rd.break` / `init=/bin/bash`
 
 > 🔐 SELinux en mode **enforcing par défaut** sur RHEL 10 — ne jamais le désactiver !
 
