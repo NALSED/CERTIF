@@ -136,12 +136,15 @@ Certification : *Red Hat Certified System Administrator*
 🟦 **10.1** — Pare-feu firewalld  
 🟦 **10.2** — Permissions par défaut des fichiers — `umask`, `chmod`  
 🟦 **10.3** — gestion SSH  
-🟥 **10.4** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
-🟥 **10.5** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
-🟥 **10.6** — Restaurer les contextes — `restorecon -Rv`, `semanage fcontext`  
-🟥 **10.7** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
-🟥 **10.8** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
-🟥 **10.9** — `Mot de passe root` au boot  
+
+🟥 **10.4** — **SELinux**  
+🟥 **10.4.1** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
+🟥 **10.4.2** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
+🟥 **10.4.3** — Restaurer les contextes — `restorecon -Rv`, `semanage fcontext`  
+🟥 **10.4.4** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
+🟥 **10.4.5** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
+
+🟥 **10.5** — `Mot de passe root` au boot  
 
 > 🔐 SELinux en mode **enforcing par défaut** sur RHEL 10 — ne jamais le désactiver !
 
