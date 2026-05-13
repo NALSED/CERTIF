@@ -352,4 +352,27 @@ root@client:/homes/ldapuser1#
 
 ---
 
+# `[RESUME]`
+
+1) `/etc/auto.master`
+````
+vim /etc/auto.master
+
+/REPERTOIRE ou l'on trouvera le partage /etc/SOUS_FICHIER
+/nfsdata                                /etc/auto.nfs
+````
+
+2) `/etc/auto.EDITER DANS auto.master`
+````
+# Fichier de partage
+NOM_DU_REPERTOIRE_DU_PARTAGE      DROIT      NOM_DU_SERVEUR:/PARTAGE_NFS_SERVEUR 
+file                              -rw        serveur:/nfsdata
+
+# Fichier /home
+WILDCARD      DROIT      NOM_DU_SERVEUR:/PARTAGE_NFS_SERVEUR/&
+*             -rw        serveur:/home/ldap/&
+````
+
+---
+
 # 6.5 — Problèmes de permissions — ls -lZ, stat, contexte SELinux
