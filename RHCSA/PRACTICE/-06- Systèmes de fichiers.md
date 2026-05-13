@@ -123,8 +123,7 @@ mnt-ext4-sdb1.mount
 
 `[NOTE]`
 
-- La configuration du serveur n'est pas au programme, mais voici la marche à suivre pour l'implémenté. Cette étape servira à travailler sur un serveur NFS
-
+Les prérequis sont disponible dans les menus déroulants ci dessous, la partie `NFS`, commence après.
 
 
 <details>
@@ -294,14 +293,9 @@ serveur:/nfsdata on /mnt type nfs4 (rw,relatime,vers=4.2,rsize=1048576,wsize=104
 ````
 
 
-
----
-
 **Configurer autofs — /etc/auto.master, /etc/auto.***
 
-`[NOTE]`
-
-- Flux :
+`Fichier partagé`
 
 1. Installer le paquet `autofs`
 
@@ -312,20 +306,49 @@ serveur:/nfsdata on /mnt type nfs4 (rw,relatime,vers=4.2,rsize=1048576,wsize=104
 
 3. Créer `/etc/auto.nfsdata` — définir le sous-répertoire et le partage NFS
 ````
-
-files -rw serveur/nfsdata
+files -rw serveur:/nfsdata
 ````
 
 4. Activer et démarrer le service `autofs`
+````
+systemctl enable --now autofs
+# ou si déjà actif après modif
+systemctl reload autofs
+````
 
 5. Tester en accédant au répertoire
- 
+````
+# Sur le client
+cd /nfsdata/files
+ls
+````
 
+`Fichier /home`
 
+1. Editer `/etc/auto.master`
+````
+/homes /etc/auto.homes
+````
 
+2. Créer / Editer `/etc/auto.homes`
+````
+* -rw serveur:/home/ldappuser/&
+```` 
 
+3. Activer et démarrer le service `autofs`
+````
+systemctl enable --now autofs
+# ou si déjà actif après modif
+systemctl reload autofs
+````
 
+4. Test
+````
+cd /homes/ldapuser1
+# résultat attendu
+root@client:/homes/ldapuser1#
 
+````
 
 ---
 
