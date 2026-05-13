@@ -172,7 +172,80 @@ yp
 ---
 ---
 
-# **1.3** — `grep` et expressions régulières — `grep -E`, `grep -F`
+# **1.3** — Outils de texte 
+
+## **HEAD / TAIL**
+
+- `head` => le haut d'un document
+
+- `tail` => le bas d'un document
+
+---
+
+## **CUT**
+
+- `cut` => Découpe selont des délimiteur un fichier
+````
+# Prend uniquement le premiere champs de /etc/passwd 
+cut -d : -f 1 /etc/passwd
+````
+
+---
+
+## **SORT**
+
+- `sort` => trie odre alphabétique
+````
+# Trie la sortie de cut
+cut -d : -f 1/etc/passwd | sort
+````
+
+---
+
+## **TR**
+`tr` => Remplace des caractéres par un autre
+````
+echo HELLO WORLD | tr '[:upper:]' '[:lower:]'
+hello world
+````
+
+---
+
+## **AWK**
+
+`awk` => de traitement de texte
+````
+# récupére le nom d'utilisateur de `/etc/passwd`
+awk -F: '{print $1}' /etc/passwd
+
+# extraire le UID dans /etc/passwd
+awk -F: '/bob/ {print $3}' /etc/passwd
+
+# Extraire l'UUID d'un blkid
+blkid /dev/sdb1 | awk '{print $2}'
+
+# Consomation CPU supérieur à 50%
+pas aux | awk '$3 > 50 {print $1, $3 }'
+
+````
+
+---
+
+## **SED**
+
+`sed` => Modification de texte en ligne de commande
+````
+# Remplacer un mot
+sed 's/ancien/nouveau/' fichier        # première occurrence par ligne
+sed 's/ancien/nouveau/g' fichier       # toutes les occurrences
+
+# Modifier uniquement la ligne de lolo
+sed -i '/lolo/s|/bin/bash|/sbin/nologin|' /etc/passwd
+````
+
+---
+
+## **GREP**
 [Regex](https://regex101.com/) et [Exercice](https://github.com/NALSED/CERTIF/tree/main/RHCSA/PRACTICE/EXO/GREP)
 
 - Syntaxe : `grep [OPTIONS] MOTIF [FICHIER...]`
