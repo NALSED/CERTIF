@@ -162,25 +162,94 @@ Protocole `rsync` natif non chiffré, utilisation implicite de SSH avec syntaxe 
 ---
 ---
 
-# **10.4** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
+**SELinux**
+
+`[INTRO]`
+
+# SELinux — Security Enhanced Linux
+ 
+- `SELinux` est une couche de sécurité supplémentaire intégrée au kernel Linux, développée par la NSA.
+
+- Les permissions Unix classiques (ugo/rwx) ne suffisent pas — SELinux ajoute un contrôle d'accès obligatoire (MAC).
+
+- Chaque fichier, processus et port reçoit un **contexte** — SELinux autorise ou refuse les accès selon une politique.
+
+- **Modes** — `enforcing` (actif et bloquant), `permissive` (actif mais log uniquement), `disabled` (désactivé).
+
+````
++-----------------------------------------------------------+
+|                        POLICY                             |
+|         (ensemble de règles chargées au boot)             |
+|                                                           |
+|  +--------------+    RULES     +-----------------------+  |
+|  |    SOURCE    |<------------>|       TARGET          |  |
+|  |              |  autorise ?  |                       |  |
+|  |   PROCESS    |              |  FILE / PORT / DIR    |  |
+|  |              |              |                       |  |
+|  | LABEL        |              | LABEL                 |  |
+|  | user:role:   |              | user:role:            |  |
+|  | type:level   |              | type:level            |  |
+|  |              |              |                       |  |
+|  | httpd_t      |              | httpd_sys_content_t   |  |
+|  +--------------+              | http_port_t (80/443)  |  |
+|                                +-----------------------+  |
+|                                                           |
+|  OK  : LABEL source + LABEL target + RULES = ACCES OK     |
+|  NKO  : LABEL incorrect = ACCES REFUSE => /var/log/audit  |
++-----------------------------------------------------------+
+````
+
+
+
 
 ---
+
+
+# **10.4.1** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
+
+
+- Pour voir le mode actuel
+
+````
+# === commande ===
+getenforce
+````
+
+- Changer entre `enforcing` et `permissive`
+````
+setenforce  enforcing / permissive
+reboot
+
+# === Par defaut ===
+vim /etc/sysconfig/selinux
+# Changer
+SELINUX=enforcing
+
+# === boot ===
+# ajouter au boot avec e
+enforcing=0 => permissive mode
+enforcing=1 => enforcing mode
+selinux=0 => arret de SELinux
+selinux=1 => activer SELinux
+````
+
+
 ---
 
-# **10.5** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
+# **10.4.2** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
+
 
 ---
----
 
-# **10.6** — Restaurer les contextes — `restorecon -Rv`, `semanage fcontext`  
+# **10.4.3** — Restaurer les contextes — `restorecon -Rv`, `semanage fcontext`  
 
----
----
-
-# **10.7** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
 
 ---
+
+# **10.4.4** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
+
+
 ---
 
-# **10.8** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
+# **10.4.5** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
 
