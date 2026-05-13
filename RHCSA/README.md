@@ -16,7 +16,7 @@ Certification : *Red Hat Certified System Administrator*
 🟨 Section 2 — Gestion des logiciels  
 🟦 Section 3 — Scripts shell  
 🟩 Section 4 — Systèmes en cours d'exécution  
-🟥 Section 5 — Stockage local  
+🟩 Section 5 — Stockage local  
 🟥 Section 6 — Systèmes de fichiers  
 🟨 Section 7 — Déploiement et gestion  
 🟦 Section 8 — Réseau  
@@ -94,9 +94,8 @@ Certification : *Red Hat Certified System Administrator*
 
 🟦 **6.1** — Créer/monter/démonter `vfat`, `ext4`, `xfs` — `mkfs.*`, `mount`, `umount`  
 🟦 **6.2.** — Montage au démarrage par `UUID/label` — `/etc/fstab`, `blkid`, `lsblk -f`, systemd   
-🟥 **6.3** — Systèmes de fichiers réseau NFS — `mount -t nfs`, `/etc/fstab`  
-🟥 **6.4** — Configurer autofs — `/etc/auto.master`, `/etc/auto.*`  
-🟥 **6.5** — Problèmes de permissions — `ls -lZ`, `stat`, contexte SELinux  
+🟩 **6.3** — Systèmes de fichiers réseau NFS — `mount -t nfs`, `/etc/fstab`  
+🟥 **6.4** — Problèmes de permissions — `ls -lZ`, `stat`, contexte SELinux  
 
 ---
 
@@ -141,7 +140,8 @@ Certification : *Red Hat Certified System Administrator*
 🟥 **10.5** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
 🟥 **10.6** — Restaurer les contextes — `restorecon -Rv`, `semanage fcontext`  
 🟥 **10.7** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
-🟥 **10.8** — Booléens SELinux — `getsebool -a`, `setsebool -P`
+🟥 **10.8** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
+🟥 **10.9** — `Mot de passe root` au boot  
 
 > 🔐 SELinux en mode **enforcing par défaut** sur RHEL 10 — ne jamais le désactiver !
 
