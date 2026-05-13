@@ -121,9 +121,211 @@ mnt-ext4-sdb1.mount
 
 # 6.3 — Systèmes de fichiers réseau NFS — mount -t nfs, /etc/fstab
 
+`[NOTE]`
+
+- La configuration du serveur n'est pas au programme, mais voici la marche à suivre pour l'implémenté. Cette étape servira à travailler sur un serveur NFS
+
+
+
+<details>
+<summary>
+<h2>
+ === INSTALL Serveur NFS ===
+</h2>
+</summary>
+
+````
+# Installer les prérequis NFS
+dnf -y install nfs-utils
+
+# Création dossier
+ mkdir -p /nfsdata /home/ldap/ldapuser{1..9}
+
+# Permission / Sécurité des répertoires à partager
+# Editer le fichier de configuration
+vim /etc/exports
+
+/nfsdata      *(rw,no_root_squash)
+/home/ldap    *(rw,no_root_squash)
+
+# Autoriser / Activer le service nfs-server
+systemctl enable --now nfs-server
+
+# Régles firewalld
+for i in nfs mountd rpc-bind; do firewall-cmd --add-service $i --permanent; done
+# sorties attendues
+success
+success
+success
+# reload
+firewall-cmd --reload
+
+# TEST
+# === Sur le serveur 192.168.0.6 ===
+showmount -e localhost
+# sorties attendues
+Export list for localhost:
+/home/ldap *
+/nfsdata   *
+
+exportfs -v
+# sorties attendues
+/nfsdata        <world>(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,no_root_squash,no_all_squash)
+/home/ldap      <world>(sync,wdelay,hide,no_subtree_check,sec=sys,rw,secure,no_root_squash,no_all_squash)
+````
+
+- Le serveur est actif.
+
+</details>
+
+
+
+<details>
+<summary>
+<h2>
+=== INSTALL Repo sur client ===
+</h2>
+</summary>
+
+- Sur le client pas de repo actif, création d'un repo depuis un .iso
+````
+# copie de l'iso
+dd if=/dev/sr0 of=/rhel10.iso ds=1M
+
+# Création point de montage
+mkdir /mnt/repo
+
+# Inscription à /etc/fstab
+# Repo local
+/rhel10.iso /mnt/repo iso9660 defaults 0 0
+
+# Monter
+mount -a
+
+# Création du repo local dans /etc/yum.repo.d
+vim /etc/yum.repo.d
+
+[BaseOS]
+name=BaseOS
+baseurl=file:///mnt/repo/BaseOS
+gpgcheck=0
+enable=1
+
+[AppStream]
+name=AppStream
+baseurl=file:///mnt/repo/AppStream
+gpgcheck=0
+enable=1
+
+# TEST
+dnf repoinfo
+# Sorties attendues
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+BaseOS                                                                682 kB/s | 2.7 kB     00:00
+AppStream                                                             110 MB/s | 1.5 MB     00:00
+Repo-id            : AppStream
+Repo-name          : AppStream
+Repo-revision      : 1761027148
+Repo-updated       : Tue 21 Oct 2025 10:12:28 +04
+Repo-pkgs          : 4,514
+Repo-available-pkgs: 4,514
+Repo-size          : 6.5 G
+Repo-baseurl       : file:///mnt/repo/AppStream
+Repo-expire        : 172,800 second(s) (last: Wed 13 May 2026 10:54:08 +04)
+Repo-filename      : /etc/yum.repos.d/local.repo
+
+Repo-id            : BaseOS
+Repo-name          : BaseOS
+Repo-revision      : 1761027164
+Repo-updated       : Tue 21 Oct 2025 10:12:45 +04
+Repo-pkgs          : 946
+Repo-available-pkgs: 946
+Repo-size          : 1.3 G
+Repo-baseurl       : file:///mnt/repo/BaseOS
+Repo-expire        : 172,800 second(s) (last: Wed 13 May 2026 10:53:31 +04)
+Repo-filename      : /etc/yum.repos.d/local.repo
+Total packages: 5,460
+````
+
+</details>
+
+
+
+- Installation des prérequis de nfs
+````
+dnf -y install nfs-utils
+
+# test nfs depuis 192.168.0.11
+showmount -e 192.168.0.6
+# Sorties attendues
+Export list for 192.168.0.6:
+/home/ldap *
+/nfsdata   *
+```` 
+
 ---
 
-# 6.4 — Configurer autofs — /etc/auto.master, /etc/auto.*
+## **NFS COMMENCE ICI**
+
+`[NOTE]`
+
+- Enregistrement DNS : 192.168.0.6 => serveur / 192.168.0.11 => client
+
+- monter le partage `NFS` sur le client
+````
+# Depuis client
+# Lister les partage dispo
+showmount -e serveur
+# Sorties
+/home/ldap *
+/nfsdata   *
+
+# Créer le partage (le montage est temporaire)
+mount serveur:/nfsdata /mnt
+
+# Vérification
+mount
+# Sortie Recherchée
+serveur:/nfsdata on /mnt type nfs4 (rw,relatime,vers=4.2,rsize=1048576,wsize=1048576,namlen=255,hard,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,clientaddr=192.168.0.11,local_lock=none,addr=192.168.0.6)
+````
+
+
+
+---
+
+**Configurer autofs — /etc/auto.master, /etc/auto.***
+
+`[NOTE]`
+
+- Flux :
+
+1. Installer le paquet `autofs`
+
+2. Éditer `/etc/auto.master` — définir le répertoire parent et pointer vers le fichier de map
+````
+/nfsdata /etc/auto.nfsdata
+````
+
+3. Créer `/etc/auto.nfsdata` — définir le sous-répertoire et le partage NFS
+````
+
+files -rw serveur/nfsdata
+````
+
+4. Activer et démarrer le service `autofs`
+
+5. Tester en accédant au répertoire
+ 
+
+
+
+
+
+
 
 ---
 
