@@ -199,8 +199,19 @@ Protocole `rsync` natif non chiffré, utilisation implicite de SSH avec syntaxe 
 +-----------------------------------------------------------+
 ````
 
+- Chaque objets avec SELinux à un label de contexte de sécurité
+````
+user      :  role      :  type     :  level
+system_u  :  system_r  :  httpd_t  :  s0
+````
 
+- **user** (`_u`) : identité SELinux de qui lance le processus — mappé depuis le user Linux (ex: `system_u`, `unconfined_u`)
 
+- **role** (`_r`) :  filtre RBAC (Role-Based Access Control) — définit quels types/domaines sont accessibles (ex: `system_r`, `object_r`)
+
+- **type** (`_t`) : le plus important — définit concrètement ce que le processus/fichier peut faire ou accéder (ex: `httpd_t`, `httpd_sys_content_t`)
+
+- **level** (``) : niveau MLS/MCS (Multi-Level Security) — quasiment ignoré sur RHEL standard, toujours `s0`
 
 ---
 
@@ -208,7 +219,7 @@ Protocole `rsync` natif non chiffré, utilisation implicite de SSH avec syntaxe 
 # **10.4.1** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
 
 
-- Pour voir le mode actuel
+- Pour voir le mode actuel  
 
 ````
 # === commande ===
@@ -237,6 +248,28 @@ selinux=1 => activer SELinux
 ---
 
 # **10.4.2** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ---
