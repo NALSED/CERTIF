@@ -168,7 +168,7 @@ Protocole `rsync` natif non chiffré, utilisation implicite de SSH avec syntaxe 
 
 # SELinux — Security Enhanced Linux
 
-# TESTP zzz
+# test
 
 - `SELinux` est une couche de sécurité supplémentaire intégrée au kernel Linux, développée par la NSA.
 
