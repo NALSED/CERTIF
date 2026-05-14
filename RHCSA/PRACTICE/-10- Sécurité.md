@@ -213,7 +213,9 @@ system_u  :  system_r  :  httpd_t  :  s0
 
 - **level** (``) : niveau MLS/MCS (Multi-Level Security) — quasiment ignoré sur RHEL standard, toujours `s0`
 
----
+`[NOTE]` Pour l'examen `RHCSA`, se concentrer sur le `type`
+
+ ---
 
 
 # **10.4.1** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
