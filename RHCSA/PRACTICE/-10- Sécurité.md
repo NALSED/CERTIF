@@ -294,7 +294,7 @@ httpd_selinux (8)
 
 **Diagnostic Erreurs**
 
-- Afin de tester une erreur voir =>  [Mise_en_Place_du_Probleme_`SELinux`](https://github.com/NALSED/CERTIF/blob/main/RHCSA/PRACTICE/EXO/SELINUX/Probleme_Context.md)
+- Afin de tester une erreur voir =>  [Mise_en_Place_du_Probleme_`SELinux`](https://github.com/NALSED/CERTIF/blob/main/RHCSA/PRACTICE/EXO/SELINUX/CONTEXT/Probleme_Context.md)
 
 
 **Diagnostique**
