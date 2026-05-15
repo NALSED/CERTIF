@@ -292,10 +292,38 @@ httpd_selinux (8)
 # On trouvera des exemple et syntaxe
 ````
 
+---
 
 **Diagnostic Erreurs**
 
-- Afin de tester une erreur avec `SELinux` voir [Mise_en_Place_du_Probleme_`SELinux`]()
+- Afin de tester une erreur voir =>  [Mise_en_Place_du_Probleme_`SELinux`](https://github.com/NALSED/CERTIF/blob/main/RHCSA/PRACTICE/EXO/SELINUX/Probleme_Context.md)
+
+
+**Diagnostique**
+- Deux commandes sont utiles
+````
+ausearch
+sealert
+
+# Output brut, technique, peu lisible — mais immédiat et sans dépendance.
+ausearch -m avc -ts recent
+
+# Analyse tout le fichier audit, regroupe les alertes et les interprète.
+sealert -a /var/log/audit/audit.log
+````
+
+- **Flux**
+````
+=== Identifier ===
+ausearch -m avc -ts recent   => voir si un refus existe
+sealert -a /var/log/audit/audit.log  => comprendre et obtenir la correction
+
+=== Corriger ===
+semanage -m ou -a
+restorecon PATH
+````
+
+- Correction du [Probleme_`SELinux`]()
 
 
 
@@ -305,6 +333,9 @@ httpd_selinux (8)
 
 
 
+
+
+---
 
 
 
