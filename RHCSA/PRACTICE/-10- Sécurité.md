@@ -299,10 +299,12 @@ httpd_selinux (8)
 
 **Diagnostique**
 - Deux commandes sont utiles
-````
-ausearch
-sealert
 
+   - `ausearch`
+
+   - `sealert`
+
+````
 # Output brut, technique, peu lisible — mais immédiat et sans dépendance.
 ausearch -m avc -ts recent
 
