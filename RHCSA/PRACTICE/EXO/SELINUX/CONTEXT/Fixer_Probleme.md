@@ -92,7 +92,7 @@ semanage fcontext -a -t httpd_sys_content_t "/web(/.*)?"
 
 ### 3) Appliquer les changements
 ````
-restorcon -Rv /web/
+restorecon -Rv /web/
 # Sortie
 Relabeled /web from unconfined_u:object_r:default_t:s0 to unconfined_u:object_r:httpd_sys_content_t:s0
 Relabeled /web/index.html from unconfined_u:object_r:default_t:s0 to unconfined_u:object_r:httpd_sys_content_t:s0
