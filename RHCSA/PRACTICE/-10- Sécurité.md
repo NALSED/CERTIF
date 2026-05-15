@@ -323,7 +323,7 @@ semanage -m ou -a
 restorecon PATH
 ````
 
-- Correction du [Probleme_`SELinux`]()
+- Correction du [Probleme_`SELinux`](https://github.com/NALSED/CERTIF/blob/main/RHCSA/PRACTICE/EXO/SELINUX/CONTEXT/Fixer_Probleme.md)
 
 
 
