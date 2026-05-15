@@ -168,8 +168,6 @@ Protocole `rsync` natif non chiffré, utilisation implicite de SSH avec syntaxe 
 
 # SELinux — Security Enhanced Linux
 
-# test
-
 - `SELinux` est une couche de sécurité supplémentaire intégrée au kernel Linux, développée par la NSA.
 
 - Les permissions Unix classiques (ugo/rwx) ne suffisent pas — SELinux ajoute un contrôle d'accès obligatoire (MAC).
