@@ -15,16 +15,37 @@ cp /tmp/index.html /web/index.html
 # 4. Configure nginx pour servir /web
 echo 'server { listen 80; root /web; }' > /etc/nginx/conf.d/test.conf
 
-# 5. Démarre nginx
+# 5. Commenter ligne dans la configuration de nginx
+vim /etc/nginx/nginx.conf
+
+#    server {
+#        listen       80;
+#        listen       [::]:80;
+#        server_name  _;
+#        root         /usr/share/nginx/html;
+
+        # Load configuration files for the default server block.
+#       include /etc/nginx/default.d/*.conf;
+#    }
+
+# 6. Démarre nginx
 systemctl start nginx
 
 # !!! Si httpd déjà actif !!! sinon conflit port 80
 systemctl stop httpd
 
-# Permission pare-feu
+# 7. Permission pare-feu
 firewall-cmd --add-service=http
 
-# 7. Teste → doit échouer (403 ou contenu vide)
+# 8. Tester => doit échouer (403 ou contenu vide)
 curl http://localhost/index.html
+
+<html>
+<head><title>403 Forbidden</title></head>
+<body>
+<center><h1>403 Forbidden</h1></center>
+<hr><center>nginx/1.26.3</center>
+</body>
+</html>
 ````
 
