@@ -4,7 +4,7 @@
 
 `[INTRO]`
 
-`firewalld` est l'outil de gestion, **nftables** est le backend sous-jacent.
+`firewalld` est l'outil de gestion, **nftables** est le backend.
  
 nftables gère :
 
@@ -253,15 +253,49 @@ selinux=1 => activer SELinux
 
 # **10.4.2** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
 
+`[NOTE]`
+
+- `man` utile => `semanage-fcontext`
+
+- Pour changer le label du context `SELinux`
+````
+# Nouveau
+semanage fcontext -a
+
+# Modification 
+semanage fcontext -m
+
+# === Appliquer les Mofifs ===
+# Immédiatement
+restorecon PATH
+
+# Au bout (créer le fichier, au boot relabel et effacé automatiquement.)
+touch /.autorelabel
+````
+
+### **⚠️ Pour conaitre les bons label pour un service ⚠️**
+````
+# Rechercher le manuel selinux pour les installer
+dnf search "selinux"
+
+# Installer ce paquet
+selinux-policy-doc.noarch : SELinux policy documentation
+dnf install -y selinux-policy-doc.noarch : SELinux policy documentation
+
+# rechercher dans man pour un service
+man -k | grep httpd
+
+# Trouver le page SERVICE_selinux
+# ICI
+httpd_selinux (8)
+
+# On trouvera des exemple et syntaxe
+````
 
 
+**Diagnostic Erreurs**
 
-
-
-
-
-
-
+- Afin de tester une erreur avec `SELinux` voir [Mise_en_Place_du_Probleme_`SELinux`]()
 
 
 
