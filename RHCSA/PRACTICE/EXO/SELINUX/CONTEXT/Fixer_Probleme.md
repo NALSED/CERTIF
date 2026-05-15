@@ -3,7 +3,7 @@
 sealert -a /var/log/audit/audit.log
 ````
 
-### - Sortie qui nous interesse
+### - Sortie qui nous intéresse
 ````
 *****  Plugin catchall (17.1 confidence) suggests   **************************
 
@@ -50,6 +50,58 @@ type=SYSCALL msg=audit(1778840699.908:411): arch=x86_64 syscall=openat success=n
 Hash: nginx,httpd_t,default_t,file,read
 ````
 
+### - La partie qui explique le probléme
+### On voit ici que le contexte actuel du processus (Source) est différent du contexte actuel du fichier (Target)
+````
+Additional Information:
+Source Context                system_u:system_r:httpd_t:s0       <=== Contexte Actuel du processus
+Target Context                unconfined_u:object_r:default_t:s0 <=== Contexte actuel du fichier
+Target Objects                index.html [ file ]                <=== Fichier problématique
+Source                        nginx
+Source Path                   /usr/sbin/nginx
+Port                          <Unknown>
+Host                          <Unknown>
+Source RPM Packages           nginx-core-1.26.3-1.el10.x86_64
+Target RPM Packages
+SELinux Policy RPM            selinux-policy-targeted-42.1.7-1.el10.noarch
+Local Policy RPM              selinux-policy-targeted-42.1.7-1.el10.noarch
+Selinux Enabled               True
+Policy Type                   targeted
+Enforcing Mode                Enforcing
+````
 
 
+## - Changer la partie problématique avec `semanage fcontext` 
 
+### 1) Comparer contexte qui bloque et celui qui marche pour le service
+````
+# Dossier problématique
+ls -Zd /web
+# Sortie
+unconfined_u:object_r:default_t:s0 /web
+
+# dossier qui fonctionne pour nginx
+ls -Zd /usr/share/nginx/html
+# Sortie system_u:object_r:httpd_sys_content_t:s0 /usr/share/nginx/html
+````
+
+### 2) Changer le contexte de /web/index.html
+````
+semanage fcontext -a -t httpd_sys_content_t "/web(/.*)?"
+````
+
+### 3) Appliquer les changements
+````
+restorcon -Rv /web/
+# Sortie
+Relabeled /web from unconfined_u:object_r:default_t:s0 to unconfined_u:object_r:httpd_sys_content_t:s0
+Relabeled /web/index.html from unconfined_u:object_r:default_t:s0 to unconfined_u:object_r:httpd_sys_content_t:s0
+````
+
+
+### TEST nginx
+````
+curl http://localhost/index.html
+# Sortie
+test selinux
+````
