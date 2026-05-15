@@ -271,7 +271,14 @@ restorecon PATH
 touch /.autorelabel
 ````
 
-### **⚠️ Pour conaitre les bons label pour un service ⚠️**
+### **⚠️ Pour conaitre le context pour un service ⚠️**
+
+**-1-**
+- Rechercher dans le document root du service (dossier de base depuis lequel le service sert ses fichiers.)
+
+**-2-**
+
+- Documentation 
 ````
 # Rechercher le manuel selinux pour les installer
 dnf search "selinux"
@@ -289,6 +296,10 @@ httpd_selinux (8)
 
 # On trouvera des exemple et syntaxe
 ````
+
+**-3-**
+
+- sealert
 
 ---
 
