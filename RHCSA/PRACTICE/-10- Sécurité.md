@@ -343,7 +343,7 @@ restorecon PATH
 # **10.4.3** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
 
 - Lister le port
-`````
+````
 semanage port -l
 ````
 
