@@ -136,9 +136,9 @@ Certification : *Red Hat Certified System Administrator*
 🟦 **10.2** — Permissions par défaut des fichiers — `umask`, `chmod`  
 🟦 **10.3** — gestion SSH  
 
-🟥 **10.4** — **SELinux**  
-🟥 **10.4.1** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
-🟥 **10.4.2** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
+🟨 **10.4** — **SELinux**  
+🟩 **10.4.1** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
+🟨 **10.4.2** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
 🟥 **10.4.3** — Restaurer les contextes — `restorecon -Rv`, `semanage fcontext`  
 🟥 **10.4.4** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
 🟥 **10.4.5** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
@@ -154,10 +154,10 @@ Certification : *Red Hat Certified System Administrator*
 🟥 Toutes les sections pratiquées en lab  
 🟥 Chaque configuration testée après reboot  
 🟥 SELinux maîtrisé — contextes, booléens, ports, violations  
-🟥 LVM pratiqué sur disques vierges  
+🟩 LVM pratiqué sur disques vierges  
 🟥 Flatpak — dépôts + install system-wide vs user  
 🟥 systemd timers — créer, activer, vérifier  
-🟥 `man` et `--help` utilisés sans filet  
+🟩 `man` et `--help` utilisés sans filet  
 🟥 Score > 210/300 sur examen blanc  
 
 ---
