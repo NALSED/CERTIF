@@ -465,5 +465,61 @@ sealert -a /var/log/audit/audit.log
 
 ````
 
-**TROUBLESHOOTING**
+### **TROUBLESHOOTING**
+
+
+- Procédure de résolution de probléme :
+
+ -1- Désactiver SELinux
+````
+setenforce 0
+````
+
+-2- Retester le Service ou autre, si OK , alors c'est un probléme avec SELinux
+
+-3- Utiliser les logs
+````
+journalctl | sealert
+
+OU
+
+sealert -a /var/log/audit/audit.log
+````
+
+-4- Si se n'est pas fait installer les policy doc de SELinux
+````
+dnf search "selinux"
+# Chercher
+selinux-policy-doc.noarch : SELinux policy documentation
+
+dnf install -y selinux-policy-doc.noarch 
+````
+
+
+⚠️ Si `sealert` n'est pas installé ⚠️
+````
+dnf provides */sealert
+
+dnf install setroubleshoot-server
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
