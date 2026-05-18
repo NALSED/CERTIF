@@ -143,8 +143,8 @@ Certification : *Red Hat Certified System Administrator*
 🟩 **10.4.4** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
 🟩 **10.4.5** — Logs SELinux    
 
-🟥 **10.5** — `Mot de passe root` au boot  `GRUB → rd.break` / `init=/bin/bash`
-
+🟥 **10.5** — `Mot de passe root` au boot  `GRUB → rd.break` / `init=/bin/bash`  
+🟥 **10.6** — `Troubleshooting Général`  
 > 🔐 SELinux en mode **enforcing par défaut** sur RHEL 10 — ne jamais le désactiver !
 
 ---
