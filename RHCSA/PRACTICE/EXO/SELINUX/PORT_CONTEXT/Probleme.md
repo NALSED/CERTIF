@@ -11,3 +11,8 @@ Port 82
 ````
 mv /etc/hosts /var/ww/html
 ````
+
+- Restart httpd
+````
+systemctl restart httpd
+````
