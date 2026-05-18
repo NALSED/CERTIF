@@ -139,9 +139,9 @@ Certification : *Red Hat Certified System Administrator*
 🟨 **10.4** — **SELinux**  
 🟩 **10.4.1** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
 🟨 **10.4.2** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
-🟥 **10.4.3** — Restaurer les contextes — `restorecon -Rv`, `semanage fcontext`  
-🟥 **10.4.4** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
-🟥 **10.4.5** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
+🟥 **10.4.3** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
+🟥 **10.4.4** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
+🟥 **10.4.5** — Logs SELinux    
 
 🟥 **10.5** — `Mot de passe root` au boot  `GRUB → rd.break` / `init=/bin/bash`
 
