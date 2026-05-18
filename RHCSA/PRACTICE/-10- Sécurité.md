@@ -503,13 +503,67 @@ dnf provides */sealert
 dnf install setroubleshoot-server
 ````
 
+---
+---
 
 
+ # **10.5** — Mot de passe root au boot GRUB → rd.break / init=/bin/bash
 
 
+ -1.1- dans le menu des kernel chosir le kernel normal et appuyer sur `e`
 
+⚠️ -1.2- Si menu non accecible ⚠️
+- booter normalement et utiliser grub2
+````
+grubby --update-kernel=ALL args="init=/bin/bash"
+init 6
+````
 
+-2- Le prompt change, tapper
+````
+mount -o remount,rw /
+````
 
+-3- Changer password Root
+````
+passwd root
+````
+
+-4- label SELinux
+````
+touch /.autorelabel
+````
+
+-5- Redemmarer
+````
+exec /sbin/init
+```
+
+⚠️ -6- Si utilisation de grubby ⚠️
+````
+grubby --update-kernel=ALL --remove-args="init=/bin/bash"
+````
+
+---
+---
+
+# **10.6** — Troubleshooting Général
+
+- Probléme au démarage ou boot spécifique, utilise le `grub prompt`.
+````
+# Booter en mode rescue / single user
+=> chercher la ligne qui commence par "linux"
+
+=> ajouter à la fin : init=/bin/bash
+
+=> ou : systemd.unit=rescue.target
+
+# Désactiver SELinux temporairement
+→ ajoute : selinux=0
+
+# Changer le niveau de log kernel
+→ ajoute : quiet ou retire quiet pour voir les messages
+````
 
 
 
