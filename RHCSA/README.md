@@ -17,11 +17,11 @@ Certification : *Red Hat Certified System Administrator*
 🟦 Section 3 — Scripts shell  
 🟩 Section 4 — Systèmes en cours d'exécution  
 🟩 Section 5 — Stockage local  
-🟥 Section 6 — Systèmes de fichiers  
+🟩 Section 6 — Systèmes de fichiers  
 🟩 Section 7 — Déploiement et gestion  
 🟦 Section 8 — Réseau  
 🟦 Section 9 — Utilisateurs et groupes  
-🟨 Section 10 — Sécurité  
+🟩 Section 10 — Sécurité  
 
 ---
 
@@ -95,7 +95,7 @@ Certification : *Red Hat Certified System Administrator*
 🟦 **6.1** — Créer/monter/démonter `vfat`, `ext4`, `xfs` — `mkfs.*`, `mount`, `umount`  
 🟦 **6.2.** — Montage au démarrage par `UUID/label` — `/etc/fstab`, `blkid`, `lsblk -f`, systemd   
 🟩 **6.3** — Systèmes de fichiers réseau NFS — `mount -t nfs`, `/etc/fstab`  
-🟥 **6.4** — Problèmes de permissions — `ls -lZ`, `stat`, contexte SELinux  
+🟩 **6.4** — Problèmes de permissions — `ls -lZ`, `stat`, contexte SELinux  
 
 ---
 
@@ -136,12 +136,12 @@ Certification : *Red Hat Certified System Administrator*
 🟦 **10.2** — Permissions par défaut des fichiers — `umask`, `chmod`  
 🟦 **10.3** — gestion SSH  
 
-🟨 **10.4** — **SELinux**  
+🟩 **10.4** — **SELinux**  
 🟩 **10.4.1** — Modes SELinux — `setenforce`, `/etc/selinux/config`  
-🟨 **10.4.2** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
-🟥 **10.4.3** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
-🟥 **10.4.4** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
-🟥 **10.4.5** — Logs SELinux    
+🟩 **10.4.2** — Contextes SELinux — `ls -Z`, `ps -Z`, `id -Z`  
+🟩 **10.4.3** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
+🟩 **10.4.4** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
+🟩 **10.4.5** — Logs SELinux    
 
 🟥 **10.5** — `Mot de passe root` au boot  `GRUB → rd.break` / `init=/bin/bash`
 
@@ -153,7 +153,7 @@ Certification : *Red Hat Certified System Administrator*
 
 🟥 Toutes les sections pratiquées en lab  
 🟥 Chaque configuration testée après reboot  
-🟥 SELinux maîtrisé — contextes, booléens, ports, violations  
+🟩 SELinux maîtrisé — contextes, booléens, ports, violations  
 🟩 LVM pratiqué sur disques vierges  
 🟥 Flatpak — dépôts + install system-wide vs user  
 🟥 systemd timers — créer, activer, vérifier  
