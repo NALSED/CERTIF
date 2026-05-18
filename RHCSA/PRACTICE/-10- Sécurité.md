@@ -1,4 +1,4 @@
-# -10-  Gérer la sécurité
+ # -10-  Gérer la sécurité
 
 # **10.1** — Pare-feu firewalld 
 
@@ -338,31 +338,132 @@ restorecon PATH
 
 
 
+---
 
+# **10.4.3** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
 
+- Lister le port
+`````
+semanage port -l
+````
 
-
-
-
-
+- Changer le port d'écoute dans `SELinux`
+````
+# Exemple avec ssh (Exemple présent dans fichier de configuration ssh)
+semanage port -a -t ssh_port_t -p tcp 22
+````
 
 ---
 
+# **10.4.4** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
+
+=> Les booléens permettent d'`activer` ou `désactiver` des règles de politique sans avoir à réécrire ou recompiler la politique SELinux.
 
 
+- Lister et voir `on / off`
+````
+# nom + deux états (actuel, persistant) + description
+semanage boolean -l 
 
+# juste le nom + état actuel.
+getsebool -a
+````
+
+- Changer l'état
+````
+setsebool -P NOM BOOLEAN on / off
+````
 
 ---
 
-# **10.4.3** — Restaurer les contextes — `restorecon -Rv`, `semanage fcontext`  
+# **10.4.5** — Logs SELinux
+
+`[NOTE]`
+
+- SELinux utilise `auditd` pour écrir les message de log
+
+- Les `logs` peuvent être utilisés de plusieurs maniéres
+
+1) Avec journalctl + grep + UUID
+````
+#EXEMPLE
+journalctl | grep sealert
+# Sortie
+May 18 10:00:54 rhcsaserver.example.com setroubleshoot[2871]: SELinux is preventing /usr/sbin/sshd from name_bind access on the tcp_socket port 2022. For complete SELinux messages run: sealert -l 4126e82e-d178-4d7b-bc23-6bdf5aa8b0fa
+
+# Ici on peux utiliser
+sealert -l 4126e82e-d178-4d7b-bc23-6bdf5aa8b0fa
+# Sortie
+SELinux is preventing /usr/sbin/sshd from name_bind access on the tcp_socket port 2022.
+
+*****  Plugin bind_ports (92.2 confidence) suggests   ************************
+
+If you want to allow /usr/sbin/sshd to bind to network port 2022
+Then you need to modify the port type.
+Do
+# semanage port -a -t PORT_TYPE -p tcp 2022
+    where PORT_TYPE is one of the following: ssh_port_t, vnc_port_t, xserver_port_t.
+
+*****  Plugin catchall_boolean (7.83 confidence) suggests   ******************
+
+If you want to allow nis to enabled
+Then you must tell SELinux about this by enabling the 'nis_enabled' boolean.
+You can read 'sshd_selinux' man page for more details.
+Do
+setsebool -P nis_enabled 1
+
+*****  Plugin catchall (1.41 confidence) suggests   **************************
+
+If you believe that sshd should be allowed name_bind access on the port 2022 tcp_socket by default.
+Then you should report this as a bug.
+You can generate a local policy module to allow this access.
+Do
+allow this access for now by executing:
+# ausearch -c 'sshd' --raw | audit2allow -M my-sshd
+# semodule -X 300 -i my-sshd.pp
 
 
----
+Additional Information:
+Source Context                system_u:system_r:sshd_t:s0-s0:c0.c1023
+Target Context                system_u:object_r:unreserved_port_t:s0
+Target Objects                port 2022 [ tcp_socket ]
+Source                        sshd
+Source Path                   /usr/sbin/sshd
+Port                          2022
+Host                          rhcsaserver.example.com
+Source RPM Packages           openssh-server-9.9p1-11.el10.x86_64
+Target RPM Packages
+SELinux Policy RPM            selinux-policy-targeted-42.1.7-1.el10.noarch
+Local Policy RPM              selinux-policy-targeted-42.1.7-1.el10.noarch
+Selinux Enabled               True
+Policy Type                   targeted
+Enforcing Mode                Enforcing
+Host Name                     rhcsaserver.example.com
+Platform                      Linux rhcsaserver.example.com
+                              6.12.0-124.8.1.el10_1.x86_64 #1 SMP
+                              PREEMPT_DYNAMIC Fri Oct 17 13:03:58 EDT 2025
+                              x86_64
+Alert Count                   11
+First Seen                    2026-05-18 09:57:23 +04
+Last Seen                     2026-05-18 10:00:50 +04
+Local ID                      4126e82e-d178-4d7b-bc23-6bdf5aa8b0fa
 
-# **10.4.4** — Labels de ports SELinux — `semanage port -l`, `semanage port -a`  
+Raw Audit Messages
+type=AVC msg=audit(1779084050.506:218): avc:  denied  { name_bind } for  pid=2869 comm="sshd" src=2022 scontext=system_u:system_r:sshd_t:s0-s0:c0.c1023 tcontext=system_u:object_r:unreserved_port_t:s0 tclass=tcp_socket permissive=0
 
 
----
+type=SYSCALL msg=audit(1779084050.506:218): arch=x86_64 syscall=bind success=no exit=EACCES a0=7 a1=561cc5b4c0d0 a2=1c a3=561cbbb300ed items=0 ppid=1 pid=2869 auid=4294967295 uid=0 gid=0 euid=0 suid=0 fsuid=0 egid=0 sgid=0 fsgid=0 tty=(none) ses=4294967295 comm=sshd exe=/usr/sbin/sshd subj=system_u:system_r:sshd_t:s0-s0:c0.c1023 key=(null)
 
-# **10.4.5** — Booléens SELinux — `getsebool -a`, `setsebool -P`  
+Hash: sshd,sshd_t,unreserved_port_t,tcp_socket,name_bind
+````
+
+2) sealert
+````
+# Listera sur toutes les erreurs relative à SELinux, avec la même syntaxe que ci-dessus.
+sealert -a /var/log/audit/audit.log
+
+
+````
+
+**TROUBLESHOOTING**
 
