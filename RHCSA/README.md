@@ -84,6 +84,7 @@ Certification : *Red Hat Certified System Administrator*
 🟩  **5.2.3** — Volumes logiques — `lvcreate`, `lvremove`, `lvs`  
 
 🟦 **5.3** — Ajout non destructif de partitions, LV et swap — `mkswap`, `swapon`, `swapoff`  
+🟥 **5.4** — Stratis `Gestion` et `Snapshoot`
 
 > 💡 RHEL 10 : GPT recommandé par défaut — privilégier `parted` sur `fdisk`
 
