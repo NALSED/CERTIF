@@ -13,7 +13,7 @@ Certification : *Red Hat Certified System Administrator*
 🟥 Non commencé 🟨 En cours 🟩 Maîtrisé  🟦 Sans Aide
 
 🟩 Section 1 — Outils essentiels  
-🟨 Section 2 — Gestion des logiciels  
+🟩 Section 2 — Gestion des logiciels  
 🟦 Section 3 — Scripts shell  
 🟩 Section 4 — Systèmes en cours d'exécution  
 🟩 Section 5 — Stockage local  
@@ -47,8 +47,7 @@ Certification : *Red Hat Certified System Administrator*
 
 🟩 **2.1** — Configurer l'accès aux dépôts RPM — `dnf config-manager`, `/etc/yum.repos.d/`  
 🟩 **2.2** — Installer et supprimer des paquets RPM et DNF — `dnf install`, `dnf remove`, `rpm -ivh`  
-🟥 **2.3** — Configurer l'accès aux dépôts Flatpak — `flatpak remote-add`, `flatpak remotes`  
-🟥 **2.4** — Installer et supprimer des applications Flatpak — `flatpak install`, `flatpak uninstall`, `flatpak list`  
+🟩 **2.3** — FLATPAK   
 
 ---
 
