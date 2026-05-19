@@ -563,17 +563,3 @@ grubby --update-kernel=ALL --remove-args="init=/bin/bash"
 
 # Changer le niveau de log kernel
 → ajoute : quiet ou retire quiet pour voir les messages
-
-
-
-
-
-
-
-
-
-
-
-
-
-
