@@ -290,6 +290,52 @@ Principaux métacaractères utilisés :
 
 :warning: `*` `+` `?` s'appliquent sur le caractère ou le groupe précédent. (dans les exemple ci dessus `b` ou `u`).
 
+---
+
+## `find`
+
+**Syntaxe**
+````
+find [chemin] [options] [expression]
+````
+
+**=== Commandes courantes ===**
+````
+# Nom
+find /etc -name "test.txt" 2>/dev/null
+
+# Nom approximatif
+find /etc -iname "*test*txt" 2>/dev/null
+
+# Par le contenu
+find /etc -exec grep -l sednal {} +
+
+# Par type
+find /etc -type f / d
+
+# Vide
+find /etc -type f -empty
+
+# Age
+find /var/log -name"*.txt" -mtime +30
+
+# executer une commandes
+# Trouver fichiers appartenant à un user supprimé (no owner)
+find / -nouser -exec chown root {} \;
+
+# Trouver et déplacer
+find /tmp -name "*.log" -exec mv {} /var/log/ \;
+````
+
+`[NOTE]`
+- Pour les execution de commande dans find
+````
+{} \; => exécute la commande une fois par fichier
+
+{} + => exécute la commande une seule fois avec tous les fichiers en argument
+````
+
+- Limitation de `{} +` : ne fonctionne pas avec toutes les commandes — si la commande ne peut traiter qu'un fichier à la fois, utiliser `{} \;`.
 
 ---
 ---
