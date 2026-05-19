@@ -332,4 +332,107 @@ swapon --show
 free -h
 ````
 
+---
+
+# 5.4 - Stratis
+
+`[NOTE]`
+
+- Fonctionnement de `Stratis` :
+````
+┌─────────────────────────────────┐
+│        Applications / VFS       │
+├─────────────────────────────────┤
+│     XFS (système de fichiers)   │  <= toujours XFS, pas de choix
+├─────────────────────────────────┤
+│   thin provisioning (dm-thin)   │  <= via device-mapper
+├─────────────────────────────────┤
+│   cache optionnel (dm-cache)    │
+├─────────────────────────────────┤
+│        Pool Stratis             │  <= agrège les blocs bruts
+├────────────┬────────────────────┤
+│  /dev/sdb  │  /dev/sdc  │  ...  │  <= block devices
+└────────────┴────────────────────┘
+````
+
+-1- Création d'un `pool` dedans on met des espace de stockage (/dev/sda /dev/sdb etc..)
+
+-2- Création de `fs` ils partagent l'espace au sein d'un `pool`
+
+-3- `Thin provisioning` : Quand un filesystem Stratis est créé, aucune taille fixe n'est allouée. Il a une taille "virtuelle" (exemple : 1 TiB), mais l'espace réel sur le pool n'est consommé qu'au fur et à mesure que des données sont écrites.
+
+
+---
+
+**=== Commandes Création ===**
+
+### - Rechercher les paquet `Stratis` et installation
+````
+dnf search "stratis"
+
+# Ici nous avont besoin de :
+stratisd.x86_64 
+stratis-cli.noarch 
+
+dnf install -y stratisd stratis-cli
+````
+
+### - Démarrer de daemon de stratis
+````
+systemctl enable --now stratisd
+````
+
+
+### - Créer un `pool`
+````
+stratis pool create my_pool /dev/sde
+````
+
+### - Lister `pool` 
+````
+stratis pool list
+# Sortie
+Name                 Total / Used / Free        Properties                                   UUID   Alerts
+my_pool   10 GiB / 833.00 MiB / 9.19 GiB   ~Le,~Ca,~Cr, Op   e512490f-bc76-4233-adfb-97d1df39abb6   WS001
+````
+
+### - Ajouter de l'espace
+````
+stratis pool add-data my_pool /dev/sdf
+stratis pool list
+# Sortie
+Name                Total / Used / Free        Properties                                   UUID   Alerts
+my_pool   20 GiB / 1.10 GiB / 18.90 GiB   ~Le,~Ca,~Cr, Op   e512490f-bc76-4233-adfb-97d1df39abb6
+# la pool fait bien 20 GiB
+````
+
+### - Créer un `fs` et lister
+````
+stratis fs create my_pool my_fs
+
+stratis fs list
+# Sortie
+Pool      Filesystem   Total / Used / Free / Limit            Device                       UUID       
+my_pool   my_fs        1 TiB / 546 MiB / 1023.47 GiB / None   /dev/stratis/my_pool/my_fs   8d403998-c7c9-4472-8a5e-8aa2c56b4256
+````
+
+### - `/etc/fstab`
+````
+mkdir /stratis
+
+blkid /dev/stratis/my_pool/my_fs | awk '{print $2}' >> /etc/fstab
+
+UUID /POINT_DE_MONTAGE xfs default,x-systemd.requires=stratisd.service 0 0
+
+systemctl daemon-reload
+mount -a
+````
+⚠️ Stratis, dépend du daemon stratisd pour assembler les couches device-mapper avant que le filesystem soit accessible. Si systemd essaie de monter le filesystem avant que stratisd soit démarré => échec. ⚠️
+
+
+---
+
+**=== Snapshoot ===** 
+
+
 
