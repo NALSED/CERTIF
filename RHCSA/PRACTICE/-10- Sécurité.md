@@ -537,7 +537,7 @@ touch /.autorelabel
 -5- Redemmarer
 ````
 exec /sbin/init
-```
+````
 
 ⚠️ -6- Si utilisation de grubby ⚠️
 ````
@@ -550,7 +550,7 @@ grubby --update-kernel=ALL --remove-args="init=/bin/bash"
 # **10.6** — Troubleshooting Général
 
 - Probléme au démarage ou boot spécifique, utilise le `grub prompt`.
-
+````
 # Booter en mode rescue / single user
 => chercher la ligne qui commence par "linux"
 
@@ -563,3 +563,4 @@ grubby --update-kernel=ALL --remove-args="init=/bin/bash"
 
 # Changer le niveau de log kernel
 → ajoute : quiet ou retire quiet pour voir les messages
+````
