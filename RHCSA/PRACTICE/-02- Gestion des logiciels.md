@@ -388,43 +388,32 @@ dnf group install --with-optional
 ---
 ---
 
-## **2.3** — Configurer l'accès aux dépôts Flatpak 
+## **2.3** — FLATPAK
 
+- `Flatpak` est une approche conteneur d'installation de logiciel, comme une sandbox, avec toutes les dépendences, cela implémente de la portabilité entre OS.
 
+- Installer
+````
+dnf install -y flatpak
+````
 
+- Ajouter un repo
+````
+flatpak remote-add --if-not-exists NAME oci+URL
+````
 
+- lister
+````
+flatpak remote-ls --app
+````
 
+- Rechercher
+````
+flatpak search
+````
 
+- Installer + MAJ (utilisateur courant)
+````
+flatpak install
+````
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----
-
-## **2.4** — Installer et supprimer des applications Flatpak 
