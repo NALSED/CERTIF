@@ -554,7 +554,7 @@ grubby --update-kernel=ALL --remove-args="init=/bin/bash"
 # Booter en mode rescue / single user
 => chercher la ligne qui commence par "linux"
 
-=> ajouter à la fin : init=/bin/bash
+=> ajouter à la fin : init=/bin/bash => procédure de changement de password root
 
 => ou : systemd.unit=rescue.target
 
@@ -564,3 +564,75 @@ grubby --update-kernel=ALL --remove-args="init=/bin/bash"
 # Changer le niveau de log kernel
 → ajoute : quiet ou retire quiet pour voir les messages
 ````
+
+---
+
+### **Debug shell**
+
+````
+# Activer
+systemctl enable --now debug.shell
+⚠️ donne un shell root , désactiver après usage ⚠️
+# Entrer
+Ctrl Alt F9
+
+# Sortir
+Ctrl Alt F1 
+
+# Désactiver
+systemctl stop debug-shell
+systemctl disable debug-shell
+````
+
+---
+
+### **File system**
+
+- Probleme avec `/etc/fstab` :
+
+Par exemple typo, ou device inexistant dans le fichier fstab, au reboot `bash-5.2#` (initramfs (rd.break))
+
+**=== Procédure ===**
+````
+# Tester ro ou rw du shell
+touch ffff
+# Si sortie Read only file system
+
+# Passer en rw
+mount -o remount,rw /
+
+# Corriger le fichier fstab
+vim /etc/fstab
+
+# Reboot
+exec /sbin/init
+````
+
+---
+
+### **Network**
+
+- le probleme peux survenir de la table de routage
+````
+ip route add
+ip route del
+````
+
+- l'IP /Gateway
+````
+nmtui
+````
+
+- DNS
+````
+/etc/resolv.conf
+````
+
+---
+
+
+
+
+
+
+
