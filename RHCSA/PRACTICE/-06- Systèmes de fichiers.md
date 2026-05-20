@@ -189,7 +189,7 @@ exportfs -v
 - Sur le client pas de repo actif, création d'un repo depuis un .iso
 ````
 # copie de l'iso
-dd if=/dev/sr0 of=/rhel10.iso ds=1M
+dd if=/dev/sr0 of=/rhel10.iso bs=1M
 
 # Création point de montage
 mkdir /mnt/repo
