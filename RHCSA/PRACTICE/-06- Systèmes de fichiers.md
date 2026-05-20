@@ -196,7 +196,7 @@ mkdir /mnt/repo
 
 # Inscription à /etc/fstab
 # Repo local
-/rhel10.iso /mnt/repo iso9660 defaults 0 0
+/rhel10.iso /mnt/repo iso9660 loop 0 0
 
 # Monter
 mount -a
