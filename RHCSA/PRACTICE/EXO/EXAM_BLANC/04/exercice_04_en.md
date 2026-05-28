@@ -1,213 +1,128 @@
-# 🔴 RHCSA Mock Exam — #04
+# RHCSA Mock Exam — #04
 **Duration: 2h30 | RHEL 10 | SELinux enforcing | No external documentation**
 
-> ⚠️ Every configuration must survive a `reboot`.
-> ⚠️ SELinux must remain in `enforcing` mode.
+> Every configuration must survive a reboot.
+> SELinux must remain in enforcing mode.
 
 ---
 
-## Task 01 — Users: Advanced Configuration
+## Task 01 — Users
 
-Create the group `auditors` (GID `7000`).
-Create:
-- `audit1`: UID `5001`, bash, primary group `auditors`, home `/audit/audit1`, password `Aud!t2026`
-- `audit2`: same configuration, home `/audit/audit2`
-- `readonly`: shell `/sbin/nologin`, home `/dev/null`, no supplementary group
-
-Configure `/etc/skel` so that every new user automatically has:
-- A `~/.bashrc` file with `alias ll='ls -alh'`
-- A `~/scripts/` directory
-
-Verify these elements are present for `audit1`.
+Create a group `auditors` with GID `7000`. Create user `audit1` with UID `5001`, bash shell, primary group `auditors`, home `/audit/audit1` and password `Aud!t2026`. Create user `audit2` with the same configuration. Create a user `readonly` with shell `/sbin/nologin`, home `/dev/null` and no supplementary group. Configure `/etc/skel` so that every new user automatically has a `~/.bashrc` file with `alias ll='ls -alh'` and a `~/scripts/` directory. Verify these are present for `audit1`.
 
 ---
 
-## Task 02 — Sudo: Restrictions and Audit
+## Task 02 — Sudo
 
-1. Configure `audit1` to execute **only** commands in `/usr/sbin/` without password
-2. Configure `audit2` to execute `journalctl` and `ausearch` without password
-3. Prevent `audit2` from using `su` and `sudo` even if in a group that allows sudo
-4. Verify with `sudo -l -U audit1` and `sudo -l -U audit2`
+Configure `audit1` so that it can run any command in `/usr/sbin/` without a password. Configure `audit2` so that it can run `journalctl` and `ausearch` without a password. Prevent `audit2` from using `su` and `sudo` even if it belongs to a group that allows sudo. Verify with `sudo -l -U audit1` and `sudo -l -U audit2`.
 
 ---
 
-## Task 03 — find: Edge Cases
+## Task 03 — find
 
-1. Find all files in `/etc/` where the **execute permission is set for others** (`-perm -o+x`)
-2. Find files in `/home/` whose **access date** is older than **30 days** (`-atime +30`)
-3. Find all `.log` files in `/var/log/` larger than **5M**, list them with their human-readable size (`-ls`)
-4. Find files in `/tmp/` whose name contains a space (hint: `-name "* *"`)
-5. Find all system files belonging to `audit1` **or** `audit2` in a single `find` command
+Find all files in `/etc/` where the execute permission is set for others. Find files in `/home/` whose access date is older than 30 days. Find all `.log` files in `/var/log/` larger than 5M and display them with their human-readable size. Find files in `/tmp/` whose name contains a space. Find all files on the system belonging to `audit1` or `audit2` in a single `find` command.
 
 ---
 
-## Task 04 — Combined Text Processing
+## Task 04 — Text Processing
 
-1. Generate the list of the 10 processes consuming the most CPU with `ps`, extract PID and %CPU columns with `awk`, redirect to `/tmp/top_cpu.txt`
-2. In `/etc/passwd`, use `sed` to delete all lines starting with `#` and blank lines → `/tmp/passwd_clean.txt`
-3. Count the number of users with a valid shell (different from `/sbin/nologin` and `/bin/false`) with a `grep | wc` pipeline
-4. Use `tr` to transform `/etc/hostname` to uppercase and display the result
+Generate the list of the 10 processes consuming the most CPU using `ps`, extract the PID and %CPU columns with `awk` and redirect to `/tmp/top_cpu.txt`. Use `sed` to remove all comment lines and blank lines from `/etc/passwd` and save to `/tmp/passwd_clean.txt`. Count the number of users with a valid shell (not `/sbin/nologin` or `/bin/false`) using a `grep | wc` pipeline. Use `tr` to display the content of `/etc/hostname` in uppercase.
 
 ---
 
-## Task 05 — Storage: Advanced LVM + pvmove
+## Task 05 — LVM: pvmove
 
-On `/dev/sdb`:
-1. Create PV, VG `vg_thin`, then LV `lv_main` of **6 GiB** in xfs on `/mnt/main`
-2. Add a 2nd PV (`/dev/sdc`) to the VG
-3. Move the Physical Extents from `/dev/sdb` to `/dev/sdc` with `pvmove` (without unmounting)
-4. Remove `/dev/sdb` from the VG with `vgreduce`
-5. Verify `/mnt/main` is still accessible and data is intact
+On `/dev/sdb`, create a PV, a VG `vg_thin` and a LV `lv_main` of 6 GiB in xfs mounted on `/mnt/main`. Add `/dev/sdc` as a second PV to the VG. Move the physical extents from `/dev/sdb` to `/dev/sdc` using `pvmove` without unmounting. Remove `/dev/sdb` from the VG with `vgreduce`. Verify `/mnt/main` is still accessible and data is intact.
 
 ---
 
-## Task 06 — Filesystems: Labels and UUID
+## Task 06 — Filesystem Labels and UUID
 
-1. Create an ext4 partition on `/dev/sdd`, assign it the label `DATAPART`
-2. Mount it via its **label** in `/etc/fstab` (syntax `LABEL=`)
-3. Create an xfs partition on a 2nd space, assign it the label `XFSPART`
-4. Verify the labels with `blkid` and `lsblk -f`
-5. Mount both via `/etc/fstab` and verify persistence
+Create an ext4 partition on `/dev/sdd` and assign it the label `DATAPART`. Create an xfs partition in a second space and assign it the label `XFSPART`. Mount both persistently in `/etc/fstab` using the `LABEL=` syntax. Verify the labels with `blkid` and `lsblk -f`.
 
 ---
 
-## Task 07 — SELinux: Port + Boolean + Context Together
+## Task 07 — SELinux: Port, Boolean and Context
 
-Complete scenario:
-1. Install and configure `vsftpd` to serve files from `/srv/ftp/data/`
-2. The service must listen on port **2121** (non-standard)
-3. Apply the correct SELinux context on `/srv/ftp/data/`
-4. Enable the SELinux boolean allowing FTP access to home directories
-5. Open the port in firewalld and test with `curl ftp://localhost:2121`
+Install and configure `vsftpd` to serve files from `/srv/ftp/data/` on port 2121. Apply the correct SELinux context on `/srv/ftp/data/`. Enable the SELinux boolean that allows FTP access to home directories. Open port 2121 in firewalld and test with `curl ftp://localhost:2121`.
 
 ---
 
-## Task 08 — Systemd: Unit Paths and Conditions
+## Task 08 — Systemd: Conditions
 
-1. Create a `watchdog.service` that checks every 30s whether `/var/run/app.pid` exists
-2. If the file does not exist, the service writes an alert to `/var/log/watchdog.log`
-3. Add a condition `ConditionPathExists=/etc/watchdog.conf` — the service only starts if this file exists
-4. Create `/etc/watchdog.conf` with content `enabled=yes`
-5. Enable the service and verify its behavior with `systemctl status`
+Create a `watchdog.service` that checks every 30 seconds whether `/var/run/app.pid` exists and writes an alert to `/var/log/watchdog.log` if it does not. Add a `ConditionPathExists=/etc/watchdog.conf` directive so the service only starts if this file exists. Create `/etc/watchdog.conf` with content `enabled=yes`. Enable the service and verify its behavior.
 
 ---
 
-## Task 09 — Logs: rsyslog + logrotate
+## Task 09 — rsyslog and logrotate
 
-1. Configure rsyslog to send **all** messages at level `crit` and above to `/var/log/critical.log`
-2. Configure logrotate for this file: **daily** rotation, **7 days** retention, compression, no error if file is absent
-3. Test the rotation manually with `logrotate -f`
-4. Generate a test message with `logger -p kern.crit "CRITICAL TEST"` and verify it appears in `/var/log/critical.log`
+Configure rsyslog to send all messages at level `crit` and above to `/var/log/critical.log`. Configure logrotate for this file with daily rotation, 7-day retention, compression and no error if the file is absent. Test the rotation manually and generate a test message with `logger -p kern.crit "CRITICAL TEST"` to verify it appears in the log.
 
 ---
 
-## Task 10 — Script: System Report Generation
+## Task 10 — Shell Script
 
-Write `/usr/local/bin/sysreport.sh` that generates a report in `/tmp/sysreport_$(date +%Y%m%d).txt` containing:
-- Hostname and date
-- Disk usage (all filesystems)
-- The 5 processes consuming the most memory
-- Number of logged-in users
-- Status of services: `sshd`, `firewalld`, `chronyd`
-- Return code `0` if all services are active, `1` otherwise
+Write `/usr/local/bin/sysreport.sh` that generates a report in `/tmp/sysreport_$(date +%Y%m%d).txt` containing the hostname and date, disk usage of all filesystems, the 5 processes consuming the most memory, the number of logged-in users and the status of `sshd`, `firewalld` and `chronyd`. Exit with code 0 if all services are active, code 1 otherwise.
 
 ---
 
-## Task 11 — Processes: cgroups and loginctl
+## Task 11 — Processes
 
-1. List active sessions with `loginctl`
-2. Identify the process consuming the most memory with `ps -eo pid,pmem,comm --sort=-pmem | head -5`
-3. Change the priority of an `sshd` process to `nice -5` with `renice`
-4. Terminate the `audit2` session with `loginctl terminate-user audit2`
-5. Verify with `loginctl list-users`
+List active sessions with `loginctl`. Identify the process consuming the most memory. Change the priority of an `sshd` process to nice -5 with `renice`. Terminate the `audit2` session with `loginctl terminate-user audit2` and verify with `loginctl list-users`.
 
 ---
 
 ## Task 12 — Chrony and Time
 
-1. Check NTP synchronization status with `chronyc tracking`
-2. Add the NTP server `0.fr.pool.ntp.org` in `/etc/chrony.conf`
-3. Force an immediate sync with `chronyc makestep`
-4. Configure the timezone `Europe/Paris` with `timedatectl`
-5. Verify with `timedatectl status` and `chronyc sources`
+Check NTP synchronization status with `chronyc tracking`. Add the server `0.fr.pool.ntp.org` to `/etc/chrony.conf`. Force an immediate sync with `chronyc makestep`. Set the timezone to `Europe/Paris` with `timedatectl`. Verify with `timedatectl status` and `chronyc sources`.
 
 ---
 
-## Task 13 — Flatpak: Override and Configuration
+## Task 13 — Flatpak
 
-1. Install flatpak if absent
-2. Add the system Flathub remote
-3. List available applications in Flathub for the keyword `text editor`
-4. For an installed Flatpak application (or simulate with an existing one), display its permissions with `flatpak info --show-permissions`
-5. Document in `/tmp/flatpak_perms.txt`: how to restrict network permissions of a Flatpak app (`--no-share=network`)
+Ensure flatpak is installed and the Flathub system remote is added. List available applications matching the keyword `text editor`. For an installed Flatpak application, display its permissions with `flatpak info --show-permissions`. Document in `/tmp/flatpak_perms.txt` how to restrict network permissions of a Flatpak app using `--no-share=network`.
 
 ---
 
-## Task 14 — Network: Firewalld Zones and Interfaces
+## Task 14 — Firewalld Zones
 
-1. Assign the main network interface to the `trusted` zone
-2. Assign a 2nd interface (or create a dummy connection) to the `public` zone
-3. In the `public` zone: allow only SSH and HTTPS
-4. In the `trusted` zone: allow all traffic
-5. Make persistent and verify with `firewall-cmd --get-active-zones`
+Assign the main network interface to the `trusted` zone and a second interface to the `public` zone. In the `public` zone, allow only SSH and HTTPS. In the `trusted` zone, allow all traffic. Make the configuration persistent and verify with `firewall-cmd --get-active-zones`.
 
 ---
 
-## Task 15 — RPM: Advanced Querying
+## Task 15 — RPM
 
-1. List all installed packages whose name starts with `python` with `rpm -qa`
-2. For each python package found, display its name and version with `rpm --qf`
-3. Find which package provides `/usr/bin/python3` with `rpm -qf`
-4. Check if a package contains post-install scripts with `rpm -q --scripts`
-5. Export a complete inventory of installed packages (name + version + architecture) to `/tmp/pkg_inventory.txt`
+List all installed packages whose name starts with `python` and display their name and version using `rpm --qf`. Find which package provides `/usr/bin/python3`. Check if a package contains post-install scripts with `rpm -q --scripts`. Export a complete inventory of installed packages (name, version, architecture) to `/tmp/pkg_inventory.txt`.
 
 ---
 
-## Task 16 — Links and SUID Permissions
+## Task 16 — Links and SUID
 
-1. Find all binaries with SUID in `/usr/bin/` and `/usr/sbin/`
-2. Explain in `/tmp/suid_risk.txt` the security risk associated with SUID on a custom binary
-3. Create a symbolic link `/usr/local/bin/ll` pointing to `/usr/bin/ls`
-4. Create a hard link from `/etc/hosts` to `/tmp/hosts_backup`
-5. Verify with `ls -li` that the inode is identical
+Find all binaries with SUID set in `/usr/bin/` and `/usr/sbin/`. Explain the security risk of SUID on a custom binary in `/tmp/suid_risk.txt`. Create a symbolic link `/usr/local/bin/ll` pointing to `/usr/bin/ls`. Create a hard link from `/etc/hosts` to `/tmp/hosts_backup` and verify with `ls -li` that the inode is identical.
 
 ---
 
-## Task 17 — Scheduling: at + cron + timer Combined
+## Task 17 — Scheduling
 
-1. Schedule with `at`: in **10 minutes**, run `rpm -Va > /tmp/rpm_verify.txt`
-2. Create a system cron in `/etc/cron.d/` (not in crontab) to run `sync` every **5 minutes** as `root`
-3. Create a timer `rpm_check.timer` that checks RPM integrity **every Sunday at 01:00** and writes the result to `/var/log/rpm_check.log`
-4. Verify all scheduled jobs with `atq`, `crontab -l` and `systemctl list-timers`
+Schedule an `at` job to run `rpm -Va > /tmp/rpm_verify.txt` in 10 minutes. Create a system cron in `/etc/cron.d/` to run `sync` every 5 minutes as `root`. Create a timer `rpm_check.timer` that checks RPM integrity every Sunday at 01:00 and writes the result to `/var/log/rpm_check.log`. Verify with `atq`, `crontab -l` and `systemctl list-timers`.
 
 ---
 
-## Task 18 — NFS: Mount Options
+## Task 18 — NFS Mount Options
 
-1. Export `/srv/nfs/soft` and `/srv/nfs/hard`
-2. Mount `/srv/nfs/soft` with option `soft,timeo=30` (soft mount: fast failure)
-3. Mount `/srv/nfs/hard` with option `hard,intr` (hard mount: uninterrupted retry)
-4. Explain in `/tmp/nfs_options.txt` the difference between `soft` and `hard` and when to use each option
+Export `/srv/nfs/soft` and `/srv/nfs/hard` via NFS. Mount `/srv/nfs/soft` with the `soft,timeo=30` option and `/srv/nfs/hard` with the `hard,intr` option. Explain in `/tmp/nfs_options.txt` the difference between soft and hard mounts and when to use each.
 
 ---
 
-## Task 19 — autofs: Direct Map and Timeout
+## Task 19 — autofs: Direct Map
 
-1. Configure autofs to mount `/srv/nfs/hard` on `/mnt/direct_hard` via direct map
-2. Set an unmount timeout of **120 seconds** for this mount
-3. Verify the mount appears on access and disappears after timeout
-4. Check autofs logs with `journalctl -u autofs`
+Configure autofs to mount `/srv/nfs/hard` on `/mnt/direct_hard` via a direct map with an unmount timeout of 120 seconds. Verify that the mount appears on access and disappears after the timeout. Check autofs logs with `journalctl -u autofs`.
 
 ---
 
-## Task 20 — Complete Failure Scenario
+## Task 20 — Recovery Scenario
 
-Simulation: root password is lost AND SELinux prevents a service from working correctly after files were moved.
-
-1. Describe the complete `rd.break` procedure with `enforcing=0` in `/tmp/full_recovery.txt`
-2. After resetting the password, explain why `touch /.autorelabel` is mandatory
-3. Use `grubby` to add `enforcing=0` temporarily, reboot, then restore `enforcing=1`
-4. Verify SELinux mode after reboot with `getenforce` and `sestatus`
+Describe the complete `rd.break` procedure for resetting the root password with `enforcing=0` and write the steps to `/tmp/full_recovery.txt`. Explain why `touch /.autorelabel` is mandatory after resetting the password. Use `grubby` to temporarily add `enforcing=0`, reboot, then restore `enforcing=1`. Verify the SELinux mode after reboot with `getenforce` and `sestatus`.
 
 ---
 
