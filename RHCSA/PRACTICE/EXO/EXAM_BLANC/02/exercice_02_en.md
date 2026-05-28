@@ -1,128 +1,125 @@
 # RHCSA Mock Exam — #02
 **Duration: 2h30 | RHEL 10 | SELinux enforcing | No external documentation**
 
-> Every configuration must survive a reboot.
-> SELinux must remain in enforcing mode.
+---
+
+## Task 01 — Users and Groups
+
+Create a group `devteam` with GID `5000`. Create users `dev1` (UID `3001`, bash, primary group `devteam`, password `Dev@2026`) and `dev2` (UID `3002`, same setup). Create a system account `svc_app` (UID `3003`, no interactive shell, no home directory). Set `dev1`'s password to expire every 60 days with a 5-day minimum between changes and a 10-day warning. Set `dev2`'s account to expire on 2026-12-31.
 
 ---
 
-## Task 01 — Users, Groups and Password Policies
+## Task 02 — SSH Key Access
 
-Create a group `devteam` with GID `5000`. Create user `dev1` with UID `3001`, bash shell, primary group `devteam` and password `Dev@2026`. Create user `dev2` with UID `3002`, same configuration. Create a system account `svc_app` with UID `3003`, shell `/sbin/nologin` and no home directory. Configure `dev1` so that the password must be changed every 60 days with a minimum of 5 days between changes and a warning 10 days before expiration. Set `dev2`'s account to expire on 2026-12-31.
-
----
-
-## Task 02 — SSH Key-Based Access
-
-Generate an ed25519 key pair for `dev1` without a passphrase, using the comment `dev1@lab`. Place the public key in `~dev1/.ssh/authorized_keys` with correct permissions. Verify that `ssh dev1@localhost` works without a password.
+Generate an ed25519 key pair for `dev1` (no passphrase, comment `dev1@lab`) and configure passwordless SSH to localhost.
 
 ---
 
 ## Task 03 — Permissions and ACLs
 
-Create `/projects/devteam/` owned by `root` with group `devteam` and permissions `rwxrws---` (sgid enabled). Use ACLs to grant `dev1` read, write and execute access, `dev2` read and execute access only, and no access to `svc_app`. Verify with `getfacl`.
+Create `/projects/devteam/` owned by `root:devteam` with sgid and permissions `rwxrws---`. Grant `dev1` full access, `dev2` read and execute only, and no access to `svc_app` using ACLs.
 
 ---
 
 ## Task 04 — find
 
-Find all files owned by group `devteam` under `/` and write the result to `/tmp/devteam_files.txt` (suppress stderr). Find all symbolic links in `/etc/` and display their target. Find files in `/var/log/` not modified for more than 30 days and larger than 1M. Find all files with exact permissions `644` in `/home/` and change them to `600` using `-exec`.
+Find all files owned by group `devteam` under `/` and save to `/tmp/devteam_files.txt`. Find symlinks in `/etc/` and display their targets. Find files in `/var/log/` older than 30 days and larger than 1M. Find files with exact permissions `644` in `/home/` and change them to `600`.
 
 ---
 
 ## Task 05 — Text Processing
 
-List `/etc/passwd` sorted by UID in descending order and redirect to `/tmp/passwd_sorted.txt`. Extract only usernames whose shell is `/bin/bash` using `awk`. Replace all occurrences of `bash` with `sh` in a copy of the file at `/tmp/passwd_copy.txt` using `sed` without modifying the original. Count lines, words and characters in `/etc/passwd` in a single command and redirect to `/tmp/passwd_stats.txt`.
+Sort `/etc/passwd` by UID descending into `/tmp/passwd_sorted.txt`. Extract usernames with `/bin/bash` shell using `awk`. Replace `bash` with `sh` in a copy at `/tmp/passwd_copy.txt` using `sed`. Count lines, words and characters of `/etc/passwd` into `/tmp/passwd_stats.txt`.
 
 ---
 
 ## Task 06 — Partitions and Swap
 
-On `/dev/sdb`, create a GPT table, a 3 GiB xfs partition and a 1 GiB swap partition. Format each partition accordingly. Mount the first partition on `/mnt/part1` via UUID in `/etc/fstab` and activate swap via UUID in `/etc/fstab`.
+On `/dev/sdb`, create a GPT table with a 3 GiB xfs partition mounted on `/mnt/part1` and a 1 GiB swap partition, both persistent via UUID in `/etc/fstab`.
 
 ---
 
 ## Task 07 — LVM Snapshot
 
-On `/dev/sdc`, create a PV, a VG `vg_dev` and a LV `lv_code` of 3 GiB formatted as ext4 and mounted on `/mnt/code`. Create a test file `/mnt/code/testfile.txt` with the content `VERSION 1`. Create a 500 MiB snapshot named `lv_code_snap`. Modify the file to contain `VERSION 2`. Unmount `lv_code`, merge the snapshot with `lvconvert --merge`, remount and verify the file contains `VERSION 1`.
+On `/dev/sdc`, create VG `vg_dev` and LV `lv_code` (3 GiB, ext4, mounted on `/mnt/code`). Create a file with content `VERSION 1`. Snapshot it, modify the file to `VERSION 2`, then restore the snapshot and verify the file reads `VERSION 1`.
 
 ---
 
-## Task 08 — SELinux: Full Diagnostic
+## Task 08 — Apache and SELinux
 
-Create `/opt/webapp/` and place an `index.html` file there with content `APP OK`. Change Apache's `DocumentRoot` to `/opt/webapp/` and start the service. It will fail due to SELinux. Diagnose the issue using `ausearch` or `sealert`, fix the context and verify with `curl http://localhost`.
-
----
-
-## Task 09 — SELinux: Boolean and Port
-
-Persistently enable the boolean that allows `httpd` to read files in user home directories. Configure `httpd` to listen on port 8080. Allow this port in SELinux and in firewalld. Verify with `curl http://localhost:8080`.
+Serve content from `/opt/webapp/` (containing `index.html` with `APP OK`) using Apache. Do not modify the default SELinux context before starting — diagnose and fix the resulting failure.
 
 ---
 
-## Task 10 — Systemd: Service Override
+## Task 09 — SELinux Boolean and Port
 
-Without modifying the original unit file of `sshd.service`, create an override that forces automatic restart on failure with a 15-second delay and limits restarts to 3 in 60 seconds. Verify with `systemctl cat sshd.service`.
+Allow `httpd` to read user home directories. Configure `httpd` to listen on port `8080`.
+
+---
+
+## Task 10 — Systemd Override
+
+Without touching the original unit file, override `sshd.service` to restart automatically on failure after 15 seconds, with a maximum of 3 restarts in 60 seconds.
 
 ---
 
 ## Task 11 — Journald
 
-Configure `journald` so that logs persist after a reboot. Display logs from the current boot for the `sshd` service only. Display logs of priority `err` and above from the last 2 hours. Configure `rsyslog` to send all `authpriv` messages at level `warning` and above to `/var/log/auth_warn.log`.
+Make journal logs persistent across reboots. Configure `rsyslog` to send `authpriv.warning` and above to `/var/log/auth_warn.log`.
 
 ---
 
-## Task 12 — Processes and Priority
+## Task 12 — Process Priority
 
-Launch `dd if=/dev/zero of=/dev/null` in the background with a nice value of 10. Find its PID, change its priority to -5 with `renice`, then terminate it with SIGTERM. Apply the tuned profile `throughput-performance` persistently.
+Launch `dd if=/dev/zero of=/dev/null` in the background with nice value `10`, change its priority to `-5`, then terminate it cleanly. Apply the `throughput-performance` tuned profile persistently.
 
 ---
 
 ## Task 13 — Scheduling
 
-Create a timer `backup_home.timer` that triggers `backup_home.service` every day at 02:00. The service must archive `/home/` to `/backup/home_$(date +%Y%m%d).tar.gz`. Enable `Persistent=true` to catch up on missed executions. Add an anacron entry to run `/usr/local/bin/weekly_report.sh` every week (create the script with `echo "weekly report"` inside).
+Create a timer `backup_home.timer` that archives `/home/` daily at 02:00, with `Persistent=true`. Add an anacron entry to run `/usr/local/bin/weekly_report.sh` every week.
 
 ---
 
 ## Task 14 — Shell Script
 
-Write `/usr/local/bin/disk_alert.sh` that iterates over all mount points. If any filesystem exceeds 80% usage, write `ALERT: /mount/point is at XX%` to `/var/log/disk_alert.log`. If no threshold is exceeded, write `OK - $(date)` to the log. Exit with code 0 if OK, code 1 if at least one alert. Schedule the script to run every hour for `root` via cron.
+Write `/usr/local/bin/disk_alert.sh` that logs `ALERT: /mount is at XX%` to `/var/log/disk_alert.log` for any filesystem exceeding 80% usage, or `OK - date` otherwise. Schedule it hourly for root via cron.
 
 ---
 
 ## Task 15 — Network
 
-Using `nmcli`, configure a second network connection on interface `enp0s8` (or the second available interface) with static IP `10.0.0.10/24`, no gateway and DNS `10.0.0.1`. Add a static entry `10.0.0.1 internal.lab.local` to `/etc/hosts`. Verify with `ip a` and `ping internal.lab.local`.
+Add a second connection on `enp0s8` with static IP `10.0.0.10/24`, no gateway, DNS `10.0.0.1`. Add `10.0.0.1 internal.lab.local` to `/etc/hosts`.
 
 ---
 
 ## Task 16 — NFS Client
 
-Export `/srv/exports/data` and `/srv/exports/homes` via NFS. Mount `/srv/exports/data` persistently on `/mnt/nfs_data` in `/etc/fstab` with options `nfs4,_netdev`. Configure autofs to automatically mount `/srv/exports/homes` under `/mnt/homes/` using a wildcard.
+Export `/srv/exports/data` and `/srv/exports/homes`. Mount `data` persistently on `/mnt/nfs_data` with options `nfs4,_netdev`. Configure autofs to mount `homes` on demand under `/mnt/homes/`.
 
 ---
 
 ## Task 17 — RPM and DNF
 
-Identify which package installed `/usr/bin/find` and list all its configuration files. Verify the package integrity with `rpm -V`. Find which package provides the `seinfo` command using `dnf`, install it and list the loaded SELinux modules with `seinfo -t | head -20`.
+Identify the package that owns `/usr/bin/find` and verify its integrity. Find and install the package that provides the `seinfo` command.
 
 ---
 
 ## Task 18 — Flatpak
 
-For user `dev1`, add the Flathub remote in user mode with the name `flathub-user`. List all available remotes. Search for `org.inkscape.Inkscape` and display its information without installing it. Remove the `flathub-user` remote. Document the difference between a `--system` and `--user` remote in `/tmp/flatpak_diff.txt`.
+For user `dev1`, add Flathub in user mode as `flathub-user`. Document the difference between `--system` and `--user` remotes in `/tmp/flatpak_diff.txt`. Remove the remote afterwards.
 
 ---
 
 ## Task 19 — Hard and Symbolic Links
 
-Create `/data/original.txt` containing `ORIGINAL CONTENT`. Create a hard link `/data/hardlink.txt` and a symbolic link `/data/symlink.txt` pointing to this file. Delete `/data/original.txt` and observe the behavior of each link. Find all files sharing the same inode as `/data/hardlink.txt` and write your observations to `/tmp/links_obs.txt`.
+Create `/data/original.txt` with content `ORIGINAL CONTENT`. Create a hard link and a symbolic link to it. Delete the original and observe the behavior of each. Write your observations to `/tmp/links_obs.txt`.
 
 ---
 
 ## Task 20 — System Troubleshooting
 
-Configure the system to boot into `multi-user.target` by default. Use `grubby` to remove the `quiet` argument from the default kernel. Display the last 20 lines of the boot journal with `journalctl -b`. Identify and mask a service of your choice, justifying your decision in `/tmp/mask_justif.txt`.
+Set the system to boot into `multi-user.target` by default. Mask a service of your choice and justify in `/tmp/mask_justif.txt`.
 
 ---
 
