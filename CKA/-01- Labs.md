@@ -2,7 +2,7 @@
 
 ---
 
-### Hardware
+### `Hardware`
     
   - 'CPU' : Intel(R) Core(TM) i7 CPU 920  @ 2.67GH
   - 'RAM' : 16 Gb DDR3 
