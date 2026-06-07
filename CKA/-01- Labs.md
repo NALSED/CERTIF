@@ -6,25 +6,45 @@
     
   - 'CPU' : Intel(R) Core(TM) i7 CPU 920  @ 2.67GH
   - 'RAM' : 16 Gb DDR3 
-  - Network Server Proxmox : - Partage de connection via iPhone SE, pour troubleshoot voir la [section de résolution](https://github.com/NALSED/TUTO/blob/main/PERSO/LINUX/troubleshoot_Proxmox_Wifi.md) du probléme lié à la wifi via partage de connection.
-  - Network Proxmox -> VM Configuration du NAT voir ci dessous, création appuyé sur [IT-Connect](https://www.it-connect.fr/tuto-proxmox-ve-creer-un-reseau-nat/)
+  - Network : Filaire : 192.168.2.2
   - IP : https://172.20.10.10:8006
 
+[NOTE]
 
-### `Network`
-
-- Ici le probléme est que Proxmox est connecté au `WAN et LAN` via mon téléphone en WIFI, donc création de régle de `NAT` pour pouvoir gérer les via `WIFI`, les différentes `VM` et `Proxmox`.
-
+Pour le réseau
+```
+                                        WAN
+                                         │
+┌────────────────────────────────────────┴────┐
+│   iPhone (hotspot)                          │
+│   172.20.10.1/28                            │
+└───────────┬─────────────────────────────────┘
+            │ WiFi
+            │
+┌───────────┴──────────┐
+│   MacBook            │
+│   WiFi : 172.20.10.x │
+│   ETH  : 192.168.2.1 │
+└───────────┬──────────┘
+            │ câble RJ45
+┌───────────┴──────────────────────────────────┐
+│   Proxmox                                    │
+│   nic0  : 192.168.2.2                        │
+│   vmbr0 ──── k8s-master  (192.168.2.10)      │
+│         ──── k8s-worker1 (192.168.2.11)      │
+│         ──── k8s-worker2 (192.168.2.12)      │
+└──────────────────────────────────────────────┘
+```
 
 ### `VM`
 
 3 vm Ubuntu 26.04 
 
-`-1-` k8s-master
+`-1-` k8s-master 192.168.2.10
 
-`-2-` k8s-worker1
+`-2-` k8s-worker1 192.168.2.11
 
-`-3-` k8s-worker2
+`-3-` k8s-worker2 192.168.2.12
 
 ```
 ┌─────────────┬───────┬───────┬────────┐
