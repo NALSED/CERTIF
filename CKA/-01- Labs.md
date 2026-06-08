@@ -11,7 +11,33 @@
 
 [NOTE]
 
-Pour le réseau
+-1- Pour la connection au hotspot (iPhone), et partage de connection, desactiver successivement hotspot -> partage -> ethernet, puis réactiver.
+
+-2- Config (8/06/26) :
+
+- WIFI : 172.20.10.4
+- Ethernet : 192.168.2.1/32 (Utilisation de DHCP avec une adresse manuelle)
+
+-3- Configuration Network de Proxmox
+```
+auto lo
+iface lo inet loopback
+
+iface nic0 inet manual
+
+auto vmbr0 
+iface vmbr0 inet static
+        address 192.168.2.2/24
+        gateway 192.168.2.1
+        bridge-ports nic0
+        bridge-stp off
+        bridge-fd 0
+
+
+source /etc/network/interfaces.d/*
+```
+
+
 ```
                                         WAN
                                          │
@@ -30,9 +56,9 @@ Pour le réseau
 ┌───────────┴──────────────────────────────────┐
 │   Proxmox                                    │
 │   nic0  : 192.168.2.2                        │
-│   vmbr0 ──── k8s-master  (192.168.2.10)      │
-│         ──── k8s-worker1 (192.168.2.11)      │
-│         ──── k8s-worker2 (192.168.2.12)      │
+│   vmbr0 ──── k8s-master  (192.168.2.5)       │
+│         ──── k8s-worker1 (192.168.2.6)       │
+│         ──── k8s-worker2 (192.168.2.7)       │
 └──────────────────────────────────────────────┘
 ```
 
@@ -40,11 +66,12 @@ Pour le réseau
 
 3 vm Ubuntu 26.04 
 
-`-1-` k8s-master 192.168.2.10
+`-1-` k8s-master 192.168.2.5
+sednal
 
-`-2-` k8s-worker1 192.168.2.11
+`-2-` k8s-worker1 192.168.2.6
 
-`-3-` k8s-worker2 192.168.2.12
+`-3-` k8s-worker2 192.168.2.7
 
 ```
 ┌─────────────┬───────┬───────┬────────┐
