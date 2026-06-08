@@ -67,7 +67,6 @@ source /etc/network/interfaces.d/*
 3 vm Ubuntu 26.04 
 
 `-1-` k8s-master 192.168.2.5
-sednal
 
 `-2-` k8s-worker1 192.168.2.6
 
