@@ -7,7 +7,7 @@
   - 'CPU' : Intel(R) Core(TM) i7 CPU 920  @ 2.67GH
   - 'RAM' : 16 Gb DDR3 
   - Network : Filaire : 192.168.2.2
-  - IP : https://172.20.10.10:8006
+  - IP : https://192.168.2.2:8006
 
 [NOTE]
 
