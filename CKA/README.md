@@ -28,6 +28,9 @@ Les compétences sont classées **par ordre d'apprentissage**, du plus simple au
 
 Chaque palier se termine par un critère `✅ Validé quand :` — tant qu'il n'est pas atteint, ne pas passer au suivant.
 
+> 📺 **Support vidéo : Sander van Vugt — CKA Complete Video Course, 4ᵉ édition.**  
+> La correspondance leçon ↔ palier, l'ordre de visionnage recommandé et les **trous de couverture à combler** sont en [annexe, en fin de document](#-annexe--correspondance-avec-le-cours-sander-van-vugt-4ᵉ-éd).
+
 ---
 
 ## Progression globale
@@ -645,6 +648,101 @@ Chaque palier se termine par un critère `✅ Validé quand :` — tant qu'il n'
 🟥 Alias et autocomplétion configurés en moins de 60 s en début d'examen  
 🟥 killer.sh terminé 2 fois avec toutes les questions comprises  
 🟥 Score > 66 % sur examen blanc chronométré
+
+---
+---
+
+# 📺 ANNEXE — Correspondance avec le cours Sander van Vugt (4ᵉ éd.)
+
+**Volume total : ~8 h 15 de vidéo**, 13 leçons réparties en 5 modules.
+
+## Divergence d'ordre — à comprendre avant de commencer
+
+Le cours et ce blueprint sont **inversés sur le bloc administration** :
+
+```
+SANDER      L1 Overview → L2 Install → L3 Nœuds → L4 Maintenance → L5 Sécurité
+            → L6-8 Applications → L9-10 Réseau → L11-12 Stockage → L13 Dépannage
+
+BLUEPRINT   P1-P4 Fondations → P5-P10 Applications → P11-P14 Réseau/Stockage
+            → P15-P19 Ordo/Gouvernance → P20-P23 Administration → P24-P26 Dépannage
+```
+
+Son **Module 1 (L2→L5) correspond à mes P20, P21, P22, P16** — soit la fin de mon blueprint, livrée en premier. C'est normal : un cours vidéo doit te donner un cluster pour suivre les démos.
+
+**Résolution** : suis **son** ordre pour les vidéos, et utilise les critères `✅ Validé quand :` du blueprint comme grille de validation. Le cluster monté en L2 est une **recette** ; le passage en 🟦 de P20 (monter sans notes, 3 fois) se fera plus tard.
+
+---
+
+## Table de correspondance
+
+| Leçon | Titre | Paliers couverts | Couverture |
+|---|---|---|---|
+| **L1** | Kubernetes Overview | P2.1 · P2.2 | partielle |
+| **L2** | Building a Kubernetes Cluster | **P20.1 → P20.14** · P23.1 · P23.2 | ✅ complète |
+| **L3** | Managing Cluster Nodes | P1.8 · P15.12 · P21.1 · P21.2 · P26.2 · P26.3 · P26.8 | ✅ complète |
+| **L4** | Cluster Maintenance | P17.1 · P17.2 · **P21.3 → P21.14** · **P22 entier** | ✅ complète |
+| **L5** | Managing Security | P7.6 · P7.7 · P7.8 · **P16.4 → P16.15** | ✅ complète |
+| **L6** | Running Applications | P3.x · P8 · P10.1-10.3 · P10.10 · P14.14 · P17.4-17.6 | ⚠️ voir trous |
+| **L7** | Managing Applications (Helm/Kustomize) | **P19 entier** · P4.6 | ✅ complète |
+| **L8** | Scheduling | P7.1-7.4 · **P15.1 → P15.11** · P16.1 → P16.3 | ✅ complète |
+| **L9** | Networking | **P11 entier** · **P13 entier** · P3.7 · P25.10 | ✅ complète |
+| **L10** | Advanced Networking | P12.1-12.4 · **P18.1 → P18.10** · P23.2 | ✅ complète |
+| **L11** | Storage | P14.1 → P14.8 · P6.4 · P6.7 | ✅ complète |
+| **L12** | StorageClass | P14.9 · P14.11 · P14.12 | ✅ complète |
+| **L13** | Troubleshooting | P17.3 · P24 · P25 · P26 | ⚠️ **survolé** |
+
+---
+
+## ⚠️ Trous de couverture — à combler hors cours
+
+Le cours est excellent sur l'administration, mais **ces paliers n'ont aucune leçon dédiée**. Trois d'entre eux sont des puces **explicites du curriculum officiel** :
+
+| Palier manquant | Statut curriculum | Gravité |
+|---|---|---|
+| **P9 — Sondes** `liveness` / `readiness` / `startup` | ✅ puce officielle *(« self-healing »)* | 🔴 critique |
+| **P23.5-23.10 — CRD et opérateurs** | ✅ puce officielle *(« understand CRDs, install operators »)* | 🔴 critique |
+| **P10.4-10.9 — Rolling update et rollback** | ✅ puce officielle | 🟠 3 min 32 en L6.1, très léger |
+| **P4 — Vitesse, `--dry-run`, alias, jsonpath** | hors curriculum, **décisif à l'examen** | 🔴 critique |
+| **P5 — Labels, sélecteurs, annotations** | transverse, supposé acquis | 🟠 important |
+| **P3 — Pod : phases, `logs`, `exec`** | supposé acquis (L6.4 = 1 min 9) | 🟠 important |
+| **P6.1-6.3, 6.5-6.10 — ConfigMap/Secret en variables** | vu **uniquement en volume** (L11.7) | 🟠 important |
+| **P10.11-10.12 — `Job` et `CronJob`** | absent | 🟡 secondaire |
+| **P24.11-24.12 — `kubectl debug`, conteneurs éphémères** | absent | 🟡 secondaire |
+| **P14.10, P14.13 — `volumeBindingMode`, resize PVC** | non explicite | 🟡 secondaire |
+| **P20.15 — `kubeadm reset`** | absent | 🟡 secondaire |
+
+> 🔴 **Le trou le plus dangereux : le dépannage.** La leçon 13 fait **~24 min pour 30 % de l'examen** — soit 5 % du cours. Elle donne la *méthode* (13.2 « Troubleshooting Flow »), pas le volume. Mes P24, P25 et P26 comptent ~40 items : ils se travaillent en **cassant le cluster**, pas en regardant des vidéos.
+
+---
+
+## Points forts du cours — à exploiter à fond
+
+- **Gateway API** — 4 leçons, ~28 min, TLS inclus (L9.7→9.10). C'était le risque principal du curriculum 2025 : il est parfaitement couvert.
+- **Haute disponibilité** — L4.6 (14 min) + L4.7 (7 min). Va au-delà du strict nécessaire.
+- **RBAC** — 7 leçons dont « RBAC for Users » (13 min 49). Très complet, couvre tout P16.
+- **etcd et upgrades** — L4.2→4.5, ~32 min + lab. Exactement le niveau attendu.
+- **Provisionneur NFS** — L12.3 (11 min 29), directement applicable à ton lab Proxmox.
+
+---
+
+## Ordre de visionnage recommandé
+
+| Étape | Contenu | Ajout hors cours |
+|---|---|---|
+| 1 | **L1 + L2** — monter le cluster sur les 3 VM Proxmox | — |
+| 2 | ⏸️ **Pause** | **P2, P3, P4, P5** en autonomie — sans ça, tout le reste sera subi |
+| 3 | **L3 + L4 + L5** | — |
+| 4 | ⏸️ **Pause** | **P6** (injection par variables) + **P9** (sondes) |
+| 5 | **L6** | **P10.4→10.12** (rollout undo/history, Jobs, CronJobs) |
+| 6 | **L7 + L8** | — |
+| 7 | **L9 + L10** | — |
+| 8 | **L11 + L12** | **P14.10, P14.13** |
+| 9 | ⏸️ **Pause** | **P23.5→23.10** (CRD et opérateurs) |
+| 10 | **L13** | **P24, P25, P26 en profondeur** — casser le cluster et réparer au chrono |
+| 11 | — | killer.sh ×2 + examens blancs |
+
+> 💡 L'étape **2** est la plus importante du plan. Le cours suppose que tu sais déjà manipuler `kubectl` : partant de zéro, sauter cette pause te fera subir les leçons 3 à 13 au lieu de les pratiquer.
 
 ---
 
