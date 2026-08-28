@@ -2,6 +2,8 @@
 
 ---
 
+## 🇫🇷
+
 ### `Hardware`
     
   - 'CPU' : Intel(R) Core(TM) i7 CPU 920  @ 2.67GH
@@ -81,3 +83,24 @@ source /etc/network/interfaces.d/*
 │ k8s-worker2 │ 2     │ 4 Go  │ 15 Go  │
 └─────────────┴───────┴───────┴────────┘
 ```
+
+---
+---
+
+## 🇦🇲
+
+### `Hardware`
+    
+  - 'CPU' : 13th Gen Intel(R) Core(TM) i7-13700KF
+  - 'RAM' : 32 Gb DDR5 
+  - Network : Filaire : 192.168.0.242
+  - IP : https://192.168.0.242:8006
+
+
+
+
+
+
+
+
+
