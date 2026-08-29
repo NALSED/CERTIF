@@ -28,7 +28,7 @@ firwall-cmd --add-services=https
 firewal-cmd --reload
 ````
 
-5) Editer le fichier `/var/www/html/index.html`
+5) Éditer le fichier `/var/www/html/index.html`
 ````
 vim /var/www/html/index.html
 ````

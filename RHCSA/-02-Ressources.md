@@ -16,7 +16,7 @@
 |--------|-------------|--------|
 | **Sander van Vugt** | Labs RHCSA RHEL 9/10, très proche de l'examen |  [Liens Youtube](https://www.youtube.com/playlist?list=PLC5eRS3MXpp8qgCiKYbZNhnTmfr57bYeU)|
 | **beanologi** |  |  [Liens Youtube](https://www.youtube.com/watch?v=WDDkDw3LI3U&list=PLTY9BjMMGESFaq6TYB0E2RsmIxuQaZbFz) |
-| **Eddie Jennings** | courbe d'apprentissage très bien pensée, sujets traité dans l'odre de la doc RH :warning: RHEL 8 :warning:|  [Liens Youtube](https://www.youtube.com/watch?v=TB06LSPQySE&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy) |
+| **Eddie Jennings** | courbe d'apprentissage très bien pensée, sujets traité dans l'ordre de la doc RH :warning: RHEL 8 :warning:|  [Liens Youtube](https://www.youtube.com/watch?v=TB06LSPQySE&list=PLgYy5YCbiYbHh1ST5__ffj99eAjVfAwgy) |
 
 ---
 
@@ -25,7 +25,7 @@
 | Chaîne | Points forts | Lien |
 |--------|-------------|--------|
 | **Xavki** | Sujet => LVM, Recherche, traité en profondeur |  [Liens Youtube](https://www.youtube.com/@xavki/search?query=rhcsa)|
-| **Stéphane Robert** | Excellents conseils, et des execices bien construit|  [Blog](blog.stephane-robert.info/docs/admin-serveurs/linux) et [GitHub-RHCSA](github.com/stephrobert/linux-training) |
+| **Stéphane Robert** | Excellents conseils, et des exercices bien construit|  [Blog](blog.stephane-robert.info/docs/admin-serveurs/linux) et [GitHub-RHCSA](github.com/stephrobert/linux-training) |
 | **Goffinet** | Pour travailler, hors ligne :warning: RHEL 7et 8 traité :warning: |  [Liens Leanpub](https://leanpub.com/b/linux-administration-complet) |
 
 
@@ -143,13 +143,13 @@ Les tableau sont construit avec les documentations officielles de redhat (11/03/
 ---
 
 
-## :three:  **Ressources par thémes**
+## :three:  **Ressources par thèmes**
 
 
 # RHCSA — Tableaux de ressources
 
 ---
-:warning: Si abscence de liens et `OK`, sujet déjà maitrisé avant `RHCSA` :warning:
+:warning: Si absence de liens et `OK`, sujet déjà maîtrisé avant `RHCSA` :warning:
 
 `[NOTE]` Les tableaux suivants listent les ressources utilisées en fonction des thèmes, pour être sûr de ne pas me perdre ou trop m'éloigner de ce qui est attendu lors de l'examen, j'ai comme fil rouge :
 Vidéo complète de préparation à l'examen de [Sander van Vugt](https://www.oreilly.com/videos/rhcsa-rhel-9/9780135397237/), ainsi que le [Documentation Officielle](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/10/)

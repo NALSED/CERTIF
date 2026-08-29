@@ -14,7 +14,7 @@ nftables gère :
 
    - La redirection de ports
  
-- `firewalld` utilise différents composants pour administrer le parefeu; les principaux sont :
+- `firewalld` utilise différents composants pour administrer le pare-feu; les principaux sont :
 
    - `Service` : ensemble prédéfini de ports/protocoles regroupés sous un nom logique, `man firewalld.service`
 
@@ -24,7 +24,7 @@ nftables gère :
 
 - Utiliser la commande `firewall-cmd --permanent`, comme commande de base
 
-⚠️ Il sera principalment demandé l'application de services pour RHCSA ⚠️
+⚠️ Il sera principalement demandé l'application de services pour RHCSA ⚠️
 
 
 ---
@@ -75,11 +75,11 @@ ssh-copy-id IP ou NAME
 
 - Ici la passphrase de la clé SSH est mise en cache dans le shell et disponible pendant toute la session ou l'utilisateur est connecté.
 
-⚠️ Hors scope mais plus proche du milieu professionel ⚠️
+⚠️ Hors scope mais plus proche du milieu professionnel ⚠️
 
-- Générer clées avec passphrase
+- Générer clés avec passphrase
 
-- Alouer un espace dans le shell
+- Allouer un espace dans le shell
 ````
 ssh-agent /bin/bash
 ````
@@ -112,7 +112,7 @@ $HOME/.shh/config
    
    - `-X` -X11 forwarding non fiable (sandboxé)
 
-   - `-Y` X11 forwarding de confiance (accés complet)
+   - `-Y` X11 forwarding de confiance (accès complet)
 
 ---
 
@@ -131,7 +131,7 @@ $HOME/.shh/config
 - `PermitRootLogin` : Autoriser / Interdire connection via Root
 - `PubkeyAuthentication` : Autoriser / Interdire connection via clé publique
 - `PasswordAthentication` : Autoriser / Interdire connection via mot de passe
-- `X11Forwarding` : Autoriser / Interdire la possiblilité de lancer un application graphique sur un client
+- `X11Forwarding` : Autoriser / Interdire la possibilité de lancer un application graphique sur un client
 - `AllowYsers` : Utilisateur autorisés à se connecter en SSH
 
 
@@ -271,7 +271,7 @@ restorecon PATH
 touch /.autorelabel
 ````
 
-### **⚠️ Pour conaitre le context pour un service ⚠️**
+### **⚠️ Pour connaître le context pour un service ⚠️**
 
 **-1-**
 - Rechercher dans le document root du service (dossier de base depuis lequel le service sert ses fichiers.)
@@ -380,9 +380,9 @@ setsebool -P NOM BOOLEAN on / off
 
 `[NOTE]`
 
-- SELinux utilise `auditd` pour écrir les message de log
+- SELinux utilise `auditd` pour écrire les message de log
 
-- Les `logs` peuvent être utilisés de plusieurs maniéres
+- Les `logs` peuvent être utilisés de plusieurs manières
 
 1) Avec journalctl + grep + UUID
 ````
@@ -468,14 +468,14 @@ sealert -a /var/log/audit/audit.log
 ### **TROUBLESHOOTING**
 
 
-- Procédure de résolution de probléme :
+- Procédure de résolution de problème :
 
  -1- Désactiver SELinux
 ````
 setenforce 0
 ````
 
--2- Retester le Service ou autre, si OK , alors c'est un probléme avec SELinux
+-2- Retester le Service ou autre, si OK , alors c'est un problème avec SELinux
 
 -3- Utiliser les logs
 ````
@@ -510,9 +510,9 @@ dnf install setroubleshoot-server
  # **10.5** — Mot de passe root au boot GRUB → rd.break / init=/bin/bash
 
 
- -1.1- dans le menu des kernel chosir le kernel normal et appuyer sur `e`
+ -1.1- dans le menu des kernel choisir le kernel normal et appuyer sur `e`
 
-⚠️ -1.2- Si menu non accecible ⚠️
+⚠️ -1.2- Si menu non accessible ⚠️
 - booter normalement et utiliser grub2
 ````
 grubby --update-kernel=ALL args="init=/bin/bash"
@@ -549,7 +549,7 @@ grubby --update-kernel=ALL --remove-args="init=/bin/bash"
 
 # **10.6** — Troubleshooting Général
 
-- Probléme au démarage ou boot spécifique, utilise le `grub prompt`.
+- Problème au démarrage ou boot spécifique, utilise le `grub prompt`.
 ````
 # Booter en mode rescue / single user
 => chercher la ligne qui commence par "linux"
@@ -588,7 +588,7 @@ systemctl disable debug-shell
 
 ### **File system**
 
-- Probleme avec `/etc/fstab` :
+- Problème avec `/etc/fstab` :
 
 Par exemple typo, ou device inexistant dans le fichier fstab, au reboot `bash-5.2#` (initramfs (rd.break))
 
@@ -612,7 +612,7 @@ exec /sbin/init
 
 ### **Network**
 
-- le probleme peux survenir de la table de routage
+- le problème peux survenir de la table de routage
 ````
 ip route add
 ip route del

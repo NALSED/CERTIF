@@ -2,7 +2,7 @@
 
 ---
 
-- Ici sera exposé dans l'odre du document [README.md](https://github.com/NALSED/CERTIF/blob/main/RHCSA/README.md), section -02- Gestion des logiciels.
+- Ici sera exposé dans l'ordre du document [README.md](https://github.com/NALSED/CERTIF/blob/main/RHCSA/README.md), section -02- Gestion des logiciels.
 
 ---
 
@@ -11,7 +11,7 @@
 1️⃣ `RPM` :
 
 - RPM Package Manager (RPM) est un `système`, bas niveau, qui exécute sur Red Hat Enterprise Linux, et permet `d'installer des binaires`, via une `archive compressé`.
-- Il contient les métadata (stoquées dans `/var/lib/rpm`) du paquet, ainsi que les dépendences et est identifié avec `.rpm` 
+- Il contient les métadata (stockées dans `/var/lib/rpm`) du paquet, ainsi que les dépendences et est identifié avec `.rpm` 
 - RPM est utilisé pour :
    - Inspecter un .rpm sans l'installer
    - Vérifier l'intégrité d'un paquet installé (Taille, checksum MD5, timestamp changés)
@@ -95,7 +95,7 @@ AppStream  BaseOS
 - Les `repo` se place dans ce dossier :
 `/etc/yum.repos.d`
 
-- Editer le fichier en .repo
+- Éditer le fichier en .repo
 
 
 ````
@@ -129,7 +129,7 @@ rhel-10-for-x86_64-appstream-rpms                              Red Hat Enterpris
 rhel-10-for-x86_64-baseos-rpms                                 Red Hat Enterprise Linux 10 for x86_64 - BaseOS (RPMs)
 ````
 
-- Test d'installation (en forcant l'install local car le compte RH est actif)
+- Test d'installation (en forçant l'install local car le compte RH est actif)
 ````
 # Si compte non actif (chercher un paquet non installé sur la machine)
 sudo dnf install aide.x86_64 -y

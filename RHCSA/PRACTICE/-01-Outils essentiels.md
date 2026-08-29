@@ -2,7 +2,7 @@
 
 ---
 
-- Ici sera exposé dans l'odre du document [README.md](https://github.com/NALSED/CERTIF/blob/main/RHCSA/README.md), section -1-Outils essentiels.
+- Ici sera exposé dans l'ordre du document [README.md](https://github.com/NALSED/CERTIF/blob/main/RHCSA/README.md), section -1-Outils essentiels.
 
 ---
 
@@ -15,7 +15,7 @@ Concept :
 - redirection sortie : `>` écrase, `>>` ajoute
 - redirection entrée : `<`
 - redirection erreur : `2>`
-- pipe : `|` stdout → stdin suivant (permet d'enchainer le traitement d'une commande)
+- pipe : `|` stdout → stdin suivant (permet d'enchaîner le traitement d'une commande)
 - tee : `tee` stdout + fichier simultanément
 
 ---
@@ -194,7 +194,7 @@ cut -d : -f 1 /etc/passwd
 
 ## **SORT**
 
-- `sort` => trie odre alphabétique
+- `sort` => trie ordre alphabétique
 ````
 # Trie la sortie de cut
 cut -d : -f 1/etc/passwd | sort
@@ -203,7 +203,7 @@ cut -d : -f 1/etc/passwd | sort
 ---
 
 ## **TR**
-`tr` => Remplace des caractéres par un autre
+`tr` => Remplace des caractères par un autre
 ````
 echo HELLO WORLD | tr '[:upper:]' '[:lower:]'
 hello world
@@ -352,7 +352,7 @@ sudo dnf install openssh-clients openssh-server
 ssh USERNAME @ IP / DOMAIN NAME
 ````
 
-- Accés sans mots de passe
+- Accès sans mots de passe
 Générer les clés (ed25519 conseillé =>  plus court, plus rapide, plus sûr par conception, moins fragile aux mauvaises implémentations.)
 ````
 ssh-keygen -t ed25519 -C "COMMENTAIRE"
@@ -428,7 +428,7 @@ sednal@rhel:~$ su - USER
 
 ## `sudo`
 
-- `sudo` doit root pour utilisateur courrant
+- `sudo` doit root pour utilisateur courant
  
 - configurer sudo
 ````
@@ -653,7 +653,7 @@ Utilisé pour changer le mode `chmod`, le propriétaire `chown` ou le groupe `ch
 
 ### `-1.3.` Utilisation Commandes
 
-Options courantes pour les `chmod`, `chown`, `chgrp` => -R (Récurssif) / -c (Verbeux sur les changements)
+Options courantes pour les `chmod`, `chown`, `chgrp` => -R (Récursif) / -c (Verbeux sur les changements)
 ````
 # Octale ici : user r + w / groups w / others w
 chmod 644
@@ -689,7 +689,7 @@ chgrp [groupe] [fichier]
 
 `-2.1.` Définition :
 Permet d'appliquer des `droits par defaut`, lors de la `création de dossiers ou fichiers`.
-Les droits par defauts (sans modification de `umask`) sur linux sont :
+Les droits par défauts (sans modification de `umask`) sur linux sont :
 - Dossiers : `755`
 - Fichiers : `644`
 
@@ -794,14 +794,14 @@ Les bit suid/guid/sticky-bit
 `-3.1.` Définition 
 
 -3.1.1 `suid` 
-Abréviation de `Set User ID`, est une autorisation spéciale sur les fichiers exécutables, qui permet à tous les utilisateurs de disposer temporairement des priviléges du propriétaire du fichier.
+Abréviation de `Set User ID`, est une autorisation spéciale sur les fichiers exécutables, qui permet à tous les utilisateurs de disposer temporairement des privilèges du propriétaire du fichier.
 Autrement dit, même si l'utilisateur courant ne dispose pas des droits nécessaire sur le fichier il pourra quand même l'exécuter.
 
 - Exemple : le binaire `/usr/bin/passwd`.
 
 `passwd` est une `commande` permettant de `modifier le mot de passe` de l’utilisateur et possède un bit SUID.
 
-Lorsque nous tapons la commande, nous `l’exécutons en tant qu’utilisateur root`, sans ça on ne pourrait pas `modifier le fichier /etc/shadow`, et par concéquent être dans l'incapacité de modifier son mot de passe sans passer par root.
+Lorsque nous tapons la commande, nous `l’exécutons en tant qu’utilisateur root`, sans ça on ne pourrait pas `modifier le fichier /etc/shadow`, et par conséquent être dans l'incapacité de modifier son mot de passe sans passer par root.
 
 pour voir si un fichier à le bit suid activé
 ````

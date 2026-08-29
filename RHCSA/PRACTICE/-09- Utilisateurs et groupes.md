@@ -9,7 +9,7 @@
 
 - Le fichier de configuration de utilisateur `/etc/login.defs`
 
-- Créer un un arborécence commune pour chaque user `/etc/skel`
+- Créer un un arborescence commune pour chaque user `/etc/skel`
 
 ## 9.1 — Comptes utilisateur — `useradd`, `usermod`, `userdel -r`
 

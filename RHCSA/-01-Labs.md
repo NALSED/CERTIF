@@ -35,7 +35,7 @@ Télécharger [RHEL](https://developers.redhat.com/products/rhel/download#getred
 
 ---
 
-## 📦 Configuratin VMs
+## 📦 Configuration VMs
 
 `[NOTE]`Il est préférable de passer en CLI pur. Si ce n’est pas le cas lors de l’installation, tapez :
 ````
@@ -75,13 +75,13 @@ sudo dnf install vim
 
 ### `-3.` Clone + Snap
 
-`-3.1.` Après installation et enregistrement clonage, en cas du crash total de la Vm pas besoin de reinstaller RHEL 10
+`-3.1.` Après installation et enregistrement clonage, en cas du crash total de la Vm pas besoin de réinstaller RHEL 10
 
 `-3.1.` Lancer le clone, et faire un Snap à chaque étape cruicial.
 
--Si probléme Rollback avec le Snap et si crash total, Clone.
+-Si problème Rollback avec le Snap et si crash total, Clone.
 
-`[NOTE]` Probléme possible avec l'enregistrement, si c'est le cas
+`[NOTE]` Problème possible avec l'enregistrement, si c'est le cas
 ````
 subscription-manager unregister
 ````

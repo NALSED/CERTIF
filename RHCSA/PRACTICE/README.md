@@ -1,4 +1,4 @@
-Ici seront traiter la pratique dans l'ordre du fichier qui liste tous les éléments à connaitre [README.md](https://github.com/NALSED/CERTIF/tree/main/RHCSA)
+Ici seront traiter la pratique dans l'ordre du fichier qui liste tous les éléments à connaître [README.md](https://github.com/NALSED/CERTIF/tree/main/RHCSA)
 
 
 -1- Outils essentiels

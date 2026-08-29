@@ -30,15 +30,15 @@ et protéger l'intégrité des données grâce à un journal en cas de coupure b
 
 ---
 
-**Systeme de fichier pour RHEL 10**
+**Système de fichier pour RHEL 10**
 
-- XFS systeme par défaut => Scalabilité, gros volumes
+- XFS système par défaut => Scalabilité, gros volumes
 
-- ext4 systeme alternatif => stable / réduction de taille possible
+- ext4 système alternatif => stable / réduction de taille possible
 
 ---
 
-- L'utilitaire pour éditer des systemes de fichier est **mkfs**
+- L'utilitaire pour éditer des systèmes de fichier est **mkfs**
 
 **Commandes**
 ````
@@ -66,11 +66,11 @@ lsof /POINT DE MONTAGE
 
 Pour identifier un point de montage et le rendre persistant dans `/etc/fstab`, il est possible d'utiliser 2 option  le `label` et `UUID`.
 
-- **Label** : est défini par l'admnin sys (après la création du systemr de fichier), il peux être intégré dans le fichier `/etc/fstab`, mais si par mégarde 2 points de montage partage le même nom cela peux poser des problémes au niveau du stockage.
+- **Label** : est défini par l'admin sys (après la création du système de fichier), il peux être intégré dans le fichier `/etc/fstab`, mais si par mégarde 2 points de montage partage le même nom cela peux poser des problèmes au niveau du stockage.
 
 - **UUID** : numéro d'identification unique généré au moment du formatage.
 
-Priviligier `UUID`
+Privilégier `UUID`
 
 ---
 
@@ -108,7 +108,7 @@ blkid | grep "sdDEVICE" | awk '{print $2}' >> /etc/fstab
 
   - Montage à la demande — possible via .automount
 
-- Les points de montages fstab sont converti en points demontage `systemd`, présent dans le fichier `run/systemd/generator`
+- Les points de montages fstab sont converti en points démontage `systemd`, présent dans le fichier `run/systemd/generator`
 ou alors sous le format : point de montage.mount
 ````
 /mnt/ext4/sdb1
@@ -325,12 +325,12 @@ ls
 
 `Fichier /home`
 
-1. Editer `/etc/auto.master`
+1. Éditer `/etc/auto.master`
 ````
 /homes /etc/auto.homes
 ````
 
-2. Créer / Editer `/etc/auto.homes`
+2. Créer / Éditer `/etc/auto.homes`
 ````
 * -rw serveur:/home/ldappuser/&
 ```` 
