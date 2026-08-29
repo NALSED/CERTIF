@@ -1,4 +1,4 @@
-pour créer le probléme avec SELinux
+pour créer le problème avec SELinux
 
 - Changer le port d'écoute du serveur web
 ````

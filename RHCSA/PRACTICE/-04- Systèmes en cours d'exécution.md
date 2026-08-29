@@ -8,7 +8,7 @@ Tout programme en cours d'exécution est un **processus**. Le kernel lui attribu
  
 Un processus naît par `fork()` depuis un parent, optionnellement suivi d'un `exec()` pour charger un nouveau programme. Il alterne entre espace user (son code) et espace kernel (ses appels système).
  
-À tout moment il est dans un état : actif `R`, en attente `S` (en attente d'une requéte hardware, réceptif au sigaux)/`D` (ne peux être interompu), stoppé `T`, ou zombie `Z` s'il est terminé mais non récupéré par son parent, `K` en attente d'être arrété
+À tout moment il est dans un état : actif `R`, en attente `S` (en attente d'une requête hardware, réceptif au signaux)/`D` (ne peux être interrompu), stoppé `T`, ou zombie `Z` s'il est terminé mais non récupéré par son parent, `K` en attente d'être arrêté
  
 ---
 
@@ -40,7 +40,7 @@ OK
 
 ## 4.2 — Démarrer dans différentes cibles — systemctl isolate multi-user.target
 
-- Les cibles sont l'nvironement dans lequel linux va charger le systeme.
+- Les cibles sont l'environnement dans lequel linux va charger le système.
 
  Il y à 22 cibles chargés sur RHEL 9.
 
@@ -50,9 +50,9 @@ OK
 
 **=== Changer de cible ===** `systemctl set-default CIBLE`
 
-- Il est aussi possible de charger une cible sans redemmarer le systeme, en utilisant la commande `systemctl isolate CIBLE`
+- Il est aussi possible de charger une cible sans redémarrer le système, en utilisant la commande `systemctl isolate CIBLE`
 
-- Dans le cas numéro 1 `systemctl set-default` un redemmarege est obligatoire, alors que `systemctl isolate`
+- Dans le cas numéro 1 `systemctl set-default` un redémarrage est obligatoire, alors que `systemctl isolate`
 
 **=== Comparatif ===**
 ```
@@ -75,7 +75,7 @@ OK
 - Linux placera le plus possible de fichier en mémoire cache, par sécurité un `swap`, au cas ou l'on manquerai de mémoire, le swap est créer à partir d'espace disque.
 
 
-**=>** **ps** permet de lister les procéssus en cours d'éxecution sur la machine
+**=>** **ps** permet de lister les processus en cours d'exécution sur la machine
 Les options sont très nombreuse, en voici quelque une :
 
 - `ps fax` => Donne une hiérarchie des processus parent - enfants
@@ -84,9 +84,9 @@ Les options sont très nombreuse, en voici quelque une :
 
 - `ps -f --forest -C NOM DU PREOCESSUS` => Permet de d'affiche les infos sur un processus.
 
-- `ps L` => affiche les option / collones que ps peux afficher
+- `ps L` => affiche les option / colonnes que ps peux afficher
 
-- `ps -o` => permet de chosir les option parmis celle listé par `ps L`, mais `ps -o` liste pour l'utilisateur, si on veux tout lister `ps -oe OPTION`
+- `ps -o` => permet de choisir les option parmi celle listé par `ps L`, mais `ps -o` liste pour l'utilisateur, si on veux tout lister `ps -oe OPTION`
 
 
 **=>** **free** permet de voir la mémoire / swap utilisé et disponible
@@ -128,14 +128,14 @@ Régulation de flux RAM → disque, car le disque à une vitesse d'écriture inf
 
 - `h` — Aide
 
-- `f` contenu aditionel 
+- `f` contenu additionnel 
 
 **=>** **uptime**
 
 - Donne des information sur la durée depuis le démarrage, le nombre de session et de charge `CPU` depuis 1, 5 et 15 minutes 
 
 `[NOTE]` 
-La commande`lscpu` donne les informations complétes sur lou les `CPU`
+La commande`lscpu` donne les informations complètes sur lou les `CPU`
 
  **=>** **kill** et **SIGNAL**
 
@@ -143,7 +143,7 @@ La commande`lscpu` donne les informations complétes sur lou les `CPU`
 
 - `killall` — envoie un signal à tous les processus par leur **nom**
 
-- `pkill -u USERNAME` envoie un siganl aux processus de l'utilisateur choisi.
+- `pkill -u USERNAME` envoie un signal aux processus de l'utilisateur choisi.
 
 ```
 kill 1234        # tue le PID 1234
@@ -171,7 +171,7 @@ Pour voir comment tuer un zombie => [Exercice Zombie](https://github.com/NALSED/
 
 `[NOTE]`
 
-- Linux attribu via cgroups des "tanches" de `ressources`, entre :
+- Linux attribue via cgroups des "tanches" de `ressources`, entre :
 
    - System : Tous les process Systemd
    - User : Tous les process User
@@ -200,7 +200,7 @@ Les modification appliqués par `tuned`, sont visible dans l'outil bas niveau `s
 
 - **sysctl** commande sui agit sur /proc/sys
 
-- **sysctl.d** dossier de persitance de la configuration
+- **sysctl.d** dossier de persistance de la configuration
 
 - **tuned-adm** Outil d'administration de `tuned`
 
@@ -241,7 +241,7 @@ tuned-adm list
 tuned-adm profile PROFILE 
 ``` 
 
-=== Personalisation de profile tuned ===
+=== Personnalisation de profile tuned ===
 
 1) créer un répertoire dans /etc/tuned
 ```
@@ -267,7 +267,7 @@ tuned-adm profile my_profile
 
 ## 4.6 — Gestion des sessions actives - loginctl
 
-- `loginctl` dépend de `systemd`, qui gére les sessions et utilisateurs.
+- `loginctl` dépend de `systemd`, qui gère les sessions et utilisateurs.
 
 **Lister**
 
@@ -281,7 +281,7 @@ loginctl list-users
 loginctl list-sessions
 ```
 
-- Processus (liste en arborécence les processus de l'utilisateur choisi)
+- Processus (liste en arborescence les processus de l'utilisateur choisi)
 ```
 loginctl user-status UID
 ```
@@ -307,7 +307,7 @@ loginctl terminate-user
    
    - Sortie normal et erreur des daemons
 
-- Systemd Journal par defaut n'est pas persistant
+- Systemd Journal par défaut n'est pas persistant
  
 - Les service `Rsyslog` lit les messages syslog et les écrits dans différent endroits `/var/log/MODULE`
 
@@ -365,7 +365,7 @@ loginctl terminate-user
 
 - `journalctl -xb` Idem + explications contextuelles (catalog entries) 
 
-- `journalctl --list-boots` Historique des boots, uniquement quand la percistance des boots est activées. 
+- `journalctl --list-boots` Historique des boots, uniquement quand la persistance des boots est activées. 
 
 
 **=== Persistance du journal de Logs ===**
@@ -389,7 +389,7 @@ Storage=persistent
 
 - Configuration Générale => `/etc/rsyslog.conf`
 
-- Ajout de régles => `/etc/rsyslog.d`
+- Ajout de règles => `/etc/rsyslog.d`
 
 Les trois composantes d'une règle de filtrage rsyslog + syntaxe:
 
@@ -497,11 +497,11 @@ systemctl mask SERVICE
 systemctl unmask SERVICE
 ```
 
-**=== Configuartion fichier units ===**
+**=== Configuration fichier units ===**
 
 - Les fichier de configuration `system` de `systemd` sont dans le dossier `/usr/lib/systemd/system`
 
-- Pour créer des fichier unit personalisés : `/etc/systemd/system`
+- Pour créer des fichier unit personnalisés : `/etc/systemd/system`
 
 - Pour voir les options possible sur un service
 ```
@@ -512,7 +512,7 @@ systemctl show SERVICE
 
  **Bonne Pratique** Pour modifier un `unit
 
- - Utiliser la commande `systemctl edit`, cela crééra un fichier directement dans `/etc/systemctl/system` sans toucher au fichier dans `/usr/lib/sytemd/system`.
+ - Utiliser la commande `systemctl edit`, cela créera un fichier directement dans `/etc/systemctl/system` sans toucher au fichier dans `/usr/lib/sytemd/system`.
 
 
 <details>
@@ -565,7 +565,7 @@ WantedBy=multi-user.target
 ```
 
 
-2) Editer les modification du fichier
+2) Éditer les modification du fichier
 ```
 systemctl edit httpd.service
 
@@ -680,7 +680,7 @@ systemctl restart httpd
 
 </details>
 
-**Déffinition de chaque option des fichier**
+**Définition de chaque option des fichier**
 ```
 man systemd.unit      # [Unit] + [Install]
 man systemd.service   # [Service]
@@ -703,19 +703,19 @@ systemctl list-dependencies
 
 ## 4.9 — Gestion des fichiers — `systemd-tmpfiles`  
 
-- Avec systemd , il est possible de gérer des fichiers/dossiers via le gestionaire tmpfile.
+- Avec systemd , il est possible de gérer des fichiers/dossiers via le gestionnaire tmpfile.
 
 - Il permet de générer des dossier/fichiers au boot et gérer les permission, les utilisateurs ainsi que de nettoyer les contenues de dossiers si non utilisé
 
 
 **=== Fichiers de configurations ===**
 
-=> Géréré directement à l'installation par `rpm`
+=> Généré directement à l'installation par `rpm`
 ```
 /usr/lib/tmpfiles.d
 ```
 
-=> Généré par le systeme
+=> Généré par le système
 ```
 /run/tmpfiles.d
 ```
@@ -775,12 +775,12 @@ exemple
 
 
 
-1) Editer un fichier de configuration dans `/etc/tmpfiles.d`
+1) Éditer un fichier de configuration dans `/etc/tmpfiles.d`
 ```
 sudo vim test_tmp_file.conf
 ```
 
-2) Editer
+2) Éditer
 ```
 # Créé un fichier pour sednal avec permissions
 f /home/sednal/fichier_test_tmpfiles 0644 sednal sednal -
@@ -815,7 +815,7 @@ drwxr-xr-x. 2 sednal sednal  6 Mar 23 18:07 Videos
 
 ```
 
-=> dossier_test_tmpfiles / fichier_test_tmpfiles /link_test -> /home/sednal/dossier_test_tmpfiles => créé avec succés.
+=> dossier_test_tmpfiles / fichier_test_tmpfiles /link_test -> /home/sednal/dossier_test_tmpfiles => créé avec succès.
 
 </details>
 

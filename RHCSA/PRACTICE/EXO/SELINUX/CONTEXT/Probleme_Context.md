@@ -1,4 +1,4 @@
-- Cet exercice à pour but de montrer, sur un service non bloquant pour le systeme, comment diagnistiquer un probléme de contexte avec `SELinux` et comment le résoudre.
+- Cet exercice à pour but de montrer, sur un service non bloquant pour le système, comment diagnostiquer un problème de contexte avec `SELinux` et comment le résoudre.
 
 **Mise en place BUG**
 ````

@@ -13,7 +13,7 @@
 
 [NOTE]
 
--1- Pour la connection au hotspot (iPhone), et partage de connection, desactiver successivement hotspot -> partage -> ethernet, puis réactiver.
+-1- Pour la connection au hotspot (iPhone), et partage de connection, désactiver successivement hotspot -> partage -> ethernet, puis réactiver.
 
 -2- Config (8/06/26) :
 

@@ -224,7 +224,7 @@ OK
 ```
 
 
-- Pour éditer le `runtime-boot` de linux choisir `regular kernel`, appyer sur `e`, mais le changement n'est pas persistant
+- Pour éditer le `runtime-boot` de linux choisir `regular kernel`, appuyer sur `e`, mais le changement n'est pas persistant
 
 
 **2 solutions pour les modifications de paramètres noyau**
@@ -270,11 +270,11 @@ DEFAULT => noyau par défaut uniquement
 
 1) éditer le fichier `/etc/default/grub`
 
-2) Vérifier si le systemme démarre en `NBR` ou en `EFI`
+2) Vérifier si le système démarre en `NBR` ou en `EFI`
 
 - `lsblk` => si sur sda1 /boot = NBR et si /boot/efi = EFI
 
-3) Ecrire les changements :
+3) Écrire les changements :
 
 - NBR : `grub2-mkconfig -o /boot/grub2/brub.cfg`
  

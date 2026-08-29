@@ -47,7 +47,7 @@ kill SIGCHLD 4519
 kill 4519
 ```
 
-7) Maintenant la commande `ps` pour chercher le zombie nous montre qu'il à dispar
+7) Maintenant la commande `ps` pour chercher le zombie nous montre qu'il à disparu
 ```
 ps aux | grep "defunct"
 ```

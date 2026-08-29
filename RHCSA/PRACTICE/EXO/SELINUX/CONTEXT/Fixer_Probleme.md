@@ -1,4 +1,4 @@
-### - Recherche du probleme dans /var/log/audit/audit.log
+### - Recherche du problème dans /var/log/audit/audit.log
 ````
 sealert -a /var/log/audit/audit.log
 ````
@@ -50,7 +50,7 @@ type=SYSCALL msg=audit(1778840699.908:411): arch=x86_64 syscall=openat success=n
 Hash: nginx,httpd_t,default_t,file,read
 ````
 
-### - La partie qui explique le probléme
+### - La partie qui explique le problème
 ### On voit ici que le contexte actuel du processus (Source) est différent du contexte actuel du fichier (Target)
 ````
 Additional Information:

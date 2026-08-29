@@ -22,7 +22,7 @@ ip r
 ip -s link
 ````
 
-- Pour tester une configuration utiliser `ip` (configuration non percistante)
+- Pour tester une configuration utiliser `ip` (configuration non persistante)
 ````
 #Address 
 ip addr add dev enp0s3 192.168.0.4/24
@@ -37,7 +37,7 @@ ip route add default via 192.168.0.2
 
 - hostnamectl => voir option `hostnamctl --help`
 
-- hostname inscri dans `/etc/hostname`
+- hostname inscrit dans `/etc/hostname`
 
 - résolution statique locale  `/etc/hosts` 
 
@@ -55,7 +55,7 @@ ip route add default via 192.168.0.2
 
 #  8.1 — Adresses IPv4 et IPv6 — nmcli, nmtui, /etc/NetworkManager/
 
-- `NetworkManager` est l'utilitaire de gestion de réseau sur RHEL, on peux l'administré de 2 maniéres:
+- `NetworkManager` est l'utilitaire de gestion de réseau sur RHEL, on peux l'administré de 2 manières:
 
    - `nmcli` : outil en ligne de commande pour gérer les connexions réseau, scriptable.
    
@@ -69,7 +69,7 @@ ip route add default via 192.168.0.2
 
 **nmcli**
 
-`nmcli` utilise l'autocomplétion, il est donc possible d'éditer une commande en utilisant l'autocomplétion, ce qui est trés pratique pour éviter les erreurs
+`nmcli` utilise l'autocomplétion, il est donc possible d'éditer une commande en utilisant l'autocomplétion, ce qui est très pratique pour éviter les erreurs
 
 - Pour les syntaxe et exemples :
 

@@ -87,9 +87,9 @@ parted /dev/sdb mkpart primary 1MiB  10GiB  # partition 1
 parted /dev/sdb mkpart primary 10GiB 20GiB  # partition 2
 ````
 
-### **Etape suivante**
+### **Étape suivante**
 
--  Création d'un systeme de fichier, voir Section 6 de la progression RHCSA.
+-  Création d'un système de fichier, voir Section 6 de la progression RHCSA.
 [ICI](https://github.com/NALSED/CERTIF/blob/main/RHCSA/PRACTICE/-06-%20Syst%C3%A8mes%20de%20fichiers.md)
 
 ---
@@ -222,7 +222,7 @@ lvcreate -L 10G -n lv_data vg_data
 lvcreate -l 50%FREE -n lv_data vg_data
 ````
 
--1.5- Création du systeme de fichier
+-1.5- Création du système de fichier
 ````
 mkfs.ext4 /dev/vg_data/lv_data
 ````
@@ -232,7 +232,7 @@ mkfs.ext4 /dev/vg_data/lv_data
 mkdir /mnt/lvm
 ````
 
--1.7- (Optionel) Inscription à fstab
+-1.7- (Optionnel) Inscription à fstab
 ⚠️ Bien récupérer `UUID` de /dev/mapper, du volume concerné et pas /dev/sdc1 ⚠️
 ````
 # Récupérer l'UUID et l'envoyer à /etc/fstab
@@ -252,12 +252,12 @@ UUID /mnt/lvm ext4 defaults 0 0
 
 -2.1- Créer un partition ou utiliser un volume disponible
 
--2.2- Etendre le `VG` sur le volume disponible
+-2.2- Étendre le `VG` sur le volume disponible
 ````
 vgextend vg_data /dev/sdd1
 ````
 
--2.3- Etendre le `LV`
+-2.3- Étendre le `LV`
 
 `=== Volume non monté ===`
 ````
@@ -303,8 +303,8 @@ pvremove /dev/sdc1
 
 # 5.3 — Ajout non destructif de partitions, LV et swap — mkswap, swapon, swapoff
 
--  Création d'une partion swap via fdisk :
-**Etapes**
+-  Création d'une partition swap via fdisk :
+**Étapes**
 ````
 # -1- Avec fdisk création de la partion
 # Comme pour une partion classique utiliser l'option 'n'

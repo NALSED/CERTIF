@@ -7,7 +7,7 @@
 - `.sh` conseillé
 - chmod +x
 
-- Commande de dé bugage => exécuter le script avec **bash -x ./script.sh**
+- Commande de débogage => exécuter le script avec **bash -x ./script.sh**
 
 ---
   
@@ -79,7 +79,7 @@ color=red
 echo $red
 ````
 
-=> `$NOMBRE` : Variable positionelle, 1 args1, 2 args2, etc...
+=> `$NOMBRE` : Variable positionnelle, 1 args1, 2 args2, etc...
 
 => `$@` : Tous les arguments
 
@@ -93,7 +93,7 @@ echo $red
 
 **- Code Retour :**
 
-`exit` => Quitter avec un code (0 succés, autre erreur)
+`exit` => Quitter avec un code (0 succès, autre erreur)
 
 `&&` => ET logique (si succès, alors...)
 
