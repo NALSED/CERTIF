@@ -107,6 +107,72 @@ kubeadm join 192.168.0.2:6443 --token p6yhss.kz1mefair5utz9am \
         --discovery-token-ca-cert-hash sha256:1d8aea0e9966e7d322772854ecfbd3a9729a19877edfd50b77066e1b1abf8228
 ````
 
+---
+
+- Pour que kubectl fonctionne directement avec sednal
+````
+mkdir -p ~/.kube
+sudo cp -i /etc/kubernetes/admin.conf ~/.kube/config
+sudo chown $(id -u):$(id -g) ~/.kube/config
+````
+
+- Test Master
+````
+kubectl get nodes
+````
+
+- Sortie attendu:
+````
+NAME         STATUS   ROLES           AGE    VERSION
+k8s-master   Ready    control-plane   8m5s   v1.37.0
+````
+
+---
+
+- Sur k8s-worker1 et k8sworker2 pour, implémenter les worker1 et worker2 au node de master.
+````
+# !!! En root !!!
+kubeadm join 192.168.0.2:6443 --token p6yhss.kz1mefair5utz9am \
+        --discovery-token-ca-cert-hash sha256:1d8aea0e9966e7d322772854ecfbd3a9729a19877edfd50b77066e1b1abf8228
+````
+
+- Sortie worker
+````
+This node has joined the cluster:
+* Certificate signing request was sent to apiserver and a response was received.
+* The Kubelet was informed of the new secure connection details.
+````
+
+- Sortie master avec `kubectl get nodes`
+````
+NAME          STATUS   ROLES           AGE    VERSION
+k8s-master    Ready    control-plane   13m    v1.37.0
+k8s-worker1   Ready    <none>          108s   v1.37.0
+k8s-worker2   Ready    <none>          117s   v1.37.0
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
 
 
 
