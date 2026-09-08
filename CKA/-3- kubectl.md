@@ -27,3 +27,8 @@ complete -o default -F __start_kubectl k
    - -2- Rattache la complétion à l'alias `k`.
 
    - -3- Sans cette ligne, la touche TAB ne fonctionne pas sur `k`.
+
+- Recharger bashrc
+````
+source ~/.bashrc
+````
