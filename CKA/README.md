@@ -1,618 +1,461 @@
-# ☸️ CKA — Blueprint & Checklist de Progression
+# ☸️ CKA — Progression
 **Certified Kubernetes Administrator** | CNCF / Linux Foundation | Version 2026  
-Curriculum officiel v1.34 *(mise à jour Février 2025 — Gateway API, Helm/Kustomize, opérateurs)*
+Support : **Sander van Vugt — CKA Complete Video Course, 4ᵉ édition**  
+Curriculum officiel v1.34 *(mise à jour Février 2025)*
 
 ---
 
 **Date de passage : *à définir***  
-**Point de départ : 🟥 débutant complet — aucune notion Kubernetes préalable**
+**Point de départ : 🟥 débutant complet — aucune notion Kubernetes préalable**  
+**Volume vidéo : ~10 h 07** — 6 modules, 16 leçons
 
 ---
 
 ## Comment lire ce document
 
-Les compétences sont classées **par ordre d'apprentissage**, du plus simple au plus complexe — et non par domaine d'examen. Chaque palier ne suppose acquis **que les paliers précédents**. Aucun saut en avant nécessaire.
+Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon liste ses sous-leçons avec leur durée et les commandes/objets à maîtriser.
 
 **Progression** : 🟥 Non commencé 🟨 En cours 🟩 Maîtrisé 🟦 Sans Aide
+
+> ⚠️ Un ✅ dans la plateforme = **vidéo vue**. Le marqueur ici = **niveau de maîtrise**. Une vidéo vue passe en 🟨, pas en 🟩 : le 🟩 s'obtient au clavier, le 🟦 sans documentation.
 
 **Domaine d'examen** entre crochets, avec son poids officiel :
 
 | Tag | Domaine officiel | Poids |
 |---|---|---|
-| `[BASE]` | Prérequis — *hors curriculum, mais indispensable* | — |
 | `[ARCH]` | Architecture, installation et configuration du cluster | 25 % |
 | `[WORK]` | Charges de travail et ordonnancement | 15 % |
 | `[NET]` | Services et réseau | 20 % |
 | `[STO]` | Stockage | 10 % |
 | `[TS]` | Dépannage | 30 % |
 
-Chaque palier se termine par un critère `✅ Validé quand :` — tant qu'il n'est pas atteint, ne pas passer au suivant.
-
-> 📺 **Support vidéo : Sander van Vugt — CKA Complete Video Course, 4ᵉ édition.**  
-> La correspondance leçon ↔ palier, l'ordre de visionnage recommandé et les **trous de couverture à combler** sont en [annexe, en fin de document](#-annexe--correspondance-avec-le-cours-sander-van-vugt-4ᵉ-éd).
+📌 **Le cours ne couvre pas tout le curriculum.** Les manques sont listés en fin de document : [Compléments hors cours](#-compléments-hors-cours--obligatoire). Ce ne sont pas des approfondissements optionnels.
 
 ---
 
 ## Progression globale
 
-🟥 **ÉTAPE I** — Fondations `P1 → P4`  
-🟥 **ÉTAPE II** — Applications `P5 → P10`  
-🟥 **ÉTAPE III** — Réseau et stockage `P11 → P14`  
-🟥 **ÉTAPE IV** — Ordonnancement et gouvernance `P15 → P19`  
-🟥 **ÉTAPE V** — Administration du cluster `P20 → P23`  
-🟥 **ÉTAPE VI** — Dépannage `P24 → P26`
+| Module | Contenu | Durée | État |
+|---|---|---|---|
+| **M1** | Cluster Architecture, Installation, and Configuration | 3 h 08 | 🟥 |
+| **M2** | Workloads and Scheduling | 2 h 02 | 🟥 |
+| **M3** | Services and Networking | 1 h 42 | 🟥 |
+| **M4** | Storage | 55 min | 🟥 |
+| **M5** | Troubleshooting | 24 min | 🟥 |
+| **M6** | Sample Exams | 1 h 51 | 🟥 |
 
----
-
-## Carte de dépendances
-
-```
-ÉTAPE I — FONDATIONS
-  P1 Linux/conteneurs ──► P2 Premier cluster ──► P3 Le Pod ──► P4 Vitesse & YAML
-                                                                    │
-ÉTAPE II — APPLICATIONS                                             ▼
-  P5 Labels ──► P6 ConfigMap/Secret ──► P7 Ressources ──► P8 Multi-conteneurs
-                                                                    │
-                                          P9 Sondes ◄───────────────┤
-                                              │                     │
-                                              ▼                     │
-                                          P10 Contrôleurs ◄─────────┘
-                                              │
-ÉTAPE III — RÉSEAU & STOCKAGE                 ▼
-  P11 Services ──► P12 DNS ──► P13 Ingress/Gateway      P14 Stockage
-                                              │              │
-ÉTAPE IV — ORDONNANCEMENT & GOUVERNANCE       ▼              ▼
-  P15 Scheduling ──► P16 RBAC/Quotas ──► P17 Métriques/HPA ──► P18 NetworkPolicy
-                                                                    │
-                                                    P19 Helm/Kustomize
-                                                                    │
-ÉTAPE V — ADMINISTRATION                                            ▼
-  P20 Install kubeadm ──► P21 Lifecycle/etcd ──► P22 HA ──► P23 Extensions/CRD
-                                                                    │
-ÉTAPE VI — DÉPANNAGE                                                ▼
-  P24 Applicatif ──► P25 Réseau/Services ──► P26 Nœud & control plane
-```
-
-> 💡 Le dépannage est **dernier** alors qu'il pèse 30 % : on ne répare pas ce qu'on ne sait pas construire. C'est un palier de **synthèse**, pas un palier d'apprentissage.
+🟨 Introduction *(4m08)* — vue
 
 ---
 ---
 
-# ÉTAPE I — FONDATIONS
+# 🏗️ Module 1 — Cluster Architecture, Installation, and Configuration
+`[ARCH]` · **3 h 08** · *Module Introduction (36s)*
 
-*Objectif : être capable de lire un cluster existant et d'écrire du YAML vite.*
-
----
-
-## 🟥 P1 — Prérequis Linux et conteneurs `[BASE]`
-
-**1.1** — SSH entre machines, `sudo`, gestion des droits fichiers  
-**1.2** — `systemd` — `systemctl status/start/restart/enable`, unités  
-**1.3** — Journaux — `journalctl -u <unité> -f`, `-n 100`, `--since`  
-**1.4** — Édition `vim` — `dd`, `yy`, `p`, `/recherche`, `:set paste`, `:wq`, `:%s///g`  
-**1.5** — Réseau Linux — `ip a`, `ip r`, `ss -tulpn`, `curl`, `nc -zv`, `dig` / `nslookup`  
-**1.6** — Fichiers — `find`, `grep -r`, `tail -f`, `less`, redirections  
-**1.7** — Notions conteneur — image, couches, registre, tag, `ENTRYPOINT` vs `CMD`  
-**1.8** — Runtime `containerd` — `crictl ps -a`, `crictl images`, `crictl logs`, `crictl inspect`  
-**1.9** — Syntaxe YAML — indentation 2 espaces, listes `-`, maps, blocs `|` et `>`, `---`
-
-✅ **Validé quand :** tu édites un fichier de config système en `vim` et tu lis les logs d'un service planté sans chercher la syntaxe.
+> Ce module correspond au domaine le plus lourd de l'examen après le dépannage. Il te fait construire ton cluster avant de savoir t'en servir — c'est normal, il faut une machine pour suivre les démos.
 
 ---
 
-## 🟥 P2 — Premier contact avec un cluster `[BASE]`
+## 🟨 Leçon 1 — Understanding Kubernetes Architecture
+**9 min** · *Learning objectives (27s)*
 
-**2.1** — Modèle mental — control plane (`kube-apiserver`, `etcd`, `kube-scheduler`, `kube-controller-manager`) vs nœud (`kubelet`, `kube-proxy`, runtime)  
-**2.2** — Boucle de réconciliation — état désiré vs état réel  
-**2.3** — Impératif vs déclaratif  
-**2.4** — Fichier kubeconfig — `~/.kube/config`, blocs `clusters` / `users` / `contexts`  
-**2.5** — Contextes — `kubectl config get-contexts`, `use-context`, `current-context`  
-**2.6** — Namespace par défaut — `kubectl config set-context --current --namespace=<ns>`  
-**2.7** — Lecture — `kubectl get <res>`, `-o wide`, `-o yaml`, `-n`, `-A`  
-**2.8** — Inspection — `kubectl describe`, section `Events`  
-**2.9** — Découverte de l'API — `kubectl api-resources`, `kubectl api-versions`  
-**2.10** — Auto-documentation — `kubectl explain pod.spec.containers --recursive`  
-**2.11** — Namespaces — création, isolation logique, ressources non-namespacées
+🟨 **1.1** — Vanilla Kubernetes and the Ecosystem *(2m36)* — ✅ vue  
+🟥 **1.2** — Running Kubernetes in Cloud or on Premises *(50s)*  
+🟥 **1.3** — Kubernetes Distributions *(1m36)* — vanilla, OpenShift, Rancher, k3s  
+🟥 **1.4** — Kubernetes Node Roles *(3m55)* — control plane (`kube-apiserver`, `etcd`, `kube-scheduler`, `kube-controller-manager`) vs worker (`kubelet`, `kube-proxy`, runtime)
 
-✅ **Validé quand :** tu bascules entre 3 contextes et tu décris n'importe quel objet sans hésiter sur la syntaxe.
+✅ **Validé quand :** tu nommes les 4 composants du control plane et les 3 du nœud, et tu dis ce que chacun fait.
 
 ---
 
-## 🟥 P3 — Le Pod `[WORK]`
+## 🟥 Leçon 2 — Creating a Kubernetes Cluster with kubeadm
+**46 min** · *Learning objectives (47s)*
 
-**3.1** — `kubectl run <nom> --image=<img>`  
-**3.2** — Phases — `Pending`, `Running`, `Succeeded`, `Failed`, `Unknown`  
-**3.3** — Anatomie d'un manifeste Pod — `apiVersion`, `kind`, `metadata`, `spec.containers`  
-**3.4** — Journaux — `kubectl logs`, `-f`, `--previous`, `-c <conteneur>`, `--tail`, `--since`  
-**3.5** — Shell dans un conteneur — `kubectl exec -it <pod> -- sh`, `-c`  
-**3.6** — Suppression — `kubectl delete pod`, `--force --grace-period=0`  
-**3.7** — Accès local — `kubectl port-forward pod/<pod> 8080:80`  
-**3.8** — `command` et `args` — surcharge de l'image  
-**3.9** — Variables d'environnement — `env`, `value`  
-**3.10** — Politique de récupération d'image — `imagePullPolicy`
+🟥 **2.1** — Cluster Node Requirements *(2m25)* — 2 vCPU, 2 Go RAM, hostname/MAC/`product_uuid` uniques  
+🟥 **2.2** — Provisioning an Infrastructure *(1m45)* — cf. `-01- Labs.md` (3 VM Proxmox)  
+🟥 **2.3** — Installation Procedure Overview *(1m21)*  
+🟥 **2.4** — Linux Kernel Settings *(2m40)* — `swapoff -a` + `/etc/fstab`, modules `overlay` / `br_netfilter`, `net.bridge.bridge-nf-call-iptables=1`, `net.ipv4.ip_forward=1`  
+🟥 **2.5** — Installing CRI and Tools *(4m54)* — `containerd`, `config.toml`, **`SystemdCgroup = true`**, dépôt `pkgs.k8s.io`, `apt-mark hold`  
+🟥 **2.6** — Using kubeadm init *(6m)* — `--pod-network-cidr`, `--apiserver-advertise-address`, `kubeadm config images pull`  
+🟥 **2.7** — Configuring the Kubernetes Client *(7m47)* — `/etc/kubernetes/admin.conf` → `~/.kube/config`, contextes, `kubectl config use-context`  
+🟥 **2.8** — Setting up Node Networking *(5m14)* — installation du CNI (Calico / Flannel / Cilium)  
+🟥 **2.9** — Adding Nodes to the Cluster *(2m55)* — `kubeadm token create --print-join-command`, `--discovery-token-ca-cert-hash`  
+🟥 **2.10** — kubeadm init with a Configuration File *(3m56)* — `kubeadm init --config`  
+🟥 **Lab** — Building a Kubernetes Cluster *(31s + 6m05 solution)*
 
-✅ **Validé quand :** tu crées un Pod à la main en YAML, tu y entres, tu lis ses logs, tu le supprimes — sans documentation.
+✅ **Validé quand :** tu montes le cluster 1 master + 2 workers **sans notes**, trois fois de suite.
 
----
-
-## 🟥 P4 — Vitesse et génération de YAML `[BASE]` ⚡
-
-> ⚠️ **Palier le plus rentable de tout le blueprint.** 2 h pour ~20 tâches : celui qui écrit son YAML à la main ne finit pas.
-
-**4.1** — Alias — `alias k=kubectl`, `complete -F __start_kubectl k`  
-**4.2** — Variables — `export do='--dry-run=client -o yaml'`, `export now='--force --grace-period=0'`  
-**4.3** — Config `vim` — `set tabstop=2 shiftwidth=2 expandtab` dans `~/.vimrc`  
-**4.4** — Génération — `k run nginx --image=nginx $do > pod.yaml`  
-**4.5** — Générateurs impératifs — `k create deploy/svc/cm/secret/job/cronjob/role/sa ... $do`  
-**4.6** — Application — `k apply -f fichier.yaml`, `-f dossier/`, `-f -` (stdin)  
-**4.7** — Modification en place — `k edit`, `k patch`, `k replace --force -f`  
-**4.8** — Sauvegarde d'un objet — `k get <res> <nom> -o yaml > backup.yaml`  
-**4.9** — Comparaison — `k diff -f fichier.yaml`  
-**4.10** — Extraction ciblée — `-o jsonpath='{.items[*].metadata.name}'`, `--sort-by`, `-o custom-columns`  
-**4.11** — Navigation `kubernetes.io/docs` — trouver un exemple copiable en < 30 s  
-
-✅ **Validé quand :** ton environnement (alias, complétion, vim) est configuré en moins de 60 s, et tu n'écris plus jamais un manifeste de zéro.
-
----
----
-
-# ÉTAPE II — APPLICATIONS
-
-*Objectif : déployer, configurer et maintenir une application.*
+> ⏸️ **PAUSE OBLIGATOIRE APRÈS CETTE LEÇON.** Voir [Complément A](#complément-a--bases-kubectl-et-vitesse-) — le cours suppose désormais que tu sais manipuler `kubectl`. Sauter cette pause te fera *subir* les leçons 3 à 16.
 
 ---
 
-## 🟥 P5 — Labels, sélecteurs et annotations `[WORK]`
+## 🟥 Leçon 3 — Managing Kubernetes Clusters
+**25 min** · *Learning objectives (35s)*
 
-**5.1** — Labels — clé/valeur sur `metadata.labels`  
-**5.2** — Manipulation — `kubectl label pod x env=prod`, `--overwrite`, `env-` (retrait)  
-**5.3** — Sélection par égalité — `-l env=prod`, `-l env!=dev`  
-**5.4** — Sélection par ensemble — `-l 'env in (prod,staging)'`, `notin`, `!clé`  
-**5.5** — Affichage — `--show-labels`, `-L env`  
-**5.6** — Annotations vs labels — métadonnées non sélectionnables  
-**5.7** — Lien sélecteur ↔ contrôleur — `spec.selector.matchLabels` ↔ `template.metadata.labels`
+🟥 **3.1** — Analyzing Cluster Nodes *(4m52)* — `kubectl get nodes -o wide`, `describe node`, conditions  
+🟥 **3.2** — Using crictl *(4m59)* — `crictl ps -a`, `crictl logs`, `crictl images`, `crictl inspect`  
+🟥 **3.3** — Running Static Pods *(4m18)* — `/etc/kubernetes/manifests/`, suffixe `-<nom-du-nœud>`, gérés par le kubelet seul  
+🟥 **3.4** — Managing Node State *(4m44)* — `kubectl cordon` / `uncordon`, `drain --ignore-daemonsets --delete-emptydir-data`  
+🟥 **3.5** — Managing Node Services *(4m10)* — `systemctl status kubelet`, `journalctl -u kubelet`, `/var/lib/kubelet/config.yaml`  
+🟥 **Lab** — Running Static Pods *(24s + 1m19 solution)*
 
-✅ **Validé quand :** tu comprends qu'un Service ou un Deployment **ne trouve rien** si le sélecteur et les labels divergent d'un caractère.
-
----
-
-## 🟥 P6 — Configuration : ConfigMap et Secret `[WORK]`
-
-**6.1** — Création ConfigMap — `--from-literal`, `--from-file`, `--from-env-file`  
-**6.2** — Injection unitaire — `env.valueFrom.configMapKeyRef`  
-**6.3** — Injection globale — `envFrom.configMapRef`  
-**6.4** — Montage en volume — `volumes.configMap`, `items`, `subPath`, `defaultMode`  
-**6.5** — Types de Secret — `generic`, `docker-registry`, `tls`  
-**6.6** — Encodage — `base64 -w0`, `base64 -d`, `stringData` vs `data`  
-**6.7** — Injection Secret — `secretKeyRef`, `envFrom.secretRef`, montage volume  
-**6.8** — Accès registre privé — `imagePullSecrets`  
-**6.9** — Objets immuables — `immutable: true`  
-**6.10** — Rechargement — les volumes se mettent à jour, **pas les variables d'env**
-
-✅ **Validé quand :** tu injectes la même clé par variable **et** par fichier monté, et tu sais laquelle survit à une mise à jour du ConfigMap.
+✅ **Validé quand :** tu crées un pod statique, tu le vois apparaître dans `kubectl get pods`, et tu le supprimes en déplaçant son manifeste.
 
 ---
 
-## 🟥 P7 — Ressources et contexte de sécurité `[WORK]`
-
-**7.1** — `resources.requests` — ce qui sert à l'**ordonnancement**  
-**7.2** — `resources.limits` — ce qui sert à l'**exécution**  
-**7.3** — Unités — CPU (`100m` = 0,1 cœur), mémoire (`Mi`, `Gi`)  
-**7.4** — Classes QoS — `Guaranteed`, `Burstable`, `BestEffort` et ordre d'éviction  
-**7.5** — Dépassement — CPU = throttling, mémoire = `OOMKilled` (code 137)  
-**7.6** — `securityContext` niveau Pod — `runAsUser`, `runAsGroup`, `fsGroup`, `runAsNonRoot`  
-**7.7** — `securityContext` niveau conteneur — `capabilities.add/drop`, `privileged`, `allowPrivilegeEscalation`, `readOnlyRootFilesystem`  
-**7.8** — ServiceAccount — notion, `automountServiceAccountToken: false`
-
-✅ **Validé quand :** tu expliques pourquoi un Pod sans `requests` peut être évincé en premier alors qu'il consomme peu.
-
----
-
-## 🟥 P8 — Pods multi-conteneurs `[WORK]`
-
-**8.1** — Namespace réseau partagé — communication via `localhost`  
-**8.2** — Volume partagé — `emptyDir` entre conteneurs  
-**8.3** — `initContainers` — exécution séquentielle, bloquante  
-**8.4** — Sidecar natif — `initContainers` avec `restartPolicy: Always`  
-**8.5** — Motifs — sidecar, ambassador, adapter  
-**8.6** — Ciblage — `kubectl logs -c`, `kubectl exec -c`
-
-✅ **Validé quand :** tu construis un Pod où un initContainer prépare un fichier qu'un sidecar sert et que le conteneur principal lit.
-
----
-
-## 🟥 P9 — Sondes et auto-réparation `[WORK]`
-
-**9.1** — `livenessProbe` — redémarre le conteneur  
-**9.2** — `readinessProbe` — retire le Pod des **endpoints** du Service  
-**9.3** — `startupProbe` — protège les démarrages lents  
-**9.4** — Mécanismes — `exec`, `httpGet`, `tcpSocket`, `grpc`  
-**9.5** — Réglages — `initialDelaySeconds`, `periodSeconds`, `timeoutSeconds`, `failureThreshold`, `successThreshold`  
-**9.6** — `restartPolicy` — `Always`, `OnFailure`, `Never`  
-**9.7** — `CrashLoopBackOff` — backoff exponentiel jusqu'à 5 min  
-**9.8** — `terminationGracePeriodSeconds`, `preStop`
-
-✅ **Validé quand :** tu distingues sans hésiter un problème de *liveness* (redémarrages en boucle) d'un problème de *readiness* (Pod Running mais trafic absent).
-
----
-
-## 🟥 P10 — Contrôleurs de charge `[WORK]`
-
-**10.1** — `ReplicaSet` — `replicas`, `selector`, `template`  
-**10.2** — `Deployment` — gère les ReplicaSets, une révision par version  
-**10.3** — Mise à l'échelle — `kubectl scale --replicas=N`  
-**10.4** — Changement d'image — `kubectl set image deploy/x c=img:tag`  
-**10.5** — Stratégies — `RollingUpdate` (`maxSurge`, `maxUnavailable`) vs `Recreate`  
-**10.6** — Suivi — `kubectl rollout status`, `history`, `--revision=N`  
-**10.7** — Retour arrière — `kubectl rollout undo`, `--to-revision=N`  
-**10.8** — Pause — `kubectl rollout pause` / `resume`  
-**10.9** — Rétention — `revisionHistoryLimit`, annotation `kubernetes.io/change-cause`  
-**10.10** — `DaemonSet` — un Pod par nœud, tolérations implicites  
-**10.11** — `Job` — `completions`, `parallelism`, `backoffLimit`, `activeDeadlineSeconds`  
-**10.12** — `CronJob` — `schedule`, `concurrencyPolicy`, `suspend`, `startingDeadlineSeconds`, `successfulJobsHistoryLimit`
-
-✅ **Validé quand :** tu fais une mise à jour progressive, tu la casses volontairement, tu la reviens en arrière et tu retrouves la révision fautive dans l'historique.
-
----
----
-
-# ÉTAPE III — RÉSEAU ET STOCKAGE
-
-*Objectif : exposer une application et lui donner de la persistance.*
-
----
-
-## 🟥 P11 — Services `[NET]`
-
-**11.1** — Modèle réseau — une IP par Pod, réseau plat, pas de NAT entre Pods  
-**11.2** — `ClusterIP` — IP virtuelle stable, interne  
-**11.3** — Chaîne sélecteur → Pods → **Endpoints**  
-**11.4** — Vérification — `kubectl get endpoints`, `kubectl get endpointslices`  
-**11.5** — Ports — `port` (Service) vs `targetPort` (conteneur) vs `nodePort` (nœud)  
-**11.6** — `NodePort` — plage `30000-32767`  
-**11.7** — `LoadBalancer` — dépend du provider / MetalLB en lab  
-**11.8** — `ExternalName` — alias DNS, aucun proxy  
-**11.9** — Service *headless* — `clusterIP: None`, retourne les IP de Pods  
-**11.10** — Création rapide — `kubectl expose deploy/x --port=80 --target-port=8080`  
-**11.11** — `kube-proxy` — modes `iptables`, `ipvs`, `nftables`
-
-✅ **Validé quand :** face à un Service qui ne répond pas, ton **premier réflexe** est `kubectl get endpoints`.
-
----
-
-## 🟥 P12 — DNS et CoreDNS `[NET]`
-
-**12.1** — Nom pleinement qualifié — `<svc>.<ns>.svc.cluster.local`  
-**12.2** — Résolution courte — `<svc>` dans le même namespace, `<svc>.<ns>` ailleurs  
-**12.3** — CoreDNS — Deployment dans `kube-system` + ConfigMap `Corefile`  
-**12.4** — Service `kube-dns` — IP DNS du cluster  
-**12.5** — `/etc/resolv.conf` d'un Pod — `search`, `nameserver`, `ndots:5`  
-**12.6** — `dnsPolicy` — `ClusterFirst`, `Default`, `None`, `ClusterFirstWithHostNet`  
-**12.7** — `dnsConfig` — serveurs et recherches personnalisés  
-**12.8** — Test — `kubectl run tmp --rm -it --image=busybox:1.28 -- nslookup <svc>`  
-**12.9** — Enregistrements SRV et Pods d'un service headless
-
-✅ **Validé quand :** tu résous un Service depuis un Pod d'un autre namespace et tu sais lire le `search` de son `resolv.conf`.
-
----
-
-## 🟥 P13 — Ingress et Gateway API `[NET]`
-
-**13.1** — Distinction **contrôleur Ingress** (le logiciel) vs **ressource Ingress** (la règle)  
-**13.2** — Installation d'un contrôleur — `ingress-nginx`  
-**13.3** — `IngressClass` et `spec.ingressClassName`  
-**13.4** — Règles — `host`, `http.paths`, `backend.service.name/port`  
-**13.5** — `pathType` — `Exact`, `Prefix`, `ImplementationSpecific`  
-**13.6** — TLS — `spec.tls`, Secret de type `tls`  
-**13.7** — `defaultBackend`  
-**13.8** — Gateway API — installation des CRD (hors distribution standard)  
-**13.9** — `GatewayClass` — l'implémentation  
-**13.10** — `Gateway` — `listeners`, `protocol`, `port`, `allowedRoutes`  
-**13.11** — `HTTPRoute` — `parentRefs`, `hostnames`, `rules.matches`, `backendRefs`  
-**13.12** — Répartition de trafic — `backendRefs[].weight`  
-**13.13** — Séparation des rôles : Gateway (infra) ≠ HTTPRoute (application)
-
-✅ **Validé quand :** tu exposes la même application deux fois — une via Ingress, une via Gateway API — et tu expliques ce que la seconde apporte.
-
----
-
-## 🟥 P14 — Stockage `[STO]`
-
-**14.1** — `emptyDir` — cycle de vie du Pod, `medium: Memory`  
-**14.2** — `hostPath` — chemin du nœud, `type:` (`Directory`, `File`, `DirectoryOrCreate`)  
-**14.3** — `volumeMounts` — `mountPath`, `subPath`, `readOnly`  
-**14.4** — `PersistentVolume` — `capacity`, `accessModes`, `persistentVolumeReclaimPolicy`, `storageClassName`  
-**14.5** — `PersistentVolumeClaim` — demande de ressource, liaison automatique  
-**14.6** — Modes d'accès — `ReadWriteOnce`, `ReadOnlyMany`, `ReadWriteMany`, `ReadWriteOncePod`  
-**14.7** — Politiques de récupération — `Retain`, `Delete`  
-**14.8** — Phases d'un PV — `Available`, `Bound`, `Released`, `Failed`  
-**14.9** — `StorageClass` — `provisioner`, `parameters`, `reclaimPolicy`, `allowVolumeExpansion`  
-**14.10** — `volumeBindingMode` — `Immediate` vs `WaitForFirstConsumer`  
-**14.11** — Classe par défaut — annotation `storageclass.kubernetes.io/is-default-class`  
-**14.12** — Provisionnement dynamique — PVC sans PV préexistant  
-**14.13** — Redimensionnement — édition du PVC, `allowVolumeExpansion: true`  
-**14.14** — `StatefulSet` — `volumeClaimTemplates`, identité stable, Service headless, ordre de déploiement
-
-✅ **Validé quand :** tu crées un PVC qui reste `Pending` **volontairement**, et tu diagnostiques la cause (classe absente, mode d'accès incompatible, `WaitForFirstConsumer`).
-
----
----
-
-# ÉTAPE IV — ORDONNANCEMENT ET GOUVERNANCE
-
-*Objectif : décider où les Pods tournent, et qui a le droit de faire quoi.*
-
----
-
-## 🟥 P15 — Ordonnancement `[WORK]`
-
-**15.1** — Fonctionnement du scheduler — phase de **filtrage** puis de **scoring**  
-**15.2** — `nodeName` — court-circuite le scheduler  
-**15.3** — `nodeSelector` + labels de nœud — `kubectl label node <n> disk=ssd`  
-**15.4** — `nodeAffinity` — `requiredDuringSchedulingIgnoredDuringExecution` vs `preferred...`  
-**15.5** — Opérateurs — `In`, `NotIn`, `Exists`, `DoesNotExist`, `Gt`, `Lt`  
-**15.6** — `podAffinity` / `podAntiAffinity` + `topologyKey`  
-**15.7** — Taints — `kubectl taint nodes <n> clé=valeur:NoSchedule`, `PreferNoSchedule`, `NoExecute`  
-**15.8** — Tolerations — `operator: Equal|Exists`, `tolerationSeconds`  
-**15.9** — Taint du control plane — `node-role.kubernetes.io/control-plane:NoSchedule`  
-**15.10** — `topologySpreadConstraints` — `maxSkew`, `topologyKey`, `whenUnsatisfiable`  
-**15.11** — `PriorityClass` — `value`, `globalDefault`, préemption  
-**15.12** — Pods statiques — `/etc/kubernetes/manifests/`, suffixe `-<nom-du-nœud>`, gérés par le kubelet seul  
-**15.13** — `schedulerName` et ordonnanceurs multiples
-
-✅ **Validé quand :** tu forces un Pod sur un nœud teinté, et tu expliques la différence entre `NoSchedule` (nouveaux Pods) et `NoExecute` (Pods déjà présents).
-
----
-
-## 🟥 P16 — Gouvernance et RBAC `[ARCH]`
-
-**16.1** — `ResourceQuota` — `hard` sur `pods`, `requests.cpu`, `limits.memory`, `count/<res>`  
-**16.2** — `LimitRange` — `default`, `defaultRequest`, `min`, `max`, `type: Container|Pod|PersistentVolumeClaim`  
-**16.3** — Interaction quota ↔ Pod sans `requests` → refus d'admission  
-**16.4** — Modèle RBAC — **sujet** + **verbe** + **ressource**  
-**16.5** — `Role` (namespacé) vs `ClusterRole` (global)  
-**16.6** — `RoleBinding` vs `ClusterRoleBinding`  
-**16.7** — Cas particulier : `RoleBinding` → `ClusterRole` = droits limités à un namespace  
-**16.8** — Règles — `apiGroups`, `resources`, `verbs`, `resourceNames`, `subresources` (`pods/log`, `pods/exec`)  
-**16.9** — Verbes — `get`, `list`, `watch`, `create`, `update`, `patch`, `delete`, `deletecollection`  
-**16.10** — Génération — `kubectl create role/clusterrole/rolebinding/clusterrolebinding`  
-**16.11** — Liaison à un ServiceAccount — `--serviceaccount=<ns>:<sa>`  
-**16.12** — Vérification — `kubectl auth can-i <verbe> <res> --as=<user> -n <ns>`, `--as-group`, `--list`  
-**16.13** — ClusterRoles par défaut — `cluster-admin`, `admin`, `edit`, `view`  
-**16.14** — ClusterRoles agrégés — `aggregationRule`  
-**16.15** — Construire un kubeconfig pour un ServiceAccount
-
-✅ **Validé quand :** tu crées un compte limité à la lecture des Pods d'un seul namespace, et tu le **prouves** avec `auth can-i --as`.
-
----
-
-## 🟥 P17 — Observabilité et autoscaling `[WORK]` `[TS]`
-
-**17.1** — Installation `metrics-server` — en lab, `--kubelet-insecure-tls`  
-**17.2** — `kubectl top nodes`, `kubectl top pods --containers`, `-A`  
-**17.3** — Événements — `kubectl get events --sort-by=.lastTimestamp`, `-w`, `--field-selector`  
-**17.4** — HPA rapide — `kubectl autoscale deploy/x --min=2 --max=10 --cpu-percent=70`  
-**17.5** — HPA v2 — `metrics` (`Resource`, `Pods`, `Object`), `behavior`, stabilisation  
-**17.6** — Dépendance stricte : **sans `requests`, pas de HPA sur CPU**  
-**17.7** — Vérification — `kubectl get hpa`, colonne `TARGETS` à `<unknown>` = métriques absentes  
-**17.8** — Notions — Cluster Autoscaler (nœuds) vs VPA (dimensionnement vertical)
-
-✅ **Validé quand :** ton HPA passe de `<unknown>` à une valeur réelle et tu sais pourquoi il était à `<unknown>`.
-
----
-
-## 🟥 P18 — NetworkPolicy `[NET]`
-
-**18.1** — État par défaut — **tout est autorisé** entre tous les Pods  
-**18.2** — Dès qu'une policy sélectionne un Pod, tout le reste est refusé pour le type concerné  
-**18.3** — `policyTypes` — `Ingress`, `Egress`  
-**18.4** — `podSelector: {}` — sélectionne **tous** les Pods du namespace  
-**18.5** — Refus global — deny-all ingress + egress  
-**18.6** — Sources — `podSelector`, `namespaceSelector`, `ipBlock` (+ `except`)  
-**18.7** — ⚠️ Piège classique — deux entrées de liste `-` = **OU**, deux clés dans la **même** entrée = **ET**  
-**18.8** — Ports et protocoles — `ports.port`, `protocol`, `endPort`  
-**18.9** — Egress et DNS — toujours autoriser UDP/TCP **53** vers CoreDNS  
-**18.10** — Prérequis CNI — Calico/Cilium oui, **Flannel seul n'applique rien**  
-**18.11** — Validation — test réel `curl` / `nc` depuis un Pod autorisé puis un Pod interdit
-
-✅ **Validé quand :** tu poses un deny-all, tu rouvres un seul flux, et le test `curl` échoue depuis partout ailleurs.
-
----
-
-## 🟥 P19 — Helm et Kustomize `[ARCH]`
-
-**19.1** — `helm repo add`, `repo update`, `search repo`  
-**19.2** — `helm install <release> <chart> -n <ns> --create-namespace`  
-**19.3** — `helm list -A`, `helm status`, `helm get values/manifest/all`  
-**19.4** — Valeurs — `-f values.yaml`, `--set clé=valeur`, `helm show values`  
-**19.5** — `helm upgrade --install`, `helm rollback <release> <rev>`, `helm history`  
-**19.6** — `helm uninstall`  
-**19.7** — Rendu hors cluster — `helm template`, `--dry-run`  
-**19.8** — Structure d'un chart — `Chart.yaml`, `values.yaml`, `templates/`, `charts/`  
-**19.9** — `kustomization.yaml` — `resources`, `namespace`, `namePrefix`, `commonLabels`, `images`  
-**19.10** — Générateurs — `configMapGenerator`, `secretGenerator`, `generatorOptions`  
-**19.11** — Bases et overlays — structure `base/` + `overlays/{dev,prod}/`  
-**19.12** — Patches — `patches`, merge stratégique, JSON 6902  
-**19.13** — Application — `kubectl kustomize <dir>`, `kubectl apply -k <dir>`
-
-✅ **Validé quand :** tu installes un chart, tu changes une valeur par upgrade, tu reviens en arrière — et tu produis deux overlays Kustomize à partir d'une même base.
-
----
----
-
-# ÉTAPE V — ADMINISTRATION DU CLUSTER
-
-*Objectif : construire, faire évoluer et sauvegarder le cluster lui-même.*
-
----
-
-## 🟥 P20 — Installation d'un cluster avec kubeadm `[ARCH]`
-
-**20.1** — Prérequis — 2 vCPU, 2 Go RAM, hostname/MAC/`product_uuid` uniques, ports ouverts  
-**20.2** — Swap — `swapoff -a` + commentaire dans `/etc/fstab`  
-**20.3** — Modules noyau — `overlay`, `br_netfilter` via `/etc/modules-load.d/k8s.conf`  
-**20.4** — Sysctl — `net.bridge.bridge-nf-call-iptables=1`, `net.ipv4.ip_forward=1`, `sysctl --system`  
-**20.5** — Runtime — installation `containerd`, `config.toml`, **`SystemdCgroup = true`**  
-**20.6** — Dépôt `pkgs.k8s.io` — installation `kubeadm` `kubelet` `kubectl` + `apt-mark hold`  
-**20.7** — Pré-téléchargement — `kubeadm config images pull`  
-**20.8** — Initialisation — `kubeadm init --pod-network-cidr=<cidr> --apiserver-advertise-address=<ip>`  
-**20.9** — Kubeconfig admin — copie de `/etc/kubernetes/admin.conf` vers `~/.kube/config`  
-**20.10** — Installation du CNI — Calico / Flannel / Cilium, cohérence avec le `--pod-network-cidr`  
-**20.11** — Jonction des workers — `kubeadm token create --print-join-command`  
-**20.12** — Anatomie du join — token + `--discovery-token-ca-cert-hash sha256:...`  
-**20.13** — Gestion des tokens — `kubeadm token list/create/delete`, expiration 24 h  
-**20.14** — Configuration par fichier — `kubeadm init --config <fichier>`  
-**20.15** — Remise à zéro — `kubeadm reset` + nettoyage `/etc/cni/net.d`, `iptables`, `~/.kube`  
-**20.16** — Vérification — `kubectl get nodes`, `kubectl get pods -n kube-system`
-
-✅ **Validé quand :** tu montes un cluster 1 master + 2 workers **from scratch, sans notes**, trois fois de suite.
-
----
-
-## 🟥 P21 — Cycle de vie et etcd `[ARCH]`
-
-**21.1** — `kubectl cordon` / `uncordon` — marquage `SchedulingDisabled`  
-**21.2** — `kubectl drain <nœud> --ignore-daemonsets --delete-emptydir-data --force`  
-**21.3** — `kubeadm upgrade plan` — versions cibles disponibles  
-**21.4** — Ordre de mise à jour — **control plane d'abord**, puis workers  
-**21.5** — Séquence control plane — `apt-mark unhold` → maj `kubeadm` → `kubeadm upgrade apply vX.Y.Z` → maj `kubelet`/`kubectl` → `daemon-reload` + `restart kubelet` → `hold`  
-**21.6** — Séquence worker — `drain` → maj `kubeadm` → `kubeadm upgrade node` → maj `kubelet` → restart → `uncordon`  
-**21.7** — Politique d'écart de versions — kubelet jamais plus récent que l'apiserver, 3 versions mineures d'écart max  
-**21.8** — Certificats — `kubeadm certs check-expiration`, `kubeadm certs renew all`  
-**21.9** — etcd — Pod statique, données dans `/var/lib/etcd`  
-**21.10** — Localiser les certificats — `/etc/kubernetes/pki/etcd/{ca.crt,server.crt,server.key}`  
-**21.11** — Sauvegarde — `ETCDCTL_API=3 etcdctl snapshot save <fic> --endpoints=https://127.0.0.1:2379 --cacert= --cert= --key=`  
-**21.12** — Vérification — `etcdctl snapshot status <fic> -w table`  
-**21.13** — Restauration — `etcdctl snapshot restore <fic> --data-dir=<nouveau>` (ou `etcdutl` sur etcd ≥ 3.5)  
-**21.14** — Après restauration — modifier le `hostPath` dans `/etc/kubernetes/manifests/etcd.yaml`, attendre le redémarrage  
-**21.15** — Retrait d'un nœud — `drain` → `kubectl delete node` → `kubeadm reset` sur la machine
+## 🟥 Leçon 4 — Performing Node Maintenance Tasks
+**66 min** — *la leçon la plus longue du cours* · *Learning objectives (51s)*
+
+🟥 **4.1** — Metrics Server *(5m21)* — installation (`--kubelet-insecure-tls` en lab), `kubectl top nodes`, `kubectl top pods --containers`  
+🟥 **4.2** — Backing up the Etcd *(7m50)* — `ETCDCTL_API=3 etcdctl snapshot save`, `--endpoints`, `--cacert`, `--cert`, `--key`, certificats dans `/etc/kubernetes/pki/etcd/`  
+🟥 **4.3** — Restoring the Etcd *(6m41)* — `etcdctl snapshot restore --data-dir`, modification du `hostPath` dans `/etc/kubernetes/manifests/etcd.yaml`  
+🟥 **4.4** — Cluster Node Upgrades *(12m15)* — `kubeadm upgrade plan`, `upgrade apply`, ordre control plane d'abord, `apt-mark unhold/hold`  
+🟥 **4.5** — Cluster Worker Upgrades *(5m42)* — `drain` → `kubeadm upgrade node` → maj `kubelet` → `uncordon`  
+🟥 **4.6** — Cluster High Availability Options *(14m21)* — etcd empilé vs externe, quorum `(n/2)+1`, nombre impair  
+🟥 **4.7** — Setting up a Highly Available Cluster *(7m33)* — `--control-plane-endpoint`, `--upload-certs`, `join --control-plane --certificate-key`  
+🟥 **Lab** — Etcd Backup and Restore *(24s + 4m37 solution)*
 
 ✅ **Validé quand :** tu casses volontairement le cluster (suppression de ressources), tu restaures un snapshot etcd, et tout revient.
 
 ---
 
-## 🟥 P22 — Control plane hautement disponible `[ARCH]`
+## 🟥 Leçon 5 — Managing Security Settings
+**41 min** · *Learning objectives (48s)*
 
-**22.1** — Topologies — etcd **empilé** (stacked) vs etcd **externe**  
-**22.2** — Quorum — nombre **impair** de membres, tolérance `(n-1)/2` pannes  
-**22.3** — Load balancer devant l'apiserver — HAProxy + Keepalived / VIP  
-**22.4** — `kubeadm init --control-plane-endpoint=<vip>:6443 --upload-certs`  
-**22.5** — Join control plane — `kubeadm join ... --control-plane --certificate-key <clé>`  
-**22.6** — Régénérer la clé — `kubeadm init phase upload-certs --upload-certs`  
-**22.7** — Vérification etcd — `etcdctl member list -w table`, `endpoint health --cluster`  
-**22.8** — Domaines de panne — ce qui survit à la perte d'un nœud, de deux nœuds
+🟥 **5.1** — Understanding API Access *(3m21)* — sujet + verbe + ressource  
+🟥 **5.2** — Managing Security Context *(4m49)* — `runAsUser`, `runAsNonRoot`, `fsGroup`, `capabilities`, `allowPrivilegeEscalation`, `readOnlyRootFilesystem`  
+🟥 **5.3** — Users, ServiceAccounts, and API Access *(1m45)* — `kubectl create sa`, `automountServiceAccountToken`  
+🟥 **5.4** — Understanding RBAC *(2m01)* — `Role` (namespacé) vs `ClusterRole` (global)  
+🟥 **5.5** — RBAC for ServiceAccounts *(10m32)* — `kubectl create role/rolebinding --serviceaccount=<ns>:<sa>`, `apiGroups`, `resources`, `verbs`  
+🟥 **5.6** — ClusterRoles and ClusterRoleBindings *(1m35)* — `cluster-admin`, `admin`, `edit`, `view` ; RoleBinding → ClusterRole = droits limités au namespace  
+🟥 **5.7** — RBAC for Users *(13m49)* — certificats client, kubeconfig, `kubectl auth can-i --as=<user>`  
+🟥 **Lab** — Managing Security *(22s + 2m11 solution)*
 
-✅ **Validé quand :** tu expliques pourquoi un cluster etcd à 2 membres est **moins** disponible qu'à 1 seul.
-
----
-
-## 🟥 P23 — Interfaces d'extension, CRD et opérateurs `[ARCH]`
-
-**23.1** — **CRI** — contrat kubelet ↔ runtime, `containerd` / `CRI-O`, socket `/run/containerd/containerd.sock`  
-**23.2** — **CNI** — binaires `/opt/cni/bin`, configuration `/etc/cni/net.d`, plugin unique actif  
-**23.3** — **CSI** — driver, plugin de nœud, plugin contrôleur, objets `CSIDriver` / `CSINode`  
-**23.4** — Device plugins — exposition de ressources matérielles (GPU)  
-**23.5** — `CustomResourceDefinition` — `apiextensions.k8s.io/v1`  
-**23.6** — Anatomie d'une CRD — `group`, `names` (`kind`/`plural`/`singular`/`shortNames`), `scope`, `versions`, `schema`  
-**23.7** — Exploitation — `kubectl get crd`, `kubectl explain <kind>`, `kubectl get <cr>`  
-**23.8** — Motif opérateur — ressource personnalisée + contrôleur en boucle de réconciliation  
-**23.9** — Installation d'un opérateur — manifeste, Helm ou OLM  
-**23.10** — Contrôleurs d'admission — mutants vs validants, `ValidatingAdmissionPolicy`
-
-✅ **Validé quand :** tu installes une CRD, tu crées une ressource personnalisée, et tu la retrouves via `kubectl explain`.
+✅ **Validé quand :** tu crées un compte limité à la lecture des Pods d'un seul namespace, et tu le **prouves** avec `auth can-i --as`.
 
 ---
 ---
 
-# ÉTAPE VI — DÉPANNAGE
-
-*Objectif : réparer sous contrainte de temps. 30 % de l'examen.*
-
----
-
-## 🟥 P24 — Dépannage applicatif `[TS]`
-
-**24.1** — Méthode — `describe` → `Events` → `logs` → `logs --previous` → `exec`  
-**24.2** — `Pending` — aucun nœud compatible : ressources, taints, affinité, PVC non lié  
-**24.3** — `ImagePullBackOff` / `ErrImagePull` — nom, tag, registre, `imagePullSecrets`  
-**24.4** — `CrashLoopBackOff` — l'application sort : `logs --previous`, code de sortie  
-**24.5** — `OOMKilled` — code **137**, limite mémoire trop basse  
-**24.6** — `ContainerCreating` bloqué — volume, Secret/ConfigMap absent, CNI  
-**24.7** — `Evicted` — pression disque ou mémoire sur le nœud  
-**24.8** — `Init:Error` / `Init:CrashLoopBackOff` — initContainer fautif  
-**24.9** — `Running` mais sans trafic — readiness en échec, absent des endpoints  
-**24.10** — `Terminating` bloqué — finalizers, `--force --grace-period=0`  
-**24.11** — Conteneurs éphémères — `kubectl debug -it <pod> --image=busybox --target=<c>`  
-**24.12** — Copie de debug — `kubectl debug <pod> --copy-to=<nom> --set-image=...`  
-**24.13** — Codes de sortie — `0`, `1`, `125`, `126`, `127`, `137` (SIGKILL), `143` (SIGTERM)
-
-✅ **Validé quand :** on te donne un Pod cassé au hasard et tu identifies la cause en moins de 2 minutes.
+# 📦 Module 2 — Workloads and Scheduling
+`[WORK]` · **2 h 02** · *Module Introduction (27s)*
 
 ---
 
-## 🟥 P25 — Dépannage réseau et services `[TS]`
+## 🟥 Leçon 6 — Deploying Kubernetes Applications
+**41 min** · *Learning objectives (37s)*
 
-**25.1** — Endpoints vides — sélecteur qui ne correspond pas, ou aucun Pod `Ready`  
-**25.2** — Comparaison — `kubectl get pods --show-labels` vs `kubectl describe svc`  
-**25.3** — `targetPort` erroné — le Service pointe vers un port non exposé  
-**25.4** — Test par couches — `curl <podIP>` → `curl <clusterIP>` → `curl <nom-svc>`  
-**25.5** — DNS — `nslookup kubernetes.default`, état des Pods CoreDNS, `Corefile`  
-**25.6** — `kube-proxy` — DaemonSet présent, logs, règles `iptables -t nat -L`  
-**25.7** — NetworkPolicy qui bloque — supprimer temporairement pour confirmer  
-**25.8** — Ingress — contrôleur en marche, `ingressClassName` correct, Service backend existant  
-**25.9** — CNI défaillant — Pods bloqués en `ContainerCreating`, nœud `NotReady`  
-**25.10** — Contournement de test — `kubectl port-forward svc/<x> 8080:80`  
-**25.11** — Boîte à outils — `busybox:1.28`, `nicolaka/netshoot`
+🟥 **6.1** — Using Deployments *(3m32)* — `replicas`, `selector.matchLabels`, `template`, `kubectl set image`  
+🟥 **6.2** — Running Agents with DaemonSets *(2m48)* — un Pod par nœud, tolérations implicites  
+🟥 **6.3** — Using StatefulSets *(6m54)* — identité stable, `volumeClaimTemplates`, Service headless, ordre de déploiement  
+🟥 **6.4** — The Case for Running Individual Pods *(1m09)*  
+🟥 **6.5** — Managing Pod Initialization *(3m38)* — `initContainers`, exécution séquentielle et bloquante  
+🟥 **6.6** — Scaling Applications *(3m10)* — `kubectl scale --replicas=N`  
+🟥 **6.7** — Configuring Autoscaling *(7m50)* — `kubectl autoscale`, HPA, **dépend de `requests` et de metrics-server**  
+🟥 **6.8** — Sidecar Containers for Application Logging *(9m31)* — namespace réseau partagé, `emptyDir` commun, sidecar natif (`initContainers` + `restartPolicy: Always`)  
+🟥 **Lab** — Running a DaemonSet *(20s + 1m33 solution)*
 
-✅ **Validé quand :** tu remontes une panne réseau couche par couche (Pod → Service → DNS → Ingress) sans sauter d'étape.
+✅ **Validé quand :** tu génères chaque contrôleur avec `--dry-run=client -o yaml` sans consulter la doc.
+
+> ⏸️ **PAUSE.** Voir [Complément B](#complément-b--sondes-rollback-et-jobs-) — sondes, rollback et Jobs/CronJobs sont absents de cette leçon alors qu'ils sont au programme.
 
 ---
 
-## 🟥 P26 — Dépannage nœud et control plane `[TS]` 🔥
+## 🟥 Leçon 7 — Using Templating Tools
+**34 min** · *Learning objectives (25s)*
 
-> **Palier le plus difficile.** Il mobilise P1, P2, P15, P20 et P21 en même temps.
+🟥 **7.1** — Running Applications from YAML Files *(1m)* — `kubectl apply -f`  
+🟥 **7.2** — The Helm Package Manager *(10m58)* — `helm repo add/update`, `helm install -n --create-namespace`, `helm list -A`  
+🟥 **7.3** — Creating a Template from a Helm Chart *(5m55)* — `helm template`, `Chart.yaml`, `values.yaml`, `templates/`  
+🟥 **7.4** — Managing Applications with Helm *(6m15)* — `helm upgrade -f/--set`, `helm rollback`, `helm history`, `helm uninstall`  
+🟥 **7.5** — Using Kustomize *(4m52)* — `kustomization.yaml`, `resources`, `configMapGenerator`, bases/overlays, `kubectl apply -k`  
+🟥 **Lab** — Managing Applications with Helm *(17s + 4m09 solution)*
 
-**26.1** — Nœud `NotReady` — kubelet arrêté, CNI absent, pression disque, certificat expiré  
-**26.2** — Diagnostic kubelet — `systemctl status kubelet`, `journalctl -u kubelet -n 100 --no-pager`  
-**26.3** — Fichiers kubelet — `/var/lib/kubelet/config.yaml`, `/etc/kubernetes/kubelet.conf`, `/var/lib/kubelet/kubeadm-flags.env`  
-**26.4** — Incohérence de cgroup driver — `systemd` côté kubelet vs `cgroupfs` côté containerd  
-**26.5** — Swap réactivé après reboot — le kubelet refuse de démarrer  
-**26.6** — Conditions de nœud — `MemoryPressure`, `DiskPressure`, `PIDPressure`  
-**26.7** — Manifestes statiques — `/etc/kubernetes/manifests/` : une erreur YAML fait tomber l'apiserver  
-**26.8** — Quand `kubectl` ne répond plus — bascule sur `crictl ps -a`, `crictl logs <id>`  
-**26.9** — Journaux bruts — `/var/log/pods/`, `/var/log/containers/`  
-**26.10** — Scheduler arrêté — Pods `Pending` indéfiniment, aucun événement d'ordonnancement  
-**26.11** — Controller-manager arrêté — Deployment sans ReplicaSet, nœuds non nettoyés  
-**26.12** — etcd en panne — apiserver refuse de démarrer, erreurs de connexion `2379`  
-**26.13** — Certificats expirés — erreurs `x509: certificate has expired`  
-**26.14** — Mauvais kubeconfig ou mauvais contexte — `Unable to connect to the server`  
-**26.15** — Fichiers du control plane — `/etc/kubernetes/{admin,controller-manager,scheduler}.conf`  
-**26.16** — Forcer le redémarrage d'un Pod statique — déplacer le manifeste hors du dossier puis le remettre  
-**26.17** — Ports à connaître — `6443` apiserver, `2379-2380` etcd, `10250` kubelet, `10259` scheduler, `10257` controller-manager
+✅ **Validé quand :** tu installes un chart, tu changes une valeur par upgrade, tu reviens en arrière — et tu produis deux overlays Kustomize à partir d'une même base.
+
+---
+
+## 🟥 Leçon 8 — Managing Scheduling
+**47 min** · *Learning objectives (47s)*
+
+🟥 **8.1** — Exploring the Scheduling Process *(2m32)* — phase de filtrage puis de scoring  
+🟥 **8.2** — Setting Node Preferences *(3m10)* — `nodeName`, `nodeSelector`, `kubectl label node`  
+🟥 **8.3** — Affinity and anti-Affinity Rules *(10m21)* — `requiredDuringScheduling...` vs `preferred...`, `podAffinity` / `podAntiAffinity`, `topologyKey`, opérateurs `In` / `NotIn` / `Exists`  
+🟥 **8.4** — Taints and Tolerations *(8m34)* — `kubectl taint nodes k=v:NoSchedule`, `PreferNoSchedule`, `NoExecute`, `tolerationSeconds`  
+🟥 **8.5** — Resource Limits and Requests *(2m08)* — `100m` CPU, `Mi`/`Gi`, classes QoS, `OOMKilled` (code 137)  
+🟥 **8.6** — Setting Namespace Quota *(6m38)* — `ResourceQuota`, `count/<res>`  
+🟥 **8.7** — Configuring LimitRange *(3m13)* — `default`, `defaultRequest`, `min`, `max`  
+🟥 **8.8** — Configuring Pod Priorities *(5m05)* — `PriorityClass`, préemption, `globalDefault`  
+🟥 **Lab** — Configuring Taints *(44s + 3m43 solution)*
+
+✅ **Validé quand :** tu forces un Pod sur un nœud teinté, et tu expliques la différence entre `NoSchedule` (nouveaux Pods) et `NoExecute` (Pods déjà présents).
+
+---
+---
+
+# 🌐 Module 3 — Services and Networking
+`[NET]` · **1 h 42** · *Module Introduction (20s)*
+
+---
+
+## 🟥 Leçon 9 — Managing Application Access
+**67 min** — *la leçon la plus longue en contenu* · *Learning objectives (47s)*
+
+🟥 **9.1** — Exploring Kubernetes Networking *(6m35)* — une IP par Pod, réseau plat, pas de NAT entre Pods  
+🟥 **9.2** — Understanding Network Plugins *(2m51)* — rôle du CNI  
+🟥 **9.3** — Using Services to Access Applications *(4m19)* — `ClusterIP`, `NodePort` (30000-32767), `LoadBalancer`, `ExternalName`, headless ; `port` vs `targetPort` vs `nodePort` ; **`kubectl get endpoints`**  
+🟥 **9.4** — Running an Ingress Controller *(10m48)* — installation `ingress-nginx`, `IngressClass`  
+🟥 **9.5** — Configuring Ingress *(7m21)* — `ingressClassName`, `host`, `http.paths`, `pathType` (`Exact` / `Prefix`)  
+🟥 **9.6** — Port Forwarding *(2m19)* — `kubectl port-forward svc/<x> 8080:80`  
+🟥 **9.7** — Understanding Gateway API *(3m39)* — séparation des rôles : Gateway (infra) ≠ HTTPRoute (application)  
+🟥 **9.8** — Configuring Gateway API *(4m04)* — installation des CRD, `GatewayClass`, `Gateway`, `listeners`  
+🟥 **9.9** — Gateway API to Provide Access *(10m06)* — `HTTPRoute`, `parentRefs`, `hostnames`, `rules.matches`, `backendRefs`  
+🟥 **9.10** — Gateway API for TLS Access *(10m16)* — terminaison TLS, Secret `tls`  
+🟥 **Lab** — Managing Networking *(22s + 3m52 solution)*
+
+✅ **Validé quand :** face à un Service qui ne répond pas, ton **premier réflexe** est `kubectl get endpoints` — et tu exposes la même app via Ingress **et** via Gateway API.
+
+> 💡 La Gateway API est l'ajout le plus récent du curriculum (2025). Le cours y consacre ~28 min avec TLS : c'est la meilleure couverture disponible, exploite-la à fond.
+
+---
+
+## 🟥 Leçon 10 — Networking
+**34 min** · *Learning objectives (39s)*
+
+🟥 **10.1** — Managing the CNI and Network Plugins *(3m59)* — `/etc/cni/net.d`, `/opt/cni/bin`, un seul plugin actif  
+🟥 **10.2** — Service Auto Registration and Kubernetes DNS *(6m27)* — `<svc>.<ns>.svc.cluster.local`, `/etc/resolv.conf`, `ndots:5`  
+🟥 **10.3** — NetworkPolicies Between Pods *(6m04)* — tout est autorisé par défaut ; `policyTypes`, `podSelector: {}`, deny-all  
+🟥 **10.4** — NetworkPolicies Between Namespaces *(9m41)* — `namespaceSelector`, `ipBlock` ; ⚠️ deux entrées `-` = **OU**, deux clés dans la même entrée = **ET** ; toujours autoriser le port **53**  
+🟥 **10.5** — Managing CoreDNS *(50s)* — Deployment `kube-system`, ConfigMap `Corefile`  
+🟥 **Lab** — Using NetworkPolicies *(48s + 5m28 solution)*
+
+✅ **Validé quand :** tu poses un deny-all, tu rouvres un seul flux, et le test `curl` échoue depuis partout ailleurs.
+
+> ⚠️ NetworkPolicy exige un CNI qui l'implémente — **Calico/Cilium oui, Flannel seul n'applique rien**. À vérifier sur ton lab.
+
+---
+---
+
+# 💾 Module 4 — Storage
+`[STO]` · **55 min** · *Module Introduction (27s)*
+
+---
+
+## 🟥 Leçon 11 — Managing Storage
+**33 min** · *Learning objectives (38s)*
+
+🟥 **11.1** — Understanding Storage Options *(2m49)*  
+🟥 **11.2** — Accessing Storage Through Pod Volumes *(2m56)* — `emptyDir` (`medium: Memory`), `hostPath`, `volumeMounts`, `subPath`  
+🟥 **11.3** — Configuring PersistentVolume *(4m35)* — `capacity`, `accessModes` (`RWO`/`ROX`/`RWX`/`RWOP`), `storageClassName`  
+🟥 **11.4** — Configuring PersistentVolumeClaim *(2m50)* — liaison automatique, phases `Available`/`Bound`/`Released`  
+🟥 **11.5** — Pod Storage with PVs and PVCs *(2m55)*  
+🟥 **11.6** — Volume Reclaim Policies *(1m28)* — `Retain`, `Delete`  
+🟥 **11.7** — ConfigMaps and Secrets as Volumes *(7m)* — `volumes.configMap`, `items`, `defaultMode`, Secret `tls` / `generic` / `docker-registry`  
+🟥 **Lab** — Setting up Storage *(41s + 6m47 solution)*
+
+✅ **Validé quand :** tu crées un PVC qui reste `Pending` **volontairement**, et tu diagnostiques la cause.
+
+> ⚠️ **11.7 ne montre ConfigMap/Secret qu'en volume.** L'injection par variables d'environnement (`envFrom`, `configMapKeyRef`) est au programme et n'est vue nulle part → [Complément C](#complément-c--configmapsecret-en-variables-denvironnement-).
+
+---
+
+## 🟥 Leçon 12 — Auto-provisioning Storage
+**22 min** · *Learning objectives (29s)*
+
+🟥 **12.1** — Using StorageClass *(2m20)* — `provisioner`, `reclaimPolicy`, `allowVolumeExpansion`, annotation `is-default-class`  
+🟥 **12.2** — Understanding Storage Provisioners *(1m48)* — provisionnement dynamique, notion CSI  
+🟥 **12.3** — Setting up an NFS Storage Provisioner *(11m29)* — directement applicable à ton lab Proxmox  
+🟥 **Lab** — Using the Hostpath Storage Provisioner *(51s + 4m37 solution)*
+
+✅ **Validé quand :** un PVC sans PV préexistant obtient son volume tout seul, et tu sais dire pourquoi il resterait `Pending` avec `WaitForFirstConsumer`.
+
+---
+---
+
+# 🔍 Module 5 — Troubleshooting
+`[TS]` · **24 min** · *Module Introduction (16s)*
+
+> 🔴 **Déséquilibre majeur à connaître : 24 minutes de vidéo pour 30 % de l'examen** — soit 4 % du cours. Cette leçon donne la *méthode*, pas le volume. Le Module 6 compense partiellement en pratique, mais le gros du travail est à faire toi-même sur ton lab.
+
+---
+
+## 🟥 Leçon 13 — Logging, Monitoring, and Troubleshooting
+**24 min** · *Learning objectives (30s)*
+
+🟥 **13.1** — Monitoring Kubernetes Resources *(1m24)* — `kubectl top`, `kubectl get events --sort-by=.lastTimestamp`  
+🟥 **13.2** — Understanding the Troubleshooting Flow *(5m32)* — `describe` → `Events` → `logs` → `logs --previous` → `exec`  
+🟥 **13.3** — Troubleshooting Applications *(2m24)* — `Pending`, `ImagePullBackOff`, `CrashLoopBackOff`, `OOMKilled` (137), `ContainerCreating`, `Evicted`  
+🟥 **13.4** — Troubleshooting Cluster Nodes *(7m55)* — nœud `NotReady`, kubelet, cgroup driver, swap réactivé, `/etc/kubernetes/manifests/`, `crictl` quand `kubectl` ne répond plus, `/var/log/pods/`  
+🟥 **13.5** — Fixing Application Access Problems *(3m42)* — endpoints vides, sélecteur qui ne correspond pas, `targetPort` erroné, DNS  
+🟥 **Lab** — Troubleshooting Nodes *(19s + 1m56 solution)*
 
 ✅ **Validé quand :** on casse ton control plane sans te dire comment, et tu le remontes en moins de 10 minutes.
 
+> ⏸️ **PAUSE LA PLUS IMPORTANTE DU PARCOURS.** Voir [Complément E](#complément-e--dépannage-intensif-) — c'est ici que se joue le tiers de ta note.
+
 ---
 ---
 
-## 📊 Synthèse
+# 🎯 Module 6 — Sample Exams
+**1 h 51** · *Module Introduction (33s)*
 
-| Étape | Paliers | Domaines couverts | Poids examen |
-|---|---|---|---|
-| I — Fondations | P1 → P4 | `[BASE]` `[WORK]` | *prérequis* |
-| II — Applications | P5 → P10 | `[WORK]` | 15 % |
-| III — Réseau & stockage | P11 → P14 | `[NET]` `[STO]` | 30 % |
-| IV — Ordonnancement & gouvernance | P15 → P19 | `[WORK]` `[ARCH]` `[NET]` | — |
-| V — Administration | P20 → P23 | `[ARCH]` | 25 % |
-| VI — Dépannage | P24 → P26 | `[TS]` | 30 % |
+> C'est le vrai atout du cours : **24 questions d'examen corrigées** avec un script de notation. À traiter en conditions réelles — chronomètre, docs limitées à `kubernetes.io`.
 
-**Points de bascule** — les paliers où le niveau de difficulté change nettement :
+---
 
-- **P4** — le palier le plus rentable : sans lui, le temps manque à l'examen
-- **P11** — première abstraction non intuitive (Service ≠ Pod, endpoints)
-- **P14** — première chaîne à 3 objets (SC → PV → PVC)
-- **P20** — passage de *consommateur* à *administrateur* du cluster
-- **P26** — synthèse finale : tout ce qui précède, sous chronomètre
+## 🟥 Leçon 14 — Sample Exam Instructions
+**4 min** · *Learning objectives (25s)*
+
+🟥 **14.1** — Preparing an Environment for the Sample Exams *(1m56)*  
+🟥 **14.2** — Working Through the Sample Exams *(49s)*  
+🟥 **14.3** — Using the exam-grade Script *(45s)*
+
+---
+
+## 🟥 Leçon 15 — CKA Sample Exam 1
+**56 min** · *Learning objectives (41s)*
+
+🟥 **15.1** — Questions Overview *(3m58)*  
+🟥 **15.2** — Configuring a HA Cluster *(9m17)* `[ARCH]`  
+🟥 **15.3** — Scheduling a Pod *(5m22)* `[WORK]`  
+🟥 **15.4** — Managing Application Initialization *(2m53)* `[WORK]`  
+🟥 **15.5** — Setting up Persistent Storage *(1m55)* `[STO]`  
+🟥 **15.6** — Configuring Application Access *(2m57)* `[NET]`  
+🟥 **15.7** — Securing Network Traffic *(8m31)* `[NET]`  
+🟥 **15.8** — Setting up Quota *(5m47)* `[WORK]`  
+🟥 **15.9** — Creating a Static Pod *(2m07)* `[ARCH]`  
+🟥 **15.10** — Troubleshooting Node Services *(1m40)* `[TS]`  
+🟥 **15.11** — Configuring Cluster Access *(5m50)* `[ARCH]`  
+🟥 **15.12** — Configuring Taints and Tolerations *(5m09)* `[WORK]`
+
+✅ **Validé quand :** tu traites les 12 questions **avant** de regarder les corrections, et le script `exam-grade` te valide.
+
+---
+
+## 🟥 Leçon 16 — CKA Sample Exam 2
+**51 min** · *Learning objectives (27s)*
+
+🟥 **16.1** — Questions Overview *(4m16)*  
+🟥 **16.2** — Creating a Cluster *(3m25)* `[ARCH]`  
+🟥 **16.3** — Performing a Control Node Upgrade *(5m09)* `[ARCH]`  
+🟥 **16.4** — Configuring Application Logging *(8m23)* `[WORK]`  
+🟥 **16.5** — Managing PersistentVolumeClaims *(9m41)* `[STO]`  
+🟥 **16.6** — Investigating Pod Logs *(1m27)* `[TS]`  
+🟥 **16.7** — Analyzing Performance *(3m27)* `[TS]`  
+🟥 **16.8** — Managing Application Scheduling *(2m28)* `[WORK]`  
+🟥 **16.9** — Configuring Ingress *(3m17)* `[NET]`  
+🟥 **16.10** — Preparing for Node Maintenance *(1m36)* `[ARCH]`  
+🟥 **16.11** — Scaling Applications *(1m43)* `[WORK]`  
+🟥 **16.12** — Etcd Backup and Restore *(5m23)* `[ARCH]`
+
+✅ **Validé quand :** idem — 12 questions à froid, chronométrées, puis correction.
+
+---
+
+🟥 **Summary** *(33s)*
+
+---
+---
+
+# ⚠️ Compléments hors cours — OBLIGATOIRE
+
+Ces sujets sont **au curriculum officiel** (ou décisifs à l'examen) et **n'apparaissent nulle part** dans les 16 leçons. Ce ne sont pas des approfondissements : sans eux, tu arrives à l'examen avec des trous.
+
+---
+
+### Complément A — Bases `kubectl` et vitesse ⚡
+**Quand : juste après la leçon 2** · Estimation : 25-30 h
+
+Le cours suppose ces bases acquises dès la leçon 3. Elles n'ont aucune leçon dédiée.
+
+🟥 **A.1** — Lecture — `kubectl get -o wide/-o yaml`, `describe`, `-A`, `-n`  
+🟥 **A.2** — Auto-documentation — `kubectl explain pod.spec.containers --recursive`, `api-resources`  
+🟥 **A.3** — Le Pod — phases, `logs -f --previous -c`, `exec -it`, `delete --force --grace-period=0`  
+🟥 **A.4** — Labels et sélecteurs — `-l env=prod`, `'env in (a,b)'`, `--show-labels`, `spec.selector.matchLabels` ↔ `template.metadata.labels`  
+🟥 **A.5** — **Vitesse** — `alias k=kubectl`, `complete -F __start_kubectl k`, `export do='--dry-run=client -o yaml'`, `~/.vimrc` (`tabstop=2 expandtab`)  
+🟥 **A.6** — Génération — `k create deploy/svc/cm/secret/job/role ... $do > f.yaml`  
+🟥 **A.7** — Extraction — `-o jsonpath`, `--sort-by`, `-o custom-columns`, `kubectl diff -f`
+
+> 🔴 **Le palier le plus rentable du parcours.** 2 h pour ~20 tâches : celui qui écrit son YAML à la main ne finit pas.
+
+---
+
+### Complément B — Sondes, rollback et Jobs 🩺
+**Quand : après la leçon 6** · Estimation : 10-12 h
+
+🟥 **B.1** — `livenessProbe` (redémarre) vs `readinessProbe` (retire des endpoints) vs `startupProbe` — ✅ **puce officielle « self-healing », absente du cours**  
+🟥 **B.2** — Mécanismes `exec` / `httpGet` / `tcpSocket`, `initialDelaySeconds`, `periodSeconds`, `failureThreshold`  
+🟥 **B.3** — Rolling update et **rollback** — `kubectl rollout status/history/undo --to-revision`, `maxSurge`, `maxUnavailable`, `Recreate` — ✅ **puce officielle, 3m32 seulement en 6.1**  
+🟥 **B.4** — `Job` — `completions`, `parallelism`, `backoffLimit`  
+🟥 **B.5** — `CronJob` — `schedule`, `concurrencyPolicy`, `suspend`  
+🟥 **B.6** — `restartPolicy`, `terminationGracePeriodSeconds`, `preStop`
+
+---
+
+### Complément C — ConfigMap/Secret en variables d'environnement 🔧
+**Quand : après la leçon 11** · Estimation : 4-6 h
+
+Le cours ne les montre qu'en **volume** (11.7).
+
+🟥 **C.1** — Création — `--from-literal`, `--from-file`, `--from-env-file`  
+🟥 **C.2** — Injection unitaire — `env.valueFrom.configMapKeyRef` / `secretKeyRef`  
+🟥 **C.3** — Injection globale — `envFrom.configMapRef` / `secretRef`  
+🟥 **C.4** — `imagePullSecrets`, `stringData` vs `data`, `immutable: true`  
+🟥 **C.5** — Différence clé : les **volumes** se mettent à jour, **pas les variables d'env**
+
+---
+
+### Complément D — CRD et opérateurs 🧩
+**Quand : après la leçon 12** · Estimation : 6-8 h
+
+✅ **Puce officielle du curriculum — absente du cours.**
+
+🟥 **D.1** — `CustomResourceDefinition` — `apiextensions.k8s.io/v1`  
+🟥 **D.2** — Anatomie — `group`, `names`, `scope`, `versions`, `schema`  
+🟥 **D.3** — Exploitation — `kubectl get crd`, `kubectl explain <kind>`  
+🟥 **D.4** — Motif opérateur — CR + contrôleur en boucle de réconciliation  
+🟥 **D.5** — Installer un opérateur (manifeste / Helm / OLM)  
+🟥 **D.6** — Interfaces d'extension — CRI, CNI, **CSI**, device plugins
+
+---
+
+### Complément E — Dépannage intensif 🔥
+**Quand : après la leçon 13, avant le Module 6** · Estimation : 35-45 h
+
+La leçon 13 fait 24 min pour 30 % de l'examen. Le volume se fait ici, **en cassant le cluster** — pas en vidéo. Tes snapshots Proxmox sont l'outil clé.
+
+🟥 **E.1** — Scénarios applicatifs — `Init:Error`, `Terminating` bloqué (finalizers), readiness en échec  
+🟥 **E.2** — `kubectl debug -it --image=busybox --target=<c>`, `--copy-to`, conteneurs éphémères  
+🟥 **E.3** — Codes de sortie — `0`, `1`, `125`, `126`, `127`, `137`, `143`  
+🟥 **E.4** — Réseau par couches — `curl <podIP>` → `<clusterIP>` → `<nom-svc>` ; `nslookup kubernetes.default` ; `nicolaka/netshoot`  
+🟥 **E.5** — `kube-proxy` — DaemonSet, logs, `iptables -t nat -L`  
+🟥 **E.6** — Control plane — apiserver mort par YAML invalide, scheduler arrêté (Pods `Pending`), controller-manager arrêté (pas de ReplicaSet), etcd en panne  
+🟥 **E.7** — Certificats — `kubeadm certs check-expiration`, `renew all`, erreurs `x509`  
+🟥 **E.8** — Ports — `6443` apiserver, `2379-2380` etcd, `10250` kubelet, `10259` scheduler, `10257` controller-manager  
+🟥 **E.9** — Redémarrer un Pod statique — déplacer le manifeste puis le remettre  
+🟥 **E.10** — `kubeadm reset` + nettoyage `/etc/cni/net.d`, `iptables`
+
+---
+
+## 📊 Plan de charge
+
+| Bloc | Vidéo | Travail total |
+|---|---|---|
+| Module 1 | 3 h 08 | 55-65 h |
+| **Complément A** *(après L2)* | — | 25-30 h |
+| Module 2 | 2 h 02 | 35-40 h |
+| **Complément B** *(après L6)* | — | 10-12 h |
+| Module 3 | 1 h 42 | 30-35 h |
+| Module 4 | 55 min | 15-20 h |
+| **Compléments C + D** | — | 10-14 h |
+| Module 5 | 24 min | 5 h |
+| **Complément E** *(dépannage)* | — | 35-45 h |
+| Module 6 *(examens blancs)* | 1 h 51 | 15-20 h |
+| killer.sh ×2 | — | 10 h |
+| **TOTAL** | **~10 h** | **~200-235 h** |
+
+À raison de **25 h/semaine** (5 h × 5 jours), cela représente **8 à 9 semaines**, soit **~2 à 2,5 mois** — comparable à ton RHCSA (~215 h).
+
+> 💡 La vidéo ne représente que **5 %** du temps total. Le reste, c'est du clavier.
 
 ---
 
@@ -623,7 +466,7 @@ Chaque palier se termine par un critère `✅ Validé quand :` — tant qu'il n'
 | **Durée** | 2 heures |
 | **Format** | Pratique, en ligne, surveillé — ~15 à 20 tâches |
 | **Score minimum** | **66 %** |
-| **Environnement** | Terminal Linux, plusieurs clusters, `kubectl` / `helm` / `crictl` disponibles |
+| **Environnement** | Terminal Linux, plusieurs clusters, `kubectl` / `helm` / `crictl` |
 | **Documentation autorisée** | `kubernetes.io/docs`, `kubernetes.io/blog`, `helm.sh/docs` — **un seul onglet** |
 | **Validité** | 2 ans |
 | **Inclus** | 1 repassage gratuit + 2 sessions du simulateur killer.sh |
@@ -636,114 +479,22 @@ Chaque palier se termine par un critère `✅ Validé quand :` — tant qu'il n'
 
 ## ✅ Checklist finale avant l'examen
 
-🟥 Les 26 paliers passés en 🟦 *(sans aide)*  
+🟥 Les 16 leçons en 🟦 *(sans aide)*  
+🟥 Les 5 compléments A → E traités  
 🟥 Cluster kubeadm monté **from scratch** au moins 3 fois sans notes  
 🟥 Sauvegarde + restauration `etcd` réussie sur un cluster cassé  
 🟥 Upgrade de version complète (control plane + workers) réussie  
 🟥 NetworkPolicy deny-all puis autorisation ciblée, validée par un test réel  
 🟥 Ingress **et** Gateway API déployés et testés  
-🟥 RBAC : créer un compte limité et le prouver avec `auth can-i --as`  
-🟥 Navigation dans `kubernetes.io/docs` sous 30 s pour tout objet  
-🟥 `--dry-run=client -o yaml` utilisé par réflexe (jamais de YAML écrit à la main)  
-🟥 Alias et autocomplétion configurés en moins de 60 s en début d'examen  
+🟥 RBAC : compte limité créé et prouvé avec `auth can-i --as`  
+🟥 Sondes liveness/readiness/startup maîtrisées *(complément B)*  
+🟥 CRD installée et ressource personnalisée créée *(complément D)*  
+🟥 Sample Exam 1 et 2 réussis **à froid**, avant correction  
+🟥 `--dry-run=client -o yaml` utilisé par réflexe  
+🟥 Alias et autocomplétion configurés en moins de 60 s  
 🟥 killer.sh terminé 2 fois avec toutes les questions comprises  
 🟥 Score > 66 % sur examen blanc chronométré
 
 ---
----
 
-# 📺 ANNEXE — Correspondance avec le cours Sander van Vugt (4ᵉ éd.)
-
-**Volume total : ~8 h 15 de vidéo**, 13 leçons réparties en 5 modules.
-
-## Divergence d'ordre — à comprendre avant de commencer
-
-Le cours et ce blueprint sont **inversés sur le bloc administration** :
-
-```
-SANDER      L1 Overview → L2 Install → L3 Nœuds → L4 Maintenance → L5 Sécurité
-            → L6-8 Applications → L9-10 Réseau → L11-12 Stockage → L13 Dépannage
-
-BLUEPRINT   P1-P4 Fondations → P5-P10 Applications → P11-P14 Réseau/Stockage
-            → P15-P19 Ordo/Gouvernance → P20-P23 Administration → P24-P26 Dépannage
-```
-
-Son **Module 1 (L2→L5) correspond à mes P20, P21, P22, P16** — soit la fin de mon blueprint, livrée en premier. C'est normal : un cours vidéo doit te donner un cluster pour suivre les démos.
-
-**Résolution** : suis **son** ordre pour les vidéos, et utilise les critères `✅ Validé quand :` du blueprint comme grille de validation. Le cluster monté en L2 est une **recette** ; le passage en 🟦 de P20 (monter sans notes, 3 fois) se fera plus tard.
-
----
-
-## Table de correspondance
-
-| Leçon | Titre | Paliers couverts | Couverture |
-|---|---|---|---|
-| **L1** | Kubernetes Overview | P2.1 · P2.2 | partielle |
-| **L2** | Building a Kubernetes Cluster | **P20.1 → P20.14** · P23.1 · P23.2 | ✅ complète |
-| **L3** | Managing Cluster Nodes | P1.8 · P15.12 · P21.1 · P21.2 · P26.2 · P26.3 · P26.8 | ✅ complète |
-| **L4** | Cluster Maintenance | P17.1 · P17.2 · **P21.3 → P21.14** · **P22 entier** | ✅ complète |
-| **L5** | Managing Security | P7.6 · P7.7 · P7.8 · **P16.4 → P16.15** | ✅ complète |
-| **L6** | Running Applications | P3.x · P8 · P10.1-10.3 · P10.10 · P14.14 · P17.4-17.6 | ⚠️ voir trous |
-| **L7** | Managing Applications (Helm/Kustomize) | **P19 entier** · P4.6 | ✅ complète |
-| **L8** | Scheduling | P7.1-7.4 · **P15.1 → P15.11** · P16.1 → P16.3 | ✅ complète |
-| **L9** | Networking | **P11 entier** · **P13 entier** · P3.7 · P25.10 | ✅ complète |
-| **L10** | Advanced Networking | P12.1-12.4 · **P18.1 → P18.10** · P23.2 | ✅ complète |
-| **L11** | Storage | P14.1 → P14.8 · P6.4 · P6.7 | ✅ complète |
-| **L12** | StorageClass | P14.9 · P14.11 · P14.12 | ✅ complète |
-| **L13** | Troubleshooting | P17.3 · P24 · P25 · P26 | ⚠️ **survolé** |
-
----
-
-## ⚠️ Trous de couverture — à combler hors cours
-
-Le cours est excellent sur l'administration, mais **ces paliers n'ont aucune leçon dédiée**. Trois d'entre eux sont des puces **explicites du curriculum officiel** :
-
-| Palier manquant | Statut curriculum | Gravité |
-|---|---|---|
-| **P9 — Sondes** `liveness` / `readiness` / `startup` | ✅ puce officielle *(« self-healing »)* | 🔴 critique |
-| **P23.5-23.10 — CRD et opérateurs** | ✅ puce officielle *(« understand CRDs, install operators »)* | 🔴 critique |
-| **P10.4-10.9 — Rolling update et rollback** | ✅ puce officielle | 🟠 3 min 32 en L6.1, très léger |
-| **P4 — Vitesse, `--dry-run`, alias, jsonpath** | hors curriculum, **décisif à l'examen** | 🔴 critique |
-| **P5 — Labels, sélecteurs, annotations** | transverse, supposé acquis | 🟠 important |
-| **P3 — Pod : phases, `logs`, `exec`** | supposé acquis (L6.4 = 1 min 9) | 🟠 important |
-| **P6.1-6.3, 6.5-6.10 — ConfigMap/Secret en variables** | vu **uniquement en volume** (L11.7) | 🟠 important |
-| **P10.11-10.12 — `Job` et `CronJob`** | absent | 🟡 secondaire |
-| **P24.11-24.12 — `kubectl debug`, conteneurs éphémères** | absent | 🟡 secondaire |
-| **P14.10, P14.13 — `volumeBindingMode`, resize PVC** | non explicite | 🟡 secondaire |
-| **P20.15 — `kubeadm reset`** | absent | 🟡 secondaire |
-
-> 🔴 **Le trou le plus dangereux : le dépannage.** La leçon 13 fait **~24 min pour 30 % de l'examen** — soit 5 % du cours. Elle donne la *méthode* (13.2 « Troubleshooting Flow »), pas le volume. Mes P24, P25 et P26 comptent ~40 items : ils se travaillent en **cassant le cluster**, pas en regardant des vidéos.
-
----
-
-## Points forts du cours — à exploiter à fond
-
-- **Gateway API** — 4 leçons, ~28 min, TLS inclus (L9.7→9.10). C'était le risque principal du curriculum 2025 : il est parfaitement couvert.
-- **Haute disponibilité** — L4.6 (14 min) + L4.7 (7 min). Va au-delà du strict nécessaire.
-- **RBAC** — 7 leçons dont « RBAC for Users » (13 min 49). Très complet, couvre tout P16.
-- **etcd et upgrades** — L4.2→4.5, ~32 min + lab. Exactement le niveau attendu.
-- **Provisionneur NFS** — L12.3 (11 min 29), directement applicable à ton lab Proxmox.
-
----
-
-## Ordre de visionnage recommandé
-
-| Étape | Contenu | Ajout hors cours |
-|---|---|---|
-| 1 | **L1 + L2** — monter le cluster sur les 3 VM Proxmox | — |
-| 2 | ⏸️ **Pause** | **P2, P3, P4, P5** en autonomie — sans ça, tout le reste sera subi |
-| 3 | **L3 + L4 + L5** | — |
-| 4 | ⏸️ **Pause** | **P6** (injection par variables) + **P9** (sondes) |
-| 5 | **L6** | **P10.4→10.12** (rollout undo/history, Jobs, CronJobs) |
-| 6 | **L7 + L8** | — |
-| 7 | **L9 + L10** | — |
-| 8 | **L11 + L12** | **P14.10, P14.13** |
-| 9 | ⏸️ **Pause** | **P23.5→23.10** (CRD et opérateurs) |
-| 10 | **L13** | **P24, P25, P26 en profondeur** — casser le cluster et réparer au chrono |
-| 11 | — | killer.sh ×2 + examens blancs |
-
-> 💡 L'étape **2** est la plus importante du plan. Le cours suppose que tu sais déjà manipuler `kubectl` : partant de zéro, sauter cette pause te fera subir les leçons 3 à 13 au lieu de les pratiquer.
-
----
-
-*CKA — Blueprint des compétences — CNCF / Linux Foundation — 2026*
+*CKA — Sander van Vugt 4ᵉ éd. — CNCF / Linux Foundation — 2026*
