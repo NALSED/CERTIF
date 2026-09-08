@@ -5,6 +5,11 @@ Prérequis (RHEL) :
 ````
 sudo dnf install -y bash-completion
 ````
+- Charger
+````
+exec bash -l
+````
+---
 
 À ajouter en fin de `~/.bashrc`, **sur les trois VM** (master + workers) :
 
