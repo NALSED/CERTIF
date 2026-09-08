@@ -71,11 +71,11 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 ## 🟥 Leçon 2 — Creating a Kubernetes Cluster with kubeadm
 **46 min** · *Learning objectives (47s)*
 
-🟥 **2.1** — Cluster Node Requirements *(2m25)* — 2 vCPU, 2 Go RAM, hostname/MAC/`product_uuid` uniques  
-🟥 **2.2** — Provisioning an Infrastructure *(1m45)* — cf. [`-1- Labs.md`](./-1-%20Labs.md) (3 VM Proxmox)  
-🟥 **2.3** — Installation Procedure Overview *(1m21)*  
-🟥 **2.4** — Linux Kernel Settings *(2m40)* — `swapoff -a` + `/etc/fstab`, modules `overlay` / `br_netfilter`, `net.bridge.bridge-nf-call-iptables=1`, `net.ipv4.ip_forward=1`  
-🟥 **2.5** — Installing CRI and Tools *(4m54)* — `containerd`, `config.toml`, **`SystemdCgroup = true`**, dépôt `pkgs.k8s.io`, `apt-mark hold`  
+🟩 **2.1** — Cluster Node Requirements *(2m25)* — 2 vCPU, 2 Go RAM, hostname/MAC/`product_uuid` uniques  
+🟩 **2.2** — Provisioning an Infrastructure *(1m45)* — cf. [`-1- Labs.md`](./-1-%20Labs.md) (3 VM Proxmox)  
+🟩 **2.3** — Installation Procedure Overview *(1m21)*  
+🟩 **2.4** — Linux Kernel Settings *(2m40)* — `swapoff -a` + `/etc/fstab`, modules `overlay` / `br_netfilter`, `net.bridge.bridge-nf-call-iptables=1`, `net.ipv4.ip_forward=1`  
+🟩 **2.5** — Installing CRI and Tools *(4m54)* — `containerd`, `config.toml`, **`SystemdCgroup = true`**, dépôt `pkgs.k8s.io`, `apt-mark hold`  
 
 > 📄 **2.4 et 2.5 sont automatisés** dans [`-2- Prérequis.md`](./-2-%20Pr%C3%A9requis.md) (script à lancer sur chaque machine).  
 > ⚠️ Pour l'examen il faut savoir les refaire **à la main** : le script fait gagner du temps en lab, pas en révision.
