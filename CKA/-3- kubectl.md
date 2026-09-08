@@ -9,6 +9,9 @@ sudo dnf install -y bash-completion
 À ajouter en fin de `~/.bashrc`, **sur les trois VM** (master + workers) :
 
 ````
+sudo vim ~/.bashrc
+````
+````
 # --- kubectl ---
 #-1-
 source <(kubectl completion bash)
