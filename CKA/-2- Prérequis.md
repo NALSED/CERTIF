@@ -2,6 +2,19 @@
 
 ---
 
+### -1- Installation Sur Rhel10
+
+### -2- Installation sur Ubuntu Server
+
+---
+
+<details>
+<summary>
+<h2>
+-1- Installation Sur Rhel10
+</h2>
+</summary>
+
 - Ici l'installation se fait via un script. (A l'examen le cluster est fourni)
 
 
@@ -156,27 +169,44 @@ k8s-worker2   Ready    <none>          117s   v1.37.0
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+</details>
 
 
 
 ---
+---
+
+
+<details>
+<summary>
+<h2>
+-2- Installation sur Ubuntu Server 
+</h2>
+</summary>
+
+# Installlation via de Kubernetes su Ubuntu Server
+
+Intalation via le Github de [Sander Van Guth](https://github.com/sandervanvugt/cka)
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</details>
 
 
