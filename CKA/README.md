@@ -59,12 +59,12 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 ## 🟨 Leçon 1 — Understanding Kubernetes Architecture
 **9 min** · *Learning objectives (27s)*
 
-🟨 **1.1** — Vanilla Kubernetes and the Ecosystem *(2m36)* —  
-🟥 **1.2** — Running Kubernetes in Cloud or on Premises *(50s)*  
-🟥 **1.3** — Kubernetes Distributions *(1m36)* — vanilla, OpenShift, Rancher, k3s  
-🟥 **1.4** — Kubernetes Node Roles *(3m55)* — control plane (`kube-apiserver`, `etcd`, `kube-scheduler`, `kube-controller-manager`) vs worker (`kubelet`, `kube-proxy`, runtime)
+🟩 **1.1** — Vanilla Kubernetes and the Ecosystem *(2m36)* —  
+🟩 **1.2** — Running Kubernetes in Cloud or on Premises *(50s)*  
+🟩 **1.3** — Kubernetes Distributions *(1m36)* — vanilla, OpenShift, Rancher, k3s  
+🟨 **1.4** — Kubernetes Node Roles *(3m55)* — control plane (`kube-apiserver`, `etcd`, `kube-scheduler`, `kube-controller-manager`) vs worker (`kubelet`, `kube-proxy`, runtime)
 
-✅ **Validé quand :** tu nommes les 4 composants du control plane et les 3 du nœud, et tu dis ce que chacun fait.
+
 
 ---
 
