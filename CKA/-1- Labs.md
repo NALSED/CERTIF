@@ -98,19 +98,19 @@ source /etc/network/interfaces.d/*
 
 ### `VM`
 
-3 vm Rhel10
+3 vm Ubuntu-Server26
 
-`-1-` k8s-master 192.168.0.2
+`-1-` k8s-master 192.168.0.5
 
-`-2-` k8s-worker1 192.168.0.3
+`-2-` k8s-worker1 192.168.0.6
 
-`-3-` k8s-worker2 192.168.0.4
+`-3-` k8s-worker2 192.168.0.7
 
 ```
 ┌─────────────┬───────┬───────┬────────┐
 │ Nom         │ vCPU  │ RAM   │ Disque │
 ├─────────────┼───────┼───────┼────────┤
-│ k8s-master  │ 4     │ 8 Go  │ 20 Go  │
+│ k8s-master  │ 6     │ 8 Go  │ 20 Go  │
 │ k8s-worker1 │ 4     │ 6 Go  │ 15 Go  │
 │ k8s-worker2 │ 4     │ 6 Go  │ 15 Go  │
 └─────────────┴───────┴───────┴────────┘
