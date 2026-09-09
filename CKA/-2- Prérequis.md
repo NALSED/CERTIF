@@ -264,15 +264,28 @@ service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   25m
 ````
 
 
+- Gestion Network :
+````
+
+````
 
 
 
+- Et pour finir l'installation à réaliser sur les 3 VM :
+````
+sudo vim $HOME/.bashrc
+````
+````
+# === Kubernetes ===
+echo 'alias k=kubectl' >> ~/.bashrc
+echo 'source <(kubectl completion bash)' >> ~/.bashrc
+echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
+````
+````
+source ~/.bashrc
+````
 
-
-
-
-
-
+### ⚠️ les commandes ci-dessus sont les premières à réaliser le jour de l'examen ⚠️
 
 
 
