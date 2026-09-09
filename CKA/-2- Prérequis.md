@@ -277,9 +277,9 @@ sudo vim $HOME/.bashrc
 ````
 ````
 # === Kubernetes ===
-echo 'alias k=kubectl' >> ~/.bashrc
-echo 'source <(kubectl completion bash)' >> ~/.bashrc
-echo 'complete -o default -F __start_kubectl k' >> ~/.bashrc
+alias k=kubectl
+source <(kubectl completion bash)
+complete -o default -F __start_kubectl k
 ````
 ````
 source ~/.bashrc
