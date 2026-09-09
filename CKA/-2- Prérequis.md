@@ -218,7 +218,7 @@ sudo systemctl status containerd.service
 kubeadm init
 ````
 
-- Sortie <=== Suivre les instruction ci dessous
+- Sortie 
 ````
 
 Your Kubernetes control-plane has initialized successfully!
@@ -243,9 +243,21 @@ kubeadm join 192.168.0.5:6443 --token j5je4v.b2r9q7kpp4mcpdhl \
         --discovery-token-ca-cert-hash sha256:c4e75cdecb291568d6d2b245e2d61bb2023b9a52f156a256c0019ed140ff8470
 ````
 
+- Sur le master 
+````
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+````
 
+- Test
+````
+kubectl get all
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   25m
+# Sortie
 
-
+````
 
 
 
