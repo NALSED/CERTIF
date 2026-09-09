@@ -23,6 +23,23 @@ sleep 30
 for id in 105 106 107; do qm snapshot $id pre-init --description "prereqs + binaires v1.36.4, avant kubeadm init"; done
 ````
 
+- !!! Test !!!
+````
+Last login: Wed Sep  9 12:16:59 +04 2026 on pts/0
+root@pve:~# qm listsnapshot 105
+`-> pre-init                    2026-09-09 12:17:35     prereqs + binaires v1.36.4, avant kubeadm init
+ `-> current                                            You are here!
+root@pve:~# qm listsnapshot 106
+`-> pre-init                    2026-09-09 12:17:36     prereqs + binaires v1.36.4, avant kubeadm init
+ `-> current                                            You are here!
+root@pve:~# qm listsnapshot 107
+`-> pre-init                    2026-09-09 12:17:36     prereqs + binaires v1.36.4, avant kubeadm init
+ `-> current                                            You are here!
+root@pve:~# 
+
+````
+
+
 ### Restauration
 ````
 qm rollback 105 pre-init
