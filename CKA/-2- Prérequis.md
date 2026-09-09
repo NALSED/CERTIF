@@ -186,7 +186,77 @@ k8s-worker2   Ready    <none>          117s   v1.37.0
 
 # Installlation via de Kubernetes su Ubuntu Server
 
-Intalation via le Github de [Sander Van Guth](https://github.com/sandervanvugt/cka)
+- Intalation via le Github de [Sander Van Guth](https://github.com/sandervanvugt/cka)
+````
+git clone https://github.com/sandervanvugt/cka
+````
+
+- installation via les script suivant:
+````
+cd $HOME/cka
+````
+
+
+- `-1-`
+````
+./setup-container.sh
+````
+
+
+- `-2-`
+````
+./setup-kubetools-previousversion.sh
+````
+
+- Etat de containerd
+````
+sudo systemctl status containerd.service
+````
+
+!!! Uniquement sur le node choisi pour être le `control plane` !!!
+````
+kubeadm init
+````
+
+- Sortie
+````
+
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 192.168.0.5:6443 --token j5je4v.b2r9q7kpp4mcpdhl \
+        --discovery-token-ca-cert-hash sha256:c4e75cdecb291568d6d2b245e2d61bb2023b9a52f156a256c0019ed140ff8470
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
