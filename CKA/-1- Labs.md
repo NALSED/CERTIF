@@ -2,6 +2,44 @@
 
 ---
 
+## **Les deux lab sont réalisé sur proxmox**
+---
+
+- Après instalation mais AVANT initialisation du cluster un snapshot à été réalisé
+
+🇫🇷
+````
+
+````
+
+
+
+## 🇦🇲
+
+### Snapshot
+````
+for id in 105 106 107; do qm shutdown $id; done
+sleep 30
+for id in 105 106 107; do qm snapshot $id pre-init --description "prereqs + binaires v1.36.4, avant kubeadm init"; done
+````
+
+### Restauration
+````
+qm rollback 105 pre-init
+qm rollback 106 pre-init
+qm rollback 107 pre-init
+````
+
+
+### Lister / supprimer
+```
+qm listsnapshot 105
+qm delsnapshot 105 pre-init
+```
+
+
+---
+ 
 ## 🇫🇷
 
 ### `Hardware`
