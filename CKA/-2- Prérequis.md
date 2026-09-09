@@ -218,7 +218,7 @@ sudo systemctl status containerd.service
 kubeadm init
 ````
 
-- Sortie
+- Sortie <=== Suivre les instruction ci dessous
 ````
 
 Your Kubernetes control-plane has initialized successfully!
