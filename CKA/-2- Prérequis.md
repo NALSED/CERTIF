@@ -265,11 +265,74 @@ service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   25m
 
 
 - Gestion Network :
+
+- Télécharger le yaml de `Calico` 
+````
+cd $HOME
+curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests/calico.yaml
+ls -lh calico.yaml
 ````
 
+- !!! Changer le fichier, pour corespondre à notre plage IP !!!
+````
+vim calico.yaml
+
+# Rechercher
+/CALICO_IPV4POOL_CIDR
+
+# Changer la valeur existant par :
+172.16.0.0\/16
+
+# Et supression du commentaire sur les lignes
+- name: CALICO_IPV4POOL_CIDR/' calico.yaml
+ value: "172.16.0.0/16"/' calico.yaml
 ````
 
 
+- Appliquer les modifications
+````
+kubectl apply -f calico.yaml
+````
+
+- Vérification
+````
+watch kubectl get pods -n kube-system
+````
+- Sortie Attendue : STATUS => Running pour tout le monde
+  
+
+---
+
+- Ajouter des Node, à réaliser sur chaque worker
+````
+kubeadm join 192.168.0.5:6443 --token yul2cd.ipu5ita9k5xaywrd \
+        --discovery-token-ca-cert-hash sha256:7cb06b4e9b6213f8eea2b8f57cf88057e6a1231ce830a9e31cc2d1da31e25f2e
+````
+
+- Vérification
+````
+kubectl get nodes
+
+# Sortie
+NAME          STATUS   ROLES           AGE    VERSION
+k8s-master    Ready    control-plane   67m    v1.36.4
+k8s-worker1   Ready    <none>          2m3s   v1.36.4
+k8s-worker2   Ready    <none>          113s   v1.36.4
+````
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
 
 - Et pour finir l'installation à réaliser sur les 3 VM :
 ````
