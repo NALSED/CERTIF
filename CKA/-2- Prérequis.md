@@ -15,7 +15,7 @@
 </h2>
 </summary>
 
-- Ici l'installation se fait via un script. (A l'examen le cluster est fourni)
+- Ici l'installation se fait via un script. (À l'examen le cluster est fourni)
 
 
 - Lancer le script sur chaque machine
@@ -87,7 +87,7 @@ echo "Rappel: kubeadm init se lance uniquement sur k8s-master"
 
 - Initialisation de `Calico` qui sera le `CNI` du cluster, son rôle :
 
-   - Gérer le réseau des pods => Atribution IP  
+   - Gérer le réseau des pods => Attribution IP  
 
    - NetworkPolicy : applique les règles de firewall entre pods.
 
@@ -135,7 +135,7 @@ sudo chown $(id -u):$(id -g) ~/.kube/config
 kubectl get nodes
 ````
 
-- Sortie attendu:
+- Sortie attendue :
 ````
 NAME         STATUS   ROLES           AGE    VERSION
 k8s-master   Ready    control-plane   8m5s   v1.37.0
@@ -143,7 +143,7 @@ k8s-master   Ready    control-plane   8m5s   v1.37.0
 
 ---
 
-- Sur k8s-worker1 et k8sworker2 pour, implémenter les worker1 et worker2 au node de master.
+- Sur k8s-worker1 et k8s-worker2, pour implémenter les worker1 et worker2 au node de master.
 ````
 # !!! En root !!!
 kubeadm join 192.168.0.2:6443 --token p6yhss.kz1mefair5utz9am \
@@ -184,14 +184,14 @@ k8s-worker2   Ready    <none>          117s   v1.37.0
 </h2>
 </summary>
 
-# Installlation via de Kubernetes su Ubuntu Server
+# Installation de Kubernetes sur Ubuntu Server
 
-- Intalation via le Github de [Sander Van Guth](https://github.com/sandervanvugt/cka)
+- Installation via le GitHub de [Sander van Vugt](https://github.com/sandervanvugt/cka)
 ````
 git clone https://github.com/sandervanvugt/cka
 ````
 
-- installation via les script suivant:
+- Installation via les scripts suivants :
 ````
 cd $HOME/cka
 ````
@@ -208,7 +208,7 @@ cd $HOME/cka
 ./setup-kubetools-previousversion.sh
 ````
 
-- Etat de containerd
+- État de containerd
 ````
 sudo systemctl status containerd.service
 ````
@@ -273,7 +273,7 @@ curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests
 ls -lh calico.yaml
 ````
 
-- !!! Changer le fichier, pour corespondre à notre plage IP !!!
+- !!! Changer le fichier, pour correspondre à notre plage IP !!!
 ````
 vim calico.yaml
 
@@ -283,7 +283,7 @@ vim calico.yaml
 # Changer la valeur existant par :
 172.16.0.0\/16
 
-# Et supression du commentaire sur les lignes
+# Et suppression du commentaire sur les lignes
 - name: CALICO_IPV4POOL_CIDR/' calico.yaml
  value: "172.16.0.0/16"/' calico.yaml
 ````

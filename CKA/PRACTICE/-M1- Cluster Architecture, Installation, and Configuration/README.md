@@ -6,6 +6,6 @@
 
 ### - `-02- Creating a Kubernetes Cluster with kubeadm`
 
-### Sont regroupé dans le fichier [-2- Prérequis.md](https://github.com/NALSED/CERTIF/blob/main/CKA/-2-%20Pr%C3%A9requis.md#-2--installation-sur-ubuntu-server-)
+### Sont regroupées dans le fichier [-2- Prérequis.md](https://github.com/NALSED/CERTIF/blob/main/CKA/-2-%20Pr%C3%A9requis.md#-2--installation-sur-ubuntu-server-)
 
-### Tous les fichiers présentés dans les sections ci-dessus ont une portées explicative et de présentations des concepts.
+### Tous les fichiers présentés dans les sections ci-dessus ont une portée explicative et de présentation des concepts.

@@ -2,10 +2,10 @@
 
 ---
 
-## **Les deux lab sont réalisé sur proxmox**
+## **Les deux labs sont réalisés sur Proxmox**
 ---
 
-- Après instalation mais AVANT initialisation du cluster un snapshot à été réalisé
+- Après installation mais AVANT initialisation du cluster un snapshot a été réalisé
 
 🇫🇷
 ````
@@ -68,7 +68,7 @@ qm delsnapshot 105 pre-init
 
 [NOTE]
 
--1- Pour la connection au hotspot (iPhone), et partage de connection, désactiver successivement hotspot -> partage -> ethernet, puis réactiver.
+-1- Pour la connexion au hotspot (iPhone), et partage de connexion, désactiver successivement hotspot -> partage -> ethernet, puis réactiver.
 
 -2- Config (8/06/26) :
 
