@@ -214,8 +214,12 @@ sudo systemctl status containerd.service
 ````
 
 !!! Uniquement sur le node choisi pour être le `control plane` !!!
+
+- Ici ajout de `--pod-network-cidr=172.16.0.0/16` car mon réseau LAN est en 192.168.0.0/24 et le manifeste Calico par défaut utilise 192.168.0.0/16
+
+- Résultat : routage cassé, nœuds qui restent NotReady
 ````
-kubeadm init
+sudo kubeadm init --pod-network-cidr=172.16.0.0/16
 ````
 
 - Sortie 
@@ -239,8 +243,8 @@ Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
 
 Then you can join any number of worker nodes by running the following on each as root:
 
-kubeadm join 192.168.0.5:6443 --token j5je4v.b2r9q7kpp4mcpdhl \
-        --discovery-token-ca-cert-hash sha256:c4e75cdecb291568d6d2b245e2d61bb2023b9a52f156a256c0019ed140ff8470
+kubeadm join 192.168.0.5:6443 --token yul2cd.ipu5ita9k5xaywrd \
+        --discovery-token-ca-cert-hash sha256:7cb06b4e9b6213f8eea2b8f57cf88057e6a1231ce830a9e31cc2d1da31e25f2e
 ````
 
 - Sur le master 
@@ -253,10 +257,10 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 - Test
 ````
 kubectl get all
+
+# Sortie
 NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   25m
-# Sortie
-
 ````
 
 
