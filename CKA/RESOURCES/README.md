@@ -1,5 +1,7 @@
-# Resources traitant de kubernetes tous themes confondu.
+# Ressources traitant de **Kubernetes**, tous thèmes confondus.
 
 ---
 
-### Elles sont classées par type (Vidéo / Site), et par catégories dans ces deux types
+Les ressources sont classées par type (**Vidéos** / **Sites**), puis par catégorie au sein de chacun de ces types.
+
+La catégorie **CONCEPT** regroupe des notions qui peuvent être déjà maîtrisées ou non.
