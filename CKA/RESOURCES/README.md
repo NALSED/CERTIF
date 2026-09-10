@@ -2,3 +2,4 @@
 
 ---
 
+### Elles sont classées par type (Vidéo / Site), et par catégories dans ces deux types
