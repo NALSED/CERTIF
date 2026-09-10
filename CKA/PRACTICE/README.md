@@ -1,3 +1,4 @@
+# === PLAN ===
 ````
 
                                   kubectl
@@ -68,7 +69,7 @@
 Plages :  Nodes 192.168.0.0/24  |  Pods 172.16.0.0/16  |  Services 10.96.0.0/12
 ````
 
-### === ANALOGIES SYSADMIN ===
+# === ANALOGIES ===
 
 `[NOTE]` Repères pour ancrer les rôles. Les limites de chaque analogie sont notées.
 
@@ -95,7 +96,7 @@ Plages :  Nodes 192.168.0.0/24  |  Pods 172.16.0.0/16  |  Services 10.96.0.0/12
 
 ---
 
-### === Réseau ===
+# === Réseau ===
 
 ## Trace d'une requête : `curl http://web` depuis un Pod
 
