@@ -67,7 +67,7 @@
 ````
 Plages :  Nodes 192.168.0.0/24  |  Pods 172.16.0.0/16  |  Services 10.96.0.0/12
 ````
-````
+
 ### === ANALOGIES SYSADMIN ===
 
 `[NOTE]` Repères pour ancrer les rôles. Les limites de chaque analogie sont notées.
@@ -119,4 +119,4 @@ iptables/IPVS écrite sur chaque nœud. Rien à voir avec un service `systemd`.
 
 `[CLÉ]` Modèle **déclaratif** : personne ne donne d'ordre. Chacun lit l'apiserver
 et agit de son côté. À l'opposé d'un script shell impératif.
-````
+
