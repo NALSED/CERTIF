@@ -14,7 +14,7 @@ exec bash -l
 À ajouter en fin de `~/.bashrc`, **sur les trois VM** (master + workers) :
 
 ````
-sudo vim ~/.bashrc
+vim ~/.bashrc
 ````
 ````
 # --- kubectl ---

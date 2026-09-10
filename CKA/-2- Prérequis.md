@@ -280,12 +280,12 @@ vim calico.yaml
 # Rechercher
 /CALICO_IPV4POOL_CIDR
 
-# Changer la valeur existant par :
-172.16.0.0\/16
+# Changer la valeur existante par :
+172.16.0.0/16
 
 # Et suppression du commentaire sur les lignes
-- name: CALICO_IPV4POOL_CIDR/' calico.yaml
- value: "172.16.0.0/16"/' calico.yaml
+- name: CALICO_IPV4POOL_CIDR
+  value: "172.16.0.0/16"
 ````
 
 
