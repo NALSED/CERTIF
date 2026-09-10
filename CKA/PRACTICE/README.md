@@ -95,25 +95,80 @@ Plages :  Nodes 192.168.0.0/24  |  Pods 172.16.0.0/16  |  Services 10.96.0.0/12
 
 ---
 
-### Où les analogies cassent
+### === Réseau ===
 
-`-1-` **L'apiserver n'est pas qu'un péage.** Un péage laisse passer vers une
-destination. Ici la requête **s'arrête** : elle est validée puis écrite dans etcd.
-Personne ne reçoit de courrier — les autres composants viennent consulter le
-registre eux-mêmes (`watch`).
+## Trace d'une requête : `curl http://web` depuis un Pod
 
-`-2-` **kube-proxy n'est pas un firewall.** Il fait du DNAT, il ne filtre rien.
-Le filtrage, c'est `NetworkPolicy`, appliqué par Calico.
+---
 
-`-3-` **Le scheduler n'est pas un chef d'orchestre.** Il ne commande personne :
-il écrit `nodeName` dans l'apiserver et s'arrête là. Le kubelet découvre ensuite
-que le Pod porte le nom de son nœud.
+````
+Pod A (172.16.1.5) veut joindre le Service "web"
+````
 
-`-4-` **Le Namespace n'isole pas le réseau.** Contrairement à un VLAN ou une VRF,
-un Pod du ns `dev` joint un Pod du ns `prod` par défaut.
+---
 
-`-5-` **Le Service n'est pas un process.** Aucun daemon ne tourne. C'est une règle
-iptables/IPVS écrite sur chaque nœud. Rien à voir avec un service `systemd`.
+`-1-` **CoreDNS** — le Pod résout `web.default.svc.cluster.local`
+
+- Réponse : `10.96.45.12` (la ClusterIP)
+- Rôle : **annuaire**. Aucun trafic ne passe par lui après.
+
+`-2-` **Le paquet part** vers `10.96.45.12:80`.
+
+- Cette IP n'existe nulle part. Aucune interface ne la porte, aucun serveur ne l'écoute.
+
+`-3-` **kube-proxy** — enfin, ses règles. Dans `PREROUTING` / `OUTPUT`, une règle DNAT écrite à l'avance réécrit la destination :
+
+````
+10.96.45.12:80  →  172.16.2.8:8080   (un Pod du Service, choisi aléatoirement)
+````
+
+- Rôle : **table NAT**. kube-proxy le process ne voit jamais ce paquet.
+
+`-4-` **NetworkPolicy** — Calico vérifie dans ses chaînes si Pod A a le droit de joindre Pod B.
+
+- Rôle : **filtrage**. Si refus, le paquet meurt ici.
+
+`-5-` **CNI (Calico)** — le paquet doit aller de `172.16.1.5` (worker1) à `172.16.2.8` (worker2). Calico a posé les routes :
+
+````
+172.16.2.0/24 via 192.168.0.7 dev tunl0
+````
+
+- Rôle : **routage L3**. C'est lui qui fait traverser le réseau physique.
+
+`-6-` **Arrivée** dans le network namespace du Pod B, via son interface `veth`.
+
+---
+
+### Séparation des rôles
+
+| Brique | Moment | Question à laquelle elle répond |
+|---|---|---|
+| `CoreDNS` | avant l'envoi | « quelle IP pour ce nom ? » |
+| `kube-proxy` | à l'envoi | « quelle IP réelle derrière cette VIP ? » |
+| `NetworkPolicy` | en transit | « a-t-il le droit ? » |
+| `CNI` | en transit | « par quelle route ? » |
+| `Ingress` | en amont de tout | « quel Service pour cette URL ? » |
+
+`[NOTE]` **Ingress est à part** : il n'est pas dans ce chemin. C'est un Pod nginx
+qui tourne dans le cluster, reçoit le trafic externe, et **redevient un client
+normal** qui refait tout le parcours ci-dessus vers le Service cible.
+
+---
+
+### Les 4 couches, dans l'ordre de traversée
+
+````
+NOM       →  CoreDNS        (annuaire)
+ADRESSE   →  kube-proxy     (NAT : VIP → IP réelle)
+CHEMIN    →  CNI            (routage L3 entre nœuds)
+DROIT     →  NetworkPolicy  (filtrage)
+````
+
+`[CLÉ]` Mécanique identique à `bind` + `nat` nftables + table de routage +
+`filter`. La seule vraie différence : **tout est réécrit dynamiquement** à chaque
+création ou suppression de Pod, par des agents qui `watch` l'apiserver.
+Rien n'est statique.
 
 ---
 
