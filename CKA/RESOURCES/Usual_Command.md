@@ -1,5 +1,7 @@
 ## Récapitulatif des commandes de gestion de Kubernetes
 
+---
+
 === GÉNÉRER UN MANIFESTE SANS CRÉER LA RESSOURCE ===
 
 - Produit le YAML d'une ressource sans rien créer dans le cluster.
