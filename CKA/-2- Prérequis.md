@@ -23,7 +23,7 @@
 #!/bin/bash
 set -e
 
-echo "=== Prerequis systeme ==="
+echo "=== Prérequis système ==="
 
 swapoff -a
 sed -i '/swap/s/^/#/' /etc/fstab
@@ -77,7 +77,7 @@ dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 
 systemctl enable --now kubelet
 
-echo "Install terminee sur $(hostname)"
+echo "Install terminée sur $(hostname)"
 echo "Rappel: kubeadm init se lance uniquement sur k8s-master"
 ````
 
@@ -280,12 +280,12 @@ vim calico.yaml
 # Rechercher
 /CALICO_IPV4POOL_CIDR
 
-# Changer la valeur existant par :
-172.16.0.0\/16
+# Changer la valeur existante par :
+172.16.0.0/16
 
 # Et suppression du commentaire sur les lignes
-- name: CALICO_IPV4POOL_CIDR/' calico.yaml
- value: "172.16.0.0/16"/' calico.yaml
+- name: CALICO_IPV4POOL_CIDR
+  value: "172.16.0.0/16"
 ````
 
 
@@ -303,9 +303,9 @@ watch kubectl get pods -n kube-system
 
 ---
 
-- Ajouter des Node, à réaliser sur chaque worker
+- Ajouter des Nodes, à réaliser sur chaque worker
 ````
-kubeadm join 192.168.0.5:6443 --token yul2cd.ipu5ita9k5xaywrd \
+sudo kubeadm join 192.168.0.5:6443 --token yul2cd.ipu5ita9k5xaywrd \
         --discovery-token-ca-cert-hash sha256:7cb06b4e9b6213f8eea2b8f57cf88057e6a1231ce830a9e31cc2d1da31e25f2e
 ````
 
@@ -336,7 +336,7 @@ k8s-worker2   Ready    <none>          113s   v1.36.4
 
 - Et pour finir l'installation à réaliser sur les 3 VM :
 ````
-sudo vim $HOME/.bashrc
+vim $HOME/.bashrc
 ````
 ````
 # === Kubernetes ===
