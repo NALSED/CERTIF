@@ -1,7 +1,7 @@
 # ☸️ CKA — Progression
 **Certified Kubernetes Administrator** | CNCF / Linux Foundation | Version 2026  
 Support : **Sander van Vugt — CKA Complete Video Course, 4ᵉ édition**  
-Curriculum officiel v1.34 *(mise à jour Février 2025)*
+Curriculum officiel v1.34 *(mise à jour février 2025)*
 
 ---
 

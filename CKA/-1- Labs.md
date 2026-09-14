@@ -1,4 +1,4 @@
-# Création du lab Kubernetes sur proxmox
+# Création du lab Kubernetes sur Proxmox
 
 ---
 
@@ -61,7 +61,7 @@ qm delsnapshot 105 pre-init
 
 ### `Hardware`
     
-  - 'CPU' : Intel(R) Core(TM) i7 CPU 920  @ 2.67GH
+  - 'CPU' : Intel(R) Core(TM) i7 CPU 920  @ 2.67 GHz
   - 'RAM' : 16 Gb DDR3 
   - Network : Filaire : 192.168.2.2
   - IP : https://192.168.2.2:8006
