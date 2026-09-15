@@ -62,7 +62,7 @@ qm delsnapshot 105 pre-init
 ### `Hardware`
     
   - 'CPU' : Intel(R) Core(TM) i7 CPU 920  @ 2.67 GHz
-  - 'RAM' : 16 Gb DDR3 
+  - 'RAM' : 16 Go DDR3 
   - Network : Filaire : 192.168.2.2
   - IP : https://192.168.2.2:8006
 
@@ -147,7 +147,7 @@ source /etc/network/interfaces.d/*
 ### `Hardware`
     
   - 'CPU' : 13th Gen Intel(R) Core(TM) i7-13700KF
-  - 'RAM' : 32 Gb DDR5 
+  - 'RAM' : 32 Go DDR5 
   - Network : Filaire : 192.168.0.242
   - IP : https://192.168.0.242:8006
 

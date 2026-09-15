@@ -111,3 +111,60 @@ kubectl describe node <NODE_NAME> | less
 ````
 kubectl drain <NODE_NAME> --ignore-daemonsets
 ````
+
+----
+
+=== VÉRIFIER LA PRÉSENCE DE CRICTL ===
+
+- Contrôle que le client CRI est installé sur le node, et l'installe si besoin.
+
+- Use-Case : premier réflexe avant toute investigation runtime sur un worker.
+````
+crictl --version
+sudo apt install -y cri-tools
+````
+
+----
+
+=== CONFIGURER CRICTL ===
+
+- Déclare le socket containerd, sans quoi chaque commande sort un warning.
+
+- Use-Case : rendre crictl utilisable sur un node fraîchement installé.
+````
+sudo vim /etc/crictl.yaml
+````
+
+----
+
+=== LISTER LES SANDBOX (CRICTL) ===
+
+- Affiche les Pods au niveau du runtime, sans passer par l'API server.
+
+- Use-Case : voir les Pods d'un worker quand le control plane est injoignable.
+````
+sudo crictl pods
+````
+
+----
+
+=== LISTER LES IMAGES EN CACHE (CRICTL) ===
+
+- Montre les images réellement présentes sur le node.
+
+- Use-Case : vérifier qu'une image est bien pullée avant de chercher ailleurs.
+````
+sudo crictl images
+````
+
+----
+
+=== ANALYSER LE KUBELET ===
+
+- État du service et journal systemd de l'agent du node.
+
+- Use-Case : diagnostiquer un node NotReady.
+````
+sudo systemctl status kubelet
+sudo journalctl -u kubelet
+````
