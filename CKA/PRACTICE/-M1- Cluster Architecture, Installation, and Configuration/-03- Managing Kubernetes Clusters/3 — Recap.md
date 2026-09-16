@@ -4,7 +4,7 @@
 
 `=== Kubelet ===`
 
-- Agent qui exécute les Pods qu'on lui assigne. Seul composant du control plane qui n'est pas un Pod : c'est un service systemd classique.
+- Agent qui exécute les Pods qu'on lui assigne. Seul composant de Kubernetes qui n'est pas un Pod : c'est un service systemd classique.
 
    - Il s'enregistre auprès de l'API server et remonte l'état du nœud.
    - Il reçoit les PodSpecs qui lui sont assignés par le scheduler, et demande au runtime (containerd) de créer les conteneurs correspondants.

@@ -2,7 +2,7 @@
 
 ---
 
-### -1- Installation Sur Rhel10
+### -1- Installation Sur RHEL 10
 
 ### -2- Installation sur Ubuntu Server
 
@@ -11,7 +11,7 @@
 <details>
 <summary>
 <h2>
--1- Installation Sur Rhel10
+-1- Installation Sur RHEL 10
 </h2>
 </summary>
 
@@ -143,7 +143,7 @@ k8s-master   Ready    control-plane   8m5s   v1.37.0
 
 ---
 
-- Sur k8s-worker1 et k8s-worker2, pour implémenter les worker1 et worker2 au node de master.
+- Sur k8s-worker1 et k8s-worker2, pour rattacher worker1 et worker2 au node master.
 ````
 # !!! En root !!!
 kubeadm join 192.168.0.2:6443 --token p6yhss.kz1mefair5utz9am \
@@ -217,7 +217,7 @@ sudo systemctl status containerd.service
 
 - Ici ajout de `--pod-network-cidr=172.16.0.0/16` car mon réseau LAN est en 192.168.0.0/24 et le manifeste Calico par défaut utilise 192.168.0.0/16
 
-- Résultat : routage cassé, nœuds qui restent NotReady
+- Sans cette option : routage cassé, nœuds qui restent NotReady
 ````
 sudo kubeadm init --pod-network-cidr=172.16.0.0/16
 ````

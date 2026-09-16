@@ -9,7 +9,7 @@
 
 - `Worker1` : 192.168.0.6 / k8s-worker1.sednal.lan
 
-- `Worker2`: 192.168.0.7 / k8s-worker2.sednal.lan
+- `Worker2` : 192.168.0.7 / k8s-worker2.sednal.lan
 
 ---
 
