@@ -7,7 +7,7 @@
 
 - Après installation mais AVANT initialisation du cluster un snapshot a été réalisé
 
-🇫🇷
+## 🇫🇷
 ````
 
 ````
