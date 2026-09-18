@@ -677,18 +677,15 @@ sed -i \
 kubectl apply -f calico.yaml
 ````
 
-`- 3.6` Génération des certificats
-````
-sudo kubeadm init phase upload-certs --upload-certs
-````
 
-`- 3.7` Faire rentrer les workers dans le cluster (sur 192.168.0.6 / 192.168.0.7)
+
+`- 3.6` Faire rentrer les workers dans le cluster (sur 192.168.0.6 / 192.168.0.7)
 ````
 sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
         --discovery-token-ca-cert-hash sha256:1de1d2f9bce63e0c23b8fc870a15acc046242dcb1a7ffa10dad823cfc10f9435
 ````
 
-`- 3.8` Faire entrer les autre master dans le cluster (sur 192.168.0.8 / 192.168.0.9)
+`- 3.7` Faire entrer les autre master dans le cluster (sur 192.168.0.8 / 192.168.0.9)
 ````
 sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
         --discovery-token-ca-cert-hash sha256:1de1d2f9bce63e0c23b8fc870a15acc046242dcb1a7ffa10dad823cfc10f9435 \
@@ -696,7 +693,7 @@ sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
         --certificate-key <`- 3.3` Initialisation Certificats pour le cluster>
 ````
 
-`- 3.9` vérif depuis n'import quel master
+`- 3.8` vérif depuis n'import quel master
 ````
 kubectl get nodes
  
