@@ -694,6 +694,11 @@ sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
         --discovery-token-ca-cert-hash sha256:1de1d2f9bce63e0c23b8fc870a15acc046242dcb1a7ffa10dad823cfc10f9435
 ````
 
+
+⚠️ Les control plane doivent impérativement avoir la même version ⚠️
+
+- **Si ce n'est pas le cas** => [4.4 — Cluster Node Upgrades Master and Workers.md](https://github.com/NALSED/CERTIF/blob/main/CKA/PRACTICE/-M1-%20Cluster%20Architecture%2C%20Installation%2C%20and%20Configuration/-04-%20Performing%20Node%20Maintenance%20Tasks/4.4%20%E2%80%94%20Cluster%20Node%20Upgrades%20Master%20and%20Workers.md)
+ 
 `- 3.7` Faire entrer les autre master dans le cluster (sur 192.168.0.8 / 192.168.0.9)
 ````
 sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
