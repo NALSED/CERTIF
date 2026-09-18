@@ -391,7 +391,7 @@ source ~/.bashrc
 </h2>
 </summary>
 
-### Cette procédure s’applique dans le cas oul'on souhaite ajouter des `Node Master` sur un cluster existant, dans l'objectif de fair de la `H.A` et en suivant les cours de Sander van Vugt.
+### Cette procédure s’applique dans le cas ou l'on souhaite ajouter des `Node Master` sur un cluster existant, dans l'objectif de fair de la `H.A` et en suivant les cours de Sander van Vugt.
 
 - Ici :
 
@@ -438,7 +438,9 @@ sudo systemctl status containerd.service
 - `keepalived` = gère la VIP (Virtual IP) — décide quel nœud la porte à un instant donné, et la fait basculer automatiquement vers un autre nœud si celui qui l'a actuellement tombe (via le protocole VRRP).
 
 `- 2.1` Installation (sur 192.168.0.5 / 192.168.0.8 / 192.16.0.9)
+````
 
+````
 
 
 
