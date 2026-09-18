@@ -698,6 +698,15 @@ sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
 ⚠️ Les control plane doivent impérativement avoir la même version ⚠️
 
 - **Si ce n'est pas le cas** => [4.4 — Cluster Node Upgrades Master and Workers.md](https://github.com/NALSED/CERTIF/blob/main/CKA/PRACTICE/-M1-%20Cluster%20Architecture%2C%20Installation%2C%20and%20Configuration/-04-%20Performing%20Node%20Maintenance%20Tasks/4.4%20%E2%80%94%20Cluster%20Node%20Upgrades%20Master%20and%20Workers.md)
+
+- **Particularité** avec la procédure mono control plane
+
+   - Faire upgrade de kubeadm jusqu'au `3` de la [doc kubernetes](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/#call-kubeadm-upgrade)
+   
+   - Enchainer avec `- 3.7` ci dessous
+ 
+   - Et seulement quand tous les `control plane` sont dans le cluster lancer la suite de la procédure d'upgrade .
+
  
 `- 3.7` Faire entrer les autre master dans le cluster (sur 192.168.0.8 / 192.168.0.9)
 ````
