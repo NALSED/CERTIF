@@ -622,30 +622,37 @@ sudo systemctl enable keepalived --now
 
 
 ---
- 
+## -3- Joindre 192.168.0.8 / 192.168.0.9 /192.168.0.5
+
 ### À réaliser sur k8s-master (192.168.0.5), pour générer un nouveau token et la certificate-key.
 
-- A réaliser une seul fois pour faire rejoindre des node au serveur
+`- 3.1` A réaliser (sur `192.168.0.5` / `192.168.0.8` / `192.168.0.9`).
 
 ````
-sudo kubeadm init phase upload-certs --upload-certs
-sudo kubeadm token create --print-join-command
+sudo kubeadm reset
 ````
  
-- Joindre le cluster pour (`192.168.0.8` / `192.168.0.9`)
+`- 3.2` kubeadm init sur (`192.168.0.5`)
 ````
-sudo kubeadm join 192.168.0.15:6443 --token <TOKEN> \
-        --discovery-token-ca-cert-hash sha256:<HASH> \
-        --control-plane \
-        --certificate-key <CERT_KEY>
+# Sur k8s-master uniquement
+sudo kubeadm init \
+  --control-plane-endpoint=192.168.0.15:6443 \
+  --pod-network-cidr=172.16.0.0/16
 ````
 
  
-- Config kubectl pour (`192.168.0.8` / `192.168.0.9`)
+`- 3.4` Config kubectl pour (`192.168.0.5`)
 ````
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
+````
+
+`- 3.5` Intallation calico et configuration
+
+- Calico
+````
+kubectl apply -f calico.yaml
 ````
  
 - Vérification (depuis n'importe quel master)
