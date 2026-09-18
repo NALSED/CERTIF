@@ -377,25 +377,114 @@ source ~/.bashrc
 
 ### ⚠️ les commandes ci-dessus sont les premières à réaliser le jour de l'examen ⚠️
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </details>
 
 
+---
+---
+
+
+<details>
+<summary>
+<h2>
+-3- Ajout Node Master (HA)
+</h2>
+</summary>
+
+
+ 
+!!! Prérequis système identiques à l'installation initiale, à refaire sur chaque nouveau master !!!
+ 
+* Installation via le GitHub de [Sander van Vugt](https://github.com/sandervanvugt/cka)
+````
+git clone https://github.com/sandervanvugt/cka
+````
+ 
+* Installation via les scripts suivants :
+````
+cd $HOME/cka
+````
+ 
+* `-1-`
+````
+./setup-container.sh
+````
+ 
+* `-2-`
+````
+./setup-kubetools-previousversion.sh
+````
+ 
+* État de containerd
+````
+sudo systemctl status containerd.service
+````
+ 
+---
+ 
+!!! À réaliser sur k8s-master (le control plane existant), pour générer un nouveau token et la certificate-key !!!
+ 
+````
+sudo kubeadm init phase upload-certs --upload-certs
+sudo kubeadm token create --print-join-command
+````
+ 
+* Sortie combinée, à utiliser sur k8s-master-2 et k8s-master-3
+````
+kubeadm join 192.168.0.5:6443 --token <TOKEN> \
+        --discovery-token-ca-cert-hash sha256:<HASH> \
+        --control-plane \
+        --certificate-key <CERT_KEY>
+````
+ 
+---
+ 
+!!! À réaliser sur k8s-master-2 ET k8s-master-3 !!!
+ 
+````
+sudo kubeadm join 192.168.0.5:6443 --token <TOKEN> \
+        --discovery-token-ca-cert-hash sha256:<HASH> \
+        --control-plane \
+        --certificate-key <CERT_KEY>
+````
+ 
+* Config kubectl (comme sur le premier master)
+````
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+````
+ 
+* Vérification (depuis n'importe quel master)
+````
+kubectl get nodes
+ 
+# Sortie attendue
+NAME            STATUS   ROLES           AGE   VERSION
+k8s-master      Ready    control-plane   ...   v1.36.4
+k8s-master-2    Ready    control-plane   ...   v1.36.4
+k8s-master-3    Ready    control-plane   ...   v1.36.4
+k8s-worker1     Ready    <none>          ...   v1.36.4
+k8s-worker2     Ready    <none>          ...   v1.36.4
+````
+ 
+
+---
+
+- Et pour finir l'installation à réaliser sur les 3 VM :
+````
+vim $HOME/.bashrc
+````
+````
+# === Kubernetes ===
+alias k=kubectl
+source <(kubectl completion bash)
+complete -o default -F __start_kubectl k
+````
+````
+source ~/.bashrc
+````
+
+### ⚠️ les commandes ci-dessus sont les premières à réaliser le jour de l'examen ⚠️
+
+</details>
