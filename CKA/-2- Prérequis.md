@@ -1,41 +1,40 @@
-/
-
-
-2 prerequis · MD
 ## Installation `k8s` et prérequis.
- 
+
 ---
- 
+
 ### -1- Installation Sur RHEL 10
- 
+
 ### -2- Installation sur Ubuntu Server
- 
+
 ---
- 
+
 <details>
 <summary>
 <h2>
 -1- Installation Sur RHEL 10
 </h2>
 </summary>
+
 - Ici l'installation se fait via un script. (À l'examen le cluster est fourni)
+
+
 - Lancer le script sur chaque machine
 ````
 #!/bin/bash
 set -e
- 
+
 echo "=== Prérequis système ==="
- 
+
 swapoff -a
 sed -i '/swap/s/^/#/' /etc/fstab
- 
+
 cat <<EOF | tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
 EOF
 modprobe overlay
 modprobe br_netfilter
- 
+
 cat <<EOF | tee /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-iptables  = 1
 net.bridge.bridge-nf-call-ip6tables = 1
@@ -43,27 +42,27 @@ net.ipv4.ip_forward                 = 1
 net.ipv6.ip_forward                 = 1
 EOF
 sysctl --system
- 
+
 setenforce 0
 sed -i 's/^SELINUX=enforcing/SELINUX=permissive/' /etc/selinux/config
- 
+
 systemctl disable --now firewalld
- 
+
 echo "=== Containerd ==="
- 
+
 dnf install -y yum-utils
 dnf config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
 dnf install -y containerd.io
- 
+
 mkdir -p /etc/containerd
 containerd config default | tee /etc/containerd/config.toml
- 
+
 sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.toml
- 
+
 systemctl enable --now containerd
- 
+
 echo "=== kubeadm kubelet kubectl ==="
- 
+
 cat <<EOF | tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
@@ -73,88 +72,91 @@ gpgcheck=1
 gpgkey=https://pkgs.k8s.io/core:/stable:/v1.37/rpm/repodata/repomd.xml.key
 exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
 EOF
- 
+
 dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
- 
+
 systemctl enable --now kubelet
- 
+
 echo "Install terminée sur $(hostname)"
 echo "Rappel: kubeadm init se lance uniquement sur k8s-master"
 ````
- 
+
 --- 
- 
+
 - Uniquement sur k8s-master `192.168.0.2`
+
 - Initialisation de `Calico` qui sera le `CNI` du cluster, son rôle :
+
    - Gérer le réseau des pods => Attribution IP  
+
    - NetworkPolicy : applique les règles de firewall entre pods.
+
 ````
 kubeadm init \
   --apiserver-advertise-address=192.168.0.2 \
   --pod-network-cidr=172.16.0.0/16
 ````
- 
+
 - Sortie
 ````
- 
 Your Kubernetes control-plane has initialized successfully!
- 
+
 To start using your cluster, you need to run the following as a regular user:
- 
+
   mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
- 
+
 Alternatively, if you are the root user, you can run:
- 
+
   export KUBECONFIG=/etc/kubernetes/admin.conf
- 
+
 You should now deploy a pod network to the cluster.
 Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
   https://kubernetes.io/docs/concepts/cluster-administration/addons/
- 
+
 Then you can join any number of worker nodes by running the following on each as root:
- 
+
 kubeadm join 192.168.0.2:6443 --token p6yhss.kz1mefair5utz9am \
         --discovery-token-ca-cert-hash sha256:1d8aea0e9966e7d322772854ecfbd3a9729a19877edfd50b77066e1b1abf8228
 ````
- 
+
 ---
- 
+
 - Pour que kubectl fonctionne directement avec sednal
 ````
 mkdir -p ~/.kube
 sudo cp -i /etc/kubernetes/admin.conf ~/.kube/config
 sudo chown $(id -u):$(id -g) ~/.kube/config
 ````
- 
+
 - Test Master
 ````
 kubectl get nodes
 ````
- 
+
 - Sortie attendue :
 ````
 NAME         STATUS   ROLES           AGE    VERSION
 k8s-master   Ready    control-plane   8m5s   v1.37.0
 ````
- 
+
 ---
- 
+
 - Sur k8s-worker1 et k8s-worker2, pour rattacher worker1 et worker2 au node master.
 ````
 # !!! En root !!!
 kubeadm join 192.168.0.2:6443 --token p6yhss.kz1mefair5utz9am \
         --discovery-token-ca-cert-hash sha256:1d8aea0e9966e7d322772854ecfbd3a9729a19877edfd50b77066e1b1abf8228
 ````
- 
+
 - Sortie worker
 ````
 This node has joined the cluster:
 * Certificate signing request was sent to apiserver and a response was received.
 * The Kubelet was informed of the new secure connection details.
 ````
- 
+
 - Sortie master avec `kubectl get nodes`
 ````
 NAME          STATUS   ROLES           AGE    VERSION
@@ -162,31 +164,44 @@ k8s-master    Ready    control-plane   13m    v1.37.0
 k8s-worker1   Ready    <none>          108s   v1.37.0
 k8s-worker2   Ready    <none>          117s   v1.37.0
 ````
- 
+
+
+
+
+
 </details>
+
+
+
 ---
 ---
- 
+
+
 <details>
 <summary>
 <h2>
 -2- Installation sur Ubuntu Server 
 </h2>
 </summary>
- 
+
+
 # ⚠️ IP Address ⚠️
- 
+
 ### Spécificité à mon lab :
- 
+
 - `DHCP` pfsense et client `Ubuntu Server 26`
+
 - Problème : les deux serveurs Ubuntu ne prennent pas les adresses IP des lease pfsense
+
 - Cause : Bug au niveau de l'indexation des demandes de lease :
+
     - DUID côté client, réservation indexée sur MAC côté serveur
+
 - Solution : forcer le client à s'identifier par MAC, pas par DUID. 
 ````
 sudo vim /etc/netplan/00-installer-config.yaml
 ````
- 
+
 ````
 network:
   ethernets:
@@ -199,150 +214,153 @@ network:
       set-name: ens18
   version: 2
 ````
- 
+
 ````
 sudo netplan apply
 sudo networkctl reconfigure ens18
 ip a show ens18
 ````
 ---
- 
+
 # Installation de Kubernetes sur Ubuntu Server
- 
+
 - Installation via le GitHub de [Sander van Vugt](https://github.com/sandervanvugt/cka)
 ````
 git clone https://github.com/sandervanvugt/cka
 ````
- 
+
 - Installation via les scripts suivants :
 ````
 cd $HOME/cka
 ````
- 
- 
+
+
 - `-1-`
 ````
 ./setup-container.sh
 ````
- 
- 
+
+
 - `-2-`
 ````
 ./setup-kubetools-previousversion.sh
 ````
- 
+
 - État de containerd
 ````
 sudo systemctl status containerd.service
 ````
- 
+
 !!! Uniquement sur le node choisi pour être le `control plane` !!!
- 
+
 - Ici ajout de `--pod-network-cidr=172.16.0.0/16` car mon réseau LAN est en 192.168.0.0/24 et le manifeste Calico par défaut utilise 192.168.0.0/16
+
 - Sans cette option : routage cassé, nœuds qui restent NotReady
 ````
 sudo kubeadm init --pod-network-cidr=172.16.0.0/16
 ````
- 
+
 - Sortie 
 ````
- 
+
 Your Kubernetes control-plane has initialized successfully!
- 
+
 To start using your cluster, you need to run the following as a regular user:
- 
+
   mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
   sudo chown $(id -u):$(id -g) $HOME/.kube/config
- 
+
 Alternatively, if you are the root user, you can run:
- 
+
   export KUBECONFIG=/etc/kubernetes/admin.conf
- 
+
 You should now deploy a pod network to the cluster.
 Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
   https://kubernetes.io/docs/concepts/cluster-administration/addons/
- 
+
 Then you can join any number of worker nodes by running the following on each as root:
- 
+
 kubeadm join 192.168.0.5:6443 --token yul2cd.ipu5ita9k5xaywrd \
         --discovery-token-ca-cert-hash sha256:7cb06b4e9b6213f8eea2b8f57cf88057e6a1231ce830a9e31cc2d1da31e25f2e
 ````
- 
+
 - Sur le master 
 ````
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ````
- 
+
 - Test
 ````
 kubectl get all
- 
+
 # Sortie
 NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
 service/kubernetes   ClusterIP   10.96.0.1    <none>        443/TCP   25m
 ````
- 
- 
+
+
 - Gestion Network :
+
 - Télécharger le yaml de `Calico` 
 ````
 cd $HOME
 curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests/calico.yaml
 ls -lh calico.yaml
 ````
- 
+
 - !!! Changer le fichier, pour correspondre à notre plage IP !!!
 ````
 vim calico.yaml
- 
+
 # Rechercher
 /CALICO_IPV4POOL_CIDR
- 
+
 # Changer la valeur existante par :
 172.16.0.0/16
- 
+
 # Et suppression du commentaire sur les lignes
 - name: CALICO_IPV4POOL_CIDR
   value: "172.16.0.0/16"
 ````
- 
- 
+
+
 - Appliquer les modifications
 ````
 kubectl apply -f calico.yaml
 ````
- 
+
 - Vérification
 ````
 watch kubectl get pods -n kube-system
 ````
 - Sortie Attendue : STATUS => Running pour tout le monde
   
+
 ---
- 
+
 - Ajouter des Nodes, à réaliser sur chaque worker
 ````
 sudo kubeadm join 192.168.0.5:6443 --token yul2cd.ipu5ita9k5xaywrd \
         --discovery-token-ca-cert-hash sha256:7cb06b4e9b6213f8eea2b8f57cf88057e6a1231ce830a9e31cc2d1da31e25f2e
 ````
- 
+
 - Vérification
 ````
 kubectl get nodes
- 
+
 # Sortie
 NAME          STATUS   ROLES           AGE    VERSION
 k8s-master    Ready    control-plane   67m    v1.36.4
 k8s-worker1   Ready    <none>          2m3s   v1.36.4
 k8s-worker2   Ready    <none>          113s   v1.36.4
 ````
- 
- 
+
+
 ---
- 
+
 - Et pour finir l'installation à réaliser sur les 3 VM :
 ````
 vim $HOME/.bashrc
@@ -356,67 +374,24 @@ complete -o default -F __start_kubectl k
 ````
 source ~/.bashrc
 ````
- 
+
 ### ⚠️ les commandes ci-dessus sont les premières à réaliser le jour de l'examen ⚠️
- 
+
 </details>
- 
+
+
 ---
 ---
- 
- 
+
+
 <details>
 <summary>
 <h2>
 -3- Ajout Node Master (HA)
 </h2>
 </summary>
- 
-### -0- Prérequis HA : réinitialisation avec un control-plane-endpoint stable
- 
-!!! kubeadm ne permet pas d'ajouter un control-plane node après coup si le cluster
-    initial n'a pas été créé avec --control-plane-endpoint. Ça a été découvert en
-    tentant le join sur k8s-master-2 :
-    "unable to add a new control plane instance to a cluster that doesn't have
-    a stable controlPlaneEndpoint address"
-!!!
- 
-- Mettre en place un load balancer / VIP devant les futurs API servers, AVANT de réinitialiser
-  (ex: HAProxy + keepalived, ou VIP pfsense) — répond sur le port 6443
-- Reset du cluster existant, sur les 5 VM (k8s-master, k8s-worker1, k8s-worker2 déjà présents)
-````
-sudo kubeadm reset
-````
- 
-- Réinitialisation sur k8s-master, avec l'endpoint stable en plus
-````
-sudo kubeadm init \
-  --control-plane-endpoint=<IP_ou_FQDN_du_LB>:6443 \
-  --pod-network-cidr=172.16.0.0/16
-````
- 
-- Reconfigurer kubectl (comme lors de l'install initiale)
-````
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-````
- 
-- Réappliquer Calico (cf. section -2-)
-````
-kubectl apply -f calico.yaml
-````
- 
-- Rejoindre k8s-worker1 et k8s-worker2 avec le NOUVEAU token/hash affiché par ce init
-  (l'ancien, du premier init, est invalidé par le reset)
-````
-sudo kubeadm join <IP_ou_FQDN_du_LB>:6443 --token <NOUVEAU_TOKEN> \
-        --discovery-token-ca-cert-hash sha256:<NOUVEAU_HASH>
-````
- 
-- Une fois ceci fait, poursuivre avec les étapes ci-dessous (upload-certs, join --control-plane
-  sur k8s-master-2/3) — elles utiliseront cette fois un cluster avec endpoint stable.
----
+
+
  
 !!! Prérequis système identiques à l'installation initiale, à refaire sur chaque nouveau master !!!
  
@@ -448,8 +423,9 @@ sudo systemctl status containerd.service
 ---
  
 ### !!! À réaliser sur k8s-master (192.168.0.5), pour générer un nouveau token et la certificate-key.
- 
+
 - A réaliser une seul fois pour faire rejoindre des node au serveur
+
 ````
 sudo kubeadm init phase upload-certs --upload-certs
 sudo kubeadm token create --print-join-command
@@ -457,7 +433,7 @@ sudo kubeadm token create --print-join-command
  
 - Sortie combinée, à utiliser sur k8s-master-2 et k8s-master-3
 ````
-kubeadm join <IP_ou_FQDN_du_LB>:6443 --token <TOKEN> \
+kubeadm join 192.168.0.5:6443 --token <TOKEN> \
         --discovery-token-ca-cert-hash sha256:<HASH> \
         --control-plane \
         --certificate-key <CERT_KEY>
@@ -468,7 +444,7 @@ kubeadm join <IP_ou_FQDN_du_LB>:6443 --token <TOKEN> \
 !!! À réaliser sur k8s-master-2 ET k8s-master-3 !!!
  
 ````
-sudo kubeadm join <IP_ou_FQDN_du_LB>:6443 --token <TOKEN> \
+sudo kubeadm join 192.168.0.5:6443 --token <TOKEN> \
         --discovery-token-ca-cert-hash sha256:<HASH> \
         --control-plane \
         --certificate-key <CERT_KEY>
@@ -494,9 +470,9 @@ k8s-worker1     Ready    <none>          ...   v1.36.4
 k8s-worker2     Ready    <none>          ...   v1.36.4
 ````
  
- 
+
 ---
- 
+
 - Et pour finir l'installation à réaliser sur les 3 VM :
 ````
 vim $HOME/.bashrc
@@ -510,8 +486,7 @@ complete -o default -F __start_kubectl k
 ````
 source ~/.bashrc
 ````
- 
+
 ### ⚠️ les commandes ci-dessus sont les premières à réaliser le jour de l'examen ⚠️
- 
+
 </details>
- 
