@@ -184,6 +184,44 @@ k8s-worker2   Ready    <none>          117s   v1.37.0
 </h2>
 </summary>
 
+
+# ⚠️ IP Address ⚠️
+
+### Spécificité à mon lab :
+
+- `DHCP` pfsense et client `Ubuntu Server 26`
+
+- Problème : les deux serveurs Ubuntu ne prennent pas les adresses IP des lease pfsense
+
+- Cause : Bug au niveau de l'indexation des demandes de lease :
+
+    - DUID côté client, réservation indexée sur MAC côté serveur
+
+- Solution : forcer le client à s'identifier par MAC, pas par DUID. 
+````
+sudo vim /etc/netplan/00-installer-config.yaml
+````
+
+````
+network:
+  ethernets:
+    ens18:
+      dhcp4: true
+      dhcp6: true
+      dhcp-identifier: mac
+      match:
+        macaddress: bc:24:11:59:76:8f    # adapte pour chaque VM
+      set-name: ens18
+  version: 2
+````
+
+````
+sudo netplan apply
+sudo networkctl reconfigure ens18
+ip a show ens18
+````
+---
+
 # Installation de Kubernetes sur Ubuntu Server
 
 - Installation via le GitHub de [Sander van Vugt](https://github.com/sandervanvugt/cka)
@@ -319,17 +357,6 @@ k8s-master    Ready    control-plane   67m    v1.36.4
 k8s-worker1   Ready    <none>          2m3s   v1.36.4
 k8s-worker2   Ready    <none>          113s   v1.36.4
 ````
-
-
-
-
-
-
-
-
-
-
-
 
 
 ---
