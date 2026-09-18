@@ -343,14 +343,6 @@ watch kubectl get pods -n kube-system
 
 - Ajouter des Nodes, à réaliser sur chaque worker
 ````
-# Si déja dans le cluster :
-sudo kubeadm reset -f
-sudo rm -rf /etc/cni/net.d
-sudo rm -rf /etc/kubernetes/kubelet.conf
-sudo rm -rf /etc/kubernetes/pki
-sudo rm -rf $HOME/.kube
-# Sinon ignorer cette étape
-
 sudo kubeadm join 192.168.0.5:6443 --token yul2cd.ipu5ita9k5xaywrd \
         --discovery-token-ca-cert-hash sha256:7cb06b4e9b6213f8eea2b8f57cf88057e6a1231ce830a9e31cc2d1da31e25f2e
 ````
@@ -689,6 +681,15 @@ kubectl apply -f calico.yaml
 
 `- 3.6` Faire rentrer les workers dans le cluster (sur 192.168.0.6 / 192.168.0.7)
 ````
+# Si déja dans le cluster :
+sudo kubeadm reset -f
+sudo rm -rf /etc/cni/net.d
+sudo rm -rf /etc/kubernetes/kubelet.conf
+sudo rm -rf /etc/kubernetes/pki
+sudo rm -rf $HOME/.kube
+# Sinon ignorer cette étape
+
+
 sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
         --discovery-token-ca-cert-hash sha256:1de1d2f9bce63e0c23b8fc870a15acc046242dcb1a7ffa10dad823cfc10f9435
 ````
