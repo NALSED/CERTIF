@@ -721,12 +721,12 @@ sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
 kubectl get nodes
  
 # Sortie attendue
-NAME            STATUS   ROLES           AGE   VERSION
-k8s-master      Ready    control-plane   ...   v1.36.4
-k8s-master-2    Ready    control-plane   ...   v1.36.4
-k8s-master-3    Ready    control-plane   ...   v1.36.4
-k8s-worker1     Ready    <none>          ...   v1.36.4
-k8s-worker2     Ready    <none>          ...   v1.36.4
+NAME           STATUS   ROLES           AGE    VERSION
+k8s-master     Ready    control-plane   112m   v1.37.0
+k8s-master-2   Ready    control-plane   12m    v1.37.0
+k8s-master-3   Ready    control-plane   10m    v1.37.0
+k8s-worker1    Ready    <none>          47m    v1.37.0
+k8s-worker2    Ready    <none>          47m    v1.37.0
 ````
  
 
