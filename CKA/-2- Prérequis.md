@@ -622,7 +622,7 @@ sudo systemctl enable keepalived --now
 
 
 ---
-## -3- Joindre 192.168.0.8 / 192.168.0.9 /192.168.0.5
+## -3- Joindre 192.168.0.8 / 192.168.0.9 / 192.168.0.5
 
 ### À réaliser sur k8s-master (192.168.0.5), pour générer un nouveau token et la certificate-key.
 
@@ -640,22 +640,58 @@ sudo kubeadm init \
   --pod-network-cidr=172.16.0.0/16
 ````
 
- 
-`- 3.4` Config kubectl pour (`192.168.0.5`)
+`- 3.3` Initialisation Certificats pour le cluster
+````
+sudo kubeadm init phase upload-certs --upload-certs
+````
+
+`- 3.4` Config kubectl (sur `192.168.0.5`)
 ````
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ````
 
-`- 3.5` Intallation calico et configuration
+`- 3.5` Installation Calico et configuration (sur `192.168.0.5`)
+````
+cd $HOME
+curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests/calico.yaml
+ls -lh calico.yaml
+````
 
-- Calico
+- Application Scop IP pod (sur `192.168.0.5`)
+````
+sed -i \
+  -e 's/^\(\s*\)# - name: CALICO_IPV4POOL_CIDR/\1- name: CALICO_IPV4POOL_CIDR/' \
+  -e 's/^\(\s*\)#   value: "192\.168\.0\.0\/16"/\1  value: "172.16.0.0\/16"/' \
+  calico.yaml
+````
+
+- Appliquer la configuration de Calico (sur `192.168.0.5`)
 ````
 kubectl apply -f calico.yaml
 ````
- 
-- Vérification (depuis n'importe quel master)
+
+`- 3.6` Génération des certificats
+````
+sudo kubeadm init phase upload-certs --upload-certs
+````
+
+`- 3.7` Faire rentrer les workers dans le cluster (sur 192.168.0.6 / 192.168.0.7)
+````
+sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
+        --discovery-token-ca-cert-hash sha256:1de1d2f9bce63e0c23b8fc870a15acc046242dcb1a7ffa10dad823cfc10f9435
+````
+
+`- 3.8` Faire entrer les autre master dans le cluster (sur 192.168.0.8 / 192.168.0.9)
+````
+sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
+        --discovery-token-ca-cert-hash sha256:1de1d2f9bce63e0c23b8fc870a15acc046242dcb1a7ffa10dad823cfc10f9435 \
+        --control-plane \
+        --certificate-key <`- 3.3` Initialisation Certificats pour le cluster>
+````
+
+`- 3.9` vérif depuis n'import quel master
 ````
 kubectl get nodes
  
