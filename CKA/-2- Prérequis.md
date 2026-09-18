@@ -1,7 +1,9 @@
 ## Installation `k8s` et prérequis.
 
 ---
-
+''''
+d
+''''
 ### -1- Installation Sur RHEL 10
 
 ### -2- Installation sur Ubuntu Server
