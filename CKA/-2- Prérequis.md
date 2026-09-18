@@ -407,7 +407,7 @@ source ~/.bashrc
 git clone https://github.com/sandervanvugt/cka
 ````
  
-### `-1-` Installation `kubernetes` via les scripts suivants :
+### `-1-` Installation `kubernetes` via les scripts suivants : sur (`192.168.0.8` / `192.168.0.9`)
 ````
 cd $HOME/cka
 ````
