@@ -1,9 +1,7 @@
 ## Installation `k8s` et prérequis.
 
 ---
-''''
-d
-''''
+
 ### -1- Installation Sur RHEL 10
 
 ### -2- Installation sur Ubuntu Server
@@ -439,16 +437,193 @@ sudo systemctl status containerd.service
 
 - `keepalived` = gère la VIP (Virtual IP) — décide quel nœud la porte à un instant donné, et la fait basculer automatiquement vers un autre nœud si celui qui l'a actuellement tombe (via le protocole VRRP).
 
-`- 2.1` Installation (sur 192.168.0.5 / 192.168.0.8 / 192.16.0.9)
+`- 2.1` Installation (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
 ````
+sudo apt update && sudo apt install -y haproxy keepalived
+````
+
+`- 2.2` Autoriser HAProxy à bind sur une IP pas encore locale (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
+````
+sudo sysctl -w net.ipv4.ip_nonlocal_bind=1
+echo "net.ipv4.ip_nonlocal_bind = 1" | sudo tee /etc/sysctl.d/99-haproxy-vip.conf
+````
+
+`- 2.3` Editer le  fichier de configuartion `/etc/haproxy/haproxy.cfg` (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
+````
+global
+    log /dev/log local0
+    log /dev/log local1 notice
+    daemon
+
+defaults
+    log     global
+    mode    tcp
+    option  tcplog
+    timeout connect 5s
+    timeout client  50s
+    timeout server  50s
+
+frontend apiserver
+    bind 192.168.0.15:6443
+    mode tcp
+    option tcplog
+    default_backend apiserver
+
+backend apiserver
+    mode tcp
+    option tcp-check
+    balance roundrobin
+    server k8s-master    192.168.0.5:6443 check
+    server k8s-master-2  192.168.0.8:6443 check
+    server k8s-master-3  192.168.0.9:6443 check
+````
+
+`- 2.4` Editer le script : `/etc/keepalived/check_apiserver.sh` (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
+````
+#!/bin/sh
+
+errorExit() {
+    echo "*** $*" 1>&2
+    exit 1
+}
+
+curl --silent --max-time 2 --insecure https://localhost:6443/ -o /dev/null || errorExit "Error GET https://localhost:6443/"
+if ip addr | grep -q 192.168.0.15; then
+    curl --silent --max-time 2 --insecure https://192.168.0.15:6443/ -o /dev/null || errorExit "Error GET https://192.168.0.15:6443/"
+fi
+````
+
+`- 2.5` Executable
+````
+sudo chmod +x /etc/keepalived/check_apiserver.sh
+````
+
+`- 2.6` - Editer les ficher de configuration `/etc/keepalived/keepalived.conf` !!! Bien prendre le fichier de la machine corespondante !!! (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
+
+** === 192.168.0.5 === **
+````
+sudo vim /etc/keepalived/keepalived.conf
+````
+````
+! Configuration File for keepalived
+global_defs {
+    enable_script_security
+    router_id LVS_DEVEL
+}
+
+vrrp_script check_apiserver {
+    script "/etc/keepalived/check_apiserver.sh"
+    interval 3
+    weight -2
+    fall 10
+    rise 2
+}
+
+vrrp_instance VI_1 {
+    state MASTER
+    interface ens18
+    virtual_router_id 151
+    priority 255
+    authentication {
+        auth_type PASS
+        auth_pass Password
+    }
+    virtual_ipaddress {
+        192.168.0.15/24
+    }
+    track_script {
+        check_apiserver
+    }
+}
+````
+
+** 192.168.0.8 **
+````
+sudo vim /etc/keepalived/keepalived.conf
+````
+````
+! Configuration File for keepalived
+global_defs {
+    enable_script_security
+    router_id LVS_DEVEL
+}
+
+vrrp_script check_apiserver {
+    script "/etc/keepalived/check_apiserver.sh"
+    interval 3
+    weight -2
+    fall 10
+    rise 2
+}
+
+vrrp_instance VI_1 {
+    state SLAVE
+    interface ens18
+    virtual_router_id 151
+    priority 254
+    authentication {
+        auth_type PASS
+        auth_pass Password
+    }
+    virtual_ipaddress {
+        192.168.0.15/24
+    }
+    track_script {
+        check_apiserver
+    }
+}
+````
+
+
+** 192.168.0.9 **
+````
+sudo vim /etc/keepalived/keepalived.conf
+````
+````
+! Configuration File for keepalived
+global_defs {
+    enable_script_security
+    router_id LVS_DEVEL
+}
+
+vrrp_script check_apiserver {
+    script "/etc/keepalived/check_apiserver.sh"
+    interval 3
+    weight -2
+    fall 10
+    rise 2
+}
+
+vrrp_instance VI_1 {
+    state SLAVE
+    interface ens18
+    virtual_router_id 151
+    priority 253
+    authentication {
+        auth_type PASS
+        auth_pass Password
+    }
+    virtual_ipaddress {
+        192.168.0.15/24
+    }
+    track_script {
+        check_apiserver
+    }
+}
 
 ````
 
+`- 2.7` Démarrage
+````
+sudo systemctl enable haproxy --now
+sudo systemctl enable keepalived --now
+
+````
 
 
 ---
  
-### !!! À réaliser sur k8s-master (192.168.0.5), pour générer un nouveau token et la certificate-key.
+### À réaliser sur k8s-master (192.168.0.5), pour générer un nouveau token et la certificate-key.
 
 - A réaliser une seul fois pour faire rejoindre des node au serveur
 
@@ -457,33 +632,23 @@ sudo kubeadm init phase upload-certs --upload-certs
 sudo kubeadm token create --print-join-command
 ````
  
-- Sortie combinée, à utiliser sur k8s-master-2 et k8s-master-3
+- Joindre le cluster pour (`192.168.0.8` / `192.16.0.9`)
 ````
-kubeadm join 192.168.0.5:6443 --token <TOKEN> \
+kubeadm join 192.168.0.15:6443 --token <TOKEN> \
         --discovery-token-ca-cert-hash sha256:<HASH> \
         --control-plane \
         --certificate-key <CERT_KEY>
 ````
+
  
----
- 
-!!! À réaliser sur k8s-master-2 ET k8s-master-3 !!!
- 
-````
-sudo kubeadm join 192.168.0.5:6443 --token <TOKEN> \
-        --discovery-token-ca-cert-hash sha256:<HASH> \
-        --control-plane \
-        --certificate-key <CERT_KEY>
-````
- 
-* Config kubectl (comme sur le premier master)
+- Config kubectl pour (`192.168.0.8` / `192.16.0.9`)
 ````
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ````
  
-* Vérification (depuis n'importe quel master)
+- Vérification (depuis n'importe quel master)
 ````
 kubectl get nodes
  
