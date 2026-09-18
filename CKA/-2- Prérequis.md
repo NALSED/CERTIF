@@ -437,18 +437,18 @@ sudo systemctl status containerd.service
 
 - `keepalived` = gère la VIP (Virtual IP) — décide quel nœud la porte à un instant donné, et la fait basculer automatiquement vers un autre nœud si celui qui l'a actuellement tombe (via le protocole VRRP).
 
-`- 2.1` Installation (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
+`- 2.1` Installation (sur `192.168.0.5` / `192.168.0.8` / `192.168.0.9`)
 ````
 sudo apt update && sudo apt install -y haproxy keepalived
 ````
 
-`- 2.2` Autoriser HAProxy à bind sur une IP pas encore locale (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
+`- 2.2` Autoriser HAProxy à bind sur une IP pas encore locale (sur `192.168.0.5` / `192.168.0.8` / `192.168.0.9`)
 ````
 sudo sysctl -w net.ipv4.ip_nonlocal_bind=1
 echo "net.ipv4.ip_nonlocal_bind = 1" | sudo tee /etc/sysctl.d/99-haproxy-vip.conf
 ````
 
-`- 2.3` Editer le  fichier de configuartion `/etc/haproxy/haproxy.cfg` (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
+`- 2.3` Editer le  fichier de configuartion `/etc/haproxy/haproxy.cfg` (sur `192.168.0.5` / `192.168.0.8` / `192.168.0.9`)
 ````
 global
     log /dev/log local0
@@ -478,7 +478,7 @@ backend apiserver
     server k8s-master-3  192.168.0.9:6443 check
 ````
 
-`- 2.4` Editer le script : `/etc/keepalived/check_apiserver.sh` (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
+`- 2.4` Editer le script : `/etc/keepalived/check_apiserver.sh` (sur `192.168.0.5` / `192.168.0.8` / `192.168.0.9`)
 ````
 #!/bin/sh
 
@@ -498,7 +498,7 @@ fi
 sudo chmod +x /etc/keepalived/check_apiserver.sh
 ````
 
-`- 2.6` - Editer les ficher de configuration `/etc/keepalived/keepalived.conf` !!! Bien prendre le fichier de la machine corespondante !!! (sur `192.168.0.5` / `192.168.0.8` / `192.16.0.9`)
+`- 2.6` - Editer les ficher de configuration `/etc/keepalived/keepalived.conf` !!! Bien prendre le fichier de la machine corespondante !!! (sur `192.168.0.5` / `192.168.0.8` / `192.168.0.9`)
 
 ** === 192.168.0.5 === **
 ````
@@ -632,16 +632,16 @@ sudo kubeadm init phase upload-certs --upload-certs
 sudo kubeadm token create --print-join-command
 ````
  
-- Joindre le cluster pour (`192.168.0.8` / `192.16.0.9`)
+- Joindre le cluster pour (`192.168.0.8` / `192.168.0.9`)
 ````
-kubeadm join 192.168.0.15:6443 --token <TOKEN> \
+sudo kubeadm join 192.168.0.15:6443 --token <TOKEN> \
         --discovery-token-ca-cert-hash sha256:<HASH> \
         --control-plane \
         --certificate-key <CERT_KEY>
 ````
 
  
-- Config kubectl pour (`192.168.0.8` / `192.16.0.9`)
+- Config kubectl pour (`192.168.0.8` / `192.168.0.9`)
 ````
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
