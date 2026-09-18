@@ -387,39 +387,61 @@ source ~/.bashrc
 <details>
 <summary>
 <h2>
--3- Ajout Node Master (HA)
+-3- Ajout Node Master (HA) sur cluster existent
 </h2>
 </summary>
 
+### Cette procédure s’applique dans le cas oul'on souhaite ajouter des `Node Master` sur un cluster existant, dans l'objectif de fair de la `H.A` et en suivant les cours de Sander van Vugt.
 
- 
-!!! Prérequis système identiques à l'installation initiale, à refaire sur chaque nouveau master !!!
- 
+- Ici :
+
+- Master : k8s-master 192.168.0.5
+
+- Worker-1 : k8s-worker1 192.168.0.6
+
+- Worker-2 : k8s-worker2 192.168.0.7
+
+
 - Installation via le GitHub de [Sander van Vugt](https://github.com/sandervanvugt/cka)
 ````
 git clone https://github.com/sandervanvugt/cka
 ````
  
-- Installation via les scripts suivants :
+### `-1-` Installation `kubernetes` via les scripts suivants :
 ````
 cd $HOME/cka
 ````
  
-- `-1-`
+`- 1.1`
 ````
 ./setup-container.sh
 ````
  
-- `-2-`
+ `- 1.2`
 ````
 ./setup-kubetools-previousversion.sh
 ````
  
-- État de containerd
+`- 1.3` État de containerd
 ````
 sudo systemctl status containerd.service
 ````
  
+---
+
+### `-2-`Mise en place du Load Balancer (HAProxy + keepalived)
+
+`[NOTE]`
+
+- `HAProxy` = le load balancer — reçoit le trafic sur 6443 et le répartit entre les 3 API servers (k8s-master, k8s-master-2, k8s-master-3)
+
+- `keepalived` = gère la VIP (Virtual IP) — décide quel nœud la porte à un instant donné, et la fait basculer automatiquement vers un autre nœud si celui qui l'a actuellement tombe (via le protocole VRRP).
+
+`- 2.1` Installation (sur 192.168.0.5 / 192.168.0.8 / 192.16.0.9)
+
+
+
+
 ---
  
 ### !!! À réaliser sur k8s-master (192.168.0.5), pour générer un nouveau token et la certificate-key.
