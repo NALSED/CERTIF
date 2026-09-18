@@ -655,9 +655,14 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 `- 3.5` Installation Calico et configuration (sur `192.168.0.5`)
 ````
 cd $HOME
+````
+````
 curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.32.2/manifests/calico.yaml
+````
+````
 ls -lh calico.yaml
 ````
+
 
 - Application Scop IP pod (sur `192.168.0.5`)
 ````
