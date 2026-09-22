@@ -716,7 +716,18 @@ sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
         --certificate-key <`- 3.3` Initialisation Certificats pour le cluster>
 ````
 
-`- 3.8` vérif depuis n'import quel master
+`- 3.8` ⚠️ ajouter un ligne `- --bind-address=`, au manifest `kube-apiserver` ⚠️
+````
+sudo vim /etc/kubernetes/manifests/kube-apiserver.yaml
+````
+````
+- --bind-address=192.168.0.5
+````
+````
+sudo systemctl restart kubelet
+````
+
+`- 3.9` vérif depuis n'import quel master
 ````
 kubectl get nodes
  
