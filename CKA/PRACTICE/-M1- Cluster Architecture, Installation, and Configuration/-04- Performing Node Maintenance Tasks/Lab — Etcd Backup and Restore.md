@@ -75,3 +75,8 @@ nginx-69b9cdbbdd-mm6m8   1/1     Running   0          51m   172.16.194.69   k8s-
 nginx-69b9cdbbdd-vghkt   1/1     Running   0          51m   172.16.126.7    k8s-worker2   <none>           <none>
 nginx-69b9cdbbdd-vsd26   1/1     Running   0          51m   172.16.194.70   k8s-worker1   <none>           <none>
 ````
+
+- FIN
+````
+k delete deploy nginx
+````
