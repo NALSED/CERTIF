@@ -21,3 +21,53 @@ spec:
       - args:
         - --kubelet-insecure-tls <========= Cette ligne
 ````
+
+### `- Débug HA exemple`
+
+- Au redémarrage impossible d'utiliser kubectl
+````
+E0922 05:38:37.453305    3095 memcache.go:381] "Couldn't get current server API group list" err="Get \"https://192.168.0.15:6443/api?timeout=32s\": EOF"
+````
+
+`Utiliser crictl`
+````
+sudo crictl ps -a
+
+# Sortie de kube-apiserver
+CONTAINER           IMAGE               CREATED             STATE               NAME                      ATTEMPT             POD ID              POD                                       NAMESPACE
+3e47607d46a76       bec5f0e1e2eeb       2 minutes ago       Exited              kube-apiserver            16                  35f4b2c76a233       kube-apiserver-k8s-master                 kube-system
+````
+
+- Logs
+````
+crictl logs 3e47607d46a76 
+
+# Extrait Sortie
+E0922 05:44:05.716442       1 run.go:72] "command failed" err="failed to create listener: failed to listen on 0.0.0.0:6443: listen tcp 0.0.0.0:6443: bind: address already in use"
+````
+
+- vérification port
+````
+ss -tlnp | grep 6443
+
+# Sortie
+LISTEN 0      4096    192.168.0.15:6443       0.0.0.0:*    users:(("haproxy",pid=1345,fd=5))
+````
+
+- **Verdict** : Haproxy démarre plus vite que kube-apiserverdonc conflit de port
+
+- **Solution** : dans `/etc/kubernetes/manifests/kube-apiserver.yaml` ajouter `- --bind-address=192.168.0.5`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
