@@ -80,12 +80,12 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 > 📄 **2.4 et 2.5 sont automatisés** dans [`-2- Prérequis.md`](./-2-%20Pr%C3%A9requis.md) (script à lancer sur chaque machine).  
 > ⚠️ Pour l'examen il faut savoir les refaire **à la main** : le script fait gagner du temps en lab, pas en révision.
 
-🟥 **2.6** — Using kubeadm init *(6m)* — `--pod-network-cidr`, `--apiserver-advertise-address`, `kubeadm config images pull`  
-🟥 **2.7** — Configuring the Kubernetes Client *(7m47)* — `/etc/kubernetes/admin.conf` → `~/.kube/config`, contextes, `kubectl config use-context`  
-🟥 **2.8** — Setting up Node Networking *(5m14)* — installation du CNI (Calico / Flannel / Cilium)  
-🟥 **2.9** — Adding Nodes to the Cluster *(2m55)* — `kubeadm token create --print-join-command`, `--discovery-token-ca-cert-hash`  
-🟥 **2.10** — kubeadm init with a Configuration File *(3m56)* — `kubeadm init --config`  
-🟥 **Lab** — Building a Kubernetes Cluster *(31s + 6m05 solution)*
+🟩 **2.6** — Using kubeadm init *(6m)* — `--pod-network-cidr`, `--apiserver-advertise-address`, `kubeadm config images pull`  
+🟩 **2.7** — Configuring the Kubernetes Client *(7m47)* — `/etc/kubernetes/admin.conf` → `~/.kube/config`, contextes, `kubectl config use-context`  
+🟩 **2.8** — Setting up Node Networking *(5m14)* — installation du CNI (Calico / Flannel / Cilium)  
+🟩 **2.9** — Adding Nodes to the Cluster *(2m55)* — `kubeadm token create --print-join-command`, `--discovery-token-ca-cert-hash`  
+🟩 **2.10** — kubeadm init with a Configuration File *(3m56)* — `kubeadm init --config`  
+🟩 **Lab** — Building a Kubernetes Cluster *(31s + 6m05 solution)*
 
 ✅ **Validé quand :** tu montes le cluster 1 master + 2 workers **sans notes**, trois fois de suite.
 
@@ -96,12 +96,12 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 ## 🟥 Leçon 3 — Managing Kubernetes Clusters
 **25 min** · *Learning objectives (35s)*
 
-🟥 **3.1** — Analyzing Cluster Nodes *(4m52)* — `kubectl get nodes -o wide`, `describe node`, conditions  
-🟥 **3.2** — Using crictl *(4m59)* — `crictl ps -a`, `crictl logs`, `crictl images`, `crictl inspect`  
-🟥 **3.3** — Running Static Pods *(4m18)* — `/etc/kubernetes/manifests/`, suffixe `-<nom-du-nœud>`, gérés par le kubelet seul  
-🟥 **3.4** — Managing Node State *(4m44)* — `kubectl cordon` / `uncordon`, `drain --ignore-daemonsets --delete-emptydir-data`  
-🟥 **3.5** — Managing Node Services *(4m10)* — `systemctl status kubelet`, `journalctl -u kubelet`, `/var/lib/kubelet/config.yaml`  
-🟥 **Lab** — Running Static Pods *(24s + 1m19 solution)*
+🟦 **3.1** — Analyzing Cluster Nodes *(4m52)* — `kubectl get nodes -o wide`, `describe node`, conditions  
+🟦 **3.2** — Using crictl *(4m59)* — `crictl ps -a`, `crictl logs`, `crictl images`, `crictl inspect`  
+🟩 **3.3** — Running Static Pods *(4m18)* — `/etc/kubernetes/manifests/`, suffixe `-<nom-du-nœud>`, gérés par le kubelet seul  
+🟩 **3.4** — Managing Node State *(4m44)* — `kubectl cordon` / `uncordon`, `drain --ignore-daemonsets --delete-emptydir-data`  
+🟦 **3.5** — Managing Node Services *(4m10)* — `systemctl status kubelet`, `journalctl -u kubelet`, `/var/lib/kubelet/config.yaml`  
+🟦 **Lab** — Running Static Pods *(24s + 1m19 solution)*
 
 ✅ **Validé quand :** tu crées un pod statique, tu le vois apparaître dans `kubectl get pods`, et tu le supprimes en déplaçant son manifeste.
 
@@ -110,14 +110,14 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 ## 🟥 Leçon 4 — Performing Node Maintenance Tasks
 **66 min** — *la leçon la plus longue du cours* · *Learning objectives (51s)*
 
-🟥 **4.1** — Metrics Server *(5m21)* — installation (`--kubelet-insecure-tls` en lab), `kubectl top nodes`, `kubectl top pods --containers`  
-🟥 **4.2** — Backing up the Etcd *(7m50)* — `ETCDCTL_API=3 etcdctl snapshot save`, `--endpoints`, `--cacert`, `--cert`, `--key`, certificats dans `/etc/kubernetes/pki/etcd/`  
-🟥 **4.3** — Restoring the Etcd *(6m41)* — `etcdctl snapshot restore --data-dir`, modification du `hostPath` dans `/etc/kubernetes/manifests/etcd.yaml`  
-🟥 **4.4** — Cluster Node Upgrades *(12m15)* — `kubeadm upgrade plan`, `upgrade apply`, ordre control plane d'abord, `apt-mark unhold/hold`  
-🟥 **4.5** — Cluster Worker Upgrades *(5m42)* — `drain` → `kubeadm upgrade node` → maj `kubelet` → `uncordon`  
-🟥 **4.6** — Cluster High Availability Options *(14m21)* — etcd empilé vs externe, quorum `(n/2)+1`, nombre impair  
-🟥 **4.7** — Setting up a Highly Available Cluster *(7m33)* — `--control-plane-endpoint`, `--upload-certs`, `join --control-plane --certificate-key`  
-🟥 **Lab** — Etcd Backup and Restore *(24s + 4m37 solution)*
+🟦 **4.1** — Metrics Server *(5m21)* — installation (`--kubelet-insecure-tls` en lab), `kubectl top nodes`, `kubectl top pods --containers`  
+🟦 **4.2** — Backing up the Etcd *(7m50)* — `ETCDCTL_API=3 etcdctl snapshot save`, `--endpoints`, `--cacert`, `--cert`, `--key`, certificats dans `/etc/kubernetes/pki/etcd/`  
+🟦 **4.3** — Restoring the Etcd *(6m41)* — `etcdctl snapshot restore --data-dir`, modification du `hostPath` dans `/etc/kubernetes/manifests/etcd.yaml`  
+🟦 **4.4** — Cluster Node Upgrades *(12m15)* — `kubeadm upgrade plan`, `upgrade apply`, ordre control plane d'abord, `apt-mark unhold/hold`  
+🟦 **4.5** — Cluster Worker Upgrades *(5m42)* — `drain` → `kubeadm upgrade node` → maj `kubelet` → `uncordon`  
+🟦 **4.6** — Cluster High Availability Options *(14m21)* — etcd empilé vs externe, quorum `(n/2)+1`, nombre impair  
+🟩 **4.7** — Setting up a Highly Available Cluster *(7m33)* — `--control-plane-endpoint`, `--upload-certs`, `join --control-plane --certificate-key`  
+🟦 **Lab** — Etcd Backup and Restore *(24s + 4m37 solution)*
 
 ✅ **Validé quand :** tu casses volontairement le cluster (suppression de ressources), tu restaures un snapshot etcd, et tout revient.
 
@@ -126,7 +126,7 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 ## 🟥 Leçon 5 — Managing Security Settings
 **41 min** · *Learning objectives (48s)*
 
-🟥 **5.1** — Understanding API Access *(3m21)* — sujet + verbe + ressource  
+🟩 **5.1** — Understanding API Access *(3m21)* — sujet + verbe + ressource  
 🟥 **5.2** — Managing Security Context *(4m49)* — `runAsUser`, `runAsNonRoot`, `fsGroup`, `capabilities`, `allowPrivilegeEscalation`, `readOnlyRootFilesystem`  
 🟥 **5.3** — Users, ServiceAccounts, and API Access *(1m45)* — `kubectl create sa`, `automountServiceAccountToken`  
 🟥 **5.4** — Understanding RBAC *(2m01)* — `Role` (namespacé) vs `ClusterRole` (global)  
