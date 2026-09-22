@@ -717,6 +717,11 @@ sudo kubeadm join 192.168.0.15:6443 --token 7qxayn.gz8u4n139tqc0uvm \
 ````
 
 `- 3.8` ⚠️ ajouter un ligne `- --bind-address=`, au manifest `kube-apiserver` ⚠️
+
+`[NOTE]`
+
+- Ajout de cette ligne car HA proxy et kube-apiserver écoute sur 6443, et HAproxy démarre avant kube-apiserver, donc conflit de port et cluster HS.
+
 ````
 sudo vim /etc/kubernetes/manifests/kube-apiserver.yaml
 ````
