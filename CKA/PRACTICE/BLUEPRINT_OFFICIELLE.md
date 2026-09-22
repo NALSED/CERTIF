@@ -1,7 +1,8 @@
 # Blueprint officiel CKA — CNCF / Linux Foundation
 
-Source : [training.linuxfoundation.org](https://training.linuxfoundation.org/certified-kubernetes-administrator-cka-program-changes/) — version en vigueur depuis le 18 février 2025.
-Dépôt open source du curriculum : [github.com/cncf/curriculum](https://github.com/cncf/curriculum)
+- Source : [training.linuxfoundation.org](https://training.linuxfoundation.org/certified-kubernetes-administrator-cka-program-changes/) — version en vigueur depuis le 18 février 2025.
+
+- Dépôt open source du curriculum : [github.com/cncf/curriculum](https://github.com/cncf/curriculum)
 
 ---
 
