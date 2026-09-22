@@ -22,6 +22,9 @@ spec:
         - --kubelet-insecure-tls <========= Cette ligne
 ````
 
+---
+---
+
 ### `- Débug HA exemple`
 
 - Au redémarrage impossible d'utiliser kubectl
@@ -58,7 +61,10 @@ LISTEN 0      4096    192.168.0.15:6443       0.0.0.0:*    users:(("haproxy",pid
 
 - **Solution** : dans `/etc/kubernetes/manifests/kube-apiserver.yaml` ajouter `- --bind-address=192.168.0.5`
 
+---
+---
 
+##############################
 
 
 
