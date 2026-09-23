@@ -65,15 +65,50 @@ LISTEN 0      4096    192.168.0.15:6443       0.0.0.0:*    users:(("haproxy",pid
 ---
 
 
+### Conflit en HA, avec un corum etcd.
+
+- A l'installation de etcdctl il est possible que Ubuntu instal etcd et l'active donc conflit pour le port 2379.
+
+- utiliser `crictl`
+````
+sudo crictl ps -a | grep -E "apiserver|etcd"
+````
+
+-logs
+````
+sudo crictl logs <ID>
+
+# Erreur trouvé
+erreur trouvée : bind: address already in use sur 127.0.0.1:2379
+````
+
+- Identifier qui tient le port
+````
+sudo ss -tlnp | grep 2379
+````
+
+- Distinguer process k8s vs process natif
+````
+cat /proc/<PID>/cgroup
+
+# Si besoin
+sudo kill -9 <PID>
+````
 
 
+- Stopper `etcd` natif
+````
+sudo systemctl stop etcd
+sudo systemctl disable etcd
+sudo systemctl mask etcd
+````
 
+- restart `kublet`
+````
+sudo systemctl restart kublet
+````
 
-
-
-
-
-
-
+---
+---
 
 
