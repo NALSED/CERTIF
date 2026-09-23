@@ -23,13 +23,13 @@ k create deploy nginx --image=nginx --replicas=3
 
 ### `-1-` Create à backup of etcd et verrification
 ````
-sudo ETCDCTL_API=3 etcdctl
-\ --endpoints=https://127.0.0.1:2379
-\ --cacert=/etc/kubernetes/pki/etcd/ca.crt
-\ --cert=/etc/kubernetes/pki/etcd/server.crt
-\ --key=server.key 
+sudo ETCDCTL_API=3 etcdctl \
+--endpoints=https://127.0.0.1:2379 \
+--cacert=/etc/kubernetes/pki/etcd/ca.crt \
+--cert=/etc/kubernetes/pki/etcd/server.crt \
+--key=/etc/kubernetes/pki/etcd/server.key \
 
-\ snaphot save /tmp/backup.db
+snaphot save /tmp/backup.db
 ````
 ````
 sudo etcdutl --write-out=table snapshot status /tmp/backup.db
@@ -113,14 +113,12 @@ MULTI CONTROLE PLANE
 k create deploy nginx --image=nginx --replicas=3 
 ````
 
-### `-1-` Create à backup of etcd et verrification
+### `-1-` Create à backup of etcd et vérification
 ````
-sudo ETCDCTL_API=3 etcdctl
-\ --endpoints=https://127.0.0.1:2379
-\ --cacert=/etc/kubernetes/pki/etcd/ca.crt
-\ --cert=/etc/kubernetes/pki/etcd/server.crt
-\ --key=server.key
-
+sudo ETCDCTL_API=3 etcdctl --endpoints=https://127.0.0.1:2379 \
+--cacert=/etc/kubernetes/pki/etcd/ca.crt \
+--cert=/etc/kubernetes/pki/etcd/server.crt \
+--key=/etc/kubernetes/pki/etcd/server.key \
 snapshot save /tmp/backup.db
 ````
 ````
