@@ -28,7 +28,7 @@ sudo ETCDCTL_API=3 etcdctl
 \ --cacert=/etc/kubernetes/pki/etcd/ca.crt
 \ --cert=/etc/kubernetes/pki/etcd/server.crt
 \ --key=server.key snaps
-hot save /tmp/backup.db
+snaphot save /tmp/backup.db
 ````
 ````
 sudo etcdutl --write-out=table snapshot status /tmp/backup.db
