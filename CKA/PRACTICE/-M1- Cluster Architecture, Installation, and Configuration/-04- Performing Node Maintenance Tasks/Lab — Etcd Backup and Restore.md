@@ -28,6 +28,7 @@ sudo ETCDCTL_API=3 etcdctl
 \ --cacert=/etc/kubernetes/pki/etcd/ca.crt
 \ --cert=/etc/kubernetes/pki/etcd/server.crt
 \ --key=server.key 
+
 snaphot save /tmp/backup.db
 ````
 ````
