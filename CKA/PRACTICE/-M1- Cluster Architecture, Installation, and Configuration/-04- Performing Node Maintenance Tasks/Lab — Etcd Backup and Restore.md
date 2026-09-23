@@ -29,7 +29,7 @@ sudo ETCDCTL_API=3 etcdctl
 \ --cert=/etc/kubernetes/pki/etcd/server.crt
 \ --key=server.key 
 
-snaphot save /tmp/backup.db
+\ snaphot save /tmp/backup.db
 ````
 ````
 sudo etcdutl --write-out=table snapshot status /tmp/backup.db
