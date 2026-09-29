@@ -34,5 +34,7 @@ system:basic-user ClusterRole/system:basic-user 10d
 
 - 🟢 COMMANDE CORRECT 🟢
 ````
-kubectl create rolebinding binding-role-view --role=role-view --user=system:basic-user
+kubectl create rolebinding binding-role-view -n default \
+--role=role-view \
+--user=system:basic-user
 ````
