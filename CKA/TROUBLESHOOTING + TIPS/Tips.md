@@ -26,3 +26,10 @@ COMMANDE --dry-run=client -o yaml > fichier.yaml
 ````
 kubectl apply -f fichier.yaml
 ````
+
+## `-4-` Pour voir ce que est namespace ou non
+````
+kubectl api-resources --namespaced=true
+#ou
+kubectl api-resources --namespaced=false
+````
