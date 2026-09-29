@@ -56,7 +56,7 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 
 ---
 
-## 🟨 Leçon 1 — Understanding Kubernetes Architecture
+## 🟩 Leçon 1 — Understanding Kubernetes Architecture
 **9 min** · *Learning objectives (27s)*
 
 🟩 **1.1** — Vanilla Kubernetes and the Ecosystem *(2m36)* —  
@@ -68,7 +68,7 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 
 ---
 
-## 🟥 Leçon 2 — Creating a Kubernetes Cluster with kubeadm
+## 🟩 Leçon 2 — Creating a Kubernetes Cluster with kubeadm
 **46 min** · *Learning objectives (47s)*
 
 🟩 **2.1** — Cluster Node Requirements *(2m25)* — 2 vCPU, 2 Go RAM, hostname/MAC/`product_uuid` uniques  
@@ -93,7 +93,7 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 
 ---
 
-## 🟥 Leçon 3 — Managing Kubernetes Clusters
+## 🟩 Leçon 3 — Managing Kubernetes Clusters
 **25 min** · *Learning objectives (35s)*
 
 🟦 **3.1** — Analyzing Cluster Nodes *(4m52)* — `kubectl get nodes -o wide`, `describe node`, conditions  
@@ -107,7 +107,7 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 
 ---
 
-## 🟥 Leçon 4 — Performing Node Maintenance Tasks
+## 🟩 Leçon 4 — Performing Node Maintenance Tasks
 **66 min** — *la leçon la plus longue du cours* · *Learning objectives (51s)*
 
 🟦 **4.1** — Metrics Server *(5m21)* — installation (`--kubelet-insecure-tls` en lab), `kubectl top nodes`, `kubectl top pods --containers`  
@@ -123,17 +123,17 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 
 ---
 
-## 🟥 Leçon 5 — Managing Security Settings
+## 🟨 Leçon 5 — Managing Security Settings
 **41 min** · *Learning objectives (48s)*
 
 🟩 **5.1** — Understanding API Access *(3m21)* — sujet + verbe + ressource  
-🟥 **5.2** — Managing Security Context *(4m49)* — `runAsUser`, `runAsNonRoot`, `fsGroup`, `capabilities`, `allowPrivilegeEscalation`, `readOnlyRootFilesystem`  
-🟥 **5.3** — Users, ServiceAccounts, and API Access *(1m45)* — `kubectl create sa`, `automountServiceAccountToken`  
-🟥 **5.4** — Understanding RBAC *(2m01)* — `Role` (namespacé) vs `ClusterRole` (global)  
-🟥 **5.5** — RBAC for ServiceAccounts *(10m32)* — `kubectl create role/rolebinding --serviceaccount=<ns>:<sa>`, `apiGroups`, `resources`, `verbs`  
-🟥 **5.6** — ClusterRoles and ClusterRoleBindings *(1m35)* — `cluster-admin`, `admin`, `edit`, `view` ; RoleBinding → ClusterRole = droits limités au namespace  
-🟥 **5.7** — RBAC for Users *(13m49)* — certificats client, kubeconfig, `kubectl auth can-i --as=<user>`  
-🟥 **Lab** — Managing Security *(22s + 2m11 solution)*
+🟩 **5.2** — Managing Security Context *(4m49)* — `runAsUser`, `runAsNonRoot`, `fsGroup`, `capabilities`, `allowPrivilegeEscalation`, `readOnlyRootFilesystem`  
+🟩 **5.3** — Users, ServiceAccounts, and API Access *(1m45)* — `kubectl create sa`, `automountServiceAccountToken`  
+🟩 **5.4** — Understanding RBAC *(2m01)* — `Role` (namespacé) vs `ClusterRole` (global)  
+🟨 **5.5** — RBAC for ServiceAccounts *(10m32)* — `kubectl create role/rolebinding --serviceaccount=<ns>:<sa>`, `apiGroups`, `resources`, `verbs`  
+🟨 **5.6** — ClusterRoles and ClusterRoleBindings *(1m35)* — `cluster-admin`, `admin`, `edit`, `view` ; RoleBinding → ClusterRole = droits limités au namespace  
+🟨 **5.7** — RBAC for Users *(13m49)* — certificats client, kubeconfig, `kubectl auth can-i --as=<user>`  
+🟨 **Lab** — Managing Security *(22s + 2m11 solution)*
 
 ✅ **Validé quand :** tu crées un compte limité à la lecture des Pods d'un seul namespace, et tu le **prouves** avec `auth can-i --as`.
 
