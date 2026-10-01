@@ -145,18 +145,18 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 
 ---
 
-## 🟥 Leçon 6 — Deploying Kubernetes Applications
+## 🟨 Leçon 6 — Deploying Kubernetes Applications
 **41 min** · *Learning objectives (37s)*
 
-🟥 **6.1** — Using Deployments *(3m32)* — `replicas`, `selector.matchLabels`, `template`, `kubectl set image`  
-🟥 **6.2** — Running Agents with DaemonSets *(2m48)* — un Pod par nœud, tolérations implicites  
-🟥 **6.3** — Using StatefulSets *(6m54)* — identité stable, `volumeClaimTemplates`, Service headless, ordre de déploiement  
-🟥 **6.4** — The Case for Running Individual Pods *(1m09)*  
-🟥 **6.5** — Managing Pod Initialization *(3m38)* — `initContainers`, exécution séquentielle et bloquante  
-🟥 **6.6** — Scaling Applications *(3m10)* — `kubectl scale --replicas=N`  
-🟥 **6.7** — Configuring Autoscaling *(7m50)* — `kubectl autoscale`, HPA, **dépend de `requests` et de metrics-server**  
-🟥 **6.8** — Sidecar Containers for Application Logging *(9m31)* — namespace réseau partagé, `emptyDir` commun, sidecar natif (`initContainers` + `restartPolicy: Always`)  
-🟥 **Lab** — Running a DaemonSet *(20s + 1m33 solution)*
+🟦 **6.1** — Using Deployments *(3m32)* — `replicas`, `selector.matchLabels`, `template`, `kubectl set image`  
+🟦 **6.2** — Running Agents with DaemonSets *(2m48)* — un Pod par nœud, tolérations implicites  
+🟨 **6.3** — Using StatefulSets *(6m54)* — identité stable, `volumeClaimTemplates`, Service headless, ordre de déploiement  
+🟦 **6.4** — The Case for Running Individual Pods *(1m09)*  
+🟩 **6.5** — Managing Pod Initialization *(3m38)* — `initContainers`, exécution séquentielle et bloquante  
+🟩 **6.6** — Scaling Applications *(3m10)* — `kubectl scale --replicas=N`  
+🟨 **6.7** — Configuring Autoscaling *(7m50)* — `kubectl autoscale`, HPA, **dépend de `requests` et de metrics-server**  
+🟨 **6.8** — Sidecar Containers for Application Logging *(9m31)* — namespace réseau partagé, `emptyDir` commun, sidecar natif (`initContainers` + `restartPolicy: Always`)  
+🟦 **Lab** — Running a DaemonSet *(20s + 1m33 solution)*
 
 ✅ **Validé quand :** tu génères chaque contrôleur avec `--dry-run=client -o yaml` sans consulter la doc.
 
