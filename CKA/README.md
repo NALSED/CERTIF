@@ -164,13 +164,13 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 
 ---
 
-## 🟥 Leçon 7 — Using Templating Tools
+## 🟨 Leçon 7 — Using Templating Tools
 **34 min** · *Learning objectives (25s)*
 
-🟥 **7.1** — Running Applications from YAML Files *(1m)* — `kubectl apply -f`  
-🟥 **7.2** — The Helm Package Manager *(10m58)* — `helm repo add/update`, `helm install -n --create-namespace`, `helm list -A`  
-🟥 **7.3** — Creating a Template from a Helm Chart *(5m55)* — `helm template`, `Chart.yaml`, `values.yaml`, `templates/`  
-🟥 **7.4** — Managing Applications with Helm *(6m15)* — `helm upgrade -f/--set`, `helm rollback`, `helm history`, `helm uninstall`  
+🟦 **7.1** — Running Applications from YAML Files *(1m)* — `kubectl apply -f`  
+🟦 **7.2** — The Helm Package Manager *(10m58)* — `helm repo add/update`, `helm install -n --create-namespace`, `helm list -A`  
+🟩 **7.3** — Creating a Template from a Helm Chart *(5m55)* — `helm template`, `Chart.yaml`, `values.yaml`, `templates/`  
+🟨 **7.4** — Managing Applications with Helm *(6m15)* — `helm upgrade -f/--set`, `helm rollback`, `helm history`, `helm uninstall`  
 🟥 **7.5** — Using Kustomize *(4m52)* — `kustomization.yaml`, `resources`, `configMapGenerator`, bases/overlays, `kubectl apply -k`  
 🟥 **Lab** — Managing Applications with Helm *(17s + 4m09 solution)*
 
