@@ -171,14 +171,14 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 🟦 **7.2** — The Helm Package Manager *(10m58)* — `helm repo add/update`, `helm install -n --create-namespace`, `helm list -A`  
 🟩 **7.3** — Creating a Template from a Helm Chart *(5m55)* — `helm template`, `Chart.yaml`, `values.yaml`, `templates/`  
 🟨 **7.4** — Managing Applications with Helm *(6m15)* — `helm upgrade -f/--set`, `helm rollback`, `helm history`, `helm uninstall`  
-🟥 **7.5** — Using Kustomize *(4m52)* — `kustomization.yaml`, `resources`, `configMapGenerator`, bases/overlays, `kubectl apply -k`  
-🟥 **Lab** — Managing Applications with Helm *(17s + 4m09 solution)*
+🟨 **7.5** — Using Kustomize *(4m52)* — `kustomization.yaml`, `resources`, `configMapGenerator`, bases/overlays, `kubectl apply -k`  
+🟦 **Lab** — Managing Applications with Helm *(17s + 4m09 solution)*
 
 ✅ **Validé quand :** tu installes un chart, tu changes une valeur par upgrade, tu reviens en arrière — et tu produis deux overlays Kustomize à partir d'une même base.
 
 ---
 
-## 🟥 Leçon 8 — Managing Scheduling
+## 🟨 Leçon 8 — Managing Scheduling
 **47 min** · *Learning objectives (47s)*
 
 🟥 **8.1** — Exploring the Scheduling Process *(2m32)* — phase de filtrage puis de scoring  
