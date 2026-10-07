@@ -4,10 +4,10 @@
 
 | Mécanisme | Direction de la force | Qui contrôle ? | Cible / Critère de filtrage |
 | :--- | :--- | :--- | :--- |
-| **Node Affinity** | **Attraction** (Pod $\rightarrow$ Nœud) | Le **Pod** | Labels du **Nœud** |
-| **Taints & Tolerations** | **Répulsion** (Nœud $\rightarrow$ Pod) | Le **Nœud** | Pods **sans Toleration** |
-| **Pod Affinity** | **Attraction** (Pod $\rightarrow$ Pod) | Le **Pod** | Labels des **autres Pods** |
-| **Pod Anti-Affinity** | **Répulsion** (Pod $\rightarrow$ Pod) | Le **Pod** | Labels des **autres Pods** |
+| **Node Affinity** | **Attraction** (Pod => Nœud) | Le **Pod** | Labels du **Nœud** |
+| **Taints & Tolerations** | **Répulsion** (Nœud => Pod) | Le **Nœud** | Pods **sans Toleration** |
+| **Pod Affinity** | **Attraction** (Pod => Pod) | Le **Pod** | Labels des **autres Pods** |
+| **Pod Anti-Affinity** | **Répulsion** (Pod => Pod) | Le **Pod** | Labels des **autres Pods** |
 
 ---
 
