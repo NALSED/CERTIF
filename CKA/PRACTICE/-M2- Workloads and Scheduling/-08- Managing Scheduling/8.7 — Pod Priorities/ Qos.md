@@ -1,7 +1,9 @@
 ## Pod Priority / Qos
 
 [https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass)
+
 [https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#quality-of-service-classes](https://kubernetes.io/docs/concepts/workloads/pods/pod-qos/#quality-of-service-classes)
+
 ---
 
 - Les objet `Pod Priority` / `Qos` sont des outils qui permettent :
