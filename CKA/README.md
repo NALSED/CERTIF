@@ -37,8 +37,8 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 
 | Module | Contenu | Durée | État |
 |---|---|---|---|
-| **M1** | Cluster Architecture, Installation, and Configuration | 3 h 08 | 🟥 |
-| **M2** | Workloads and Scheduling | 2 h 02 | 🟥 |
+| **M1** | Cluster Architecture, Installation, and Configuration | 3 h 08 | 🟨  |
+| **M2** | Workloads and Scheduling | 2 h 02 | 🟨  |
 | **M3** | Services and Networking | 1 h 42 | 🟥 |
 | **M4** | Storage | 55 min | 🟥 |
 | **M5** | Troubleshooting | 24 min | 🟥 |
