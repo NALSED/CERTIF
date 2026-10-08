@@ -109,6 +109,10 @@ sudo systemctl restart kublet
 ````
 
 ---
----
+
+### Problème avec un Deployement
+````
+kubectl describe 
+````
 
 
