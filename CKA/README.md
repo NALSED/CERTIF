@@ -181,11 +181,11 @@ Ce document suit **exactement** l'ordre des leçons du cours. Chaque leçon list
 ## 🟨 Leçon 8 — Managing Scheduling
 **47 min** · *Learning objectives (47s)*
 
-🟥 **8.1** — Exploring the Scheduling Process *(2m32)* — phase de filtrage puis de scoring  
-🟥 **8.2** — Setting Node Preferences *(3m10)* — `nodeName`, `nodeSelector`, `kubectl label node`  
-🟥 **8.3** — Affinity and anti-Affinity Rules *(10m21)* — `requiredDuringScheduling...` vs `preferred...`, `podAffinity` / `podAntiAffinity`, `topologyKey`, opérateurs `In` / `NotIn` / `Exists`  
-🟥 **8.4** — Taints and Tolerations *(8m34)* — `kubectl taint nodes k=v:NoSchedule`, `PreferNoSchedule`, `NoExecute`, `tolerationSeconds`  
-🟥 **8.5** — Resource Limits and Requests *(2m08)* — `100m` CPU, `Mi`/`Gi`, classes QoS, `OOMKilled` (code 137)  
+🟦 **8.1** — Exploring the Scheduling Process *(2m32)* — phase de filtrage puis de scoring  
+🟦 **8.2** — Setting Node Preferences *(3m10)* — `nodeName`, `nodeSelector`, `kubectl label node`  
+🟨 **8.3** — Affinity and anti-Affinity Rules *(10m21)* — `requiredDuringScheduling...` vs `preferred...`, `podAffinity` / `podAntiAffinity`, `topologyKey`, opérateurs `In` / `NotIn` / `Exists`  
+🟨 **8.4** — Taints and Tolerations *(8m34)* — `kubectl taint nodes k=v:NoSchedule`, `PreferNoSchedule`, `NoExecute`, `tolerationSeconds`  
+🟦 **8.5** — Resource Limits and Requests *(2m08)* — `100m` CPU, `Mi`/`Gi`, classes QoS, `OOMKilled` (code 137)  
 🟥 **8.6** — Setting Namespace Quota *(6m38)* — `ResourceQuota`, `count/<res>`  
 🟥 **8.7** — Configuring LimitRange *(3m13)* — `default`, `defaultRequest`, `min`, `max`  
 🟥 **8.8** — Configuring Pod Priorities *(5m05)* — `PriorityClass`, préemption, `globalDefault`  
