@@ -46,3 +46,9 @@ kubectl apply -f fichier.yaml
 ````
 kubectl api-resources 
 ````
+
+## `-5-` Filter Sortie
+- filtre sur les champs de l'objet k8s (métadonnées, état)
+````
+--field-selector
+````
