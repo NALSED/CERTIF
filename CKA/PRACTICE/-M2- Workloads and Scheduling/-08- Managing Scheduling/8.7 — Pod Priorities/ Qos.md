@@ -20,7 +20,8 @@
 
    - Il est rendu possible grace à l'objet `PriorityClass`
    - `PriorityClass` est ensuite intégré au .yaml de déploiement.
-   - En fonction du niveau (Valeur Numérique) de priorité le `Scheduler` peux fair de la préemption sur des pod moins prioritaire (Niveau Cluster).
+   - En fonction du niveau (Valeur Numérique arbitraire) de priorité le `Scheduler` peux fair de la préemption sur des pod moins prioritaire (Niveau Cluster).
+   - Plus la valeur numérique est haute plus le niveau de priorité est élevé.
 
 ### `-1-` Créer les différent niveau `PriorityClass`
 
@@ -30,8 +31,33 @@
    - preemptionPolicy: `PreemptLowerPriority` (Régle par défaut / valeur absente du .yaml ) Kubernetes tue (preempt) les Pods moins prioritaires s'il manque de ressources.
    - preemptionPolicy: `Never` Kubernetes place le Pod en tête de la file d'attente (queue jumping), mais ne tue jamais de Pods existants.
 
+
+````
+apiVersion: scheduling.k8s.io/v1
+kind: PriorityClass
+metadata:
+  name: high-priority
+value: 1000000
+preemptionPolicy: Never
+globalDefault: false
+description: "This priority class will not cause other pods to be preempted."
 ````
 
+### -2- Utiliser l'objet dans un déploiement
+
+````
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: test
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  priorityClassName: high-priority
 ````
 
 
