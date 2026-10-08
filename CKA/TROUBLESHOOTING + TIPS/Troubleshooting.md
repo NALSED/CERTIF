@@ -110,9 +110,15 @@ sudo systemctl restart kublet
 
 ---
 
-### Problème avec un Deployement
+### Problème avec un Deployement / replicas / pod /...
+
+- Deployment → ReplicaSet → Pod (chaque niveau a ses propres events)
+
 ````
-kubectl describe 
+kubectl describe deployment <nom> ....................... # event au niveau Deployment
+kubectl describe rs <nom> ............................... # quota/LimitRange visibles ici
+kubectl describe pod <nom> .............................. # image pull, OOMKill, crash...
+kubectl get events -n <ns> --sort-by='.lastTimestamp' ... # tous les events du namespace
 ````
 
 
