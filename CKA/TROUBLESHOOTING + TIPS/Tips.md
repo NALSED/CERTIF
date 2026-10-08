@@ -1,3 +1,18 @@
+## `-0-` Autocompletion `Bash` `helm` 
+[https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-kubectl-autocompletion](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#enable-kubectl-autocompletion)
+````
+alias k=kubectl
+alias kg='kubectl get'
+export do='--dry-run=client -o yaml'
+
+source <(kubectl completion bash)
+source <(kubectl completion helm)
+complete -o default -F __start_kubectl k
+````
+
+
+---
+
 ## `-1-` Cluster Node Upgrade
 
 Dans la doc utiliser `Upgrading kubadm clusters`
