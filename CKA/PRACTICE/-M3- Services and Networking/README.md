@@ -36,15 +36,15 @@
                          v                         v
                  +--------------+          +--------------+
                  | Service      |          | Service      |
-                 | ClusterIP    |          | ClusterIP     |
-                 | 10.96.0.5    |          | 10.96.0.8     |
-                 +------+-------+          +------+--------+
+                 | ClusterIP    |          | ClusterIP    |
+                 | 10.96.0.5    |          | 10.96.0.8    |
+                 +------+-------+          +------+-------+
                         │                          │
          ┌──────────────┘                          │
-         │   nom DNS construit par CoreDNS :        │
-         │   <name>.<namespace>.svc.cluster.local   │
-         │                                          │
-         v                                          v
+         │   nom DNS construit par CoreDNS :       │
+         │   <name>.<namespace>.svc.cluster.local  │
+         │                                         │
+         v                                         v
   +-------------+                          +----------------+
   |  CoreDNS    |<---- watch API server --->|   API server   |
   |  (cache DNS)|   (Service créé/supprimé) |   (+ etcd)     |
@@ -63,21 +63,21 @@
    |  Endpoints   |<-------------------------------------+
    |  Controller  |                                       |
    +------+-------+                                       |
-          │  met à jour la liste des IP réelles            |
+          │  met à jour la liste des IP réelles           |
           v                                               |
    +----------------------------+                         |
    | Endpoints de "mon-service" |                         |
    | 172.16.1.2:80              |                         |
    | 172.16.1.3:80               |                        |
    +-------------+--------------+                         |
-                 │                                         |
-                 v                                         |
-         +---------------+                                 |
-         |  kube-proxy   |  (sur chaque nœud)              |
-         |  iptables/IPVS|  redirige ClusterIP → Pod IP    |
-         +-------+-------+                                 |
-                 │                                         |
-                 v                                         |
+                 │                                        |
+                 v                                        |
+         +---------------+                                |
+         |  kube-proxy   |  (sur chaque nœud)             |
+         |  iptables/IPVS|  redirige ClusterIP → Pod IP   |
+         +-------+-------+                                |
+                 │                                        |
+                 v                                        |
 ════════════════ RÉSEAU DES PODS (géré par le CNI) ═════════════════
                  │                                         |
         +--------+--------+                      +---------+--------+
@@ -87,7 +87,7 @@
    | labels: |       | labels: |            | labels: |       | labels: |
    | app=web |       | app=web |            | app=db  |       | app=db  |
    | IP:     |       | IP:     |            | IP:     |       | IP:     |
-   |172.16.1.2       |172.16.1.3           |172.16.2.4       |172.16.2.5
+   |172.16.1.2       |172.16.1.3            |172.16.2.4       |172.16.2.5
    +---------+       +---------+            +---------+       +---------+
         ^                 ^                      ^                  ^
         |                 |                      |                  |
