@@ -145,7 +145,7 @@ root@pve:~# qm listsnapshot 106
 root@pve:~# qm listsnapshot 107
 `-> pre-init                    2026-09-09 12:17:36     prereqs + binaires v1.36.4, avant kubeadm init
  `-> current                                            You are here!
-root@pve:~#
+````
 
 
 ### Restauration
