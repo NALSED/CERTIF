@@ -1,8 +1,5 @@
 # Création du lab Kubernetes sur Proxmox
 
----
-
-## **Les deux labs sont réalisés sur Proxmox**
 
 ---
  
@@ -15,74 +12,83 @@
   - Network : Filaire : 192.168.2.2
   - IP : https://192.168.2.2:8006
 
-[NOTE]
-
--1- Pour la connexion au hotspot (iPhone), et partage de connexion, désactiver successivement hotspot -> partage -> ethernet, puis réactiver.
-
--2- Config (8/06/26) :
-
-- WIFI : 172.20.10.4
-- Ethernet : 192.168.2.1/32 (Utilisation de DHCP avec une adresse manuelle)
-
--3- Configuration Network de Proxmox
-```
-auto lo
-iface lo inet loopback
-
-iface nic0 inet manual
-
-auto vmbr0 
-iface vmbr0 inet static
-        address 192.168.2.2/24
-        gateway 192.168.2.1
-        bridge-ports nic0
-        bridge-stp off
-        bridge-fd 0
 
 
-source /etc/network/interfaces.d/*
-```
+-1- Création des VM via `KVM` / `QEMU` / `libvirt`
+
+[https://www.stephane-robert.info/docs/virtualiser/type1/kvm/](https://www.stephane-robert.info/docs/virtualiser/type1/kvm/)
+
+`[NOTE]`
+
+- A la fin de installation de `KVM` et `libvirt` la commande
+````
+virt-host-validate
+````
+
+- Fait apparaite des **FAIL** , il sont du à des problémes d'autorisation de `cgroups`.
+
+- Pour fixer le probléme :
+````
+# Editer GRUB
+sudo vim /etc/default/grub
+
+# Editer
+GRUB_CMDLINE_LINUX="rhgb quiet intel_iommu=on systemd.unified_cgroup_hierarchy=0"
+````
+
+- Reload la configuration
+````
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+````
 
 
-```
-                                        WAN
-                                         │
-┌────────────────────────────────────────┴────┐
-│   iPhone (hotspot)                          │
-│   172.20.10.1/28                            │
-└───────────┬─────────────────────────────────┘
-            │ WiFi
-            │
-┌───────────┴──────────┐
-│   MacBook            │
-│   WiFi : 172.20.10.x │
-│   ETH  : 192.168.2.1 │
-└───────────┬──────────┘
-            │ câble RJ45
-┌───────────┴──────────────────────────────────┐
-│   Proxmox                                    │
-│   nic0  : 192.168.2.2                        │
-│   vmbr0 ──── k8s-master  (192.168.2.5)       │
-│         ──── k8s-worker1 (192.168.2.6)       │
-│         ──── k8s-worker2 (192.168.2.7)       │
-└──────────────────────────────────────────────┘
-```
+-2- Création des VM via `virt-manager`:
+
+
 
 ### `VM`
 
+`[NOTE]`
+
+- Edition des `IP`
+
+````
+sudo vim /etc/netplan/00-installer-config.yaml
+````
+````
+network:
+  version: 2
+  ethernets:
+    enp1s0:
+      dhcp4: false
+      addresses:
+        - <CHANGER IP DU SERVER>
+      routes:
+        - to: default
+          via: 192.168.122.1
+      nameservers:
+        addresses:
+          - 192.168.122.1
+          - 1.1.1.1
+````
+````
+sudo netplan try
+sudo netplan apply
+ip -br a
+````
 3 vm Ubuntu 26.04 
 
-`-1-` k8s-master 192.168.2.5
+`-1-` k8s-master 192.168.122.59
 
-`-2-` k8s-worker1 192.168.2.6
+`-2-` k8s-worker1 192.168.122.58
 
-`-3-` k8s-worker2 192.168.2.7
+`-3-` k8s-worker2 192.168.122.57
 
 ```
 ┌─────────────┬───────┬───────┬────────┐
 │ Nom         │ vCPU  │ RAM   │ Disque │
 ├─────────────┼───────┼───────┼────────┤
-│ k8s-master  │ 2     │ 4 Go  │ 20 Go  │
+│ master      │ 2     │ 3 Go  │ 20 Go  │
 │ k8s-worker1 │ 2     │ 4 Go  │ 15 Go  │
 │ k8s-worker2 │ 2     │ 4 Go  │ 15 Go  │
 └─────────────┴───────┴───────┴────────┘
