@@ -14,7 +14,7 @@
 
 
 
--1- Création des VM via `KVM` / `QEMU` / `libvirt`
+### -1- Création des VM via `KVM` / `QEMU` / `libvirt`
 
 [https://www.stephane-robert.info/docs/virtualiser/type1/kvm/](https://www.stephane-robert.info/docs/virtualiser/type1/kvm/)
 
@@ -42,7 +42,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ````
 
 
--2- Création des VM via `virt-manager`:
+### -2- Création des VM via `virt-manager`:
 
 
 
@@ -76,7 +76,8 @@ sudo netplan try
 sudo netplan apply
 ip -br a
 ````
-3 vm Ubuntu 26.04 
+
+###-3- vm Ubuntu 26.04 
 
 `-1-` k8s-master 192.168.122.59
 
