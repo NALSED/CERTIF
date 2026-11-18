@@ -210,7 +210,7 @@ network:
       dhcp6: true
       dhcp-identifier: mac
       match:
-        macaddress: bc:24:11:59:76:8f    # adapte pour chaque VM
+        macaddress: bc:24:11:59:76:8f    # A adapter pour chaque VM
       set-name: ens18
   version: 2
 ````
