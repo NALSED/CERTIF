@@ -77,7 +77,7 @@ sudo netplan apply
 ip -br a
 ````
 
-###-3- vm Ubuntu 26.04 
+### -3- vm Ubuntu 26.04 
 
 `-1-` k8s-master 192.168.122.59
 
