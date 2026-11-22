@@ -28,7 +28,7 @@ spec:
       - image: nginx
         name: nginx
         resources: {}
-status: {
+status: {}
 ````
 
 `-3-` Créer
